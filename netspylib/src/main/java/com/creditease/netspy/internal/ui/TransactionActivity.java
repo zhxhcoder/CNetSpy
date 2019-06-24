@@ -92,7 +92,7 @@ public class TransactionActivity extends BaseNetSpyActivity implements LoaderMan
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share_text) {
-            share(FormatUtils.getShareText(this, transaction));
+            share(FormatUtils.getShareResponseText(this, transaction));
             return true;
         } else if (item.getItemId() == R.id.share_curl) {
             share(FormatUtils.getShareCurlCommand(transaction));

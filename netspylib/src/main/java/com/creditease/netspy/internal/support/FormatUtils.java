@@ -68,6 +68,13 @@ public class FormatUtils {
         }
     }
 
+    /**
+     * 原来的getShareText 返回response所有信息
+     *
+     * @param context
+     * @param transaction
+     * @return
+     */
     public static String getShareText(Context context, HttpTransaction transaction) {
         String text = "";
         text += context.getString(R.string.netspy_url) + ": " + v(transaction.getUrl()) + "\n";
@@ -98,6 +105,20 @@ public class FormatUtils {
         if (!TextUtils.isEmpty(headers)) {
             text += headers + "\n";
         }
+        text += (transaction.responseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
+            context.getString(R.string.netspy_body_omitted);
+        return text;
+    }
+
+    /**
+     * 仅仅返回 response信息
+     *
+     * @param context
+     * @param transaction
+     * @return
+     */
+    public static String getShareResponseText(Context context, HttpTransaction transaction) {
+        String text = "";
         text += (transaction.responseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
             context.getString(R.string.netspy_body_omitted);
         return text;
