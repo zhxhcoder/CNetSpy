@@ -67,14 +67,12 @@ public final class NetSpyInterceptor implements Interceptor {
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
-    static boolean isNetSpy = false;
 
     /**
      * @param context The current Context.
      */
-    public NetSpyInterceptor(Context context, boolean isNetSpy) {
-        NetSpyInterceptor.isNetSpy = isNetSpy;
-        this.context = context.getApplicationContext();
+    public NetSpyInterceptor() {
+        this.context = NetSpyHelper.netSpyApp;
         notificationHelper = new NotificationHelper(this.context);
         showNotification = true;
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
@@ -118,7 +116,7 @@ public final class NetSpyInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
 
-        if (!isNetSpy) {
+        if (!NetSpyHelper.isNetSpy) {
             Request request = chain.request();
             return chain.proceed(request);
         }
