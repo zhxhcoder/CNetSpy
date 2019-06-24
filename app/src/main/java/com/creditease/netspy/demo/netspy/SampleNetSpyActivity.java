@@ -52,7 +52,7 @@ public class SampleNetSpyActivity extends AppCompatActivity {
     }
 
     private void doHttpActivity() {
-        SpyApiService.HttpbinApi api = SpyApiService.getInstance(getClient(this));
+        SpyApiService.HttpApi api = SpyApiService.getInstance(getClient(this));
         Callback<Void> cb = new Callback<Void>() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -63,11 +63,9 @@ public class SampleNetSpyActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         };
-        api.get().enqueue(cb);
-        api.post(new SpyApiService.Data("posted")).enqueue(cb);
-        api.patch(new SpyApiService.Data("patched")).enqueue(cb);
-        api.put(new SpyApiService.Data("put")).enqueue(cb);
-        api.delete().enqueue(cb);
-
+        api.getList().enqueue(cb);
+        api.getList().enqueue(cb);
+        api.postList(new SpyApiService.Data("list")).enqueue(cb);
+        api.postArray(new SpyApiService.Data("array")).enqueue(cb);
     }
 }
