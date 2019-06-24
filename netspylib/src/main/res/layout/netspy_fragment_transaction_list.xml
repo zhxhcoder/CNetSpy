@@ -7,6 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    app:layoutManager="LinearLayoutManager"
     tools:context=".internal.ui.TransactionListFragment"
     tools:listitem="@layout/netspy_list_item_transaction" />
