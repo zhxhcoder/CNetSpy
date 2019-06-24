@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 
 public class NotificationHelper {
 
-    private static final String CHANNEL_ID = "netspy";
+    private static final String CHANNEL_ID = "cnetspy";
     private static final int NOTIFICATION_ID = 1138;
     private static final int BUFFER_SIZE = 10;
 
