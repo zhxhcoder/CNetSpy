@@ -53,7 +53,7 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     pkg {
-        repo = 'android'//创建的仓库名字
+        repo = 'CBase'//创建的仓库名字
         name = 'CNetSpy'//packageName
         websiteUrl = siteUrl
         vcsUrl = gitUrl
@@ -63,7 +63,7 @@ bintray {
 
         version {
             name = '1.1'//版本号
-            desc = 'A tools for spying okhttp network'//版本描述
+            desc = 'tools for spying okhttp network'//版本描述
             released = new Date()
             vcsTag = 'v1.1'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
@@ -77,7 +77,7 @@ install {
             project {
                 packaging 'aar'
                 //项目描述
-                description 'A tools for spying okhttp network'
+                description 'tools for spying okhttp network'
                 url siteUrl
                 // 填写开源协议
                 licenses {
