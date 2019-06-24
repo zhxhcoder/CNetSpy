@@ -32,7 +32,7 @@ public class SQLiteUtils {
             File external = context.getExternalFilesDir(null);
             File data = Environment.getDataDirectory();
             if (external != null && external.canWrite()) {
-                String dataDBPath = "data/" + context.getPackageName() + "/databases/netspy.db";
+                String dataDBPath = "data/" + context.getPackageName() + "/databases/cnetspy.db";
                 String extractDBPath = "netspydb.temp";
                 File dataDB = new File(data, dataDBPath);
                 File extractDB = new File(external, extractDBPath);
