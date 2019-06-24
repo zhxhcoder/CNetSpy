@@ -17,7 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -27,6 +26,5 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
-    implementation 'nl.qbusict:cupboard:2.2.0'
     implementation "com.android.support:design:$supportLibVersion"
 }

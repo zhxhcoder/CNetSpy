@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.internal.data;
 
 import android.net.Uri;
@@ -13,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import nl.qbusict.cupboard.annotation.Index;
+import com.creditease.netspy.cupboard.annotation.Index;
 import okhttp3.Headers;
 
 public class HttpTransaction {

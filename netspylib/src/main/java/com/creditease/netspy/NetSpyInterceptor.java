@@ -32,6 +32,7 @@ import okio.GzipSource;
 import okio.Okio;
 
 /**
+ * okhttp拦截器
  * An OkHttp Interceptor which persists and displays HTTP activity in your application for later inspection.
  */
 public final class NetSpyInterceptor implements Interceptor {
@@ -65,10 +66,13 @@ public final class NetSpyInterceptor implements Interceptor {
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
+    static boolean isNetSpy;
+
     /**
      * @param context The current Context.
      */
-    public NetSpyInterceptor(Context context) {
+    public NetSpyInterceptor(Context context, boolean isNetSpy) {
+        NetSpyInterceptor.isNetSpy = isNetSpy;
         this.context = context.getApplicationContext();
         notificationHelper = new NotificationHelper(this.context);
         showNotification = true;
@@ -97,7 +101,7 @@ public final class NetSpyInterceptor implements Interceptor {
         this.maxContentLength = max;
         return this;
     }
-  
+
     /**
      * Set the retention period for HTTP transaction data captured by this interceptor.
      * The default is one week.
@@ -110,7 +114,14 @@ public final class NetSpyInterceptor implements Interceptor {
         return this;
     }
 
-    @Override public Response intercept(Chain chain) throws IOException {
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+
+        if (!isNetSpy) {
+            Request request = chain.request();
+            return chain.proceed(request);
+        }
+
         Request request = chain.request();
 
         RequestBody requestBody = request.body();
