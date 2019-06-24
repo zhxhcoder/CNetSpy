@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Operate on a {@link CupboardDatabase}. A {@link com.creditease.netspy.cupboard.DatabaseCompartment} is created from {@link Cupboard#withDatabase(SQLiteDatabase)}
  * or {@link Cupboard#withDatabase(CupboardDatabase)}
- * <p/>
+ *
  * <h2>Example</h2>
  * <pre>
  * SQLiteDatabase db = ...

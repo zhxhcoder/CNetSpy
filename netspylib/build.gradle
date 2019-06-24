@@ -27,7 +27,7 @@ android {
     android.libraryVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "cnetspy.aar"
+                outputFileName = "cnetspylib.aar"
             }
     }
 }

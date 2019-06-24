@@ -6,22 +6,6 @@ import com.creditease.netspy.cupboard.convert.EntityConverter;
 
 import java.util.List;
 
-/**
- * {@link com.creditease.netspy.cupboard.CursorCompartment} is used to get or iterate results from a {@link Cursor}.
- * A {@link com.creditease.netspy.cupboard.CursorCompartment} is created from {@link Cupboard#withCursor(Cursor)}.
- * <p/>
- * <h2>Example</h2>
- * <pre>
- *  Cursor cursor = ...
- *  // get the first Book from this cursor
- *  Book book = cupboard().withCursor(cursor).get(Book.class);
- *  // iterate all books
- *  Iterable<Book> itr = cupboard().withCursor(cursor).iterate();
- *  for (Book book : itr) {
- *    // access book
- *  }
- *  </pre>
- */
 public class CursorCompartment extends com.creditease.netspy.cupboard.BaseCompartment {
 
     private final Cursor mCursor;
@@ -32,7 +16,7 @@ public class CursorCompartment extends com.creditease.netspy.cupboard.BaseCompar
     }
 
     /**
-     * Create a {@link Iterable} of objects.
+     * Create a {link Iterable} of objects.
      *
      * @param clz the entity type
      * @return the iterable

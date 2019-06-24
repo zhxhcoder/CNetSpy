@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
  * {@link com.creditease.netspy.cupboard.annotation.Index#uniqueNames()} are used.
  * If the column is just annotated and no parameters are provided, a simple index with a generic name
  * will be created.
- * <p/>
- * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {@link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()} <br/>
+ *
+ * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {@link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()}
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.FIELD)

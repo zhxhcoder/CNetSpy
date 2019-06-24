@@ -129,7 +129,7 @@ public class ReflectiveEntityConverter<T> implements EntityConverter<T> {
 
     /**
      * Check if a field should be ignored. This allows subclasses to ignore fields at their discretion.
-     * <p/>
+     *
      * The default implementation ignores all static, final or transient fields and if
      * {@link Cupboard#isUseAnnotations()} returns true also checks for the {@link Ignore}
      * annotation.

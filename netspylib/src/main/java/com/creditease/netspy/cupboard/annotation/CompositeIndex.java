@@ -5,11 +5,9 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Annotation interface that allows one to order columns for a composite index (if another column in the same table shares
- * the same index name in {@link com.creditease.netspy.cupboard.annotation.Index})
+ * the same index name in {link com.creditease.netspy.cupboard.annotation.Index})
  * For more information see
- * <a href="http://stackoverflow.com/questions/2292662/how-important-is-the-order-of-columns-in-indexes}"><b>Why order matters?</b></a>
- * <p/>
- * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {@link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()} <br/>
+ * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()}
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface CompositeIndex {

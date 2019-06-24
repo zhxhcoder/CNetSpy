@@ -13,8 +13,8 @@ import java.lang.annotation.Target;
  * useful when working with existing data like the {@link ContactsContract} ContentProvider as it utilises
  * generic column names (e.g. data1, data2,...,data15) which map to various
  * aliases depending on the mime type in use for a given row.
- * <p/>
- * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {@link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()} <br/>
+ *
+ * Note that annotations are not processed by default. To enable processing of annotations construct an instance of Cupboard using {@link com.creditease.netspy.cupboard.CupboardBuilder} and call {@link com.creditease.netspy.cupboard.CupboardBuilder#useAnnotations()}
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.FIELD)
