@@ -8,7 +8,7 @@ import com.creditease.netspy.internal.data.NetSpyContentProvider;
 public class ClearTransactionsService extends IntentService {
 
     public ClearTransactionsService() {
-        super("NetSpy-ClearTransactionsService");
+        super("NetSpyHelper-ClearTransactionsService");
     }
 
     @Override

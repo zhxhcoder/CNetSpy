@@ -11,7 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.LongSparseArray;
 
-import com.creditease.netspy.NetSpy;
+import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.internal.data.HttpTransaction;
 import com.creditease.netspy.internal.ui.BaseNetSpyActivity;
@@ -64,7 +64,7 @@ public class NotificationHelper {
         addToBuffer(transaction);
         if (!BaseNetSpyActivity.isInForeground()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                    .setContentIntent(PendingIntent.getActivity(context, 0, NetSpy.getLaunchIntent(context), 0))
+                    .setContentIntent(PendingIntent.getActivity(context, 0, NetSpyHelper.launchIntent(context), 0))
                     .setLocalOnly(true)
                     .setSmallIcon(R.drawable.netspy_ic_notification_white_24dp)
                     .setColor(ContextCompat.getColor(context, R.color.netspy_colorPrimary))

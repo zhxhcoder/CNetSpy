@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RetentionManager {
 
-    private static final String LOG_TAG = "NetSpy";
+    private static final String LOG_TAG = "NetSpyHelper";
     private static final String PREFS_NAME = "netspy_preferences";
     private static final String KEY_LAST_CLEANUP = "last_cleanup";
 

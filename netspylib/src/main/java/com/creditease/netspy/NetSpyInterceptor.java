@@ -67,7 +67,7 @@ public final class NetSpyInterceptor implements Interceptor {
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
-    static boolean isNetSpy;
+    static boolean isNetSpy = false;
 
     /**
      * @param context The current Context.
