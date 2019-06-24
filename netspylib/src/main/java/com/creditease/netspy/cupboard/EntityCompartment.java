@@ -1,10 +1,7 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.content.ContentValues;
 
-import com.creditease.netspy.cupboard.BaseCompartment;
-import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.convert.EntityConverter;
 
 public class EntityCompartment<T> extends BaseCompartment {

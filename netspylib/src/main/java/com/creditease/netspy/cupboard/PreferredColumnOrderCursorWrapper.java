@@ -1,13 +1,12 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
+import com.creditease.netspy.cupboard.convert.EntityConverter.Column;
+
 import java.util.Arrays;
 import java.util.List;
-
-import com.creditease.netspy.cupboard.convert.EntityConverter.Column;
 
 /**
  * A cursor that guarantees that it will return columns of the wrapped cursor in the requested order and with the requested casing.

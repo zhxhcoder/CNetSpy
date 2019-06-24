@@ -30,7 +30,7 @@ public class FormatUtils {
         if (httpHeaders != null) {
             for (HttpHeader header : httpHeaders) {
                 out += ((withMarkup) ? "<b>" : "") + header.getName() + ": " + ((withMarkup) ? "</b>" : "") +
-                        header.getValue() + ((withMarkup) ? "<br />" : "\n");
+                    header.getValue() + ((withMarkup) ? "<br />" : "\n");
             }
         }
         return out;
@@ -40,7 +40,7 @@ public class FormatUtils {
         int unit = si ? 1000 : 1024;
         if (bytes < unit) return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(unit));
-        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
+        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1) + (si ? "" : "i");
         return String.format(Locale.US, "%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
 
@@ -62,7 +62,7 @@ public class FormatUtils {
             Source xmlSource = new SAXSource(new InputSource(new ByteArrayInputStream(xml.getBytes())));
             StreamResult res = new StreamResult(new ByteArrayOutputStream());
             serializer.transform(xmlSource, res);
-            return new String(((ByteArrayOutputStream)res.getOutputStream()).toByteArray());
+            return new String(((ByteArrayOutputStream) res.getOutputStream()).toByteArray());
         } catch (Exception e) {
             return xml;
         }
@@ -91,7 +91,7 @@ public class FormatUtils {
             text += headers + "\n";
         }
         text += (transaction.requestBodyIsPlainText()) ? v(transaction.getFormattedRequestBody()) :
-                context.getString(R.string.netspy_body_omitted);
+            context.getString(R.string.netspy_body_omitted);
         text += "\n\n";
         text += "---------- " + context.getString(R.string.netspy_response) + " ----------\n\n";
         headers = formatHeaders(transaction.getResponseHeaders(), false);
@@ -99,7 +99,7 @@ public class FormatUtils {
             text += headers + "\n";
         }
         text += (transaction.responseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
-                context.getString(R.string.netspy_body_omitted);
+            context.getString(R.string.netspy_body_omitted);
         return text;
     }
 

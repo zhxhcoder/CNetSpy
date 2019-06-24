@@ -5,9 +5,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.data.HttpTransaction;
 import com.creditease.netspy.internal.data.LocalCupboard;
+import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.support.NotificationHelper;
 import com.creditease.netspy.internal.support.RetentionManager;
 

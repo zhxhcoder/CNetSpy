@@ -1,7 +1,5 @@
-
 package com.creditease.netspy.cupboard;
 
-import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.convert.EntityConverter;
 
 class BaseCompartment {

@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.content.ContentProvider;
@@ -9,26 +8,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.creditease.netspy.cupboard.CupboardDatabase;
-import com.creditease.netspy.cupboard.CupboardFactory;
-import com.creditease.netspy.cupboard.CursorCompartment;
-import com.creditease.netspy.cupboard.DatabaseCompartment;
-import com.creditease.netspy.cupboard.EntityCompartment;
-import com.creditease.netspy.cupboard.ProviderCompartment;
-import com.creditease.netspy.cupboard.ProviderOperationsCompartment;
 import com.creditease.netspy.cupboard.annotation.Column;
 import com.creditease.netspy.cupboard.convert.EntityConverter;
 import com.creditease.netspy.cupboard.convert.EntityConverterFactory;
 import com.creditease.netspy.cupboard.convert.FieldConverter;
 import com.creditease.netspy.cupboard.convert.FieldConverterFactory;
 import com.creditease.netspy.cupboard.internal.convert.ConverterRegistry;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>The entry point of Cupboard is this class. The typical way to get an instance of this class is to use {@link CupboardFactory} using a static import:</p>
@@ -62,7 +54,7 @@ import com.creditease.netspy.cupboard.internal.convert.ConverterRegistry;
  * </ul>
  *
  * <h2>Using annotations for column mapping</h2>
- *
+ * <p>
  * When working with existing data, it might be convenient to use a different field name for a certain column.
  * For supporting that use case, the {@link Column} annotation can be used on an entity field. By default, these
  * annotations are not processed, processing needs to be enabled explicitly by creating a Cupboard instance using {@link com.creditease.netspy.cupboard.CupboardBuilder}
@@ -72,12 +64,12 @@ import com.creditease.netspy.cupboard.internal.convert.ConverterRegistry;
  * </pre>
  * Above would configure a local instance of Cupboard to use the {@link Column} annotation for mapping fields to columns.
  * If you would like to make this the global default, use {@link com.creditease.netspy.cupboard.CupboardBuilder} as well.
- *<pre>
- *static {
+ * <pre>
+ * static {
  *      new CupboardBuilder().useAnnotations().asGlobalInstance().build();
  *      cupboard().register(MyEntity.class);
- *}
- *</pre>
+ * }
+ * </pre>
  *
  * @see DatabaseCompartment
  * @see ProviderCompartment
@@ -100,6 +92,7 @@ public class Cupboard {
 
     /**
      * Register an entity class. Every entity class has to be registered before use.
+     *
      * @param clz the entity class to register.
      */
     public <T> void register(Class<T> clz) {
@@ -108,6 +101,7 @@ public class Cupboard {
 
     /**
      * Operate on a {@link SQLiteDatabase}
+     *
      * @param db the database to wrap
      * @return a {@link DatabaseCompartment} wrapping the database for chaining.
      */
@@ -117,6 +111,7 @@ public class Cupboard {
 
     /**
      * Operate on a {@link CupboardDatabase}
+     *
      * @param db the database to wrap
      * @return a {@link DatabaseCompartment} wrapping the database for chaining.
      */
@@ -127,6 +122,7 @@ public class Cupboard {
 
     /**
      * Operate on a {@link Cursor}
+     *
      * @param cursor the cursor to wrap
      * @return a {@link CursorCompartment} wrapping the cursor for chaining.
      */
@@ -136,6 +132,7 @@ public class Cupboard {
 
     /**
      * Operate on a {@link ContentResolver}
+     *
      * @param context the {@link Context} to retrieve the {@link ContentResolver} from
      * @return a {@link ProviderCompartment} to interact with the {@link ContentResolver}
      */
@@ -145,6 +142,7 @@ public class Cupboard {
 
     /**
      * Operate on a list of {@link ContentProviderOperation}s
+     *
      * @param operations the (empty) list of operations to append to
      * @return a {@link ProviderOperationsCompartment} for chaining
      */
@@ -154,6 +152,7 @@ public class Cupboard {
 
     /**
      * Operate on an entity
+     *
      * @param entityClass the entity class
      * @return an {@link EntityCompartment} to interact with the entity.
      */
@@ -164,6 +163,7 @@ public class Cupboard {
 
     /**
      * Get the database table for an entity
+     *
      * @param clz the entity class
      * @return the database table name
      */
@@ -173,6 +173,7 @@ public class Cupboard {
 
     /**
      * Get the classes that are registered with this instance
+     *
      * @return an unmodifiable collection of registered classes
      */
     public Collection<Class<?>> getRegisteredEntities() {
@@ -212,7 +213,7 @@ public class Cupboard {
     /**
      * Get an entity converter for an entity class. When using the returned converter directly, you should take note that {@link EntityConverter#fromCursor(Cursor)}
      * expects the cursor passed in to have the columns in the expected order.
-     *
+     * <p>
      * When not using this as part of delegation from an EntityConverter, the recommended way is to use {@link #withCursor(Cursor)} and use {@link CursorCompartment#get(Class)}
      * to convert from a cursor to an entity.
      *

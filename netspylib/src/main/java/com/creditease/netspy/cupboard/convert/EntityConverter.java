@@ -3,9 +3,9 @@ package com.creditease.netspy.cupboard.convert;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import java.util.List;
-
 import com.creditease.netspy.cupboard.annotation.Index;
+
+import java.util.List;
 
 /**
  * An entity converter is responsible for converting an entity to {@link ContentValues} and from a {@link Cursor}
@@ -16,10 +16,10 @@ public interface EntityConverter<T> {
     /**
      * Create an entity from the cursor. The cursor supplied is guaranteed to provide the columns in the order returned by {@link com.creditease.netspy.cupboard.convert.EntityConverter#getColumns()},
      * but the number of columns might be less if the result does not contain them.
-     *
+     * <p>
      * For example, if the converter has 10 columns and the cursor has only 7, the columns 0-6 from {@link com.creditease.netspy.cupboard.convert.EntityConverter#getColumns()} will be supplied, even
      * if the original cursor does not contain all of them. This allows a {@link com.creditease.netspy.cupboard.convert.EntityConverter} to iterate over the columns without checking for column name.
-     *
+     * <p>
      * Note the contract between @{link #getColumns} and this function: {@link #getColumns()} should always specify the required columns for conversion. Any unlisted columns will be dropped from
      * the cursor that is supplied here for performance reasons.
      *
@@ -39,20 +39,23 @@ public interface EntityConverter<T> {
 
     /**
      * Get the database column names along with the colum types
-     * @see ColumnType
+     *
      * @return the list of colums
+     * @see ColumnType
      */
     public List<Column> getColumns();
 
     /**
      * Set the id value on an entity
-     * @param id the id
+     *
+     * @param id       the id
      * @param instance the instance to set the id on
      */
     public void setId(Long id, T instance);
 
     /**
      * Get the id of an entity
+     *
      * @param instance the entity
      * @return the id
      */
@@ -60,6 +63,7 @@ public interface EntityConverter<T> {
 
     /**
      * Get the database table for the entity
+     *
      * @return the mapped table name
      */
     public String getTable();

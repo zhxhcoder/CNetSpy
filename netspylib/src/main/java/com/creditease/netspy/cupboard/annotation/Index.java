@@ -1,7 +1,5 @@
 package com.creditease.netspy.cupboard.annotation;
 
-import com.creditease.netspy.cupboard.annotation.CompositeIndex;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

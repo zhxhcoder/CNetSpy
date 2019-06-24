@@ -1,11 +1,11 @@
 package com.creditease.netspy.cupboard.convert;
 
+import com.creditease.netspy.cupboard.annotation.CompositeIndex;
+import com.creditease.netspy.cupboard.annotation.Index;
+
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.creditease.netspy.cupboard.annotation.CompositeIndex;
-import com.creditease.netspy.cupboard.annotation.Index;
 
 /**
  * Builder that can be used to build {@link Index} annotations. This is useful for custom {@link com.creditease.netspy.cupboard.convert.EntityConverter}s

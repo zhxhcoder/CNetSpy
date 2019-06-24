@@ -1,8 +1,8 @@
-
 package com.creditease.netspy.cupboard.internal.convert;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.convert.EntityConverter.ColumnType;
 import com.creditease.netspy.cupboard.convert.FieldConverter;

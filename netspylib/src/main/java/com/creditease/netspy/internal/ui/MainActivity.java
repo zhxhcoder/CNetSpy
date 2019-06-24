@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.internal.ui;
 
 import android.content.pm.ApplicationInfo;
@@ -23,8 +22,8 @@ public class MainActivity extends BaseNetSpyActivity implements TransactionListF
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, TransactionListFragment.newInstance())
-                    .commit();
+                .add(R.id.container, TransactionListFragment.newInstance())
+                .commit();
         }
     }
 

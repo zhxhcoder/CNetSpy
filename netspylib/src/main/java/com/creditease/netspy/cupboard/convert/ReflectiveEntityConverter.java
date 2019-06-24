@@ -4,6 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
+import com.creditease.netspy.cupboard.Cupboard;
+import com.creditease.netspy.cupboard.annotation.Ignore;
+import com.creditease.netspy.cupboard.annotation.Index;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
@@ -12,10 +16,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import com.creditease.netspy.cupboard.Cupboard;
-import com.creditease.netspy.cupboard.annotation.Ignore;
-import com.creditease.netspy.cupboard.annotation.Index;
 
 /**
  * The default {@link EntityConverter}
@@ -247,7 +247,7 @@ public class ReflectiveEntityConverter<T> implements EntityConverter<T> {
     protected String getColumn(Field field) {
         if (mUseAnnotations) {
             com.creditease.netspy.cupboard.annotation.Column column = field
-                    .getAnnotation(com.creditease.netspy.cupboard.annotation.Column.class);
+                .getAnnotation(com.creditease.netspy.cupboard.annotation.Column.class);
             if (column != null) {
                 return column.value();
             }
@@ -258,7 +258,7 @@ public class ReflectiveEntityConverter<T> implements EntityConverter<T> {
     protected Index getIndexes(Field field) {
         if (mUseAnnotations) {
             Index index = field
-                    .getAnnotation(Index.class);
+                .getAnnotation(Index.class);
             if (index != null) {
                 return index;
             }

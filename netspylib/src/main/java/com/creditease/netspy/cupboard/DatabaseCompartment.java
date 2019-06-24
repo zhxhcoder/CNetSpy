@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.annotation.SuppressLint;
@@ -8,6 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
+import com.creditease.netspy.cupboard.annotation.Index;
+import com.creditease.netspy.cupboard.convert.EntityConverter;
+import com.creditease.netspy.cupboard.convert.EntityConverter.Column;
+import com.creditease.netspy.cupboard.convert.EntityConverter.ColumnType;
+import com.creditease.netspy.cupboard.internal.IndexStatement;
+import com.creditease.netspy.cupboard.internal.IndexStatement.Builder;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,17 +21,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import com.creditease.netspy.cupboard.BaseCompartment;
-import com.creditease.netspy.cupboard.Cupboard;
-import com.creditease.netspy.cupboard.CupboardDatabase;
-import com.creditease.netspy.cupboard.QueryResultIterable;
-import com.creditease.netspy.cupboard.annotation.Index;
-import com.creditease.netspy.cupboard.convert.EntityConverter;
-import com.creditease.netspy.cupboard.convert.EntityConverter.Column;
-import com.creditease.netspy.cupboard.convert.EntityConverter.ColumnType;
-import com.creditease.netspy.cupboard.internal.IndexStatement;
-import com.creditease.netspy.cupboard.internal.IndexStatement.Builder;
 
 /**
  * Operate on a {@link CupboardDatabase}. A {@link com.creditease.netspy.cupboard.DatabaseCompartment} is created from {@link Cupboard#withDatabase(SQLiteDatabase)}

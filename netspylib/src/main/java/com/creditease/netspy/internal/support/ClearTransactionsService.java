@@ -3,6 +3,7 @@ package com.creditease.netspy.internal.support;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+
 import com.creditease.netspy.internal.data.NetSpyContentProvider;
 
 public class ClearTransactionsService extends IntentService {

@@ -2,13 +2,12 @@ package com.creditease.netspy.cupboard;
 
 import android.database.Cursor;
 
+import com.creditease.netspy.cupboard.convert.EntityConverter;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import com.creditease.netspy.cupboard.PreferredColumnOrderCursorWrapper;
-import com.creditease.netspy.cupboard.convert.EntityConverter;
 
 
 public class QueryResultIterable<T> implements Iterable<T> {

@@ -13,6 +13,7 @@ public class NetSpyHelper {
     public static Intent launchIntent(Context context) {
         return new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
+
     public static void launchActivity(Context context) {
         if (NetSpyInterceptor.isNetSpy) {
             context.startActivity(new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

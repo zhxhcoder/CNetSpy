@@ -2,9 +2,10 @@ package com.creditease.netspy.internal.data;
 
 import android.net.Uri;
 
-import com.google.gson.reflect.TypeToken;
+import com.creditease.netspy.cupboard.annotation.Index;
 import com.creditease.netspy.internal.support.FormatUtils;
 import com.creditease.netspy.internal.support.JsonConvertor;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.creditease.netspy.cupboard.annotation.Index;
 import okhttp3.Headers;
 
 public class HttpTransaction {
@@ -23,24 +23,25 @@ public class HttpTransaction {
         Failed
     }
 
-    public static final String[] PARTIAL_PROJECTION = new String[] {
-            "_id",
-            "requestDate",
-            "tookMs",
-            "method",
-            "host",
-            "path",
-            "scheme",
-            "requestContentLength",
-            "responseCode",
-            "error",
-            "responseContentLength"
+    public static final String[] PARTIAL_PROJECTION = new String[]{
+        "_id",
+        "requestDate",
+        "tookMs",
+        "method",
+        "host",
+        "path",
+        "scheme",
+        "requestContentLength",
+        "responseCode",
+        "error",
+        "responseContentLength"
     };
 
     private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("HH:mm:ss", Locale.US);
 
     private Long _id;
-    @Index private Date requestDate;
+    @Index
+    private Date requestDate;
     private Date responseDate;
     private Long tookMs;
 
@@ -245,7 +246,8 @@ public class HttpTransaction {
 
     public List<HttpHeader> getRequestHeaders() {
         return JsonConvertor.getInstance().fromJson(requestHeaders,
-                new TypeToken<List<HttpHeader>>(){}.getType());
+            new TypeToken<List<HttpHeader>>() {
+            }.getType());
     }
 
     public String getRequestHeadersString(boolean withMarkup) {
@@ -262,7 +264,8 @@ public class HttpTransaction {
 
     public List<HttpHeader> getResponseHeaders() {
         return JsonConvertor.getInstance().fromJson(responseHeaders,
-                new TypeToken<List<HttpHeader>>(){}.getType());
+            new TypeToken<List<HttpHeader>>() {
+            }.getType());
     }
 
     public String getResponseHeadersString(boolean withMarkup) {
@@ -292,12 +295,13 @@ public class HttpTransaction {
     }
 
     public String getDurationString() {
-        return (tookMs != null) ? + tookMs + " ms" : null;
+        return (tookMs != null) ? +tookMs + " ms" : null;
     }
 
     public String getRequestSizeString() {
         return formatBytes((requestContentLength != null) ? requestContentLength : 0);
     }
+
     public String getResponseSizeString() {
         return (responseContentLength != null) ? formatBytes(responseContentLength) : null;
     }

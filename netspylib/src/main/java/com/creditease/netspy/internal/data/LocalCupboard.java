@@ -20,8 +20,8 @@ public class LocalCupboard {
 
     public static Cupboard getAnnotatedInstance() {
         return new CupboardBuilder(getInstance())
-                .useAnnotations()
-                .build();
+            .useAnnotations()
+            .build();
     }
 
     private LocalCupboard() {

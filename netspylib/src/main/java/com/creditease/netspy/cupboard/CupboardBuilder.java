@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.cupboard;
 
 import com.creditease.netspy.cupboard.convert.EntityConverterFactory;

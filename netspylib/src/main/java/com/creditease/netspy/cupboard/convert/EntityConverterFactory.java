@@ -1,7 +1,6 @@
 package com.creditease.netspy.cupboard.convert;
 
-import com.creditease.netspy.cupboard.*;
-import com.creditease.netspy.cupboard.convert.EntityConverter;
+import com.creditease.netspy.cupboard.Cupboard;
 
 /**
  * An entity converter factory instantiates {@link EntityConverter}s. A single factory may support

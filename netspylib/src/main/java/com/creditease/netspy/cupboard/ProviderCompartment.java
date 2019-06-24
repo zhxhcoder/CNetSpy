@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.content.ContentProvider;
@@ -11,10 +10,10 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import com.creditease.netspy.cupboard.convert.EntityConverter;
+
 import java.util.Collection;
 import java.util.List;
-
-import com.creditease.netspy.cupboard.convert.EntityConverter;
 
 @SuppressWarnings("unchecked")
 public class ProviderCompartment extends BaseCompartment {

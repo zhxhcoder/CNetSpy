@@ -21,8 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.support.NotificationHelper;
 import com.creditease.netspy.internal.support.SQLiteUtils;
 

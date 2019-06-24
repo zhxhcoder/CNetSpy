@@ -1,14 +1,10 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.database.Cursor;
 
-import java.util.List;
-
-import com.creditease.netspy.cupboard.BaseCompartment;
-import com.creditease.netspy.cupboard.Cupboard;
-import com.creditease.netspy.cupboard.QueryResultIterable;
 import com.creditease.netspy.cupboard.convert.EntityConverter;
+
+import java.util.List;
 
 /**
  * {@link com.creditease.netspy.cupboard.CursorCompartment} is used to get or iterate results from a {@link Cursor}.

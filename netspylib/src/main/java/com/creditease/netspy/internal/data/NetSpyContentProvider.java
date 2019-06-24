@@ -49,15 +49,15 @@ public class NetSpyContentProvider extends ContentProvider {
         switch (matcher.match(uri)) {
             case TRANSACTIONS:
                 cursor = LocalCupboard.getInstance().withDatabase(db).query(HttpTransaction.class).
-                        withProjection(projection).
-                        withSelection(selection, selectionArgs).
-                        orderBy(sortOrder).
-                        getCursor();
+                    withProjection(projection).
+                    withSelection(selection, selectionArgs).
+                    orderBy(sortOrder).
+                    getCursor();
                 break;
             case TRANSACTION:
                 cursor = LocalCupboard.getInstance().withDatabase(db).query(HttpTransaction.class).
-                        byId(ContentUris.parseId(uri)).
-                        getCursor();
+                    byId(ContentUris.parseId(uri)).
+                    getCursor();
                 break;
         }
         if (cursor != null) {
@@ -97,7 +97,7 @@ public class NetSpyContentProvider extends ContentProvider {
                 break;
             case TRANSACTION:
                 result = db.delete(LocalCupboard.getInstance().getTable(HttpTransaction.class),
-                        "_id = ?", new String[]{uri.getPathSegments().get(1)});
+                    "_id = ?", new String[]{uri.getPathSegments().get(1)});
                 break;
         }
         if (result > 0) {
@@ -117,7 +117,7 @@ public class NetSpyContentProvider extends ContentProvider {
                 break;
             case TRANSACTION:
                 result = db.update(LocalCupboard.getInstance().getTable(HttpTransaction.class), contentValues,
-                        "_id = ?", new String[]{uri.getPathSegments().get(1)});
+                    "_id = ?", new String[]{uri.getPathSegments().get(1)});
                 break;
         }
         if (result > 0) {

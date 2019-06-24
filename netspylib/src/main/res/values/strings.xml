@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="netspy_name">NetSpy</string>
+    <string name="netspy_name">CNetSpy</string>
     <string name="netspy_notification_title">Recording HTTP activity</string>
     <string name="netspy_clear">Clear</string>
     <string name="netspy_browse_sql_database">Browse SQLite database</string>

@@ -1,5 +1,8 @@
 package com.creditease.netspy.cupboard.internal;
 
+import com.creditease.netspy.cupboard.annotation.CompositeIndex;
+import com.creditease.netspy.cupboard.annotation.Index;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.creditease.netspy.cupboard.annotation.CompositeIndex;
-import com.creditease.netspy.cupboard.annotation.Index;
 
 public class IndexStatement {
     public static final String INDEX_PREFIX = "_cb";
@@ -146,7 +146,7 @@ public class IndexStatement {
                 final int prime = 31;
                 int result = 1;
                 result = prime * result
-                        + ((mColumnName == null) ? 0 : mColumnName.hashCode());
+                    + ((mColumnName == null) ? 0 : mColumnName.hashCode());
                 return result;
             }
 

@@ -1,8 +1,8 @@
-
 package com.creditease.netspy.cupboard.internal.convert;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.convert.EntityConverter.ColumnType;
 import com.creditease.netspy.cupboard.convert.FieldConverter;
@@ -15,9 +15,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class DefaultFieldConverterFactory implements FieldConverterFactory {
-    
+
     private static HashMap<Type, FieldConverter<?>> sTypeConverters = new HashMap<Type, FieldConverter<?>>(25);
-    
+
     static {
         sTypeConverters.put(BigDecimal.class, new BigDecimalConverter());
         sTypeConverters.put(BigInteger.class, new BigIntegerConverter());

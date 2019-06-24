@@ -1,4 +1,3 @@
-
 package com.creditease.netspy.cupboard;
 
 import android.content.ContentProviderOperation;
@@ -7,11 +6,9 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-import java.util.ArrayList;
-
-import com.creditease.netspy.cupboard.BaseCompartment;
-import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.convert.EntityConverter;
+
+import java.util.ArrayList;
 
 @SuppressWarnings("unchecked")
 public class ProviderOperationsCompartment extends BaseCompartment {
@@ -40,13 +37,13 @@ public class ProviderOperationsCompartment extends BaseCompartment {
         Long id = converter.getId(entity);
         if (id == null) {
             mOperations.add(ContentProviderOperation.newInsert(uri).
-                    withValues(values).
-                    withYieldAllowed(shouldYield()).
-                    build());
+                withValues(values).
+                withYieldAllowed(shouldYield()).
+                build());
         } else {
             mOperations.add(ContentProviderOperation.newInsert(ContentUris.withAppendedId(uri, id)).
-                    withYieldAllowed(shouldYield()).
-                    withValues(values).build());
+                withYieldAllowed(shouldYield()).
+                withValues(values).build());
         }
         mYieldAllowed = false;
         return this;
@@ -57,7 +54,6 @@ public class ProviderOperationsCompartment extends BaseCompartment {
      *
      * @return the {@link com.creditease.netspy.cupboard.ProviderOperationsCompartment} for chaining.
      * @see SQLiteDatabase#yieldIfContendedSafely()
-     *
      */
     public com.creditease.netspy.cupboard.ProviderOperationsCompartment yield() {
         mYieldAllowed = true;
@@ -120,8 +116,8 @@ public class ProviderOperationsCompartment extends BaseCompartment {
             return this;
         }
         mOperations.add(ContentProviderOperation.newDelete(ContentUris.withAppendedId(uri, id)).
-                withYieldAllowed(mYieldAllowed).
-                build());
+            withYieldAllowed(mYieldAllowed).
+            build());
         return this;
     }
 
@@ -136,6 +132,6 @@ public class ProviderOperationsCompartment extends BaseCompartment {
 
     private boolean shouldYield() {
         return mYieldAllowed || (mYieldAfter > 0 && mOperations.size() + 1 >= mYieldAfter && (
-                (mOperations.size() + 1) % mYieldAfter == 0));
+            (mOperations.size() + 1) % mYieldAfter == 0));
     }
 }

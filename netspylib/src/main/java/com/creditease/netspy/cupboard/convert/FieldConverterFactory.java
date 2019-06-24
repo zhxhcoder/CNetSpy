@@ -1,8 +1,8 @@
 package com.creditease.netspy.cupboard.convert;
 
-import java.lang.reflect.Type;
+import com.creditease.netspy.cupboard.Cupboard;
 
-import com.creditease.netspy.cupboard.*;
+import java.lang.reflect.Type;
 
 /**
  * An field converter factory instantiates {@link FieldConverter}s. A single factory may support

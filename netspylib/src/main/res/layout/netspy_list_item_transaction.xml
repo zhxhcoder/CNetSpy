@@ -4,36 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/code"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:padding="2dp"
         android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        tools:text="200"/>
+        tools:text="200" />
 
     <TextView
         android:id="@+id/path"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/code"
         android:layout_toEndOf="@id/code"
+        android:layout_toRightOf="@id/code"
         android:padding="2dp"
         android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        tools:text="GET /path/to/some/resource?goes=here"/>
+        tools:text="GET /path/to/some/resource?goes=here" />
 
     <TextView
         android:id="@+id/host"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/path"
-        android:layout_toRightOf="@id/code"
         android:layout_toEndOf="@id/code"
+        android:layout_toRightOf="@id/code"
         android:padding="2dp"
         tools:text="example.com" />
 
@@ -41,20 +41,20 @@
         android:id="@+id/ssl"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_toRightOf="@id/host"
-        android:layout_toEndOf="@id/host"
         android:layout_below="@id/path"
         android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/host"
+        android:layout_toRightOf="@id/host"
         android:contentDescription="@string/netspy_ssl"
-        android:src="@drawable/netspy_ic_https_grey_24dp"/>
+        android:src="@drawable/netspy_ic_https_grey_24dp" />
 
     <LinearLayout
         android:id="@+id/meta"
-        android:layout_below="@id/host"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/host"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp">
 
         <TextView
             android:id="@+id/start"
@@ -67,8 +67,8 @@
             android:id="@+id/duration"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:padding="2dp"
             android:gravity="end"
+            android:padding="2dp"
             tools:text="8023 ms" />
 
         <TextView

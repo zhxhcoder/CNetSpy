@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="NetSpy.Theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/netspy_colorPrimary</item>
         <item name="colorPrimaryDark">@color/netspy_colorPrimaryDark</item>
