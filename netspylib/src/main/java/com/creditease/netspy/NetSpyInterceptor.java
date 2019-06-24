@@ -69,7 +69,7 @@ public final class NetSpyInterceptor implements Interceptor {
 
 
     /**
-     * @param context The current Context.
+     * NetSpyInterceptor
      */
     public NetSpyInterceptor() {
         this.context = NetSpyHelper.netSpyApp;

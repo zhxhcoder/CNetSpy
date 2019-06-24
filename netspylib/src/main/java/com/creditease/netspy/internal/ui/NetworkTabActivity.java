@@ -31,17 +31,17 @@ import com.creditease.netspy.internal.support.SimpleOnPageChangedListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.creditease.netspy.internal.ui.TransactionPayloadFragment.TYPE_REQUEST;
-import static com.creditease.netspy.internal.ui.TransactionPayloadFragment.TYPE_RESPONSE;
+import static com.creditease.netspy.internal.ui.NetworkDownloadFragment.TYPE_REQUEST;
+import static com.creditease.netspy.internal.ui.NetworkDownloadFragment.TYPE_RESPONSE;
 
-public class TransactionActivity extends BaseNetSpyActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String ARG_TRANSACTION_ID = "transaction_id";
 
     private static int selectedTabPosition = 0;
 
     public static void start(Context context, long transactionId) {
-        Intent intent = new Intent(context, TransactionActivity.class);
+        Intent intent = new Intent(context, NetworkTabActivity.class);
         intent.putExtra(ARG_TRANSACTION_ID, transactionId);
         context.startActivity(intent);
     }
@@ -55,7 +55,7 @@ public class TransactionActivity extends BaseNetSpyActivity implements LoaderMan
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.netspy_activity_transaction);
+        setContentView(R.layout.netspy_activity_network_tab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -122,7 +122,7 @@ public class TransactionActivity extends BaseNetSpyActivity implements LoaderMan
     private void populateUI() {
         if (transaction != null) {
             title.setText(transaction.getMethod() + " " + transaction.getPath());
-            for (TransactionFragment fragment : adapter.fragments) {
+            for (NetworkTabFragment fragment : adapter.fragments) {
                 fragment.transactionUpdated(transaction);
             }
         }
@@ -130,9 +130,9 @@ public class TransactionActivity extends BaseNetSpyActivity implements LoaderMan
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new TransactionOverviewFragment(), getString(R.string.netspy_overview));
-        adapter.addFragment(TransactionPayloadFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
-        adapter.addFragment(TransactionPayloadFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
+        adapter.addFragment(new NetworkOverviewFragment(), getString(R.string.netspy_overview));
+        adapter.addFragment(NetworkDownloadFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
+        adapter.addFragment(NetworkDownloadFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangedListener() {
             @Override
@@ -152,14 +152,14 @@ public class TransactionActivity extends BaseNetSpyActivity implements LoaderMan
     }
 
     static class Adapter extends FragmentPagerAdapter {
-        final List<TransactionFragment> fragments = new ArrayList<>();
+        final List<NetworkTabFragment> fragments = new ArrayList<>();
         private final List<String> fragmentTitles = new ArrayList<>();
 
         Adapter(FragmentManager fm) {
             super(fm);
         }
 
-        void addFragment(TransactionFragment fragment, String title) {
+        void addFragment(NetworkTabFragment fragment, String title) {
             fragments.add(fragment);
             fragmentTitles.add(title);
         }

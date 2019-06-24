@@ -14,7 +14,7 @@ import com.creditease.netspy.internal.data.HttpTransaction;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class TransactionOverviewFragment extends Fragment implements TransactionFragment {
+public class NetworkOverviewFragment extends Fragment implements NetworkTabFragment {
 
     TextView url;
     TextView method;
@@ -31,7 +31,7 @@ public class TransactionOverviewFragment extends Fragment implements Transaction
 
     private HttpTransaction transaction;
 
-    public TransactionOverviewFragment() {
+    public NetworkOverviewFragment() {
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TransactionOverviewFragment extends Fragment implements Transaction
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.netspy_fragment_transaction_overview, container, false);
+        View view = inflater.inflate(R.layout.netspy_fragment_network_overview, container, false);
         url = view.findViewById(R.id.url);
         method = view.findViewById(R.id.method);
         protocol = view.findViewById(R.id.protocol);

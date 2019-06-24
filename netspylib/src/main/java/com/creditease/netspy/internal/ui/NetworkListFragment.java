@@ -26,18 +26,18 @@ import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.support.NotificationHelper;
 import com.creditease.netspy.internal.support.SQLiteUtils;
 
-public class TransactionListFragment extends Fragment implements
+public class NetworkListFragment extends Fragment implements
     SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     private String currentFilter;
     private OnListFragmentInteractionListener listener;
-    private TransactionAdapter adapter;
+    private NetworkTabAdapter adapter;
 
-    public TransactionListFragment() {
+    public NetworkListFragment() {
     }
 
-    public static TransactionListFragment newInstance() {
-        return new TransactionListFragment();
+    public static NetworkListFragment newInstance() {
+        return new NetworkListFragment();
     }
 
     @Override
@@ -49,14 +49,14 @@ public class TransactionListFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.netspy_fragment_transaction_list, container, false);
+        View view = inflater.inflate(R.layout.netspy_fragment_netwok_list, container, false);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-            adapter = new TransactionAdapter(getContext(), listener);
+            adapter = new NetworkTabAdapter(getContext(), listener);
             recyclerView.setAdapter(adapter);
         }
         return view;

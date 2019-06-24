@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.creditease.netspy.R;
 import com.creditease.netspy.internal.data.HttpTransaction;
 import com.creditease.netspy.internal.data.LocalCupboard;
-import com.creditease.netspy.internal.ui.TransactionListFragment.OnListFragmentInteractionListener;
+import com.creditease.netspy.internal.ui.NetworkListFragment.OnListFragmentInteractionListener;
 
-class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
+class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolder> {
 
     private final Context context;
     private final OnListFragmentInteractionListener listener;
@@ -29,7 +29,7 @@ class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHol
     private final int color400;
     private final int color300;
 
-    TransactionAdapter(Context context, OnListFragmentInteractionListener listener) {
+    NetworkTabAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.listener = listener;
         this.context = context;
         colorDefault = ContextCompat.getColor(context, R.color.netspy_status_default);
@@ -39,10 +39,10 @@ class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHol
         color400 = ContextCompat.getColor(context, R.color.netspy_status_400);
         color300 = ContextCompat.getColor(context, R.color.netspy_status_300);
 
-        cursorAdapter = new CursorAdapter(TransactionAdapter.this.context, null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
+        cursorAdapter = new CursorAdapter(NetworkTabAdapter.this.context, null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
             @Override
             public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_item_transaction, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_network_item, parent, false);
                 ViewHolder holder = new ViewHolder(itemView);
                 itemView.setTag(holder);
                 return itemView;
@@ -73,8 +73,8 @@ class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHol
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (null != TransactionAdapter.this.listener) {
-                            TransactionAdapter.this.listener.onListFragmentInteraction(holder.transaction);
+                        if (null != NetworkTabAdapter.this.listener) {
+                            NetworkTabAdapter.this.listener.onListFragmentInteraction(holder.transaction);
                         }
                     }
                 });
