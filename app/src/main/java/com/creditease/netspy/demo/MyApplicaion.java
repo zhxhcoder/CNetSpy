@@ -13,6 +13,6 @@ public class MyApplicaion extends Application {
     public void onCreate() {
         super.onCreate();
 
-        NetSpyHelper.init(this, true);
+        NetSpyHelper.install(this);
     }
 }

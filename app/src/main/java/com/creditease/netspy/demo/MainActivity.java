@@ -1,9 +1,10 @@
 package com.creditease.netspy.demo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
+import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.demo.netspy.SampleNetSpyActivity;
 
 /**
@@ -17,5 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleNetSpyActivity.class)));
+        findViewById(R.id.spyStatusButton).setOnClickListener(v -> {
+            NetSpyHelper.init(true);
+        });
     }
 }
