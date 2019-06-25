@@ -16,14 +16,14 @@ public class NetSpyHelper {
 
     public static void install(Application netSpyApp, boolean isNetSpy) {
         init(netSpyApp);
-        init(isNetSpy);
+        debug(isNetSpy);
     }
 
     public static void install(Application netSpyApp) {
         install(netSpyApp, false);
     }
 
-    public static void init(boolean isNetSpy) {
+    public static void debug(boolean isNetSpy) {
         NetSpyHelper.isNetSpy = isNetSpy;
     }
 

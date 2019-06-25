@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleNetSpyActivity.class)));
         findViewById(R.id.spyStatusButton).setOnClickListener(v -> {
-            NetSpyHelper.init(true);
+            NetSpyHelper.debug(true);
         });
     }
 }
