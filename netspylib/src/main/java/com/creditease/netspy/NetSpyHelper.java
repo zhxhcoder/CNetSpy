@@ -19,6 +19,10 @@ public class NetSpyHelper {
         NetSpyHelper.isNetSpy = isNetSpy;
     }
 
+    public static void init(Application netSpyApp) {
+        init(netSpyApp, false);
+    }
+
     public static Intent launchIntent(Context context) {
         return new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
