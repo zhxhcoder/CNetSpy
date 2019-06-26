@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
@@ -25,20 +24,13 @@ public class SampleNetSpyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_netspy);
-        findViewById(R.id.do_http).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < 10; i++) {
-                    doHttpActivity();
-                }
+        findViewById(R.id.do_http).setOnClickListener(view -> {
+            for (int i = 0; i < 10; i++) {
+                doHttpActivity();
             }
         });
-        findViewById(R.id.launch_netspy_directly).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchNetSpyDirectly();
-            }
-        });
+        findViewById(R.id.launch_netspy_directly).setOnClickListener(view -> NetSpyHelper.launchActivity(this)
+        );
     }
 
     private OkHttpClient getClient(Context context) {
@@ -47,10 +39,6 @@ public class SampleNetSpyActivity extends AppCompatActivity {
             .addInterceptor(new NetSpyInterceptor())
             .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
-    }
-
-    private void launchNetSpyDirectly() {
-        NetSpyHelper.launchActivity(this);
     }
 
     private void doHttpActivity() {

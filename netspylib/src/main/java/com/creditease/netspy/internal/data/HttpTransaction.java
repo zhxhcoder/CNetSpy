@@ -37,7 +37,7 @@ public class HttpTransaction {
         "responseContentLength"
     };
 
-    private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("HH:mm:ss", Locale.US);
+    private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("HH:mm:ss", Locale.CHINESE);
 
     private Long _id;
     @Index

@@ -14,21 +14,12 @@ public class NetSpyHelper {
     static boolean isNetSpy = false;
     static Application netSpyApp;
 
-    public static void install(Application netSpyApp, boolean isNetSpy) {
-        init(netSpyApp);
-        debug(isNetSpy);
-    }
-
     public static void install(Application netSpyApp) {
-        install(netSpyApp, false);
+        NetSpyHelper.netSpyApp = netSpyApp;
     }
 
     public static void debug(boolean isNetSpy) {
         NetSpyHelper.isNetSpy = isNetSpy;
-    }
-
-    public static void init(Application netSpyApp) {
-        NetSpyHelper.netSpyApp = netSpyApp;
     }
 
     public static Intent launchIntent(Context context) {
