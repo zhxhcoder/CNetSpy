@@ -28,7 +28,9 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         findViewById(R.id.do_http).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doHttpActivity();
+                for (int i = 0; i < 10; i++) {
+                    doHttpActivity();
+                }
             }
         });
         findViewById(R.id.launch_netspy_directly).setOnClickListener(new View.OnClickListener() {
