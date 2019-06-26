@@ -37,7 +37,7 @@ public class HttpTransaction {
         "responseContentLength"
     };
 
-    private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("HH:mm:ss", Locale.CHINESE);
+    private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss SSS");
 
     private Long _id;
     @Index
@@ -287,11 +287,11 @@ public class HttpTransaction {
     }
 
     public String getRequestDateString() {
-        return (requestDate != null) ? requestDate.toString() : null;
+        return (requestDate != null) ? requestDate.toLocaleString() : null;
     }
 
     public String getResponseDateString() {
-        return (responseDate != null) ? responseDate.toString() : null;
+        return (responseDate != null) ? responseDate.toLocaleString() : null;
     }
 
     public String getDurationString() {
