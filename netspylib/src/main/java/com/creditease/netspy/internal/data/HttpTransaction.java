@@ -7,11 +7,9 @@ import com.creditease.netspy.internal.support.FormatUtils;
 import com.creditease.netspy.internal.support.JsonConvertor;
 import com.google.gson.reflect.TypeToken;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import okhttp3.Headers;
 
@@ -36,8 +34,6 @@ public class HttpTransaction {
         "error",
         "responseContentLength"
     };
-
-    private static final SimpleDateFormat TIME_ONLY_FMT = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss SSS");
 
     private Long _id;
     @Index
@@ -283,7 +279,7 @@ public class HttpTransaction {
     }
 
     public String getRequestStartTimeString() {
-        return (requestDate != null) ? TIME_ONLY_FMT.format(requestDate) : null;
+        return (requestDate != null) ? requestDate.toLocaleString() : null;
     }
 
     public String getRequestDateString() {

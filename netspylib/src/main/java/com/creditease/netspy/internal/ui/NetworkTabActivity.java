@@ -31,8 +31,8 @@ import com.creditease.netspy.internal.support.SimpleOnPageChangedListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.creditease.netspy.internal.ui.NetworkDownloadFragment.TYPE_REQUEST;
-import static com.creditease.netspy.internal.ui.NetworkDownloadFragment.TYPE_RESPONSE;
+import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_REQUEST;
+import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_RESPONSE;
 
 public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -131,8 +131,8 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
     private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new NetworkOverviewFragment(), getString(R.string.netspy_overview));
-        adapter.addFragment(NetworkDownloadFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
-        adapter.addFragment(NetworkDownloadFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
+        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
+        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangedListener() {
             @Override

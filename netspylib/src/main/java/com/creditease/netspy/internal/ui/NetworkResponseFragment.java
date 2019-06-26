@@ -16,7 +16,7 @@ import com.creditease.netspy.internal.data.HttpTransaction;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetworkDownloadFragment extends Fragment implements NetworkTabFragment {
+public class NetworkResponseFragment extends Fragment implements NetworkTabFragment {
 
     public static final int TYPE_REQUEST = 0;
     public static final int TYPE_RESPONSE = 1;
@@ -29,11 +29,11 @@ public class NetworkDownloadFragment extends Fragment implements NetworkTabFragm
     private int type;
     private HttpTransaction transaction;
 
-    public NetworkDownloadFragment() {
+    public NetworkResponseFragment() {
     }
 
-    public static NetworkDownloadFragment newInstance(int type) {
-        NetworkDownloadFragment fragment = new NetworkDownloadFragment();
+    public static NetworkResponseFragment newInstance(int type) {
+        NetworkResponseFragment fragment = new NetworkResponseFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_TYPE, type);
         fragment.setArguments(b);
@@ -50,7 +50,7 @@ public class NetworkDownloadFragment extends Fragment implements NetworkTabFragm
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.netspy_fragment_network_download, container, false);
+        View view = inflater.inflate(R.layout.netspy_fragment_network_response, container, false);
         headers = view.findViewById(R.id.headers);
         body = view.findViewById(R.id.body);
         return view;

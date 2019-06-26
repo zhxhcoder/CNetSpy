@@ -14,6 +14,5 @@ public class MyApplicaion extends Application {
         super.onCreate();
 
         NetSpyHelper.install(this);
-        NetSpyHelper.debug(true);
     }
 }
