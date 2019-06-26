@@ -34,9 +34,8 @@ public class HttpTransaction {
         "error",
         "responseContentLength"
     };
-
-    private Long _id;
     @Index
+    private Long _id;
     private Date requestDate;
     private Date responseDate;
     private Long tookMs;
