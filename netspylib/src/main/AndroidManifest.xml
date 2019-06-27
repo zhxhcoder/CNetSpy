@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name="com.creditease.netspy.internal.data.NetSpyContentProvider"
-            android:authorities="${applicationId}.netspy.provider"
+            android:authorities="com.creditease.netspy.provider"
             android:exported="false" />
 
         <activity
