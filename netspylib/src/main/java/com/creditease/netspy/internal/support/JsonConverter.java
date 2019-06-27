@@ -10,11 +10,11 @@ import java.util.Date;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class JsonConvertor {
+public class JsonConverter {
 
     private static Gson gson = null;
 
-    private JsonConvertor() {
+    private JsonConverter() {
     }
 
     public static Gson getInstance() {

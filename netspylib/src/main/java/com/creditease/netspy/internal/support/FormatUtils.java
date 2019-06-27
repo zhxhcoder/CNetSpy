@@ -48,7 +48,7 @@ public class FormatUtils {
         try {
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(json);
-            return JsonConvertor.getInstance().toJson(je);
+            return JsonConverter.getInstance().toJson(je);
         } catch (Exception e) {
             return json;
         }

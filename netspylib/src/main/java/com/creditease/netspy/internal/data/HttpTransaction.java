@@ -4,7 +4,7 @@ import android.net.Uri;
 
 import com.creditease.netspy.cupboard.annotation.Index;
 import com.creditease.netspy.internal.support.FormatUtils;
-import com.creditease.netspy.internal.support.JsonConvertor;
+import com.creditease.netspy.internal.support.JsonConverter;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -237,11 +237,11 @@ public class HttpTransaction {
     }
 
     public void setRequestHeaders(List<HttpHeader> headers) {
-        requestHeaders = JsonConvertor.getInstance().toJson(headers);
+        requestHeaders = JsonConverter.getInstance().toJson(headers);
     }
 
     public List<HttpHeader> getRequestHeaders() {
-        return JsonConvertor.getInstance().fromJson(requestHeaders,
+        return JsonConverter.getInstance().fromJson(requestHeaders,
             new TypeToken<List<HttpHeader>>() {
             }.getType());
     }
@@ -255,11 +255,11 @@ public class HttpTransaction {
     }
 
     public void setResponseHeaders(List<HttpHeader> headers) {
-        responseHeaders = JsonConvertor.getInstance().toJson(headers);
+        responseHeaders = JsonConverter.getInstance().toJson(headers);
     }
 
     public List<HttpHeader> getResponseHeaders() {
-        return JsonConvertor.getInstance().fromJson(responseHeaders,
+        return JsonConverter.getInstance().fromJson(responseHeaders,
             new TypeToken<List<HttpHeader>>() {
             }.getType());
     }

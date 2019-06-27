@@ -4,8 +4,10 @@ import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.CupboardBuilder;
 
 public class LocalCupboard {
-
     private static Cupboard cupboard;
+
+    private LocalCupboard() {
+    }
 
     static {
         getInstance().register(HttpTransaction.class);
@@ -22,8 +24,5 @@ public class LocalCupboard {
         return new CupboardBuilder(getInstance())
             .useAnnotations()
             .build();
-    }
-
-    private LocalCupboard() {
     }
 }

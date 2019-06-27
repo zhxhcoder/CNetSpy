@@ -101,7 +101,7 @@ public class NotificationHelper {
     @NonNull
     private NotificationCompat.Action getClearAction() {
         CharSequence clearTitle = context.getString(R.string.netspy_clear);
-        Intent deleteIntent = new Intent(context, ClearTransactionsService.class);
+        Intent deleteIntent = new Intent(context, ClearTransService.class);
         PendingIntent intent = PendingIntent.getService(context, 11, deleteIntent, PendingIntent.FLAG_ONE_SHOT);
         return new NotificationCompat.Action(R.drawable.netspy_ic_delete_white_24dp,
             clearTitle, intent);

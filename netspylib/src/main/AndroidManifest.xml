@@ -19,7 +19,7 @@
             android:theme="@style/NetSpy.Theme" />
 
         <service
-            android:name="com.creditease.netspy.internal.support.ClearTransactionsService"
+            android:name="com.creditease.netspy.internal.support.ClearTransService"
             android:exported="false" />
     </application>
 </manifest>

@@ -24,7 +24,6 @@ import com.creditease.netspy.R;
 import com.creditease.netspy.internal.data.HttpTransaction;
 import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.support.NotificationHelper;
-import com.creditease.netspy.internal.support.SQLiteUtils;
 
 public class NetworkListFragment extends Fragment implements
     SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
@@ -100,9 +99,6 @@ public class NetworkListFragment extends Fragment implements
         if (item.getItemId() == R.id.clear) {
             getContext().getContentResolver().delete(NetSpyContentProvider.TRANSACTION_URI, null, null);
             NotificationHelper.clearBuffer();
-            return true;
-        } else if (item.getItemId() == R.id.browse_sql) {
-            SQLiteUtils.browseDatabase(getContext());
             return true;
         } else {
             return super.onOptionsItemSelected(item);

@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 
 import com.creditease.netspy.internal.data.NetSpyContentProvider;
 
-public class ClearTransactionsService extends IntentService {
+public class ClearTransService extends IntentService {
 
-    public ClearTransactionsService() {
-        super("NetSpyHelper-ClearTransactionsService");
+    public ClearTransService() {
+        super("NetSpyHelper-ClearTransService");
     }
 
     @Override
