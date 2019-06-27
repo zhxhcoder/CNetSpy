@@ -119,7 +119,7 @@ public class NetworkListFragment extends Fragment implements
             }
         }
         loader.setProjection(HttpTransaction.PARTIAL_PROJECTION);
-        loader.setSortOrder("requestDate DESC");
+        loader.setSortOrder("_id DESC");
         return loader;
     }
 
