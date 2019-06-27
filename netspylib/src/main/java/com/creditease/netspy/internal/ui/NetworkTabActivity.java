@@ -26,7 +26,6 @@ import com.creditease.netspy.internal.data.HttpTransaction;
 import com.creditease.netspy.internal.data.LocalCupboard;
 import com.creditease.netspy.internal.data.NetSpyContentProvider;
 import com.creditease.netspy.internal.support.FormatUtils;
-import com.creditease.netspy.internal.support.SimpleOnPageChangedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,10 +133,21 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
         adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
         adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new SimpleOnPageChangedListener() {
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageSelected(int position) {
-                selectedTabPosition = position;
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                selectedTabPosition = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
         viewPager.setCurrentItem(selectedTabPosition);

@@ -34,31 +34,30 @@ import okio.Okio;
 /**
  * Created by zhxh on 2019/06/19
  * okhttp拦截器
- * An OkHttp Interceptor which persists and displays HTTP activity in your application for later inspection.
  */
 public final class NetSpyInterceptor implements Interceptor {
 
     public enum Period {
         /**
-         * Retain data for the last hour.
+         * 保留最近一小时数据.
          */
         ONE_HOUR,
         /**
-         * Retain data for the last day.
+         * 保留最近一天数据
          */
         ONE_DAY,
         /**
-         * Retain data for the last week.
+         * 保留最近一周数据
          */
         ONE_WEEK,
         /**
-         * Retain data forever.
+         * 保留数据
          */
         FOREVER
     }
 
     private static final String LOG_TAG = "NetSpyInterceptor";
-    private static final Period DEFAULT_RETENTION = Period.ONE_WEEK;
+    private static final Period DEFAULT_RETENTION = Period.ONE_DAY;
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private final Context context;
@@ -79,9 +78,9 @@ public final class NetSpyInterceptor implements Interceptor {
     }
 
     /**
-     * Control whether a notification is shown while HTTP activity is recorded.
+     * 当有http时是否展示通知
      *
-     * @param show true to show a notification, false to suppress it.
+     * @param show true 展示通知, false 不展示
      * @return The {@link NetSpyInterceptor} instance.
      */
     public NetSpyInterceptor showNotification(boolean show) {
@@ -90,11 +89,7 @@ public final class NetSpyInterceptor implements Interceptor {
     }
 
     /**
-     * Set the maximum length for request and response content before it is truncated.
-     * Warning: setting this value too high may cause unexpected results.
-     *
-     * @param max the maximum length (in bytes) for request/response content.
-     * @return The {@link NetSpyInterceptor} instance.
+     * 设置请求与返回最大长度（bytes）
      */
     public NetSpyInterceptor maxContentLength(long max) {
         this.maxContentLength = max;
@@ -102,10 +97,8 @@ public final class NetSpyInterceptor implements Interceptor {
     }
 
     /**
-     * Set the retention period for HTTP transaction data captured by this interceptor.
-     * The default is one week.
+     * 默认保留一天数据
      *
-     * @param period the peroid for which to retain HTTP transaction data.
      * @return The {@link NetSpyInterceptor} instance.
      */
     public NetSpyInterceptor retainDataFor(Period period) {
@@ -116,7 +109,7 @@ public final class NetSpyInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
 
-        if (!NetSpyHelper.isNetSpy) {
+        if (!NetSpyHelper.isNetSpy) {//默认false 不拦截
             Request request = chain.request();
             return chain.proceed(request);
         }
@@ -236,8 +229,7 @@ public final class NetSpyInterceptor implements Interceptor {
     }
 
     /**
-     * Returns true if the body in question probably contains human readable text. Uses a small sample
-     * of code points to detect unicode control characters commonly used in binary file signatures.
+     * 通过采样部分数据判断是否可读
      */
     private boolean isPlaintext(Buffer buffer) {
         try {

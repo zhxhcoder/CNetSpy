@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 class NetSpyDbOpenHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "cnetspy.db";
-    private static final int VERSION = 3;
+    private static final String DATABASE_NAME = "cnetspylib.db";
+    private static final int VERSION = 4;
 
     NetSpyDbOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);

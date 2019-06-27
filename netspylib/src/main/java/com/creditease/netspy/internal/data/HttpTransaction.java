@@ -21,6 +21,7 @@ public class HttpTransaction {
         Failed
     }
 
+    //数据库表
     public static final String[] PARTIAL_PROJECTION = new String[]{
         "_id",
         "requestDate",
@@ -34,8 +35,8 @@ public class HttpTransaction {
         "error",
         "responseContentLength"
     };
-    @Index
     private Long _id;
+    @Index
     private Date requestDate;
     private Date responseDate;
     private Long tookMs;

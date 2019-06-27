@@ -25,7 +25,7 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_netspy);
         findViewById(R.id.do_http).setOnClickListener(view -> {
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < 2; i++) {
                 doHttpActivity();
             }
         });

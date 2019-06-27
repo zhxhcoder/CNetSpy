@@ -11,7 +11,7 @@ import com.creditease.netspy.internal.data.HttpTransaction;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class MainActivity extends BaseNetSpyActivity implements NetworkListFragment.OnListFragmentInteractionListener {
+public class NetSpyMainActivity extends BaseNetSpyActivity implements NetworkListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
