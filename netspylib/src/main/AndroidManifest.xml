@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name="com.creditease.netspy.internal.data.NetSpyContentProvider"
-            android:authorities="com.creditease.netspy.provider"
+            android:authorities="com.creditease.netspy.netSpyContentProvider"
             android:exported="false" />
 
         <activity
@@ -15,7 +15,7 @@
             android:theme="@style/NetSpy.Theme" />
         <activity
             android:name="com.creditease.netspy.internal.ui.NetworkTabActivity"
-            android:parentActivityName=".internal.ui.NetSpyHomeActivity"
+            android:parentActivityName="com.creditease.netspy.internal.ui.NetSpyHomeActivity"
             android:theme="@style/NetSpy.Theme" />
 
         <service
