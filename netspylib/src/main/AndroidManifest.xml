@@ -5,6 +5,7 @@
         <provider
             android:name="com.creditease.netspy.internal.data.NetSpyContentProvider"
             android:authorities="${applicationId}.netSpyContentProvider"
+            android:grantUriPermissions="true"
             android:exported="false" />
 
         <activity
