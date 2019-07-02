@@ -6,10 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.creditease.netspy.internal.support.NotificationHelper;
 
+/**
+ * Created by zhxh on 2019/06/12
+ * 当进入后台时关闭通知
+ */
 public abstract class BaseNetSpyActivity extends AppCompatActivity {
-
     private static boolean inForeground;
-
     private NotificationHelper notificationHelper;
 
     public static boolean isInForeground() {
