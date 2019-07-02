@@ -80,7 +80,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.netspy_transaction, menu);
+        inflater.inflate(R.menu.netspy_network_tab_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
