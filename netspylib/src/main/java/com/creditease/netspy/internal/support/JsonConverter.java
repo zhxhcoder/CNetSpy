@@ -11,7 +11,6 @@ import java.util.Date;
  * Created by zhxh on 2019/06/12
  */
 public class JsonConverter {
-
     private static Gson gson = null;
 
     private JsonConverter() {

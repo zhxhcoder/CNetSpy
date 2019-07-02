@@ -29,13 +29,13 @@ import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_RES
 
 public class NetworkTabActivity extends BaseNetSpyActivity {
 
-    private static final String ARG_TRANSACTION_ID = "transaction_id";
+    private static final String ARG_TRANS_ID = "trans_id";
 
     private static int selectedTabPosition = 0;
 
-    public static void start(Context context, long transactionId) {
+    public static void start(Context context, long transId) {
         Intent intent = new Intent(context, NetworkTabActivity.class);
-        intent.putExtra(ARG_TRANSACTION_ID, transactionId);
+        intent.putExtra(ARG_TRANS_ID, transId);
         context.startActivity(intent);
     }
 
@@ -65,7 +65,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        transactionId = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
+        transactionId = getIntent().getLongExtra(ARG_TRANS_ID, 0);
 
         httpEvent = DBManager.getInstance().getDataByTransId(transactionId);
 

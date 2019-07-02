@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class MapConverter implements PropertyConverter<Map<String, String>, String> {
 
-    private Gson mGson; // gson
+    private Gson mGson;
 
     public MapConverter() {
         mGson = new Gson();
