@@ -20,18 +20,20 @@ import com.creditease.netspy.internal.db.DBManager;
 import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
-public class NetworkListFragment extends Fragment implements
+import java.util.List;
+
+public class NetSpyListFragment extends Fragment implements
     SearchView.OnQueryTextListener {
 
     private String currentFilter;
     private OnListFragmentInteractionListener listener;
     private NetworkTabAdapter adapter;
 
-    public NetworkListFragment() {
+    public NetSpyListFragment() {
     }
 
-    public static NetworkListFragment newInstance() {
-        return new NetworkListFragment();
+    public static NetSpyListFragment newInstance() {
+        return new NetSpyListFragment();
     }
 
     @Override
@@ -43,7 +45,7 @@ public class NetworkListFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.netspy_fragment_netwok_list, container, false);
+        View view = inflater.inflate(R.layout.netspy_fragment_list, container, false);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
@@ -52,6 +54,10 @@ public class NetworkListFragment extends Fragment implements
                 DividerItemDecoration.VERTICAL));
             adapter = new NetworkTabAdapter(getContext(), listener);
             recyclerView.setAdapter(adapter);
+
+            List<HttpEvent> dataList = DBManager.getInstance().getAllData();
+            adapter.setData(dataList);
+
         }
         return view;
     }
@@ -98,7 +104,6 @@ public class NetworkListFragment extends Fragment implements
             return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     public boolean onQueryTextSubmit(String query) {

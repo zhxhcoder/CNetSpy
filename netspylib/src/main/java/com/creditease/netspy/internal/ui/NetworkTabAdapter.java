@@ -12,11 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.DBManager;
 import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.ui.NetworkListFragment.OnListFragmentInteractionListener;
+import com.creditease.netspy.internal.ui.NetSpyListFragment.OnListFragmentInteractionListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolder> {
@@ -33,7 +31,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
     private final int color300;
 
 
-    List<HttpEvent> dataList = new ArrayList<>();
+    List<HttpEvent> dataList;
 
     NetworkTabAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.listener = listener;
@@ -44,8 +42,6 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         color500 = ContextCompat.getColor(context, R.color.netspy_status_500);
         color400 = ContextCompat.getColor(context, R.color.netspy_status_400);
         color300 = ContextCompat.getColor(context, R.color.netspy_status_300);
-
-        dataList = DBManager.getInstance().getAllData();
 
         cursorAdapter = new CursorAdapter(NetworkTabAdapter.this.context, null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
             @Override
@@ -78,12 +74,9 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
                 }
                 setStatusColor(holder, transaction);
                 holder.transaction = transaction;
-                holder.view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (null != NetworkTabAdapter.this.listener) {
-                            NetworkTabAdapter.this.listener.onListFragmentInteraction(holder.transaction);
-                        }
+                holder.view.setOnClickListener(v -> {
+                    if (null != NetworkTabAdapter.this.listener) {
+                        NetworkTabAdapter.this.listener.onListFragmentInteraction(holder.transaction);
                     }
                 });
             }
@@ -126,8 +119,8 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         return new ViewHolder(v);
     }
 
-    void swapCursor(Cursor newCursor) {
-        cursorAdapter.swapCursor(newCursor);
+    void setData(List<HttpEvent> dataList) {
+        this.dataList = dataList;
         notifyDataSetChanged();
     }
 

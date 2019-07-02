@@ -10,19 +10,20 @@ import com.creditease.netspy.internal.db.HttpEvent;
 
 /**
  * Created by zhxh on 2019/06/12
+ * 请求列表
  */
-public class NetSpyMainActivity extends BaseNetSpyActivity implements NetworkListFragment.OnListFragmentInteractionListener {
+public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.netspy_activity_main);
+        setContentView(R.layout.netspy_activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, NetworkListFragment.newInstance())
+                .add(R.id.container, NetSpyListFragment.newInstance())
                 .commit();
         }
     }

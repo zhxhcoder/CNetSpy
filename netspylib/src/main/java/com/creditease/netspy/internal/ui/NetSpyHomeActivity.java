@@ -11,7 +11,7 @@ import com.creditease.netspy.internal.db.HttpEvent;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetSpyHomeActivity extends BaseNetSpyActivity implements NetworkListFragment.OnListFragmentInteractionListener {
+public class NetSpyHomeActivity extends BaseNetSpyActivity implements NetSpyListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class NetSpyHomeActivity extends BaseNetSpyActivity implements NetworkLis
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, NetworkListFragment.newInstance())
+                .add(R.id.container, NetSpyListFragment.newInstance())
                 .commit();
         }
     }
