@@ -14,7 +14,7 @@ import com.creditease.netspy.internal.db.HttpEvent;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetworkOverviewFragment extends Fragment implements NetworkTabFragment {
+public class NetworkOverviewFragment extends Fragment implements INetworkTabFragment {
 
     TextView url;
     TextView method;
@@ -29,7 +29,7 @@ public class NetworkOverviewFragment extends Fragment implements NetworkTabFragm
     TextView responseSize;
     TextView totalSize;
 
-    private HttpEvent transaction;
+    private HttpEvent httpEvent;
 
     public NetworkOverviewFragment() {
     }
@@ -65,25 +65,25 @@ public class NetworkOverviewFragment extends Fragment implements NetworkTabFragm
     }
 
     @Override
-    public void transactionUpdated(HttpEvent transaction) {
-        this.transaction = transaction;
+    public void httpTransUpdate(HttpEvent httpEvent) {
+        this.httpEvent = httpEvent;
         populateUI();
     }
 
     private void populateUI() {
-        if (isAdded() && transaction != null) {
-            url.setText(transaction.getUrl());
-            method.setText(transaction.getMethod());
-            protocol.setText(transaction.getProtocol());
-            status.setText(transaction.getStatus().toString());
-            response.setText(transaction.getResponseSummaryText());
-            ssl.setText((transaction.isSsl() ? R.string.netspy_yes : R.string.netspy_no));
-            requestTime.setText(transaction.getRequestDateString());
-            responseTime.setText(transaction.getResponseDateString());
-            duration.setText(transaction.getDurationString());
-            requestSize.setText(transaction.getRequestSizeString());
-            responseSize.setText(transaction.getResponseSizeString());
-            totalSize.setText(transaction.getTotalSizeString());
+        if (isAdded() && httpEvent != null) {
+            url.setText(httpEvent.getUrl());
+            method.setText(httpEvent.getMethod());
+            protocol.setText(httpEvent.getProtocol());
+            status.setText(httpEvent.getStatus().toString());
+            response.setText(httpEvent.getResponseSummaryText());
+            ssl.setText((httpEvent.isSsl() ? R.string.netspy_yes : R.string.netspy_no));
+            requestTime.setText(httpEvent.getRequestDateString());
+            responseTime.setText(httpEvent.getResponseDateString());
+            duration.setText(httpEvent.getDurationString());
+            requestSize.setText(httpEvent.getRequestSizeString());
+            responseSize.setText(httpEvent.getResponseSizeString());
+            totalSize.setText(httpEvent.getTotalSizeString());
         }
     }
 }

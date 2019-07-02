@@ -48,15 +48,14 @@ public class DBManager {
     }
 
     public HttpEvent getDataByTransId(long transId) {
-        return mDaoSession.callInTxNoException(new Callable<HttpEvent>() {
-            @Override
-            public HttpEvent call() {
-                HttpEvent event = mDaoSession.queryBuilder(HttpEvent.class)
-                    .where(HttpEventDao.Properties.TransId
-                        .eq(transId)).uniqueOrThrow();
-                return event;
+
+        for (HttpEvent data : getAllData()) {
+            if (transId == data.getTransId()) {
+                return data;
             }
-        });
+        }
+
+        return null;
     }
 
     public void insertData(HttpEvent httpEvent) {

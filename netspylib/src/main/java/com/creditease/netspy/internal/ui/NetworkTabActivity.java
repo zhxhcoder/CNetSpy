@@ -69,7 +69,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
         transaction = DBManager.getInstance().getDataByTransId(transactionId);
 
-        populateUI();
+        populateUI(transaction);
     }
 
     @Override
@@ -98,11 +98,11 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     }
 
 
-    private void populateUI() {
-        if (transaction != null) {
-            title.setText(transaction.getMethod() + " " + transaction.getPath());
-            for (NetworkTabFragment fragment : adapter.fragments) {
-                fragment.transactionUpdated(transaction);
+    private void populateUI(HttpEvent event) {
+        if (event != null) {
+            title.setText(event.getMethod() + " " + event.getPath());
+            for (INetworkTabFragment fragment : adapter.fragments) {
+                fragment.httpTransUpdate(event);
             }
         }
     }
@@ -142,14 +142,14 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     }
 
     static class Adapter extends FragmentPagerAdapter {
-        final List<NetworkTabFragment> fragments = new ArrayList<>();
+        final List<INetworkTabFragment> fragments = new ArrayList<>();
         private final List<String> fragmentTitles = new ArrayList<>();
 
         Adapter(FragmentManager fm) {
             super(fm);
         }
 
-        void addFragment(NetworkTabFragment fragment, String title) {
+        void addFragment(INetworkTabFragment fragment, String title) {
             fragments.add(fragment);
             fragmentTitles.add(title);
         }

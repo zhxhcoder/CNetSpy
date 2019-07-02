@@ -17,7 +17,7 @@ import com.creditease.netspy.internal.support.FormatUtils;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetworkResponseFragment extends Fragment implements NetworkTabFragment {
+public class NetworkResponseFragment extends Fragment implements INetworkTabFragment {
 
     public static final int TYPE_REQUEST = 0;
     public static final int TYPE_RESPONSE = 1;
@@ -28,7 +28,7 @@ public class NetworkResponseFragment extends Fragment implements NetworkTabFragm
     TextView body;
 
     private int type;
-    private HttpEvent transaction;
+    private HttpEvent httpEvent;
 
     public NetworkResponseFragment() {
     }
@@ -64,21 +64,21 @@ public class NetworkResponseFragment extends Fragment implements NetworkTabFragm
     }
 
     @Override
-    public void transactionUpdated(HttpEvent transaction) {
-        this.transaction = transaction;
+    public void httpTransUpdate(HttpEvent httpEvent) {
+        this.httpEvent = httpEvent;
         populateUI();
     }
 
     private void populateUI() {
-        if (isAdded() && transaction != null) {
+        if (isAdded() && httpEvent != null) {
             switch (type) {
                 case TYPE_REQUEST:
-                    setText(FormatUtils.formatHeaders(transaction.getRequestHeaders(), true),
-                        transaction.getFormattedRequestBody(), transaction.getRequestBodyIsPlainText());
+                    setText(FormatUtils.formatHeaders(httpEvent.getRequestHeaders(), true),
+                        httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
                     break;
                 case TYPE_RESPONSE:
-                    setText(FormatUtils.formatHeaders(transaction.getResponseHeaders(), true),
-                        transaction.getFormattedResponseBody(), transaction.getResponseBodyIsPlainText());
+                    setText(FormatUtils.formatHeaders(httpEvent.getResponseHeaders(), true),
+                        httpEvent.getFormattedResponseBody(), httpEvent.getResponseBodyIsPlainText());
                     break;
             }
         }
