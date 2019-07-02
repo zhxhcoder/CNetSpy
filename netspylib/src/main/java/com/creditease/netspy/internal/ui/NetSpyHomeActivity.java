@@ -29,7 +29,7 @@ public class NetSpyHomeActivity extends BaseNetSpyActivity implements NetworkLis
 
     @Override
     public void onListFragmentInteraction(HttpEvent transaction) {
-        NetworkTabActivity.start(this, transaction.get_id());
+        NetworkTabActivity.start(this, transaction.getTransId());
     }
 
     private String getApplicationName() {

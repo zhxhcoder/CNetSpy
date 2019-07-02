@@ -40,7 +40,7 @@ public class NotificationHelper {
         if (transaction.getStatus() == HttpEvent.Status.Requested) {
             transactionCount++;
         }
-        transactionBuffer.put(transaction.get_id(), transaction);
+        transactionBuffer.put(transaction.getTransId(), transaction);
         if (transactionBuffer.size() > BUFFER_SIZE) {
             transactionBuffer.removeAt(0);
         }

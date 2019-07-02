@@ -17,7 +17,7 @@ public class NetSpyMainActivity extends BaseNetSpyActivity implements NetworkLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.netspy_activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
@@ -29,7 +29,7 @@ public class NetSpyMainActivity extends BaseNetSpyActivity implements NetworkLis
 
     @Override
     public void onListFragmentInteraction(HttpEvent transaction) {
-        NetworkTabActivity.start(this, transaction.get_id());
+        NetworkTabActivity.start(this, transaction.getTransId());
     }
 
     private String getApplicationName() {

@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
  */
 public class DBManager {
 
-    private static final String DB_NAME = "cnetspy.db"; // 数据库名称
+    private static final String DB_NAME = "cnetspy1.db"; // 数据库名称
 
     private static volatile DBManager sInstance = null; // 单例
 

@@ -72,7 +72,7 @@ public final class NetSpyInterceptor implements Interceptor {
     public NetSpyInterceptor() {
         this.context = NetSpyHelper.netSpyApp;
         notificationHelper = new NotificationHelper(this.context);
-        showNotification = true;
+        showNotification = NetSpyHelper.isNetSpy;
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
     }
 
@@ -151,7 +151,7 @@ public final class NetSpyInterceptor implements Interceptor {
             }
         }
 
-        Long transactionUri = createEvent(transaction);
+        long transId = createHttpEvent(transaction);
 
         long startNs = System.nanoTime();
         Response response;
@@ -159,7 +159,7 @@ public final class NetSpyInterceptor implements Interceptor {
             response = chain.proceed(request);
         } catch (Exception e) {
             transaction.setError(e.toString());
-            updateEvent(transaction, transactionUri);
+            updateHttpEvent(transaction, transId);
             throw e;
         }
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
@@ -190,7 +190,7 @@ public final class NetSpyInterceptor implements Interceptor {
                 try {
                     charset = contentType.charset(UTF8);
                 } catch (UnsupportedCharsetException e) {
-                    updateEvent(transaction, transactionUri);
+                    updateHttpEvent(transaction, transId);
                     return response;
                 }
             }
@@ -202,27 +202,32 @@ public final class NetSpyInterceptor implements Interceptor {
             transaction.setResponseContentLength(buffer.size());
         }
 
-        updateEvent(transaction, transactionUri);
+        updateHttpEvent(transaction, transId);
 
         return response;
     }
 
-    private long createEvent(HttpEvent transaction) {
+    private long createHttpEvent(HttpEvent transaction) {
+
+        transaction.setTransId(System.currentTimeMillis());
+
+
+        DBManager.getInstance().insertData(transaction);
 
         if (showNotification) {
             notificationHelper.show(transaction);
         }
         retentionManager.doMaintenance();
-        return transaction.get_id();
+        return transaction.getTransId();
     }
 
-    private long updateEvent(HttpEvent transaction, long uri) {
+    private long updateHttpEvent(HttpEvent transaction, long transId) {
 
         DBManager.getInstance().insertData(transaction);
         if (showNotification) {
             notificationHelper.show(transaction);
         }
-        return uri;
+        return transId;
     }
 
     /**

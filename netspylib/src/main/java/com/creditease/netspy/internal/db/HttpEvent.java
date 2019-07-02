@@ -9,11 +9,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import okhttp3.Headers;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -46,6 +42,7 @@ public class HttpEvent {
 
     @Id(autoincrement = true)
     private Long _id; // 自增id
+    private Long transId; // 业务id
 
     private java.util.Date requestDate;
     private java.util.Date responseDate;
@@ -79,7 +76,7 @@ public class HttpEvent {
     private boolean responseBodyIsPlainText = true;
 
     @Keep()
-    public HttpEvent(Long _id, java.util.Date requestDate,
+    public HttpEvent(Long _id, Long transId, java.util.Date requestDate,
                      java.util.Date responseDate, Long tookMs, String protocol,
                      String method, String url, String host, String path, String scheme,
                      Long requestContentLength, String requestContentType,
@@ -89,6 +86,7 @@ public class HttpEvent {
                      String responseContentType, Map<String, String> responseHeaders, String responseBody,
                      boolean responseBodyIsPlainText) {
         this._id = _id;
+        this.transId = transId;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
         this.tookMs = tookMs;
@@ -123,6 +121,14 @@ public class HttpEvent {
 
     public void set_id(Long _id) {
         this._id = _id;
+    }
+
+    public Long getTransId() {
+        return transId;
+    }
+
+    public void setTransId(Long transId) {
+        this.transId = transId;
     }
 
     public java.util.Date getRequestDate() {
