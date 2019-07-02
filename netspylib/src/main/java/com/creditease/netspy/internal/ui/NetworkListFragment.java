@@ -1,18 +1,13 @@
 package com.creditease.netspy.internal.ui;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +21,7 @@ import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
 public class NetworkListFragment extends Fragment implements
-    SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
+    SearchView.OnQueryTextListener {
 
     private String currentFilter;
     private OnListFragmentInteractionListener listener;
@@ -64,7 +59,6 @@ public class NetworkListFragment extends Fragment implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -105,32 +99,6 @@ public class NetworkListFragment extends Fragment implements
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader loader = new CursorLoader(getContext());
-        if (!TextUtils.isEmpty(currentFilter)) {
-            if (TextUtils.isDigitsOnly(currentFilter)) {
-                loader.setSelection("responseCode LIKE ?");
-                loader.setSelectionArgs(new String[]{currentFilter + "%"});
-            } else {
-                loader.setSelection("path LIKE ?");
-                loader.setSelectionArgs(new String[]{"%" + currentFilter + "%"});
-            }
-        }
-        loader.setProjection(HttpEvent.PARTIAL_PROJECTION);
-        loader.setSortOrder("_id DESC");
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.swapCursor(null);
-    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -140,7 +108,6 @@ public class NetworkListFragment extends Fragment implements
     @Override
     public boolean onQueryTextChange(String newText) {
         currentFilter = newText;
-        getLoaderManager().restartLoader(0, null, this);
         return true;
     }
 

@@ -1,18 +1,13 @@
 package com.creditease.netspy.internal.ui;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -32,7 +27,7 @@ import java.util.List;
 import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_REQUEST;
 import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_RESPONSE;
 
-public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class NetworkTabActivity extends BaseNetSpyActivity {
 
     private static final String ARG_TRANSACTION_ID = "transaction_id";
 
@@ -71,13 +66,15 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
         tabLayout.setupWithViewPager(viewPager);
 
         transactionId = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
-        getSupportLoaderManager().initLoader(0, null, this);
+
+        transaction = DBManager.getInstance().getDataByTransId(transactionId);
+
+        populateUI();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
@@ -100,21 +97,6 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader loader = new CursorLoader(this);
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        transaction = DBManager.getInstance().getAllData().get(data.getPosition());
-        populateUI();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-    }
 
     private void populateUI() {
         if (transaction != null) {

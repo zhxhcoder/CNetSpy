@@ -7,6 +7,7 @@ import com.creditease.netspy.NetSpyHelper;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+
 /**
  * Created by zhxh on 2019/07/02
  * 数据库操作类.
@@ -43,8 +44,17 @@ public class DBManager {
     }
 
     public List<HttpEvent> getAllData() {
-        List<HttpEvent> datas = mDaoSession.loadAll(HttpEvent.class);
-        return datas;
+        return mDaoSession.loadAll(HttpEvent.class);
+    }
+
+    public HttpEvent getDataByTransId(long transId) {
+        return mDaoSession.callInTxNoException(new Callable<HttpEvent>() {
+            @Override
+            public HttpEvent call() {
+                HttpEvent event = mDaoSession.queryBuilder(HttpEvent.class).where(HttpEventDao.Properties.TransId.eq(transId)).uniqueOrThrow();
+                return event;
+            }
+        });
     }
 
     public void insertData(HttpEvent httpEvent) {

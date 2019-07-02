@@ -45,7 +45,6 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         color400 = ContextCompat.getColor(context, R.color.netspy_status_400);
         color300 = ContextCompat.getColor(context, R.color.netspy_status_300);
 
-
         dataList = DBManager.getInstance().getAllData();
 
         cursorAdapter = new CursorAdapter(NetworkTabAdapter.this.context, null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
