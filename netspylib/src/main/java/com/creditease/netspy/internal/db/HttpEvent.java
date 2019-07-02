@@ -10,6 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
 import java.util.Map;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by zhxh on 2019/07/02

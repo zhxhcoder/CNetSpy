@@ -51,7 +51,9 @@ public class DBManager {
         return mDaoSession.callInTxNoException(new Callable<HttpEvent>() {
             @Override
             public HttpEvent call() {
-                HttpEvent event = mDaoSession.queryBuilder(HttpEvent.class).where(HttpEventDao.Properties.TransId.eq(transId)).uniqueOrThrow();
+                HttpEvent event = mDaoSession.queryBuilder(HttpEvent.class)
+                    .where(HttpEventDao.Properties.TransId
+                        .eq(transId)).uniqueOrThrow();
                 return event;
             }
         });

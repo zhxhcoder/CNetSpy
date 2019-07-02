@@ -57,7 +57,6 @@ public class NetSpyListFragment extends Fragment implements
 
             List<HttpEvent> dataList = DBManager.getInstance().getAllData();
             adapter.setData(dataList);
-
         }
         return view;
     }

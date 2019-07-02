@@ -30,8 +30,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
     private final int color400;
     private final int color300;
 
-
-    List<HttpEvent> dataList;
+    private List<HttpEvent> dataList;
 
     NetworkTabAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.listener = listener;
