@@ -4,8 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpHeader;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -13,8 +12,8 @@ import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -25,12 +24,12 @@ import javax.xml.transform.stream.StreamResult;
 
 public class FormatUtils {
 
-    public static String formatHeaders(List<HttpHeader> httpHeaders, boolean withMarkup) {
+    public static String formatHeaders(Map<String, String> httpHeaders, boolean withMarkup) {
         String out = "";
         if (httpHeaders != null) {
-            for (HttpHeader header : httpHeaders) {
-                out += ((withMarkup) ? "<b>" : "") + header.getName() + ": " + ((withMarkup) ? "</b>" : "") +
-                    header.getValue() + ((withMarkup) ? "<br />" : "\n");
+            for (Map.Entry<String, String> entry : httpHeaders.entrySet()) {
+                out += ((withMarkup) ? "<b>" : "") + entry.getKey() + ": " + ((withMarkup) ? "</b>" : "") +
+                    entry.getValue() + ((withMarkup) ? "<br />" : "\n");
             }
         }
         return out;
@@ -75,7 +74,7 @@ public class FormatUtils {
      * @param transaction
      * @return
      */
-    public static String getShareText(Context context, HttpTransaction transaction) {
+    public static String getShareText(Context context, HttpEvent transaction) {
         String text = "";
         text += context.getString(R.string.netspy_url) + ": " + v(transaction.getUrl()) + "\n";
         text += context.getString(R.string.netspy_method) + ": " + v(transaction.getMethod()) + "\n";
@@ -97,7 +96,7 @@ public class FormatUtils {
         if (!TextUtils.isEmpty(headers)) {
             text += headers + "\n";
         }
-        text += (transaction.requestBodyIsPlainText()) ? v(transaction.getFormattedRequestBody()) :
+        text += (transaction.getRequestBodyIsPlainText()) ? v(transaction.getFormattedRequestBody()) :
             context.getString(R.string.netspy_body_omitted);
         text += "\n\n";
         text += "---------- " + context.getString(R.string.netspy_response) + " ----------\n\n";
@@ -105,7 +104,7 @@ public class FormatUtils {
         if (!TextUtils.isEmpty(headers)) {
             text += headers + "\n";
         }
-        text += (transaction.responseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
+        text += (transaction.getResponseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
             context.getString(R.string.netspy_body_omitted);
         return text;
     }
@@ -117,21 +116,21 @@ public class FormatUtils {
      * @param transaction
      * @return
      */
-    public static String getShareResponseText(Context context, HttpTransaction transaction) {
+    public static String getShareResponseText(Context context, HttpEvent transaction) {
         String text = "";
-        text += (transaction.responseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
+        text += (transaction.getResponseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
             context.getString(R.string.netspy_body_omitted);
         return text;
     }
 
-    public static String getShareCurlCommand(HttpTransaction transaction) {
+    public static String getShareCurlCommand(HttpEvent transaction) {
         boolean compressed = false;
         String curlCmd = "curl";
         curlCmd += " -X " + transaction.getMethod();
-        List<HttpHeader> headers = transaction.getRequestHeaders();
-        for (int i = 0, count = headers.size(); i < count; i++) {
-            String name = headers.get(i).getName();
-            String value = headers.get(i).getValue();
+        Map<String, String> headers = transaction.getRequestHeaders();
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            String name = entry.getKey();
+            String value = entry.getValue();
             if ("Accept-Encoding".equalsIgnoreCase(name) && "gzip".equalsIgnoreCase(value)) {
                 compressed = true;
             }

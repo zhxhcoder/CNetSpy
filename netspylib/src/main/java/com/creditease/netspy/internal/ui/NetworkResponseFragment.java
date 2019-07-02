@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.db.HttpEvent;
+import com.creditease.netspy.internal.support.FormatUtils;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -27,7 +28,7 @@ public class NetworkResponseFragment extends Fragment implements NetworkTabFragm
     TextView body;
 
     private int type;
-    private HttpTransaction transaction;
+    private HttpEvent transaction;
 
     public NetworkResponseFragment() {
     }
@@ -63,7 +64,7 @@ public class NetworkResponseFragment extends Fragment implements NetworkTabFragm
     }
 
     @Override
-    public void transactionUpdated(HttpTransaction transaction) {
+    public void transactionUpdated(HttpEvent transaction) {
         this.transaction = transaction;
         populateUI();
     }
@@ -72,12 +73,12 @@ public class NetworkResponseFragment extends Fragment implements NetworkTabFragm
         if (isAdded() && transaction != null) {
             switch (type) {
                 case TYPE_REQUEST:
-                    setText(transaction.getRequestHeadersString(true),
-                        transaction.getFormattedRequestBody(), transaction.requestBodyIsPlainText());
+                    setText(FormatUtils.formatHeaders(transaction.getRequestHeaders(), true),
+                        transaction.getFormattedRequestBody(), transaction.getRequestBodyIsPlainText());
                     break;
                 case TYPE_RESPONSE:
-                    setText(transaction.getResponseHeadersString(true),
-                        transaction.getFormattedResponseBody(), transaction.responseBodyIsPlainText());
+                    setText(FormatUtils.formatHeaders(transaction.getResponseHeaders(), true),
+                        transaction.getFormattedResponseBody(), transaction.getResponseBodyIsPlainText());
                     break;
             }
         }

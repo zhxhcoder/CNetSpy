@@ -34,5 +34,4 @@ public abstract class BaseNetSpyActivity extends AppCompatActivity {
         super.onPause();
         inForeground = false;
     }
-
 }

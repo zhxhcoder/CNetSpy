@@ -1,13 +1,10 @@
 package com.creditease.netspy;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.LocalCupboard;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
+import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 import com.creditease.netspy.internal.support.RetentionManager;
 
@@ -16,6 +13,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Headers;
@@ -119,13 +118,13 @@ public final class NetSpyInterceptor implements Interceptor {
         RequestBody requestBody = request.body();
         boolean hasRequestBody = requestBody != null;
 
-        HttpTransaction transaction = new HttpTransaction();
+        HttpEvent transaction = new HttpEvent();
         transaction.setRequestDate(new Date());
 
         transaction.setMethod(request.method());
         transaction.setUrl(request.url().toString());
 
-        transaction.setRequestHeaders(request.headers());
+        transaction.setRequestHeaders(toHttpHeaderMap(request.headers()));
         if (hasRequestBody) {
             if (requestBody.contentType() != null) {
                 transaction.setRequestContentType(requestBody.contentType().toString());
@@ -136,7 +135,7 @@ public final class NetSpyInterceptor implements Interceptor {
         }
 
         transaction.setRequestBodyIsPlainText(!bodyHasUnsupportedEncoding(request.headers()));
-        if (hasRequestBody && transaction.requestBodyIsPlainText()) {
+        if (hasRequestBody && transaction.getRequestBodyIsPlainText()) {
             BufferedSource source = getNativeSource(new Buffer(), bodyGzipped(request.headers()));
             Buffer buffer = source.buffer();
             requestBody.writeTo(buffer);
@@ -152,7 +151,7 @@ public final class NetSpyInterceptor implements Interceptor {
             }
         }
 
-        Uri transactionUri = create(transaction);
+        Long transactionUri = createEvent(transaction);
 
         long startNs = System.nanoTime();
         Response response;
@@ -160,14 +159,14 @@ public final class NetSpyInterceptor implements Interceptor {
             response = chain.proceed(request);
         } catch (Exception e) {
             transaction.setError(e.toString());
-            update(transaction, transactionUri);
+            updateEvent(transaction, transactionUri);
             throw e;
         }
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
         ResponseBody responseBody = response.body();
 
-        transaction.setRequestHeaders(response.request().headers()); // includes headers added later in the chain
+        transaction.setRequestHeaders(toHttpHeaderMap(response.request().headers())); // includes headers added later in the chain
         transaction.setResponseDate(new Date());
         transaction.setTookMs(tookMs);
         transaction.setProtocol(response.protocol().toString());
@@ -178,10 +177,10 @@ public final class NetSpyInterceptor implements Interceptor {
         if (responseBody.contentType() != null) {
             transaction.setResponseContentType(responseBody.contentType().toString());
         }
-        transaction.setResponseHeaders(response.headers());
+        transaction.setResponseHeaders(toHttpHeaderMap(response.headers()));
 
         transaction.setResponseBodyIsPlainText(!bodyHasUnsupportedEncoding(response.headers()));
-        if (HttpHeaders.hasBody(response) && transaction.responseBodyIsPlainText()) {
+        if (HttpHeaders.hasBody(response) && transaction.getResponseBodyIsPlainText()) {
             BufferedSource source = getNativeSource(response);
             source.request(Long.MAX_VALUE);
             Buffer buffer = source.buffer();
@@ -191,7 +190,7 @@ public final class NetSpyInterceptor implements Interceptor {
                 try {
                     charset = contentType.charset(UTF8);
                 } catch (UnsupportedCharsetException e) {
-                    update(transaction, transactionUri);
+                    updateEvent(transaction, transactionUri);
                     return response;
                 }
             }
@@ -203,29 +202,27 @@ public final class NetSpyInterceptor implements Interceptor {
             transaction.setResponseContentLength(buffer.size());
         }
 
-        update(transaction, transactionUri);
+        updateEvent(transaction, transactionUri);
 
         return response;
     }
 
-    private Uri create(HttpTransaction transaction) {
-        ContentValues values = LocalCupboard.getInstance().withEntity(HttpTransaction.class).toContentValues(transaction);
-        Uri uri = context.getContentResolver().insert(NetSpyContentProvider.TRANSACTION_URI, values);
-        transaction.setId(Long.valueOf(uri.getLastPathSegment()));
+    private long createEvent(HttpEvent transaction) {
+
         if (showNotification) {
             notificationHelper.show(transaction);
         }
         retentionManager.doMaintenance();
-        return uri;
+        return transaction.get_id();
     }
 
-    private int update(HttpTransaction transaction, Uri uri) {
-        ContentValues values = LocalCupboard.getInstance().withEntity(HttpTransaction.class).toContentValues(transaction);
-        int updated = context.getContentResolver().update(uri, values, null, null);
-        if (showNotification && updated > 0) {
+    private long updateEvent(HttpEvent transaction, long uri) {
+
+        DBManager.getInstance().insertData(transaction);
+        if (showNotification) {
             notificationHelper.show(transaction);
         }
-        return updated;
+        return uri;
     }
 
     /**
@@ -297,5 +294,13 @@ public final class NetSpyInterceptor implements Interceptor {
             }
         }
         return response.body().source();
+    }
+
+    private Map<String, String> toHttpHeaderMap(Headers headers) {
+        Map<String, String> headerMap = new HashMap<>();
+        for (int i = 0, count = headers.size(); i < count; i++) {
+            headerMap.put(headers.name(i), headers.value(i));
+        }
+        return headerMap;
     }
 }

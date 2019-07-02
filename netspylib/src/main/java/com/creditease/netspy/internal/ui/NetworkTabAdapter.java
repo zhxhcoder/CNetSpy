@@ -12,9 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.LocalCupboard;
+import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.ui.NetworkListFragment.OnListFragmentInteractionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolder> {
 
@@ -29,6 +32,9 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
     private final int color400;
     private final int color300;
 
+
+    List<HttpEvent> dataList = new ArrayList<>();
+
     NetworkTabAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.listener = listener;
         this.context = context;
@@ -38,6 +44,9 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         color500 = ContextCompat.getColor(context, R.color.netspy_status_500);
         color400 = ContextCompat.getColor(context, R.color.netspy_status_400);
         color300 = ContextCompat.getColor(context, R.color.netspy_status_300);
+
+
+        dataList = DBManager.getInstance().getAllData();
 
         cursorAdapter = new CursorAdapter(NetworkTabAdapter.this.context, null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
             @Override
@@ -50,13 +59,13 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
 
             @Override
             public void bindView(View view, final Context context, Cursor cursor) {
-                final HttpTransaction transaction = LocalCupboard.getInstance().withCursor(cursor).get(HttpTransaction.class);
+                final HttpEvent transaction = dataList.get(cursor.getPosition());
                 final ViewHolder holder = (ViewHolder) view.getTag();
                 holder.path.setText(transaction.getMethod() + " " + transaction.getPath());
                 holder.host.setText(transaction.getHost());
                 holder.start.setText(transaction.getRequestStartTimeString());
                 holder.ssl.setVisibility(transaction.isSsl() ? View.VISIBLE : View.GONE);
-                if (transaction.getStatus() == HttpTransaction.Status.Complete) {
+                if (transaction.getStatus() == HttpEvent.Status.Complete) {
                     holder.code.setText(String.valueOf(transaction.getResponseCode()));
                     holder.duration.setText(transaction.getDurationString());
                     holder.size.setText(transaction.getTotalSizeString());
@@ -65,7 +74,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
                     holder.duration.setText(null);
                     holder.size.setText(null);
                 }
-                if (transaction.getStatus() == HttpTransaction.Status.Failed) {
+                if (transaction.getStatus() == HttpEvent.Status.Failed) {
                     holder.code.setText("!!!");
                 }
                 setStatusColor(holder, transaction);
@@ -80,11 +89,11 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
                 });
             }
 
-            private void setStatusColor(ViewHolder holder, HttpTransaction transaction) {
+            private void setStatusColor(ViewHolder holder, HttpEvent transaction) {
                 int color;
-                if (transaction.getStatus() == HttpTransaction.Status.Failed) {
+                if (transaction.getStatus() == HttpEvent.Status.Failed) {
                     color = colorError;
-                } else if (transaction.getStatus() == HttpTransaction.Status.Requested) {
+                } else if (transaction.getStatus() == HttpEvent.Status.Requested) {
                     color = colorRequested;
                 } else if (transaction.getResponseCode() >= 500) {
                     color = color500;
@@ -132,18 +141,18 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         public final TextView duration;
         public final TextView size;
         public final ImageView ssl;
-        HttpTransaction transaction;
+        HttpEvent transaction;
 
         ViewHolder(View view) {
             super(view);
             this.view = view;
-            code = (TextView) view.findViewById(R.id.code);
-            path = (TextView) view.findViewById(R.id.path);
-            host = (TextView) view.findViewById(R.id.host);
-            start = (TextView) view.findViewById(R.id.start);
-            duration = (TextView) view.findViewById(R.id.duration);
-            size = (TextView) view.findViewById(R.id.size);
-            ssl = (ImageView) view.findViewById(R.id.ssl);
+            code = view.findViewById(R.id.code);
+            path = view.findViewById(R.id.path);
+            host = view.findViewById(R.id.host);
+            start = view.findViewById(R.id.start);
+            duration = view.findViewById(R.id.duration);
+            size = view.findViewById(R.id.size);
+            ssl = view.findViewById(R.id.ssl);
         }
     }
 }

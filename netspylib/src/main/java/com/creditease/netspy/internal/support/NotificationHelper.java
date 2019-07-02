@@ -13,7 +13,7 @@ import android.util.LongSparseArray;
 
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.ui.BaseNetSpyActivity;
 
 import java.lang.reflect.Method;
@@ -24,7 +24,7 @@ public class NotificationHelper {
     private static final int NOTIFICATION_ID = 1138;
     private static final int BUFFER_SIZE = 10;
 
-    private static final LongSparseArray<HttpTransaction> transactionBuffer = new LongSparseArray<>();
+    private static final LongSparseArray<HttpEvent> transactionBuffer = new LongSparseArray<>();
     private static int transactionCount;
 
     private final Context context;
@@ -36,11 +36,11 @@ public class NotificationHelper {
         transactionCount = 0;
     }
 
-    private static synchronized void addToBuffer(HttpTransaction transaction) {
-        if (transaction.getStatus() == HttpTransaction.Status.Requested) {
+    private static synchronized void addToBuffer(HttpEvent transaction) {
+        if (transaction.getStatus() == HttpEvent.Status.Requested) {
             transactionCount++;
         }
-        transactionBuffer.put(transaction.getId(), transaction);
+        transactionBuffer.put(transaction.get_id(), transaction);
         if (transactionBuffer.size() > BUFFER_SIZE) {
             transactionBuffer.removeAt(0);
         }
@@ -60,7 +60,7 @@ public class NotificationHelper {
         }
     }
 
-    public synchronized void show(HttpTransaction transaction) {
+    public synchronized void show(HttpEvent transaction) {
         addToBuffer(transaction);
         if (!BaseNetSpyActivity.isInForeground()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)

@@ -21,8 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
+import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
 public class NetworkListFragment extends Fragment implements
@@ -97,7 +97,7 @@ public class NetworkListFragment extends Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.clear) {
-            getContext().getContentResolver().delete(NetSpyContentProvider.TRANSACTION_URI, null, null);
+            DBManager.getInstance().deleteAllData();
             NotificationHelper.clearBuffer();
             return true;
         } else {
@@ -108,7 +108,6 @@ public class NetworkListFragment extends Fragment implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(getContext());
-        loader.setUri(NetSpyContentProvider.TRANSACTION_URI);
         if (!TextUtils.isEmpty(currentFilter)) {
             if (TextUtils.isDigitsOnly(currentFilter)) {
                 loader.setSelection("responseCode LIKE ?");
@@ -118,7 +117,7 @@ public class NetworkListFragment extends Fragment implements
                 loader.setSelectionArgs(new String[]{"%" + currentFilter + "%"});
             }
         }
-        loader.setProjection(HttpTransaction.PARTIAL_PROJECTION);
+        loader.setProjection(HttpEvent.PARTIAL_PROJECTION);
         loader.setSortOrder("_id DESC");
         return loader;
     }
@@ -146,6 +145,6 @@ public class NetworkListFragment extends Fragment implements
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(HttpTransaction item);
+        void onListFragmentInteraction(HttpEvent item);
     }
 }

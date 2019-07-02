@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.db.HttpEvent;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -29,7 +29,7 @@ public class NetworkOverviewFragment extends Fragment implements NetworkTabFragm
     TextView responseSize;
     TextView totalSize;
 
-    private HttpTransaction transaction;
+    private HttpEvent transaction;
 
     public NetworkOverviewFragment() {
     }
@@ -65,7 +65,7 @@ public class NetworkOverviewFragment extends Fragment implements NetworkTabFragm
     }
 
     @Override
-    public void transactionUpdated(HttpTransaction transaction) {
+    public void transactionUpdated(HttpEvent transaction) {
         this.transaction = transaction;
         populateUI();
     }

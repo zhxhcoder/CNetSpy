@@ -12,7 +12,7 @@ import com.creditease.netspy.internal.ui.NetSpyHomeActivity;
  */
 public class NetSpyHelper {
     static boolean isNetSpy = false;
-    static Application netSpyApp;
+    public static Application netSpyApp;
 
     public static void install(Application netSpyApp) {
         NetSpyHelper.netSpyApp = netSpyApp;

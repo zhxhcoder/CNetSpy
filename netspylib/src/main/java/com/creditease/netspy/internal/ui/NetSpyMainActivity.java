@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.internal.db.HttpEvent;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -28,8 +28,8 @@ public class NetSpyMainActivity extends BaseNetSpyActivity implements NetworkLis
     }
 
     @Override
-    public void onListFragmentInteraction(HttpTransaction transaction) {
-        NetworkTabActivity.start(this, transaction.getId());
+    public void onListFragmentInteraction(HttpEvent transaction) {
+        NetworkTabActivity.start(this, transaction.get_id());
     }
 
     private String getApplicationName() {

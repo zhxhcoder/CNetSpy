@@ -22,9 +22,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.LocalCupboard;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
+import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.FormatUtils;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
     Adapter adapter;
 
     private long transactionId;
-    private HttpTransaction transaction;
+    private HttpEvent transaction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,13 +103,12 @@ public class NetworkTabActivity extends BaseNetSpyActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(this);
-        loader.setUri(ContentUris.withAppendedId(NetSpyContentProvider.TRANSACTION_URI, transactionId));
         return loader;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        transaction = LocalCupboard.getInstance().withCursor(data).get(HttpTransaction.class);
+        transaction = DBManager.getInstance().getAllData().get(data.getPosition());
         populateUI();
     }
 
