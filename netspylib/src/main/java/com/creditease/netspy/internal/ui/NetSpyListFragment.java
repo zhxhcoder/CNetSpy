@@ -20,6 +20,7 @@ import com.creditease.netspy.internal.db.DBManager;
 import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -100,6 +101,7 @@ public class NetSpyListFragment extends Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.clear) {
+            adapter.setData(new ArrayList<>());
             DBManager.getInstance().deleteAllData();
             NotificationHelper.clearBuffer();
             return true;
