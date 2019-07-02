@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
@@ -31,6 +34,15 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         });
         findViewById(R.id.launch_netspy_directly).setOnClickListener(view -> NetSpyHelper.launchActivity(this)
         );
+
+        CheckBox checkBox = findViewById(R.id.cb_netspy_status);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+                NetSpyHelper.debug(isChecked);
+            }
+        });
     }
 
     private OkHttpClient getClient(Context context) {
