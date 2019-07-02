@@ -25,7 +25,7 @@ import java.util.List;
 public class NetSpyListFragment extends Fragment implements
     SearchView.OnQueryTextListener {
 
-    private String currentFilter;
+    private String filterText;
     private OnListFragmentInteractionListener listener;
     private NetworkTabAdapter adapter;
 
@@ -111,7 +111,8 @@ public class NetSpyListFragment extends Fragment implements
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        currentFilter = newText;
+        filterText = newText;
+        //TODO 通过filterText字段进行数据库筛选
         return true;
     }
 
