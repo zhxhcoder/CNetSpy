@@ -43,7 +43,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     Adapter adapter;
 
     private long transactionId;
-    private HttpEvent transaction;
+    private HttpEvent httpEvent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,9 +67,9 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
         transactionId = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
 
-        transaction = DBManager.getInstance().getDataByTransId(transactionId);
+        httpEvent = DBManager.getInstance().getDataByTransId(transactionId);
 
-        populateUI(transaction);
+        populateUI(httpEvent);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share_text) {
-            share(FormatUtils.getShareResponseText(this, transaction));
+            share(FormatUtils.getShareResponseText(this, httpEvent));
             return true;
         } else if (item.getItemId() == R.id.share_curl) {
-            share(FormatUtils.getShareCurlCommand(transaction));
+            share(FormatUtils.getShareCurlCommand(httpEvent));
             return true;
         } else {
             return super.onOptionsItemSelected(item);
