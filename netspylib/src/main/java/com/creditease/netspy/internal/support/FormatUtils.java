@@ -12,6 +12,8 @@ import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -83,8 +85,8 @@ public class FormatUtils {
         text += context.getString(R.string.netspy_response) + ": " + v(transaction.getResponseSummaryText()) + "\n";
         text += context.getString(R.string.netspy_ssl) + ": " + v(context.getString(transaction.isSsl() ? R.string.netspy_yes : R.string.netspy_no)) + "\n";
         text += "\n";
-        text += context.getString(R.string.netspy_request_time) + ": " + v(transaction.getRequestDateString()) + "\n";
-        text += context.getString(R.string.netspy_response_time) + ": " + v(transaction.getResponseDateString()) + "\n";
+        text += context.getString(R.string.netspy_request_time) + ": " + v(transaction.getRequestDate().toLocaleString()) + "\n";
+        text += context.getString(R.string.netspy_response_time) + ": " + v(transaction.getResponseDate().toLocaleString()) + "\n";
         text += context.getString(R.string.netspy_duration) + ": " + v(transaction.getDurationString()) + "\n";
         text += "\n";
         text += context.getString(R.string.netspy_request_size) + ": " + v(transaction.getRequestSizeString()) + "\n";
@@ -148,4 +150,13 @@ public class FormatUtils {
     private static String v(String string) {
         return (string != null) ? string : "";
     }
+
+
+    public static String getHHmmSS(Date date) {
+        String msg = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss.SSS");
+        msg += sdf.format(date);
+        return msg;
+    }
+
 }

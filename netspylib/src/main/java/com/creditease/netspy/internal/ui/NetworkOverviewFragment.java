@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.internal.db.HttpEvent;
+import com.creditease.netspy.internal.support.FormatUtils;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -78,8 +79,8 @@ public class NetworkOverviewFragment extends Fragment implements INetworkTabFrag
             status.setText(httpEvent.getStatus().toString());
             response.setText(httpEvent.getResponseSummaryText());
             ssl.setText((httpEvent.isSsl() ? R.string.netspy_yes : R.string.netspy_no));
-            requestTime.setText(httpEvent.getRequestDateString());
-            responseTime.setText(httpEvent.getResponseDateString());
+            requestTime.setText(FormatUtils.getHHmmSS(httpEvent.getRequestDate()));
+            responseTime.setText(FormatUtils.getHHmmSS(httpEvent.getResponseDate()));
             duration.setText(httpEvent.getDurationString());
             requestSize.setText(httpEvent.getRequestSizeString());
             responseSize.setText(httpEvent.getResponseSizeString());

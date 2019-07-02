@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
  */
 public class DBManager {
 
-    private static final String DB_NAME = "cnetspy202.db"; // 数据库名称
+    private static final String DB_NAME = "cnetspy203.db"; // 数据库名称
 
     private static volatile DBManager sInstance = null; // 单例
 
@@ -48,13 +48,11 @@ public class DBManager {
     }
 
     public HttpEvent getDataByTransId(long transId) {
-
         for (HttpEvent data : getAllData()) {
             if (transId == data.getTransId()) {
                 return data;
             }
         }
-
         return null;
     }
 

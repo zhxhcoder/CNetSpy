@@ -21,6 +21,7 @@ import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,10 +61,15 @@ public class NetSpyListFragment extends Fragment implements
             adapter = new NetworkTabAdapter(getContext(), listener);
             recyclerView.setAdapter(adapter);
 
-            List<HttpEvent> dataList = DBManager.getInstance().getAllData();
-            adapter.setData(dataList);
+            updateDataFromDb();
         }
         return view;
+    }
+
+    public void updateDataFromDb() {
+        List<HttpEvent> dataList = DBManager.getInstance().getAllData();
+        Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
+        adapter.setData(dataList);
     }
 
     @Override

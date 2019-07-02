@@ -19,21 +19,6 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class HttpEvent {
 
-    //数据库表
-    public static final String[] PARTIAL_PROJECTION = new String[]{
-        "_id",
-        "requestDate",
-        "tookMs",
-        "method",
-        "host",
-        "path",
-        "scheme",
-        "requestContentLength",
-        "responseCode",
-        "error",
-        "responseContentLength"
-    };
-
     public enum Status {
         Requested,
         Complete,
@@ -329,18 +314,6 @@ public class HttpEvent {
         } else {
             return HttpEvent.Status.Complete;
         }
-    }
-
-    public String getRequestStartTimeString() {
-        return (requestDate != null) ? requestDate.toString() : null;
-    }
-
-    public String getRequestDateString() {
-        return (requestDate != null) ? requestDate.toString() : null;
-    }
-
-    public String getResponseDateString() {
-        return (responseDate != null) ? responseDate.toString() : null;
     }
 
     public String getDurationString() {
