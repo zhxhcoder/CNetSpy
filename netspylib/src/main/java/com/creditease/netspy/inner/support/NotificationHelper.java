@@ -18,6 +18,9 @@ import com.creditease.netspy.inner.ui.BaseNetSpyActivity;
 
 import java.lang.reflect.Method;
 
+/**
+ * 通知管理类
+ */
 public class NotificationHelper {
 
     private static final String CHANNEL_ID = "cnetspy";

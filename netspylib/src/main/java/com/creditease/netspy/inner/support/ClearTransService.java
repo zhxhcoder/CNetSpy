@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 
 import com.creditease.netspy.DBHelper;
 
+/**
+ * 清空数据库
+ */
 public class ClearTransService extends IntentService {
 
     public ClearTransService() {

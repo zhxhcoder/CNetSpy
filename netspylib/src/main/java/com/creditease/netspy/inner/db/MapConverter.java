@@ -11,24 +11,24 @@ import java.util.Map;
 
 /**
  * Created by zhxh on 2019/07/02
+ * 属性转换器
  */
 public class MapConverter implements PropertyConverter<Map<String, String>, String> {
+    private Gson gson;
 
-    private Gson mGson;
-
-    public MapConverter() {
-        mGson = new Gson();
+    MapConverter() {
+        gson = new Gson();
     }
 
     @Override
     public Map<String, String> convertToEntityProperty(String databaseValue) {
         Type type = new TypeToken<HashMap<String, String>>() {
         }.getType();
-        return mGson.fromJson(databaseValue, type);
+        return gson.fromJson(databaseValue, type);
     }
 
     @Override
     public String convertToDatabaseValue(Map<String, String> entityProperty) {
-        return mGson.toJson(entityProperty);
+        return gson.toJson(entityProperty);
     }
 }
