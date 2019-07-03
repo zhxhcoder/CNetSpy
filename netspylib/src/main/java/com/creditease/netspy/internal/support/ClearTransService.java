@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.DBHelper;
 
 public class ClearTransService extends IntentService {
 
@@ -14,7 +14,7 @@ public class ClearTransService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        DBManager.getInstance().deleteAllData();
+        DBHelper.getInstance().deleteAllData();
         NotificationHelper.clearBuffer();
         NotificationHelper notificationHelper = new NotificationHelper(this);
         notificationHelper.dismiss();

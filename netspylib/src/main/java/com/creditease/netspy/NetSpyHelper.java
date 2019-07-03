@@ -10,7 +10,7 @@ import com.creditease.netspy.internal.ui.NetSpyHomeActivity;
  * Created by zhxh on 2018/11/12
  * NetSpyHelper 工具类.
  */
-public class NetSpyHelper {
+public final class NetSpyHelper {
     static boolean isNetSpy = false;
     public static Application netSpyApp;
 

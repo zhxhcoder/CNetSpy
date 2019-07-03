@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
@@ -114,7 +113,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         public final TextView start;
         public final TextView duration;
         public final TextView size;
-        public final ImageView ssl;
+        public final TextView ssl;
         HttpEvent transaction;
 
         ViewHolder(View view) {

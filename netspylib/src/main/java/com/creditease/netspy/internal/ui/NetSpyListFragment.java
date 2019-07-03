@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 
@@ -67,7 +67,7 @@ public class NetSpyListFragment extends Fragment implements
     }
 
     public void updateDataFromDb() {
-        List<HttpEvent> dataList = DBManager.getInstance().getAllData();
+        List<HttpEvent> dataList = DBHelper.getInstance().getAllData();
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
         adapter.setData(dataList);
     }
@@ -108,7 +108,7 @@ public class NetSpyListFragment extends Fragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.clear) {
             adapter.setData(new ArrayList<>());
-            DBManager.getInstance().deleteAllData();
+            DBHelper.getInstance().deleteAllData();
             NotificationHelper.clearBuffer();
             return true;
         } else {

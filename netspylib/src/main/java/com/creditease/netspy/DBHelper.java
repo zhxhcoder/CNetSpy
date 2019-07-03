@@ -1,8 +1,10 @@
-package com.creditease.netspy.internal.db;
+package com.creditease.netspy;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.creditease.netspy.NetSpyHelper;
+import com.creditease.netspy.internal.db.DaoMaster;
+import com.creditease.netspy.internal.db.DaoSession;
+import com.creditease.netspy.internal.db.HttpEvent;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -12,27 +14,27 @@ import java.util.concurrent.Callable;
  * Created by zhxh on 2019/07/02
  * 数据库操作类.
  */
-public class DBManager {
+public final class DBHelper {
 
     private static final String DB_NAME = "cnetspy203.db"; // 数据库名称
 
-    private static volatile DBManager sInstance = null; // 单例
+    private static volatile DBHelper sInstance = null; // 单例
 
     private SQLiteDatabase mDatabase;
 
     private DaoSession mDaoSession;
 
-    public DBManager() {
+    public DBHelper() {
         mDatabase = new DaoMaster.DevOpenHelper(NetSpyHelper.netSpyApp, DB_NAME).getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(mDatabase);
         mDaoSession = daoMaster.newSession();
     }
 
-    public static DBManager getInstance() {
+    public static DBHelper getInstance() {
         if (sInstance == null) {
-            synchronized (DBManager.class) {
+            synchronized (DBHelper.class) {
                 if (sInstance == null) {
-                    sInstance = new DBManager();
+                    sInstance = new DBHelper();
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.creditease.netspy;
 import android.content.Context;
 import android.util.Log;
 
-import com.creditease.netspy.internal.db.DBManager;
 import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.NotificationHelper;
 import com.creditease.netspy.internal.support.RetentionManager;
@@ -210,7 +209,7 @@ public final class NetSpyInterceptor implements Interceptor {
     private long createHttpEvent(HttpEvent transaction) {
         transaction.setTransId(System.currentTimeMillis());
 
-        DBManager.getInstance().insertData(transaction);
+        DBHelper.getInstance().insertData(transaction);
 
         if (showNotification) {
             notificationHelper.show(transaction);
@@ -223,7 +222,7 @@ public final class NetSpyInterceptor implements Interceptor {
 
         transaction.setTransId(transId);
 
-        DBManager.getInstance().insertData(transaction);
+        DBHelper.getInstance().insertData(transaction);
         if (showNotification) {
             notificationHelper.show(transaction);
         }

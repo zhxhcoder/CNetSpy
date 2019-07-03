@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.DBManager;
+import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.internal.db.HttpEvent;
 import com.creditease.netspy.internal.support.FormatUtils;
 
@@ -67,7 +67,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
         transactionId = getIntent().getLongExtra(ARG_TRANS_ID, 0);
 
-        httpEvent = DBManager.getInstance().getDataByTransId(transactionId);
+        httpEvent = DBHelper.getInstance().getDataByTransId(transactionId);
 
         populateUI(httpEvent);
     }

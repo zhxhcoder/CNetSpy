@@ -37,16 +37,18 @@
         android:padding="2dp"
         tools:text="example.com" />
 
-    <ImageView
+    <TextView
         android:id="@+id/ssl"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/path"
-        android:layout_marginTop="4dp"
+        android:layout_marginLeft="5dp"
         android:layout_toEndOf="@id/host"
         android:layout_toRightOf="@id/host"
-        android:contentDescription="@string/netspy_ssl"
-        android:src="@drawable/netspy_ic_https_grey_24dp" />
+        android:padding="2dp"
+        android:text="@string/netspy_ssl"
+        android:textColor="@color/netspy_status_default"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/meta"
