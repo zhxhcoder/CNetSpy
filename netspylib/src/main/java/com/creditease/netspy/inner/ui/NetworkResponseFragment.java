@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
-import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.support.FormatHelper;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -73,11 +73,11 @@ public class NetworkResponseFragment extends Fragment implements INetworkTabFrag
         if (isAdded() && httpEvent != null) {
             switch (type) {
                 case TYPE_REQUEST:
-                    setText(FormatUtils.formatHeaders(httpEvent.getRequestHeaders(), true),
+                    setText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
                         httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
                     break;
                 case TYPE_RESPONSE:
-                    setText(FormatUtils.formatHeaders(httpEvent.getResponseHeaders(), true),
+                    setText(FormatHelper.formatHeaders(httpEvent.getResponseHeaders(), true),
                         httpEvent.getFormattedResponseBody(), httpEvent.getResponseBodyIsPlainText());
                     break;
             }

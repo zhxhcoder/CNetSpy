@@ -2,7 +2,7 @@ package com.creditease.netspy.inner.db;
 
 import android.net.Uri;
 
-import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.support.FormatHelper;
 
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
@@ -10,7 +10,6 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
 import java.util.Map;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by zhxh on 2019/07/02
@@ -363,16 +362,16 @@ public class HttpEvent {
 
     private String formatBody(String body, String contentType) {
         if (contentType != null && contentType.toLowerCase().contains("json")) {
-            return FormatUtils.formatJson(body);
+            return FormatHelper.formatJson(body);
         } else if (contentType != null && contentType.toLowerCase().contains("xml")) {
-            return FormatUtils.formatXml(body);
+            return FormatHelper.formatXml(body);
         } else {
             return body;
         }
     }
 
     private String formatBytes(long bytes) {
-        return FormatUtils.formatByteCount(bytes, true);
+        return FormatHelper.formatByteCount(bytes, true);
     }
 
     public String getFormattedRequestBody() {

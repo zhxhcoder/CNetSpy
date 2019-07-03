@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.creditease.netspy.R;
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
-import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.support.FormatHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,10 +87,10 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share_text) {
-            share(FormatUtils.getShareResponseText(this, httpEvent));
+            share(FormatHelper.getShareResponseText(this, httpEvent));
             return true;
         } else if (item.getItemId() == R.id.share_curl) {
-            share(FormatUtils.getShareCurlCommand(httpEvent));
+            share(FormatHelper.getShareCurlCommand(httpEvent));
             return true;
         } else {
             return super.onOptionsItemSelected(item);

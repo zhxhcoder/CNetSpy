@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
-import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.support.FormatHelper;
 import com.creditease.netspy.inner.ui.NetSpyListFragment.OnListFragmentInteractionListener;
 
 import java.text.MessageFormat;
@@ -58,7 +58,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
 
         holder.path.setText(MessageFormat.format("{0} {1}", transaction.getMethod(), transaction.getPath()));
         holder.host.setText(transaction.getHost());
-        holder.start.setText(FormatUtils.getHHmmSS(transaction.getRequestDate()));
+        holder.start.setText(FormatHelper.getHHmmSS(transaction.getRequestDate()));
         holder.ssl.setVisibility(transaction.isSsl() ? View.VISIBLE : View.GONE);
         if (transaction.getStatus() == HttpEvent.Status.Complete) {
             holder.code.setText(String.valueOf(transaction.getResponseCode()));

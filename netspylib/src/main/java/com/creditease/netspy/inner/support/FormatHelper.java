@@ -24,7 +24,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 
-public class FormatUtils {
+public class FormatHelper {
 
     public static String formatHeaders(Map<String, String> httpHeaders, boolean withMarkup) {
         String out = "";
