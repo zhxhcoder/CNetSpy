@@ -1,6 +1,6 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui;
 
-import com.creditease.netspy.internal.db.HttpEvent;
+import com.creditease.netspy.inner.db.HttpEvent;
 /**
  * Created by zhxh on 2019/07/02
  * 数据库操作类.

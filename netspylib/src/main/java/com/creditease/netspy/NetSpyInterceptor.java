@@ -3,9 +3,9 @@ package com.creditease.netspy;
 import android.content.Context;
 import android.util.Log;
 
-import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.support.NotificationHelper;
-import com.creditease.netspy.internal.support.RetentionManager;
+import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.NotificationHelper;
+import com.creditease.netspy.inner.support.RetentionManager;
 
 import java.io.EOFException;
 import java.io.IOException;

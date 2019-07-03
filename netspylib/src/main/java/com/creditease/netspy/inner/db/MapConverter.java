@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.db;
+package com.creditease.netspy.inner.db;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

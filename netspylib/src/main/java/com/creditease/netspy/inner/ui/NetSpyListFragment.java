@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.DBHelper;
-import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.support.NotificationHelper;
+import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.NotificationHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

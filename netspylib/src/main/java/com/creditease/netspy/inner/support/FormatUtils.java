@@ -1,10 +1,10 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.HttpEvent;
+import com.creditease.netspy.inner.db.HttpEvent;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 

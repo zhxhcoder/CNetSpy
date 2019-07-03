@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.support.FormatUtils;
-import com.creditease.netspy.internal.ui.NetSpyListFragment.OnListFragmentInteractionListener;
+import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.ui.NetSpyListFragment.OnListFragmentInteractionListener;
 
 import java.text.MessageFormat;
 import java.util.List;

@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".internal.ui.NetSpyListFragment"
+    tools:context=".inner.ui.NetSpyListFragment"
     tools:listitem="@layout/netspy_list_network_item" />

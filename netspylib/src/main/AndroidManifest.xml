@@ -3,18 +3,18 @@
 
     <application>
         <activity
-            android:name="com.creditease.netspy.internal.ui.NetSpyHomeActivity"
+            android:name="com.creditease.netspy.inner.ui.NetSpyHomeActivity"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
         <activity
-            android:name="com.creditease.netspy.internal.ui.NetworkTabActivity"
-            android:parentActivityName="com.creditease.netspy.internal.ui.NetSpyHomeActivity"
+            android:name="com.creditease.netspy.inner.ui.NetworkTabActivity"
+            android:parentActivityName="com.creditease.netspy.inner.ui.NetSpyHomeActivity"
             android:theme="@style/NetSpy.Theme" />
 
         <service
-            android:name="com.creditease.netspy.internal.support.ClearTransService"
+            android:name="com.creditease.netspy.inner.support.ClearTransService"
             android:exported="false" />
     </application>
 </manifest>

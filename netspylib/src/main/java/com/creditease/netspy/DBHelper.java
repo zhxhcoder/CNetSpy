@@ -2,9 +2,9 @@ package com.creditease.netspy;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.creditease.netspy.internal.db.DaoMaster;
-import com.creditease.netspy.internal.db.DaoSession;
-import com.creditease.netspy.internal.db.HttpEvent;
+import com.creditease.netspy.inner.db.DaoMaster;
+import com.creditease.netspy.inner.db.DaoSession;
+import com.creditease.netspy.inner.db.HttpEvent;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
  */
 public final class DBHelper {
 
-    private static final String DB_NAME = "cnetspy203.db"; // 数据库名称
+    private static final String DB_NAME = "cnetspy204.db"; // 数据库名称
 
     private static volatile DBHelper sInstance = null; // 单例
 

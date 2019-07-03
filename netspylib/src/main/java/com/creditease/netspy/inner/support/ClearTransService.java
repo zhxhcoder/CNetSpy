@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import android.app.IntentService;
 import android.content.Intent;

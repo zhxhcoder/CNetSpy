@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,14 +18,14 @@ import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.DBHelper;
-import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.support.FormatUtils;
+import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.FormatUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_REQUEST;
-import static com.creditease.netspy.internal.ui.NetworkResponseFragment.TYPE_RESPONSE;
+import static com.creditease.netspy.inner.ui.NetworkResponseFragment.TYPE_REQUEST;
+import static com.creditease.netspy.inner.ui.NetworkResponseFragment.TYPE_RESPONSE;
 
 public class NetworkTabActivity extends BaseNetSpyActivity {
 

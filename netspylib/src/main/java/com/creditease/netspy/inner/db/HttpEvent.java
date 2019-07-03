@@ -1,8 +1,8 @@
-package com.creditease.netspy.internal.db;
+package com.creditease.netspy.inner.db;
 
 import android.net.Uri;
 
-import com.creditease.netspy.internal.support.FormatUtils;
+import com.creditease.netspy.inner.support.FormatUtils;
 
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;

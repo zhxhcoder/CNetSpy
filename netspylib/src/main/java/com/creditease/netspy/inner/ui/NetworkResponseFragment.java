@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.db.HttpEvent;
-import com.creditease.netspy.internal.support.FormatUtils;
+import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.FormatUtils;
 
 /**
  * Created by zhxh on 2019/06/12
