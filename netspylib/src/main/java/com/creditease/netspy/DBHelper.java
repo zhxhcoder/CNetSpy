@@ -17,7 +17,7 @@ import java.util.concurrent.Callable;
  */
 public final class DBHelper {
 
-    private static final String DB_NAME = "cnetspy204.db"; // 数据库名称
+    private static final String DB_NAME = "cnetspy205.db"; // 数据库名称
 
     private static volatile DBHelper sInstance = null; // 单例
 
