@@ -1,7 +1,5 @@
 package com.creditease.netspy.inner.net;
 
-import android.util.Log;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -23,7 +21,7 @@ import okhttp3.Response;
  */
 public class HttpHelper {
 
-    public static void uploadFile(String url, File file) {
+    public static void uploadFile(String url, File file, CallBack cb) {
         OkHttpClient client = new OkHttpClient();
 
         FormBody paramsBody = new FormBody.Builder()
@@ -61,15 +59,16 @@ public class HttpHelper {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    Log.d("XXXXXXXX", "onResponse: " + response.body().string());
+                    if (response.body() != null) {
+                        cb.onSuccess(response.body().string());
+                    }
                 }
             }
         });
-
     }
 
 
     interface CallBack {
-
+        void onSuccess(String response);
     }
 }
