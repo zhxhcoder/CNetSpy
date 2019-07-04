@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.creditease.netspy.inner.db.DaoMaster;
 import com.creditease.netspy.inner.db.DaoSession;
 import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.db.HttpEventDao;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -26,8 +27,8 @@ public final class DBHelper {
 
     public DBHelper() {
         mDatabase = new DaoMaster.DevOpenHelper(NetSpyHelper.netSpyApp, DB_NAME).getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(mDatabase);
-        mDaoSession = daoMaster.newSession();
+        DaoMaster daoMaster = new DaoMaster(mDatabase);//用于创建数据库以及获取DaoSession
+        mDaoSession = daoMaster.newSession();//用于获取各个表对应的Dao类
     }
 
     public static DBHelper getInstance() {
@@ -60,53 +61,24 @@ public final class DBHelper {
 
     public void insertData(HttpEvent httpEvent) {
         if (httpEvent != null) {
-            mDaoSession.insertOrReplace(httpEvent);
+            mDaoSession.getHttpEventDao().insertOrReplace(httpEvent);
         }
     }
 
-    public void saveEventList(final List<HttpEvent> eventList) {
-        if (eventList == null || eventList.isEmpty()) {
-            return;
+    public void updateData(HttpEvent httpEvent) {
+        if (httpEvent != null) {
+            mDaoSession.getHttpEventDao().update(httpEvent);
         }
-        mDaoSession.callInTxNoException(new Callable() {
-
-            @Override
-            public Object call() throws Exception {
-                for (HttpEvent httpEvent : eventList) {
-                    mDaoSession.getHttpEventDao().insertOrReplace(httpEvent);
-                }
-                return null;
-            }
-        });
     }
 
-
-    public void removeEventList(final List<HttpEvent> eventList) {
-        if (eventList == null || eventList.isEmpty()) {
-            return;
-        }
-        mDaoSession.callInTxNoException(new Callable() {
-            @Override
-            public Object call() throws Exception {
-                for (HttpEvent httpEvent : eventList) {
-                    mDaoSession.getHttpEventDao().delete(httpEvent);
-                }
-                return null;
-            }
-        });
-    }
-
-    public List<HttpEvent> queryEventList() {
+    public List<HttpEvent> queryEventList(int responseCode) {
         return mDaoSession.callInTxNoException(new Callable<List<HttpEvent>>() {
             @Override
             public List<HttpEvent> call() throws Exception {
-                List<HttpEvent> eventList = mDaoSession.queryBuilder(HttpEvent.class).list();
-                if (eventList != null) {
-                    for (HttpEvent httpEvent : eventList) {
-                        mDaoSession.insertOrReplace(httpEvent);
-                    }
-                }
-                return eventList;
+                return mDaoSession
+                    .queryBuilder(HttpEvent.class)
+                    .where(HttpEventDao.Properties.ResponseCode.eq(responseCode))
+                    .list();
             }
         });
     }

@@ -10,7 +10,7 @@
     android:paddingBottom="20dp">
 
     <Button
-        android:id="@+id/do_http"
+        android:id="@+id/btn_http"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -32,5 +32,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="是否开启监听" />
+        android:text="开启监听" />
+
+    <Button
+        android:id="@+id/btn_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="数据库操作"
+        android:textAllCaps="false" />
 </LinearLayout>

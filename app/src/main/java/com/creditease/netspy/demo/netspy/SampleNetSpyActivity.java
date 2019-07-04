@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
@@ -21,12 +23,13 @@ import retrofit2.Response;
  * Created by zhxh on 2019/06/24
  */
 public class SampleNetSpyActivity extends AppCompatActivity {
+    private final static String TAG = "netSpyLog";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_netspy);
-        findViewById(R.id.do_http).setOnClickListener(view -> {
+        findViewById(R.id.btn_http).setOnClickListener(view -> {
             for (int i = 0; i < 2; i++) {
                 doHttpActivity();
             }
@@ -38,6 +41,11 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             NetSpyHelper.debug(isChecked);
+        });
+
+        findViewById(R.id.btn_db).setOnClickListener(view -> {
+            Log.d(TAG, "getDataByTransId " + DBHelper.getInstance().getDataByTransId(0).toString());
+            Log.d(TAG, "queryEventList " + DBHelper.getInstance().queryEventList(200).get(0).toString());
         });
     }
 

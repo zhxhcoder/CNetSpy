@@ -10,6 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
 import java.util.Map;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by zhxh on 2019/07/02
@@ -382,4 +383,33 @@ public class HttpEvent {
         return formatBody(responseBody, responseContentType);
     }
 
+    @Override
+    public String toString() {
+        return "HttpEvent{" +
+            "_id=" + _id +
+            ", transId=" + transId +
+            ", requestDate=" + requestDate +
+            ", responseDate=" + responseDate +
+            ", tookMs=" + tookMs +
+            ", protocol='" + protocol + '\'' +
+            ", method='" + method + '\'' +
+            ", url='" + url + '\'' +
+            ", host='" + host + '\'' +
+            ", path='" + path + '\'' +
+            ", scheme='" + scheme + '\'' +
+            ", requestContentLength=" + requestContentLength +
+            ", requestContentType='" + requestContentType + '\'' +
+            ", requestHeaders=" + requestHeaders +
+            ", requestBody='" + requestBody + '\'' +
+            ", requestBodyIsPlainText=" + requestBodyIsPlainText +
+            ", responseCode=" + responseCode +
+            ", responseMessage='" + responseMessage + '\'' +
+            ", error='" + error + '\'' +
+            ", responseContentLength=" + responseContentLength +
+            ", responseContentType='" + responseContentType + '\'' +
+            ", responseHeaders=" + responseHeaders +
+            ", responseBody='" + responseBody + '\'' +
+            ", responseBodyIsPlainText=" + responseBodyIsPlainText +
+            '}';
+    }
 }
