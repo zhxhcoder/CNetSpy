@@ -39,11 +39,11 @@ public class NotificationHelper {
         transactionCount = 0;
     }
 
-    private static synchronized void addToBuffer(HttpEvent transaction) {
-        if (transaction.getStatus() == HttpEvent.Status.Requested) {
+    private static synchronized void addToBuffer(HttpEvent httpEvent) {
+        if (httpEvent.getStatus() == HttpEvent.Status.Requested) {
             transactionCount++;
         }
-        transactionBuffer.put(transaction.getTransId(), transaction);
+        transactionBuffer.put(httpEvent.getTransId(), httpEvent);
         if (transactionBuffer.size() > BUFFER_SIZE) {
             transactionBuffer.removeAt(0);
         }
@@ -63,8 +63,8 @@ public class NotificationHelper {
         }
     }
 
-    public synchronized void show(HttpEvent transaction) {
-        addToBuffer(transaction);
+    public synchronized void show(HttpEvent httpEvent) {
+        addToBuffer(httpEvent);
         if (!BaseNetSpyActivity.isInForeground()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentIntent(PendingIntent.getActivity(context, 0, NetSpyHelper.launchIntent(context), 0))
