@@ -11,6 +11,8 @@ import java.lang.reflect.Method;
 public class NetHelper {
 
 
+
+
     //检测GPRS是否打开
     public static boolean gprsIsOpen(Context context) {
         ConnectivityManager mCM = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
