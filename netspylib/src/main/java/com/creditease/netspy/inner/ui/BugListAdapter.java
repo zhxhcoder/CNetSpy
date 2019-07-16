@@ -80,10 +80,10 @@ class BugListAdapter extends RecyclerView.Adapter<BugListAdapter.ViewHolder> {
 
     public void sendEmail(String trace) {
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        String subject = "异常报告";
+        String subject = "App异常报告";
         String body = "异常日志记录如下: " + "\n" + trace + "\n";
 
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"xiaohuizhu4@creditease.com"});
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"zhxhcoder@gmail.com"});
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         sendIntent.setType("message/rfc822");
