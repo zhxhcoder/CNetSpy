@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 /**
  * Created by zhxh on 2019/07/16
  */
-public class ErrorManager {
+public class CExceptionHelper {
 
     public static void send(Activity activity) {
         StringBuilder trace = new StringBuilder();

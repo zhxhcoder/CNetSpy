@@ -3,7 +3,6 @@ package com.creditease.netspy.demo;
 import android.app.Application;
 
 import com.creditease.netspy.NetSpyHelper;
-import com.creditease.netspy.demo.error.TopExceptionHandler;
 
 /**
  * Created by zhxh on 2019/06/24
