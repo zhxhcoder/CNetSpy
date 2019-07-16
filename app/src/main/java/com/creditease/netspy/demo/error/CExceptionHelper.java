@@ -31,7 +31,7 @@ public class CExceptionHelper {
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         String subject = "异常报告";
-        String body = "发送日志: " + "\n" + trace.toString() + "\n";
+        String body = "异常日志记录如下: " + "\n" + trace.toString() + "\n";
 
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrcoder@qq.com"});
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);

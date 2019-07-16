@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.creditease.netspy.demo.error.CExceptionHelper;
 import com.creditease.netspy.demo.error.CExceptionHandler;
+import com.creditease.netspy.demo.error.CExceptionHelper;
 import com.creditease.netspy.demo.netspy.SampleNetSpyActivity;
 
 /**
@@ -22,9 +22,18 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleNetSpyActivity.class)));
 
         findViewById(R.id.errorButton).setOnClickListener(v -> {
-            int a = 1 / 0;
-            String str=null;
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int a = 1 / 0;
+
+                }
+            });
+
+            String str = null;
             str.substring(2);
+
         });
 
         findViewById(R.id.sendButton).setOnClickListener(v -> CExceptionHelper.send(MainActivity.this));

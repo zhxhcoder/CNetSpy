@@ -29,16 +29,16 @@ public class CExceptionHandler implements Thread.UncaughtExceptionHandler {
         /*
          * 意外是子线程时,输出在这里
          */
-        report.append("--------- thread-begin ---------\n\n");
         Throwable cause = e.getCause();
         if (cause != null) {
-            report.append(cause.toString()).append("\n\n");
+            report.append("--------- thread-begin ---------\n\n");
+
             arr = cause.getStackTrace();
             for (int i = 0; i < arr.length; i++) {
                 report.append("    ").append(arr[i].toString()).append("\n");
             }
+            report.append("-------------thread-end------------------\n\n");
         }
-        report.append("-------------thread-end------------------\n\n");
 
         try {
             FileOutputStream trace = app.openFileOutput("stack.trace",
