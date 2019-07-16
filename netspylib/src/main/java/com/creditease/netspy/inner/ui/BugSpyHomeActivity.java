@@ -21,7 +21,7 @@ public class BugSpyHomeActivity extends AppCompatActivity {
         toolbar.setSubtitle("Bug监控");
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, NetSpyListFragment.newInstance())
+                .add(R.id.container, BugSpyListFragment.newInstance())
                 .commit();
         }
     }

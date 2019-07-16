@@ -3,7 +3,6 @@ package com.creditease.netspy.inner.db;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
-import java.util.Date;
 
 /**
  * Created by zhxh on 2019/07/16

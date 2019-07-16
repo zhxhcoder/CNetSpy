@@ -2,6 +2,7 @@ package com.creditease.netspy;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.db.DaoMaster;
 import com.creditease.netspy.inner.db.DaoSession;
 import com.creditease.netspy.inner.db.HttpEvent;
@@ -42,6 +43,18 @@ public final class DBHelper {
         return sInstance;
     }
 
+    public void deleteAllBugData() {
+        mDaoSession.deleteAll(BugEvent.class);
+    }
+
+    public void insertBugData(BugEvent bugEvent) {
+        if (bugEvent != null) {
+            mDaoSession.getBugEventDao().insertOrReplace(bugEvent);
+        }
+    }
+    public List<BugEvent> getAllBugData() {
+        return mDaoSession.loadAll(BugEvent.class);
+    }
     public void deleteAllHttpData() {
         mDaoSession.deleteAll(HttpEvent.class);
     }

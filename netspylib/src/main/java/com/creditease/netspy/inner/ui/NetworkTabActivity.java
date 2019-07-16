@@ -16,8 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.creditease.netspy.R;
 import com.creditease.netspy.DBHelper;
+import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
 
@@ -109,9 +109,9 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new NetworkOverviewFragment(), getString(R.string.netspy_overview));
-        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
         adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
+        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
+        adapter.addFragment(new NetworkOverviewFragment(), getString(R.string.netspy_overview));
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

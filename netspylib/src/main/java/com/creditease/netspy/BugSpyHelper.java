@@ -5,11 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
+import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.ui.NetSpyHomeActivity;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -45,6 +45,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
             return;
         }
     }
+
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         if (!NetSpyHelper.isNetSpy) {
@@ -70,52 +71,18 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
             }
             report.append("-------------thread-end------------------\n\n");
         }
-        try {
-            saveError(report.toString());
+        saveError(report.toString());
 
-            FileOutputStream trace = app.openFileOutput("stack.trace",
-                Context.MODE_PRIVATE);
-            trace.write(report.toString().getBytes());
-            trace.close();
-        } catch (IOException ioe) {
-            //TODO
-        }
         exceptionHandler.uncaughtException(t, e);
     }
 
 
     public void saveError(String report) {
-
+        BugEvent event = new BugEvent();
+        event.setTimeStamp(System.currentTimeMillis());
+        event.setBugReport(report);
+        DBHelper.getInstance().insertBugData(event);
     }
 
 
-    public static void sendEmail(Activity activity) {
-        StringBuilder trace = new StringBuilder();
-        String line;
-        try {
-            BufferedReader reader = new BufferedReader(
-                new InputStreamReader(activity.openFileInput("stack.trace")));
-
-            while ((line = reader.readLine()) != null) {
-                trace.append(line).append("\n");
-            }
-        } catch (FileNotFoundException fnf) {
-            //TODO
-        } catch (IOException ioe) {
-            //TODO
-        }
-
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        String subject = "异常报告";
-        String body = "异常日志记录如下: " + "\n" + trace.toString() + "\n";
-
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrcoder@qq.com"});
-        sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        sendIntent.setType("message/rfc822");
-
-        activity.startActivity(Intent.createChooser(sendIntent, "Title:"));
-
-        activity.deleteFile("stack.trace");
-    }
 }
