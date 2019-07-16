@@ -25,8 +25,6 @@ public final class NetSpyHelper {
      */
     public static void debug(boolean isNetSpy) {
         NetSpyHelper.isNetSpy = isNetSpy;
-        //同时加上bug监控体系
-        BugSpyHelper.debug(isNetSpy);
     }
 
     public static Intent launchIntent(Context context) {
