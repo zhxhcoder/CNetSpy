@@ -7,6 +7,9 @@ import android.content.Intent;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.ui.BugSpyHomeActivity;
 
+import java.util.Date;
+
+
 /**
  * Created by zhxh on 2019/07/16
  */
@@ -42,7 +45,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        if (!NetSpyHelper.isNetSpy) {
+        if (!BugSpyHelper.isBugSpy) {
             return;
         }
         StackTraceElement[] arr = e.getStackTrace();
@@ -77,6 +80,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     private void saveError(String report) {
         BugEvent event = new BugEvent();
         event.setTimeStamp(System.currentTimeMillis());
+        event.setCrashDate(new Date());
         event.setBugReport(report);
         DBHelper.getInstance().insertBugData(event);
     }

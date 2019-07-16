@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleNetSpyActivity.class)));
 
         findViewById(R.id.errorButton).setOnClickListener(v -> {
+            int a = 1 / 0;
 
             new Thread(new Runnable() {
                 @Override
