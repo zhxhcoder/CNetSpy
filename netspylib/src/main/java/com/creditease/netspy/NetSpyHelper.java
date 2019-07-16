@@ -16,8 +16,13 @@ public final class NetSpyHelper {
 
     public static void install(Application netSpyApp) {
         NetSpyHelper.netSpyApp = netSpyApp;
+
+        ExceptionHelper.install(netSpyApp);
     }
 
+    /**
+     * @param isNetSpy 是否 和网络监听
+     */
     public static void debug(boolean isNetSpy) {
         NetSpyHelper.isNetSpy = isNetSpy;
     }
