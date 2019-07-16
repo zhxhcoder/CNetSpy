@@ -20,7 +20,6 @@ import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
-import com.creditease.netspy.demo.support.NetHelper;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -61,20 +60,6 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         findViewById(R.id.btn_db).setOnClickListener(view -> {
             Log.d(TAG, "queryEventList " + DBHelper.getInstance().queryEventList(200).get(0).toString());
         });
-        findViewById(R.id.btn_net_state).setOnClickListener(view -> {
-
-            //checkOnlineState();
-
-            NetHelper.setGprsEnabled(this, true);
-
-            boolean isReachable = NetHelper.gprsIsOpen(this);
-            if (isReachable) {
-                Log.d(TAG, "host 可达 ");
-            } else {
-                Log.d(TAG, "host 不可达 ");
-            }
-        });
-
 
     }
 
