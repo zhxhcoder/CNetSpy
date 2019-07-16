@@ -58,7 +58,7 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_db).setOnClickListener(view -> {
-            Log.d(TAG, "queryEventList " + DBHelper.getInstance().queryEventList(200).get(0).toString());
+            Log.d(TAG, "queryHttpEventList " + DBHelper.getInstance().queryHttpEventList(200).get(0).toString());
         });
 
     }

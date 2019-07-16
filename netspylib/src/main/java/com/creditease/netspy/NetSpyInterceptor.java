@@ -209,7 +209,7 @@ public final class NetSpyInterceptor implements Interceptor {
     private long createHttpEvent(HttpEvent transaction) {
         transaction.setTransId(System.currentTimeMillis());
 
-        DBHelper.getInstance().insertData(transaction);
+        DBHelper.getInstance().insertHttpData(transaction);
 
         if (showNotification) {
             notificationHelper.show(transaction);
@@ -222,7 +222,7 @@ public final class NetSpyInterceptor implements Interceptor {
 
         transaction.setTransId(transId);
 
-        DBHelper.getInstance().insertData(transaction);
+        DBHelper.getInstance().insertHttpData(transaction);
         if (showNotification) {
             notificationHelper.show(transaction);
         }

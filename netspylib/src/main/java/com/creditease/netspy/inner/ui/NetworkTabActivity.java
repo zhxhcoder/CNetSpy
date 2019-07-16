@@ -67,7 +67,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
         transactionId = getIntent().getLongExtra(ARG_TRANS_ID, 0);
 
-        httpEvent = DBHelper.getInstance().getDataByTransId(transactionId);
+        httpEvent = DBHelper.getInstance().getHttpDataByTransId(transactionId);
 
         populateUI(httpEvent);
     }

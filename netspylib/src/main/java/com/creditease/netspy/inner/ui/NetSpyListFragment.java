@@ -67,7 +67,7 @@ public class NetSpyListFragment extends Fragment implements
     }
 
     public void updateDataFromDb() {
-        List<HttpEvent> dataList = DBHelper.getInstance().getAllData();
+        List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
         adapter.setData(dataList);
     }
@@ -108,7 +108,7 @@ public class NetSpyListFragment extends Fragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.clear) {
             adapter.setData(new ArrayList<>());
-            DBHelper.getInstance().deleteAllData();
+            DBHelper.getInstance().deleteAllHttpData();
             NotificationHelper.clearBuffer();
             return true;
         } else {

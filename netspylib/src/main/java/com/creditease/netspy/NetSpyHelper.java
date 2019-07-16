@@ -17,7 +17,7 @@ public final class NetSpyHelper {
     public static void install(Application netSpyApp) {
         NetSpyHelper.netSpyApp = netSpyApp;
         //注册异常监控
-        ErrorSpyHelper.install(netSpyApp);
+        BugSpyHelper.install(netSpyApp);
     }
 
     /**

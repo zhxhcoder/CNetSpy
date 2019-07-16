@@ -42,16 +42,16 @@ public final class DBHelper {
         return sInstance;
     }
 
-    public void deleteAllData() {
+    public void deleteAllHttpData() {
         mDaoSession.deleteAll(HttpEvent.class);
     }
 
-    public List<HttpEvent> getAllData() {
+    public List<HttpEvent> getAllHttpData() {
         return mDaoSession.loadAll(HttpEvent.class);
     }
 
-    public HttpEvent getDataByTransId(long transId) {
-        for (HttpEvent data : getAllData()) {
+    public HttpEvent getHttpDataByTransId(long transId) {
+        for (HttpEvent data : getAllHttpData()) {
             if (transId == data.getTransId()) {
                 return data;
             }
@@ -59,19 +59,19 @@ public final class DBHelper {
         return null;
     }
 
-    public void insertData(HttpEvent httpEvent) {
+    public void insertHttpData(HttpEvent httpEvent) {
         if (httpEvent != null) {
             mDaoSession.getHttpEventDao().insertOrReplace(httpEvent);
         }
     }
 
-    public void updateData(HttpEvent httpEvent) {
+    public void updateHttpData(HttpEvent httpEvent) {
         if (httpEvent != null) {
             mDaoSession.getHttpEventDao().update(httpEvent);
         }
     }
 
-    public List<HttpEvent> queryEventList(int responseCode) {
+    public List<HttpEvent> queryHttpEventList(int responseCode) {
         return mDaoSession.callInTxNoException(new Callable<List<HttpEvent>>() {
             @Override
             public List<HttpEvent> call() throws Exception {

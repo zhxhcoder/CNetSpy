@@ -17,7 +17,7 @@ public class ClearTransService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        DBHelper.getInstance().deleteAllData();
+        DBHelper.getInstance().deleteAllHttpData();
         NotificationHelper.clearBuffer();
         NotificationHelper notificationHelper = new NotificationHelper(this);
         notificationHelper.dismiss();
