@@ -33,7 +33,7 @@ public class ErrorManager {
         String subject = "Error report";
         String body = "Mail this to appdeveloper@gmail.com: " + "\n" + trace.toString() + "\n";
 
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"readerscope@altcanvas.com"});
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrcoder@qq.com"});
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         sendIntent.setType("message/rfc822");
