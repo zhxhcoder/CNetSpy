@@ -14,26 +14,26 @@ import java.io.InputStreamReader;
 /**
  * Created by zhxh on 2019/07/16
  */
-public class ExceptionHelper implements Thread.UncaughtExceptionHandler {
+public class ErrorSpyHelper implements Thread.UncaughtExceptionHandler {
     static boolean isErrorSpy = false;
 
     private Thread.UncaughtExceptionHandler exceptionHandler;
     private Application app;
 
-    public ExceptionHelper(Application app) {
+    public ErrorSpyHelper(Application app) {
         this.exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         this.app = app;
     }
 
     public static void install(Application app) {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHelper(app));
+        Thread.setDefaultUncaughtExceptionHandler(new ErrorSpyHelper(app));
     }
 
     /**
      * @param isErrorSpy 是否进行异常监听
      */
     public static void debug(boolean isErrorSpy) {
-        ExceptionHelper.isErrorSpy = isErrorSpy;
+        ErrorSpyHelper.isErrorSpy = isErrorSpy;
     }
 
     @Override
