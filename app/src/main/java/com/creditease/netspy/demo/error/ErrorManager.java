@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
  */
 public class ErrorManager {
 
-    public void send(Activity activity) {
+    public static void send(Activity activity) {
         StringBuilder trace = new StringBuilder();
         String line;
         try {
@@ -31,7 +31,7 @@ public class ErrorManager {
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         String subject = "Error report";
-        String body = "Mail this to appdeveloper@gmail.com: " + "\n" + trace.toString() + "\n";
+        String body = "Mail this to mrcoder@qq.com: " + "\n" + trace.toString() + "\n";
 
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrcoder@qq.com"});
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);

@@ -12,15 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="网络接口监听" />
+        android:text="去网络监听页面" />
 
     <Button
-        android:id="@+id/netStatusButton"
+        android:id="@+id/errorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="网络状态监听" />
+        android:text="来个崩溃吧" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="发送错误日志" />
 
 
 </LinearLayout>
