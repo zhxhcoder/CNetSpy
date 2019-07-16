@@ -1,7 +1,6 @@
 package com.creditease.netspy.inner.support;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
@@ -67,48 +66,6 @@ public class FormatHelper {
         } catch (Exception e) {
             return xml;
         }
-    }
-
-    /**
-     * 原来的getShareText 返回response所有信息
-     *
-     * @param context
-     * @param transaction
-     * @return
-     */
-    public static String getShareText(Context context, HttpEvent transaction) {
-        String text = "";
-        text += context.getString(R.string.netspy_url) + ": " + v(transaction.getUrl()) + "\n";
-        text += context.getString(R.string.netspy_method) + ": " + v(transaction.getMethod()) + "\n";
-        text += context.getString(R.string.netspy_protocol) + ": " + v(transaction.getProtocol()) + "\n";
-        text += context.getString(R.string.netspy_status) + ": " + v(transaction.getStatus().toString()) + "\n";
-        text += context.getString(R.string.netspy_response) + ": " + v(transaction.getResponseSummaryText()) + "\n";
-        text += context.getString(R.string.netspy_ssl) + ": " + v(context.getString(transaction.isSsl() ? R.string.netspy_yes : R.string.netspy_no)) + "\n";
-        text += "\n";
-        text += context.getString(R.string.netspy_request_time) + ": " + v(transaction.getRequestDate().toLocaleString()) + "\n";
-        text += context.getString(R.string.netspy_response_time) + ": " + v(transaction.getResponseDate().toLocaleString()) + "\n";
-        text += context.getString(R.string.netspy_duration) + ": " + v(transaction.getDurationString()) + "\n";
-        text += "\n";
-        text += context.getString(R.string.netspy_request_size) + ": " + v(transaction.getRequestSizeString()) + "\n";
-        text += context.getString(R.string.netspy_response_size) + ": " + v(transaction.getResponseSizeString()) + "\n";
-        text += context.getString(R.string.netspy_total_size) + ": " + v(transaction.getTotalSizeString()) + "\n";
-        text += "\n";
-        text += "---------- " + context.getString(R.string.netspy_request) + " ----------\n\n";
-        String headers = formatHeaders(transaction.getRequestHeaders(), false);
-        if (!TextUtils.isEmpty(headers)) {
-            text += headers + "\n";
-        }
-        text += (transaction.getRequestBodyIsPlainText()) ? v(transaction.getFormattedRequestBody()) :
-            context.getString(R.string.netspy_body_omitted);
-        text += "\n\n";
-        text += "---------- " + context.getString(R.string.netspy_response) + " ----------\n\n";
-        headers = formatHeaders(transaction.getResponseHeaders(), false);
-        if (!TextUtils.isEmpty(headers)) {
-            text += headers + "\n";
-        }
-        text += (transaction.getResponseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
-            context.getString(R.string.netspy_body_omitted);
-        return text;
     }
 
     /**

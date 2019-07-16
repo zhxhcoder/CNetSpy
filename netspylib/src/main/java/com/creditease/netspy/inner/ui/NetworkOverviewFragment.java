@@ -80,7 +80,10 @@ public class NetworkOverviewFragment extends Fragment implements INetworkTabFrag
             response.setText(httpEvent.getResponseSummaryText());
             ssl.setText((httpEvent.isSsl() ? R.string.netspy_yes : R.string.netspy_no));
             requestTime.setText(FormatHelper.getHHmmSS(httpEvent.getRequestDate()));
-            responseTime.setText(FormatHelper.getHHmmSS(httpEvent.getResponseDate()));
+
+            if (httpEvent.getResponseDate() != null) {
+                responseTime.setText(FormatHelper.getHHmmSS(httpEvent.getResponseDate()));
+            }
             duration.setText(httpEvent.getDurationString());
             requestSize.setText(httpEvent.getRequestSizeString());
             responseSize.setText(httpEvent.getResponseSizeString());
