@@ -30,8 +30,8 @@ public class CExceptionHelper {
         }
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        String subject = "Error report";
-        String body = "Mail this to mrcoder@qq.com: " + "\n" + trace.toString() + "\n";
+        String subject = "异常报告";
+        String body = "发送日志: " + "\n" + trace.toString() + "\n";
 
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mrcoder@qq.com"});
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);

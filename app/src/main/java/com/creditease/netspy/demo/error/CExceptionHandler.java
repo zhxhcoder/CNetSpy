@@ -38,7 +38,7 @@ public class CExceptionHandler implements Thread.UncaughtExceptionHandler {
                 report.append("    ").append(arr[i].toString()).append("\n");
             }
         }
-        report.append("-------------------------------\n\n");
+        report.append("-------------thread-end------------------\n\n");
 
         try {
             FileOutputStream trace = app.openFileOutput("stack.trace",
