@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.creditease.netspy.demo.error.CExceptionHandler;
 import com.creditease.netspy.demo.error.CExceptionHelper;
 import com.creditease.netspy.demo.netspy.SampleNetSpyActivity;
 
