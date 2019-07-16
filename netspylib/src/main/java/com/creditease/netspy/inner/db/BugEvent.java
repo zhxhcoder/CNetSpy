@@ -2,6 +2,7 @@ package com.creditease.netspy.inner.db;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -17,17 +18,21 @@ public class BugEvent {
     private java.util.Date crashDate;
 
     private String bugReport;
+    private String deviceInfo;
+    private String userInfo;
 
-    @Generated(hash = 1453206622)
+    @Keep()
     public BugEvent(Long _id, Long timeStamp, java.util.Date crashDate,
-            String bugReport) {
+                    String bugReport, String deviceInfo, String userInfo) {
         this._id = _id;
         this.timeStamp = timeStamp;
         this.crashDate = crashDate;
         this.bugReport = bugReport;
+        this.deviceInfo = deviceInfo;
+        this.userInfo = userInfo;
     }
 
-    @Generated(hash = 135755314)
+    @Keep()
     public BugEvent() {
     }
 
@@ -61,5 +66,33 @@ public class BugEvent {
 
     public void setBugReport(String bugReport) {
         this.bugReport = bugReport;
+    }
+
+    public String getDeviceInfo() {
+        return deviceInfo;
+    }
+
+    public void setDeviceInfo(String deviceInfo) {
+        this.deviceInfo = deviceInfo;
+    }
+
+    public String getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(String userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "BugEvent{" +
+            "_id=" + _id +
+            ", timeStamp=" + timeStamp +
+            ", crashDate=" + crashDate +
+            ", bugReport='" + bugReport + '\'' +
+            ", deviceInfo='" + deviceInfo + '\'' +
+            ", userInfo='" + userInfo + '\'' +
+            '}';
     }
 }

@@ -1,17 +1,11 @@
 package com.creditease.netspy;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
 import com.creditease.netspy.inner.db.BugEvent;
-import com.creditease.netspy.inner.ui.NetSpyHomeActivity;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.creditease.netspy.inner.ui.BugSpyHomeActivity;
 
 /**
  * Created by zhxh on 2019/07/16
@@ -22,12 +16,12 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     private Thread.UncaughtExceptionHandler exceptionHandler;
     private Application app;
 
-    public BugSpyHelper(Application app) {
+    private BugSpyHelper(Application app) {
         this.exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         this.app = app;
     }
 
-    public static void install(Application app) {
+    static void install(Application app) {
         Thread.setDefaultUncaughtExceptionHandler(new BugSpyHelper(app));
     }
 
@@ -40,7 +34,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     public static void launchActivity(Context context) {
         if (BugSpyHelper.isBugSpy) {
-            context.startActivity(new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            context.startActivity(new Intent(context, BugSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } else {
             return;
         }
@@ -71,18 +65,19 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
             }
             report.append("-------------thread-end------------------\n\n");
         }
-        saveError(report.toString());
+
+        try {
+            saveError(report.toString());
+        } catch (Exception exec) {
+        }
 
         exceptionHandler.uncaughtException(t, e);
     }
 
-
-    public void saveError(String report) {
+    private void saveError(String report) {
         BugEvent event = new BugEvent();
         event.setTimeStamp(System.currentTimeMillis());
         event.setBugReport(report);
         DBHelper.getInstance().insertBugData(event);
     }
-
-
 }

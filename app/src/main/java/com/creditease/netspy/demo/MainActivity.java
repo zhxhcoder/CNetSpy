@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.creditease.netspy.demo.error.CExceptionHelper;
+import com.creditease.netspy.BugSpyHelper;
 import com.creditease.netspy.demo.netspy.SampleNetSpyActivity;
 
 /**
@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     int a = 1 / 0;
-
                 }
             });
 
@@ -34,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        findViewById(R.id.sendButton).setOnClickListener(v -> CExceptionHelper.send(MainActivity.this));
-
+        findViewById(R.id.reportButton).setOnClickListener(v -> {
+            BugSpyHelper.debug(true);
+            BugSpyHelper.launchActivity(MainActivity.this);
+        });
     }
 }

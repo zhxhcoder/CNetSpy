@@ -23,12 +23,12 @@
         android:text="来个崩溃吧" />
 
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/reportButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="发送错误日志" />
+        android:text="打开监控列表" />
 
 
 </LinearLayout>
