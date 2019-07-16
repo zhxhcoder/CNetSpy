@@ -1,6 +1,6 @@
 package com.creditease.netspy.demo.error;
 
-import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
 import java.io.FileOutputStream;
@@ -11,9 +11,9 @@ import java.io.IOException;
  */
 public class CExceptionHandler implements Thread.UncaughtExceptionHandler {
     private Thread.UncaughtExceptionHandler exceptionHandler;
-    private Activity app;
+    private Application app;
 
-    public CExceptionHandler(Activity app) {
+    public CExceptionHandler(Application app) {
         this.exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         this.app = app;
     }
@@ -39,7 +39,6 @@ public class CExceptionHandler implements Thread.UncaughtExceptionHandler {
             }
             report.append("-------------thread-end------------------\n\n");
         }
-
         try {
             FileOutputStream trace = app.openFileOutput("stack.trace",
                 Context.MODE_PRIVATE);
