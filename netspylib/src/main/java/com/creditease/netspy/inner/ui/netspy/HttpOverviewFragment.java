@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,7 +48,7 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.netspy_fragment_network_overview, container, false);
+        View view = inflater.inflate(R.layout.netspy_fragment_http_overview, container, false);
         url = view.findViewById(R.id.url);
         method = view.findViewById(R.id.method);
         protocol = view.findViewById(R.id.protocol);

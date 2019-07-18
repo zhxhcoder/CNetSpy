@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +46,7 @@ public class HttpTabActivity extends BaseNetSpyActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.netspy_activity_network_tab);
+        setContentView(R.layout.netspy_activity_http_tab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

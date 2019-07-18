@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

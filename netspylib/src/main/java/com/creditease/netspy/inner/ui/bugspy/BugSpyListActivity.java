@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.bugspy;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +15,7 @@ public class BugSpyListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.netspy_activity_home);
+        setContentView(R.layout.common_activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle("Bug监控");

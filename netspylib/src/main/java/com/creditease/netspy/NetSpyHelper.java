@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
-import com.creditease.netspy.inner.ui.NetSpyListActivity;
+import com.creditease.netspy.inner.ui.netspy.NetSpyListActivity;
 
 /**
  * Created by zhxh on 2018/11/12

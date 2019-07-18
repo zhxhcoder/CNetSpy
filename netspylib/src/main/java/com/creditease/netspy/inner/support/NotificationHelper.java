@@ -14,7 +14,7 @@ import android.util.LongSparseArray;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
-import com.creditease.netspy.inner.ui.BaseNetSpyActivity;
+import com.creditease.netspy.inner.ui.netspy.BaseNetSpyActivity;
 
 import java.lang.reflect.Method;
 

@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.bugspy;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +32,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_bug_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.bugspy_list_bug_item, parent, false);
         ViewHolder holder = new ViewHolder(itemView);
         itemView.setTag(holder);
         return holder;

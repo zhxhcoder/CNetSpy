@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
-import com.creditease.netspy.inner.ui.NetSpyListFragment.OnListFragmentInteractionListener;
+import com.creditease.netspy.inner.ui.netspy.NetSpyListFragment.OnListFragmentInteractionListener;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -50,7 +50,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_network_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_http_item, parent, false);
         ViewHolder holder = new ViewHolder(itemView);
         itemView.setTag(holder);
         return holder;

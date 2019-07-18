@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".inner.ui.HttpOverviewFragment">
-
+    tools:context=".inner.ui.netspy.HttpOverviewFragment">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -257,6 +255,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:padding="16dp"
             android:textIsSelectable="true" />
     </LinearLayout>
 
