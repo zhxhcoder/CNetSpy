@@ -14,6 +14,7 @@ import java.util.Date;
  * Created by zhxh on 2019/07/16
  */
 public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
+
     static boolean isBugSpy = false;
 
     private Thread.UncaughtExceptionHandler exceptionHandler;

@@ -17,6 +17,8 @@ import java.util.concurrent.Callable;
  * 数据库操作类.
  */
 public final class DBHelper {
+    //只保留最近 50条 崩溃日志
+    private static final int bugLogCount = 20;
 
     private static final String DB_NAME = "cnetspy300.db"; // 数据库名称
 
@@ -49,12 +51,22 @@ public final class DBHelper {
 
     public void insertBugData(BugEvent bugEvent) {
         if (bugEvent != null) {
+            resetBugDataSize();
             mDaoSession.getBugEventDao().insertOrReplace(bugEvent);
         }
     }
+
+    private void resetBugDataSize() {
+        //TODO 如果超过 bugLogCount数量 则删除最老加入的
+        if (getAllBugData().size() >= bugLogCount) {
+            mDaoSession.getBugEventDao().deleteByKey(0L);
+        }
+    }
+
     public List<BugEvent> getAllBugData() {
         return mDaoSession.loadAll(BugEvent.class);
     }
+
     public void deleteAllHttpData() {
         mDaoSession.deleteAll(HttpEvent.class);
     }
