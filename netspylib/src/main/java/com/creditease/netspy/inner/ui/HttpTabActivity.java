@@ -24,17 +24,15 @@ import com.creditease.netspy.inner.support.FormatHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.creditease.netspy.inner.ui.NetworkResponseFragment.TYPE_REQUEST;
-import static com.creditease.netspy.inner.ui.NetworkResponseFragment.TYPE_RESPONSE;
 
-public class NetworkTabActivity extends BaseNetSpyActivity {
+public class HttpTabActivity extends BaseNetSpyActivity {
 
     private static final String ARG_TRANS_ID = "trans_id";
 
     private static int selectedTabPosition = 0;
 
     public static void start(Context context, long transId) {
-        Intent intent = new Intent(context, NetworkTabActivity.class);
+        Intent intent = new Intent(context, HttpTabActivity.class);
         intent.putExtra(ARG_TRANS_ID, transId);
         context.startActivity(intent);
     }
@@ -101,7 +99,7 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     private void populateUI(HttpEvent event) {
         if (event != null) {
             title.setText(event.getMethod() + " " + event.getPath());
-            for (INetworkTabFragment fragment : adapter.fragments) {
+            for (IHttpTabFragment fragment : adapter.fragments) {
                 fragment.httpTransUpdate(event);
             }
         }
@@ -109,9 +107,8 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_RESPONSE), getString(R.string.netspy_response));
-        adapter.addFragment(NetworkResponseFragment.newInstance(TYPE_REQUEST), getString(R.string.netspy_request));
-        adapter.addFragment(new NetworkOverviewFragment(), getString(R.string.netspy_overview));
+        adapter.addFragment(HttpResponseFragment.newInstance(), getString(R.string.netspy_response));
+        adapter.addFragment(new HttpOverviewFragment(), getString(R.string.netspy_overview));
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -142,14 +139,14 @@ public class NetworkTabActivity extends BaseNetSpyActivity {
     }
 
     static class Adapter extends FragmentPagerAdapter {
-        final List<INetworkTabFragment> fragments = new ArrayList<>();
+        final List<IHttpTabFragment> fragments = new ArrayList<>();
         private final List<String> fragmentTitles = new ArrayList<>();
 
         Adapter(FragmentManager fm) {
             super(fm);
         }
 
-        void addFragment(INetworkTabFragment fragment, String title) {
+        void addFragment(IHttpTabFragment fragment, String title) {
             fragments.add(fragment);
             fragmentTitles.add(title);
         }

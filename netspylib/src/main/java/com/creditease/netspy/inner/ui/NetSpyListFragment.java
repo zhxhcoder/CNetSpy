@@ -33,7 +33,7 @@ public class NetSpyListFragment extends Fragment implements
 
     private String filterText;
     private OnListFragmentInteractionListener listener;
-    private NetworkTabAdapter adapter;
+    private NetSpyListAdapter adapter;
 
     public NetSpyListFragment() {
     }
@@ -58,7 +58,7 @@ public class NetSpyListFragment extends Fragment implements
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-            adapter = new NetworkTabAdapter(getContext(), listener);
+            adapter = new NetSpyListAdapter(getContext(), listener);
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();

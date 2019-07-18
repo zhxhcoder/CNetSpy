@@ -4,20 +4,20 @@
     <application>
 
         <activity
-            android:name="com.creditease.netspy.inner.ui.BugSpyHomeActivity"
+            android:name="com.creditease.netspy.inner.ui.BugSpyListActivity"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
         <activity
-            android:name="com.creditease.netspy.inner.ui.NetSpyHomeActivity"
+            android:name="com.creditease.netspy.inner.ui.NetSpyListActivity"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
         <activity
-            android:name="com.creditease.netspy.inner.ui.NetworkTabActivity"
-            android:parentActivityName="com.creditease.netspy.inner.ui.NetSpyHomeActivity"
+            android:name="com.creditease.netspy.inner.ui.HttpTabActivity"
+            android:parentActivityName="com.creditease.netspy.inner.ui.NetSpyListActivity"
             android:theme="@style/NetSpy.Theme" />
 
         <service

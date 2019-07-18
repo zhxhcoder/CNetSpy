@@ -17,11 +17,11 @@ import java.util.List;
 /**
  * Created by zhxh on 2019/07/16
  */
-class BugListAdapter extends RecyclerView.Adapter<BugListAdapter.ViewHolder> {
+class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolder> {
     Context activity;
     private List<BugEvent> dataList;
 
-    BugListAdapter(Context context) {
+    BugSpyListAdapter(Context context) {
         activity = context;
     }
 

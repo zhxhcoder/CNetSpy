@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".inner.ui.NetworkResponseFragment">
+    tools:context=".inner.ui.HttpResponseFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,13 +14,29 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/headers"
+            android:id="@+id/requestHeaders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textIsSelectable="true" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/cardview_dark_background" />
+
         <TextView
-            android:id="@+id/body"
+            android:id="@+id/requestBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/cardview_dark_background" />
+
+        <TextView
+            android:id="@+id/responseBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textIsSelectable="true" />

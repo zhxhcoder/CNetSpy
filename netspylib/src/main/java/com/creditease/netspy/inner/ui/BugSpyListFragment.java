@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class BugSpyListFragment extends Fragment {
 
-    private BugListAdapter adapter;
+    private BugSpyListAdapter adapter;
 
     public BugSpyListFragment() {
     }
@@ -52,7 +52,7 @@ public class BugSpyListFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-            adapter = new BugListAdapter(getContext());
+            adapter = new BugSpyListAdapter(getContext());
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();

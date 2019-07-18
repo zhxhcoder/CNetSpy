@@ -10,7 +10,7 @@ import com.creditease.netspy.R;
 /**
  * Created by zhxh on 2019/07/16
  */
-public class BugSpyHomeActivity extends AppCompatActivity {
+public class BugSpyListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

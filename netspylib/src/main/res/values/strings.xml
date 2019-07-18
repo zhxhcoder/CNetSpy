@@ -6,8 +6,7 @@
     <string name="netspy_clear">Clear</string>
     <string name="netspy_browse_sql_database">Browse SQLite database</string>
     <string name="netspy_overview">请求头</string>
-    <string name="netspy_request">参数</string>
-    <string name="netspy_response">返回</string>
+    <string name="netspy_response">返回值</string>
     <string name="netspy_url">URL</string>
     <string name="netspy_method">Method</string>
     <string name="netspy_protocol">Protocol</string>

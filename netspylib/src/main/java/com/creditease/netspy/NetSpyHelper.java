@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
-import com.creditease.netspy.inner.ui.NetSpyHomeActivity;
+import com.creditease.netspy.inner.ui.NetSpyListActivity;
 
 /**
  * Created by zhxh on 2018/11/12
@@ -28,12 +28,12 @@ public final class NetSpyHelper {
     }
 
     public static Intent launchIntent(Context context) {
-        return new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new Intent(context, NetSpyListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     public static void launchActivity(Context context) {
         if (NetSpyHelper.isNetSpy) {
-            context.startActivity(new Intent(context, NetSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            context.startActivity(new Intent(context, NetSpyListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } else {
             return;
         }

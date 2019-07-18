@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.creditease.netspy.inner.db.BugEvent;
-import com.creditease.netspy.inner.ui.BugSpyHomeActivity;
+import com.creditease.netspy.inner.ui.BugSpyListActivity;
 
 import java.util.Date;
 
@@ -38,7 +38,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     public static void launchActivity(Context context) {
         if (BugSpyHelper.isBugSpy) {
-            context.startActivity(new Intent(context, BugSpyHomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            context.startActivity(new Intent(context, BugSpyListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } else {
             return;
         }

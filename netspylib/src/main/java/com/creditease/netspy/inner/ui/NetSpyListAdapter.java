@@ -16,7 +16,11 @@ import com.creditease.netspy.inner.ui.NetSpyListFragment.OnListFragmentInteracti
 import java.text.MessageFormat;
 import java.util.List;
 
-class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolder> {
+/**
+ * Created by zhxh on 2019/07/18
+ * 网络数据列表.
+ */
+class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolder> {
 
     private final OnListFragmentInteractionListener listener;
 
@@ -29,7 +33,7 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
 
     private List<HttpEvent> dataList;
 
-    NetworkTabAdapter(Context context, OnListFragmentInteractionListener listener) {
+    NetSpyListAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.listener = listener;
         colorDefault = ContextCompat.getColor(context, R.color.netspy_status_default);
         colorRequested = ContextCompat.getColor(context, R.color.netspy_status_requested);
@@ -75,8 +79,8 @@ class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolde
         setStatusColor(holder, transaction);
         holder.transaction = transaction;
         holder.view.setOnClickListener(v -> {
-            if (null != NetworkTabAdapter.this.listener) {
-                NetworkTabAdapter.this.listener.onListFragmentInteraction(holder.transaction);
+            if (null != NetSpyListAdapter.this.listener) {
+                NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
         });
     }

@@ -17,26 +17,20 @@ import com.creditease.netspy.inner.support.FormatHelper;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetworkResponseFragment extends Fragment implements INetworkTabFragment {
+public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
 
-    public static final int TYPE_REQUEST = 0;
-    public static final int TYPE_RESPONSE = 1;
+    TextView requestHeaders;
+    TextView requestBody;
+    TextView responseBody;
 
-    private static final String ARG_TYPE = "type";
-
-    TextView headers;
-    TextView body;
-
-    private int type;
     private HttpEvent httpEvent;
 
-    public NetworkResponseFragment() {
+    public HttpResponseFragment() {
     }
 
-    public static NetworkResponseFragment newInstance(int type) {
-        NetworkResponseFragment fragment = new NetworkResponseFragment();
+    public static HttpResponseFragment newInstance() {
+        HttpResponseFragment fragment = new HttpResponseFragment();
         Bundle b = new Bundle();
-        b.putInt(ARG_TYPE, type);
         fragment.setArguments(b);
         return fragment;
     }
@@ -44,7 +38,6 @@ public class NetworkResponseFragment extends Fragment implements INetworkTabFrag
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        type = getArguments().getInt(ARG_TYPE);
         setRetainInstance(true);
     }
 
@@ -52,8 +45,9 @@ public class NetworkResponseFragment extends Fragment implements INetworkTabFrag
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.netspy_fragment_network_response, container, false);
-        headers = view.findViewById(R.id.headers);
-        body = view.findViewById(R.id.body);
+        requestHeaders = view.findViewById(R.id.requestHeaders);
+        requestBody = view.findViewById(R.id.requestBody);
+        responseBody = view.findViewById(R.id.responseBody);
         return view;
     }
 
@@ -71,26 +65,28 @@ public class NetworkResponseFragment extends Fragment implements INetworkTabFrag
 
     private void populateUI() {
         if (isAdded() && httpEvent != null) {
-            switch (type) {
-                case TYPE_REQUEST:
-                    setText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
-                        httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
-                    break;
-                case TYPE_RESPONSE:
-                    setText(FormatHelper.formatHeaders(httpEvent.getResponseHeaders(), true),
-                        httpEvent.getFormattedResponseBody(), httpEvent.getResponseBodyIsPlainText());
-                    break;
-            }
+            setRequestText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
+                httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
+
+            setResponseText(httpEvent.getFormattedResponseBody(), httpEvent.getResponseBodyIsPlainText());
         }
     }
 
-    private void setText(String headersString, String bodyString, boolean isPlainText) {
-        headers.setVisibility((TextUtils.isEmpty(headersString) ? View.GONE : View.VISIBLE));
-        headers.setText(Html.fromHtml(headersString));
+    private void setRequestText(String headersString, String bodyString, boolean isPlainText) {
+        requestHeaders.setVisibility((TextUtils.isEmpty(headersString) ? View.GONE : View.VISIBLE));
+        requestHeaders.setText(Html.fromHtml(headersString));
         if (!isPlainText) {
-            body.setText(getString(R.string.netspy_body_omitted));
+            requestBody.setText(getString(R.string.netspy_body_omitted));
         } else {
-            body.setText(bodyString);
+            requestBody.setText(bodyString);
+        }
+    }
+
+    private void setResponseText(String bodyString, boolean isPlainText) {
+        if (!isPlainText) {
+            responseBody.setText(getString(R.string.netspy_body_omitted));
+        } else {
+            responseBody.setText(bodyString);
         }
     }
 }

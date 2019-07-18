@@ -3,6 +3,8 @@ package com.creditease.netspy.inner.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import com.creditease.netspy.inner.support.FormatHelper;
 /**
  * Created by zhxh on 2019/06/12
  */
-public class NetworkOverviewFragment extends Fragment implements INetworkTabFragment {
+public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
 
     TextView url;
     TextView method;
@@ -30,9 +32,12 @@ public class NetworkOverviewFragment extends Fragment implements INetworkTabFrag
     TextView responseSize;
     TextView totalSize;
 
+    TextView responseHeaders;
+
+
     private HttpEvent httpEvent;
 
-    public NetworkOverviewFragment() {
+    public HttpOverviewFragment() {
     }
 
     @Override
@@ -56,6 +61,9 @@ public class NetworkOverviewFragment extends Fragment implements INetworkTabFrag
         requestSize = view.findViewById(R.id.request_size);
         responseSize = view.findViewById(R.id.response_size);
         totalSize = view.findViewById(R.id.total_size);
+
+        responseHeaders = view.findViewById(R.id.responseHeaders);
+
         return view;
     }
 
@@ -88,6 +96,13 @@ public class NetworkOverviewFragment extends Fragment implements INetworkTabFrag
             requestSize.setText(httpEvent.getRequestSizeString());
             responseSize.setText(httpEvent.getResponseSizeString());
             totalSize.setText(httpEvent.getTotalSizeString());
+
+            setResponseHeader(FormatHelper.formatHeaders(httpEvent.getResponseHeaders(), true));
         }
+    }
+
+    private void setResponseHeader(String headersString) {
+        responseHeaders.setVisibility((TextUtils.isEmpty(headersString) ? View.GONE : View.VISIBLE));
+        responseHeaders.setText(Html.fromHtml(headersString));
     }
 }
