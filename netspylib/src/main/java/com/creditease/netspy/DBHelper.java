@@ -57,9 +57,15 @@ public final class DBHelper {
     }
 
     private void resetBugDataSize() {
-        //TODO 如果超过 bugLogCount数量 则删除最老加入的
-        if (getAllBugData().size() >= bugLogCount) {
-            mDaoSession.getBugEventDao().deleteByKey(0L);
+        //TODO 如果超过 bugLogCount数量 则删除最老加入的一条
+
+        List<BugEvent> list = getAllBugData();
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        int size = list.size();
+        if (size >= bugLogCount) {
+            mDaoSession.delete(list.get(size - 1));
         }
     }
 
