@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="12dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/code"
@@ -25,7 +25,7 @@
         android:layout_toRightOf="@id/code"
         android:padding="2dp"
         android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        tools:text="GET /path/to/some/resource?goes=here" />
+        tools:text="GET /github/zhxhcoder/android" />
 
     <TextView
         android:id="@+id/host"
@@ -35,10 +35,10 @@
         android:layout_toEndOf="@id/code"
         android:layout_toRightOf="@id/code"
         android:padding="2dp"
-        tools:text="example.com" />
+        tools:text="zhxh.com" />
 
     <TextView
-        android:id="@+id/ssl"
+        android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/path"
@@ -46,12 +46,11 @@
         android:layout_toEndOf="@id/host"
         android:layout_toRightOf="@id/host"
         android:padding="2dp"
-        android:text="@string/netspy_ssl"
+        android:text="时间"
         android:textColor="@color/netspy_status_default"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 
     <LinearLayout
-        android:id="@+id/meta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/host"
@@ -59,27 +58,11 @@
         android:layout_marginLeft="40dp">
 
         <TextView
-            android:id="@+id/start"
-            android:layout_width="120dp"
+            android:id="@+id/param"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            tools:text="18:29:07" />
-
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="2dp"
-            tools:text="8023 ms" />
-
-        <TextView
-            android:id="@+id/size"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="2dp"
-            tools:text="16.45 KB" />
+            tools:text="参数" />
 
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.creditease.netspy.inner.ui.netspy;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import java.util.List;
  */
 class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolder> {
 
+    Context context;
+
     private final OnListFragmentInteractionListener listener;
 
     private final int colorDefault;
@@ -34,6 +37,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
     private List<HttpEvent> dataList;
 
     NetSpyListAdapter(Context context, OnListFragmentInteractionListener listener) {
+        this.context = context;
         this.listener = listener;
         colorDefault = ContextCompat.getColor(context, R.color.netspy_status_default);
         colorRequested = ContextCompat.getColor(context, R.color.netspy_status_requested);
@@ -58,31 +62,45 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final HttpEvent transaction = dataList.get(position);
+        final HttpEvent httpEvent = dataList.get(position);
 
-        holder.path.setText(MessageFormat.format("{0} {1}", transaction.getMethod(), transaction.getPath()));
-        holder.host.setText(transaction.getHost());
-        holder.start.setText(FormatHelper.getHHmmSS(transaction.getRequestDate()));
-        holder.ssl.setVisibility(transaction.isSsl() ? View.VISIBLE : View.GONE);
-        if (transaction.getStatus() == HttpEvent.Status.Complete) {
-            holder.code.setText(String.valueOf(transaction.getResponseCode()));
-            holder.duration.setText(transaction.getDurationString());
-            holder.size.setText(transaction.getTotalSizeString());
+        holder.path.setText(MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath()));
+        holder.host.setText(httpEvent.getHost());
+        holder.start.setText(FormatHelper.getHHmmSS(httpEvent.getRequestDate()));
+
+        if (httpEvent.getStatus() == HttpEvent.Status.Complete) {
+            holder.code.setText(String.valueOf(httpEvent.getResponseCode()));
         } else {
             holder.code.setText(null);
-            holder.duration.setText(null);
-            holder.size.setText(null);
         }
-        if (transaction.getStatus() == HttpEvent.Status.Failed) {
+        if (httpEvent.getStatus() == HttpEvent.Status.Failed) {
             holder.code.setText("!!!");
         }
-        setStatusColor(holder, transaction);
-        holder.transaction = transaction;
+        setRequestText(holder.param, httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
+
+        setStatusColor(holder, httpEvent);
+        holder.transaction = httpEvent;
         holder.view.setOnClickListener(v -> {
             if (null != NetSpyListAdapter.this.listener) {
                 NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
         });
+    }
+
+    private void setRequestText(TextView requestBody, String bodyString, boolean isPlainText) {
+
+        if (TextUtils.isEmpty(bodyString)) {
+            requestBody.setVisibility(View.GONE);
+        } else {
+            requestBody.setVisibility(View.VISIBLE);
+
+            if (!isPlainText) {
+                requestBody.setText(context.getString(R.string.netspy_body_omitted));
+            } else {
+                requestBody.setText(bodyString);
+            }
+        }
+
     }
 
     private void setStatusColor(ViewHolder holder, HttpEvent transaction) {
@@ -115,9 +133,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         public final TextView path;
         public final TextView host;
         public final TextView start;
-        public final TextView duration;
-        public final TextView size;
-        public final TextView ssl;
+        public final TextView param;
         HttpEvent transaction;
 
         ViewHolder(View view) {
@@ -127,9 +143,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
             path = view.findViewById(R.id.path);
             host = view.findViewById(R.id.host);
             start = view.findViewById(R.id.start);
-            duration = view.findViewById(R.id.duration);
-            size = view.findViewById(R.id.size);
-            ssl = view.findViewById(R.id.ssl);
+            param = view.findViewById(R.id.param);
         }
     }
 }
