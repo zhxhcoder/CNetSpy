@@ -35,6 +35,7 @@
         android:layout_toEndOf="@id/code"
         android:layout_toRightOf="@id/code"
         android:padding="2dp"
+        android:textColor="@color/netspy_status_default"
         tools:text="zhxh.com" />
 
     <TextView
@@ -46,7 +47,7 @@
         android:layout_toEndOf="@id/host"
         android:layout_toRightOf="@id/host"
         android:padding="2dp"
-        android:text="时间"
+        android:text="2012年"
         android:textColor="@color/netspy_status_default"
         android:textStyle="normal" />
 

@@ -66,7 +66,12 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
 
         holder.path.setText(MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath()));
         holder.host.setText(httpEvent.getHost());
-        holder.start.setText(FormatHelper.getHHmmSS(httpEvent.getRequestDate()));
+        String strTime = FormatHelper.getHHmmSS(httpEvent.getRequestDate());
+        if (strTime.length() > 5) {
+            holder.start.setText(strTime.substring(5));
+        } else {
+            holder.start.setText(strTime);
+        }
 
         if (httpEvent.getStatus() == HttpEvent.Status.Complete) {
             holder.code.setText(String.valueOf(httpEvent.getResponseCode()));
