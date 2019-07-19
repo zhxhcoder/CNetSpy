@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.creditease.netspy.BugSpyHelper;
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
@@ -51,10 +52,16 @@ public class SampleNetSpyActivity extends AppCompatActivity {
         findViewById(R.id.launch_netspy_directly).setOnClickListener(view -> NetSpyHelper.launchActivity(this)
         );
 
-        CheckBox checkBox = findViewById(R.id.cb_netspy_status);
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
+        checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             NetSpyHelper.debug(isChecked);
+        });
+        CheckBox checkBox2 = findViewById(R.id.cb_bugspy_status);
+        checkBox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            BugSpyHelper.debug(isChecked);
+            BugSpyHelper.launchActivity(this);
         });
 
         findViewById(R.id.btn_db).setOnClickListener(view -> {

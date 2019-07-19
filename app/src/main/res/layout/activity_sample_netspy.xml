@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="开启监听" />
+        android:text="开启网络监听" />
 
     <Button
         android:id="@+id/btn_db"
@@ -43,4 +43,11 @@
         android:text="数据库操作"
         android:textAllCaps="false" />
 
+    <CheckBox
+        android:id="@+id/cb_bugspy_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="开启异常监听" />
 </LinearLayout>
