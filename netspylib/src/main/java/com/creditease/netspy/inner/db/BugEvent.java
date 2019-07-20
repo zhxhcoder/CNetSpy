@@ -17,16 +17,18 @@ public class BugEvent {
 
     private java.util.Date crashDate;
 
+    private String bugSummary;
     private String bugReport;
     private String deviceInfo;
     private String userInfo;
 
     @Keep()
     public BugEvent(Long _id, Long timeStamp, java.util.Date crashDate,
-                    String bugReport, String deviceInfo, String userInfo) {
+                    String bugSummary, String bugReport, String deviceInfo, String userInfo) {
         this._id = _id;
         this.timeStamp = timeStamp;
         this.crashDate = crashDate;
+        this.bugSummary = bugSummary;
         this.bugReport = bugReport;
         this.deviceInfo = deviceInfo;
         this.userInfo = userInfo;
@@ -84,12 +86,21 @@ public class BugEvent {
         this.userInfo = userInfo;
     }
 
+    public String getBugSummary() {
+        return bugSummary;
+    }
+
+    public void setBugSummary(String bugSummary) {
+        this.bugSummary = bugSummary;
+    }
+
     @Override
     public String toString() {
         return "BugEvent{" +
             "_id=" + _id +
             ", timeStamp=" + timeStamp +
             ", crashDate=" + crashDate +
+            ", bugSummary='" + bugSummary + '\'' +
             ", bugReport='" + bugReport + '\'' +
             ", deviceInfo='" + deviceInfo + '\'' +
             ", userInfo='" + userInfo + '\'' +
