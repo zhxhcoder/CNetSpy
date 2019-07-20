@@ -20,7 +20,7 @@ public final class DBHelper {
     //只保留最近 50条 崩溃日志
     private static final int bugLogCount = 20;
 
-    private static final String DB_NAME = "cnetspy300.db"; // 数据库名称
+    private static final String DB_NAME = "cnetspy303.db"; // 数据库名称
 
     private static volatile DBHelper sInstance = null; // 单例
 
