@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.NotificationHelper;
-import com.creditease.netspy.inner.support.RetentionManager;
+import com.creditease.netspy.inner.support.ExpiryManager;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -60,7 +60,7 @@ public final class NetSpyInterceptor implements Interceptor {
 
     private final Context context;
     private final NotificationHelper notificationHelper;
-    private RetentionManager retentionManager;
+    private ExpiryManager expiryManager;
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
@@ -72,7 +72,7 @@ public final class NetSpyInterceptor implements Interceptor {
         this.context = NetSpyHelper.netSpyApp;
         notificationHelper = new NotificationHelper(this.context);
         showNotification = NetSpyHelper.isNetSpy;
-        retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
+        expiryManager = new ExpiryManager(this.context, DEFAULT_RETENTION);
     }
 
     /**
@@ -100,7 +100,7 @@ public final class NetSpyInterceptor implements Interceptor {
      * @return The {@link NetSpyInterceptor} instance.
      */
     public NetSpyInterceptor retainDataFor(Period period) {
-        retentionManager = new RetentionManager(context, period);
+        expiryManager = new ExpiryManager(context, period);
         return this;
     }
 
@@ -214,7 +214,7 @@ public final class NetSpyInterceptor implements Interceptor {
         if (showNotification) {
             notificationHelper.show(transaction);
         }
-        retentionManager.doMaintenance();
+        expiryManager.doMaintenance();
         return transaction.getTransId();
     }
 

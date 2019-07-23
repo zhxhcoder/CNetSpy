@@ -9,7 +9,10 @@ import com.creditease.netspy.NetSpyInterceptor;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class RetentionManager {
+/**
+ * 时间
+ */
+public class ExpiryManager {
 
     private static final String LOG_TAG = "NetSpyHelper";
     private static final String PREFS_NAME = "netspy_preferences";
@@ -22,7 +25,7 @@ public class RetentionManager {
     private final long cleanupFrequency;
     private final SharedPreferences prefs;
 
-    public RetentionManager(Context context, NetSpyInterceptor.Period retentionPeriod) {
+    public ExpiryManager(Context context, NetSpyInterceptor.Period retentionPeriod) {
         this.context = context;
         period = toMillis(retentionPeriod);
         prefs = context.getSharedPreferences(PREFS_NAME, 0);
