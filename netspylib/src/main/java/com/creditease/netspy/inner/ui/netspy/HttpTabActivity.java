@@ -85,7 +85,7 @@ public class HttpTabActivity extends BaseNetSpyActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share_text) {
-            share(FormatHelper.getShareResponseText(this, httpEvent));
+            share(httpEvent.getFormattedRequestBody() + "\n\n" + FormatHelper.getShareResponseText(this, httpEvent));
             return true;
         } else if (item.getItemId() == R.id.share_curl) {
             share(FormatHelper.getShareCurlCommand(httpEvent));
