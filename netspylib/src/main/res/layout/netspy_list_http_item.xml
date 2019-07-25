@@ -34,8 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/path"
-        android:layout_toEndOf="@id/code"
-        android:layout_toRightOf="@id/code"
         android:padding="2dp"
         android:textColor="@color/netspy_status_default"
         tools:text="zhxh.com" />
@@ -56,9 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/host"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp">
+        android:layout_below="@id/host">
 
         <TextView
             android:id="@+id/param"
