@@ -1,5 +1,5 @@
 # CNetSpy
-OKhttp网络接口监听库
+OKhttp网络接口监听库与异常监控
 
 ##version 1.3.5 等1开头的用的是原生sqlite数据库
 
