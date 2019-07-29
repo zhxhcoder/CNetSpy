@@ -48,8 +48,7 @@
         android:layout_toRightOf="@id/host"
         android:padding="2dp"
         android:text="2012年"
-        android:textColor="@color/netspy_status_default"
-        android:textStyle="normal" />
+        android:textColor="@color/netspy_status_default" />
 
     <LinearLayout
         android:layout_width="match_parent"
