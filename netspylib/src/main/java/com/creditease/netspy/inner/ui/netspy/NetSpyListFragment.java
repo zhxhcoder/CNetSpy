@@ -73,6 +73,12 @@ public class NetSpyListFragment extends Fragment implements
         adapter.setData(dataList);
     }
 
+    public void updateDataFromSearch() {
+        List<HttpEvent> dataList = DBHelper.getInstance().queryHttpEventByFilter(filterText);
+        Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
+        adapter.setData(dataList);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -130,7 +136,7 @@ public class NetSpyListFragment extends Fragment implements
         if (TextUtils.isEmpty(filterText)) {
             updateDataFromDb();
         } else {
-            adapter.setData(DBHelper.getInstance().queryHttpEventByFilter(filterText));
+            updateDataFromSearch();
         }
         return true;
     }
