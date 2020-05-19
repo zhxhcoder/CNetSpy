@@ -108,7 +108,7 @@ public final class DBHelper {
             public List<HttpEvent> call() throws Exception {
                 return mDaoSession
                         .queryBuilder(HttpEvent.class)
-                        .where(HttpEventDao.Properties.Url.like("%" + filterText + "%"))
+                        .where(HttpEventDao.Properties.Path.like("%" + filterText + "%"))
                         .list();
             }
         });
