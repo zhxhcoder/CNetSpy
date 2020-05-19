@@ -24,7 +24,6 @@ class SpyApiService {
 
     static class Data {
         final String params;
-
         Data(String params) {
             this.params = params;
         }
