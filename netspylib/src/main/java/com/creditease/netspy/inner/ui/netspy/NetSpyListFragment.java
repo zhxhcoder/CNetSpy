@@ -108,11 +108,6 @@ public class NetSpyListFragment extends Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search) {
-            if (TextUtils.isEmpty(filterText)) {
-                updateDataFromDb();
-            } else {
-                adapter.setData(DBHelper.getInstance().queryHttpEventByFilter(filterText));
-            }
             return true;
         } else if (item.getItemId() == R.id.clear) {
             adapter.setData(new ArrayList<>());
@@ -132,7 +127,11 @@ public class NetSpyListFragment extends Fragment implements
     @Override
     public boolean onQueryTextChange(String newText) {
         filterText = newText;
-        //TODO 通过filterText字段进行数据库筛选
+        if (TextUtils.isEmpty(filterText)) {
+            updateDataFromDb();
+        } else {
+            adapter.setData(DBHelper.getInstance().queryHttpEventByFilter(filterText));
+        }
         return true;
     }
 
