@@ -102,14 +102,26 @@ public final class DBHelper {
         }
     }
 
+    public List<HttpEvent> queryHttpEventByFilter(String filterText) {
+        return mDaoSession.callInTxNoException(new Callable<List<HttpEvent>>() {
+            @Override
+            public List<HttpEvent> call() throws Exception {
+                return mDaoSession
+                        .queryBuilder(HttpEvent.class)
+                        .where(HttpEventDao.Properties.Url.like("%" + filterText + "%"))
+                        .list();
+            }
+        });
+    }
+
     public List<HttpEvent> queryHttpEventList(int responseCode) {
         return mDaoSession.callInTxNoException(new Callable<List<HttpEvent>>() {
             @Override
             public List<HttpEvent> call() throws Exception {
                 return mDaoSession
-                    .queryBuilder(HttpEvent.class)
-                    .where(HttpEventDao.Properties.ResponseCode.eq(responseCode))
-                    .list();
+                        .queryBuilder(HttpEvent.class)
+                        .where(HttpEventDao.Properties.ResponseCode.eq(responseCode))
+                        .list();
             }
         });
     }

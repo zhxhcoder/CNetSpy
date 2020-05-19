@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,9 +30,9 @@ import java.util.List;
  * 请求列表
  */
 public class NetSpyListFragment extends Fragment implements
-    SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener {
 
-    private String filterText;
+    private String filterText = "";
     private OnListFragmentInteractionListener listener;
     private NetSpyListAdapter adapter;
 
@@ -57,7 +58,7 @@ public class NetSpyListFragment extends Fragment implements
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+                    DividerItemDecoration.VERTICAL));
             adapter = new NetSpyListAdapter(getContext(), listener);
             recyclerView.setAdapter(adapter);
 
@@ -84,7 +85,7 @@ public class NetSpyListFragment extends Fragment implements
             listener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -106,7 +107,14 @@ public class NetSpyListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.clear) {
+        if (item.getItemId() == R.id.search) {
+            if (TextUtils.isEmpty(filterText)) {
+                updateDataFromDb();
+            } else {
+                adapter.setData(DBHelper.getInstance().queryHttpEventByFilter(filterText));
+            }
+            return true;
+        } else if (item.getItemId() == R.id.clear) {
             adapter.setData(new ArrayList<>());
             DBHelper.getInstance().deleteAllHttpData();
             NotificationHelper.clearBuffer();
