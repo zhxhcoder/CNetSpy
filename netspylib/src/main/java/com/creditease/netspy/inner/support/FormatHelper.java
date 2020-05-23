@@ -36,7 +36,7 @@ public class FormatHelper {
         if (httpHeaders != null) {
             for (Map.Entry<String, String> entry : httpHeaders.entrySet()) {
                 out += ((withMarkup) ? "<b>" : "") + entry.getKey() + ": " + ((withMarkup) ? "</b>" : "") +
-                        entry.getValue() + ((withMarkup) ? "<br />" : "\n");
+                    entry.getValue() + ((withMarkup) ? "<br />" : "\n");
             }
         }
         return out;
@@ -84,7 +84,7 @@ public class FormatHelper {
     public static String getShareResponseText(Context context, HttpEvent transaction) {
         String text = "";
         text += (transaction.getResponseBodyIsPlainText()) ? v(transaction.getFormattedResponseBody()) :
-                context.getString(R.string.netspy_body_omitted);
+            context.getString(R.string.netspy_body_omitted);
         return text;
     }
 
