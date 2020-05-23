@@ -20,6 +20,7 @@ import com.creditease.netspy.inner.support.FormatHelper;
 public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
 
     TextView requestHeaders;
+    TextView requestUrl;
     TextView requestBody;
     TextView responseBody;
 
@@ -46,6 +47,7 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.netspy_fragment_http_response, container, false);
         requestHeaders = view.findViewById(R.id.requestHeaders);
+        requestUrl = view.findViewById(R.id.requestUrl);
         requestBody = view.findViewById(R.id.requestBody);
         responseBody = view.findViewById(R.id.responseBody);
         return view;
@@ -65,6 +67,8 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
 
     private void populateUI() {
         if (isAdded() && httpEvent != null) {
+            requestUrl.setText(String.format("%s %s", httpEvent.getMethod(), httpEvent.getUrl()));
+
             setRequestText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
                 httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
 
