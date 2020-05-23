@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.R;
@@ -41,7 +40,6 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
         context.startActivity(intent);
     }
 
-    TextView title;
     Adapter adapter;
 
     private long transactionId;
@@ -54,7 +52,6 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        title = findViewById(R.id.toolbar_title);
 
         final ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -108,7 +105,6 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
 
     private void populateUI(HttpEvent event) {
         if (event != null) {
-            title.setText(event.getMethod() + " " + event.getPath());
             for (IHttpTabFragment fragment : adapter.fragments) {
                 fragment.httpTransUpdate(filterText, event);
             }
@@ -156,7 +152,6 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
-
         return true;
     }
 

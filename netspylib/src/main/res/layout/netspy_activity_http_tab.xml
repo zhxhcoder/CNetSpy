@@ -16,12 +16,6 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            style="@style/NetSpy.TextAppearance.TransactionTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Title" />
 
     </android.support.v7.widget.Toolbar>
 
