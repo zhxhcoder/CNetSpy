@@ -152,6 +152,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
+        populateUI(httpEvent);
         return true;
     }
 
