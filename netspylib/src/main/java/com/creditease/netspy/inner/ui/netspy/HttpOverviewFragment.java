@@ -74,7 +74,7 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
     }
 
     @Override
-    public void httpTransUpdate(HttpEvent httpEvent) {
+    public void httpTransUpdate(String filterText,HttpEvent httpEvent) {
         this.httpEvent = httpEvent;
         populateUI();
     }

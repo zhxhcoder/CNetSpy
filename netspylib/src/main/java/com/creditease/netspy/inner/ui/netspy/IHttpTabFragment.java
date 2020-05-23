@@ -7,5 +7,5 @@ import com.creditease.netspy.inner.db.HttpEvent;
  * 数据返回接口.
  */
 interface IHttpTabFragment {
-    void httpTransUpdate(HttpEvent httpEvent);
+    void httpTransUpdate(String filterText,HttpEvent httpEvent);
 }

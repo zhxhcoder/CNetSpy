@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HttpTabActivity extends BaseNetSpyActivity {
+public class HttpTabActivity extends BaseNetSpyActivity implements
+    SearchView.OnQueryTextListener {
+
+    private String filterText = "";
 
     private static final String ARG_TRANS_ID = "trans_id";
 
@@ -79,12 +83,18 @@ public class HttpTabActivity extends BaseNetSpyActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.netspy_network_tab_menu, menu);
+        MenuItem searchMenuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setIconifiedByDefault(true);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.share_text) {
+        if (item.getItemId() == R.id.search) {
+            return true;
+        } else if (item.getItemId() == R.id.share_text) {
             share(httpEvent.getFormattedRequestBody() + "\n\n" + FormatHelper.getShareResponseText(this, httpEvent));
             return true;
         } else if (item.getItemId() == R.id.share_curl) {
@@ -100,7 +110,7 @@ public class HttpTabActivity extends BaseNetSpyActivity {
         if (event != null) {
             title.setText(event.getMethod() + " " + event.getPath());
             for (IHttpTabFragment fragment : adapter.fragments) {
-                fragment.httpTransUpdate(event);
+                fragment.httpTransUpdate(filterText, event);
             }
         }
     }
@@ -136,6 +146,18 @@ public class HttpTabActivity extends BaseNetSpyActivity {
         sendIntent.putExtra(Intent.EXTRA_TEXT, content);
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, null));
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        filterText = s;
+
+        return true;
     }
 
     static class Adapter extends FragmentPagerAdapter {
