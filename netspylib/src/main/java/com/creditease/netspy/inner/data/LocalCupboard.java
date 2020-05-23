@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.data;
+package com.creditease.netspy.inner.data;
 
 import com.creditease.netspy.cupboard.Cupboard;
 import com.creditease.netspy.cupboard.CupboardBuilder;

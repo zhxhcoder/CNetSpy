@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.LocalCupboard;
-import com.creditease.netspy.internal.ui.NetworkListFragment.OnListFragmentInteractionListener;
+import com.creditease.netspy.inner.data.HttpTransaction;
+import com.creditease.netspy.inner.data.LocalCupboard;
+import com.creditease.netspy.inner.ui.netspy.NetworkListFragment.OnListFragmentInteractionListener;
 
 class NetworkTabAdapter extends RecyclerView.Adapter<NetworkTabAdapter.ViewHolder> {
 

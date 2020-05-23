@@ -1,11 +1,11 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.creditease.netspy.NetSpyInterceptor;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
+import com.creditease.netspy.inner.data.NetSpyContentProvider;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

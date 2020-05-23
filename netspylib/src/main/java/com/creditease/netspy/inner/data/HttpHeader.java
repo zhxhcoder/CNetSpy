@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.data;
+package com.creditease.netspy.inner.data;
 
 public class HttpHeader {
 

@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

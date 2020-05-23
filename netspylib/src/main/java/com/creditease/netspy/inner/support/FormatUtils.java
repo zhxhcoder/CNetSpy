@@ -1,11 +1,11 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpHeader;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.inner.data.HttpHeader;
+import com.creditease.netspy.inner.data.HttpTransaction;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 

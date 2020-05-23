@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.support;
+package com.creditease.netspy.inner.support;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,8 +13,8 @@ import android.util.LongSparseArray;
 
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.ui.BaseNetSpyActivity;
+import com.creditease.netspy.inner.data.HttpTransaction;
+import com.creditease.netspy.inner.ui.netspy.BaseNetSpyActivity;
 
 import java.lang.reflect.Method;
 

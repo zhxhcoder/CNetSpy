@@ -1,26 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.creditease.netspy">
 
     <application>
+        <activity android:name=".inner.ui.bugspy.BugSpyListActivity"></activity>
+
         <provider
-            android:name="com.creditease.netspy.internal.data.NetSpyContentProvider"
+            android:name=".inner.data.NetSpyContentProvider"
             android:authorities="${applicationId}.netSpyContentProvider"
-            android:grantUriPermissions="true"
-            android:exported="false" />
+            android:exported="false"
+            android:grantUriPermissions="true" />
 
         <activity
-            android:name="com.creditease.netspy.internal.ui.NetSpyHomeActivity"
+            android:name=".inner.ui.netspy.NetSpyHomeActivity"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
         <activity
-            android:name="com.creditease.netspy.internal.ui.NetworkTabActivity"
-            android:parentActivityName="com.creditease.netspy.internal.ui.NetSpyHomeActivity"
+            android:name=".inner.ui.netspy.NetworkTabActivity"
+            android:parentActivityName=".inner.ui.netspy.NetSpyHomeActivity"
             android:theme="@style/NetSpy.Theme" />
 
         <service
-            android:name="com.creditease.netspy.internal.support.ClearTransService"
+            android:name=".inner.support.ClearTransService"
             android:exported="false" />
     </application>
+
 </manifest>

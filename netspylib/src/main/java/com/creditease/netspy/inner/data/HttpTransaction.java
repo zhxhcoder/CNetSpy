@@ -1,10 +1,10 @@
-package com.creditease.netspy.internal.data;
+package com.creditease.netspy.inner.data;
 
 import android.net.Uri;
 
 import com.creditease.netspy.cupboard.annotation.Index;
-import com.creditease.netspy.internal.support.FormatUtils;
-import com.creditease.netspy.internal.support.JsonConverter;
+import com.creditease.netspy.inner.support.FormatUtils;
+import com.creditease.netspy.inner.support.JsonConverter;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;

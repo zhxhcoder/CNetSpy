@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
+import com.creditease.netspy.inner.data.HttpTransaction;
 
 /**
  * Created by zhxh on 2019/06/12

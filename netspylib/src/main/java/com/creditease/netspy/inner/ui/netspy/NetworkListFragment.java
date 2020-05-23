@@ -1,4 +1,4 @@
-package com.creditease.netspy.internal.ui;
+package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -21,9 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.internal.data.HttpTransaction;
-import com.creditease.netspy.internal.data.NetSpyContentProvider;
-import com.creditease.netspy.internal.support.NotificationHelper;
+import com.creditease.netspy.inner.data.HttpTransaction;
+import com.creditease.netspy.inner.data.NetSpyContentProvider;
+import com.creditease.netspy.inner.support.NotificationHelper;
 
 public class NetworkListFragment extends Fragment implements
     SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
