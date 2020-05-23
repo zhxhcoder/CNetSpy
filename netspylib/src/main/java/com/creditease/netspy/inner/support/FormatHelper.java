@@ -3,6 +3,7 @@ package com.creditease.netspy.inner.support;
 import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 
 import com.creditease.netspy.R;
@@ -131,6 +132,9 @@ public class FormatHelper {
      */
     public static SpannableString findSearch(int color, String text, String keyword) {
         SpannableString s = new SpannableString(text);
+        if (TextUtils.isEmpty(keyword)) {
+            return s;
+        }
         Pattern p = Pattern.compile(keyword);
         Matcher m = p.matcher(s);
         while (m.find()) {
@@ -151,6 +155,9 @@ public class FormatHelper {
      */
     public static SpannableString findSearch(int color, String text, String... keyword) {
         SpannableString s = new SpannableString(text);
+        if (keyword == null || keyword.length == 0) {
+            return s;
+        }
         for (int i = 0; i < keyword.length; i++) {
             Pattern p = Pattern.compile(keyword[i]);
             Matcher m = p.matcher(s);

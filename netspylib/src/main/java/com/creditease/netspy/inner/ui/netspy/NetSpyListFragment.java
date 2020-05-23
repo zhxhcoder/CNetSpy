@@ -70,13 +70,13 @@ public class NetSpyListFragment extends Fragment implements
     public void updateDataFromDb() {
         List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
-        adapter.setData(dataList);
+        adapter.setData(filterText, dataList);
     }
 
     public void updateDataFromSearch() {
         List<HttpEvent> dataList = DBHelper.getInstance().queryHttpEventByFilter(filterText);
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
-        adapter.setData(dataList);
+        adapter.setData(filterText, dataList);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class NetSpyListFragment extends Fragment implements
         if (item.getItemId() == R.id.search) {
             return true;
         } else if (item.getItemId() == R.id.clear) {
-            adapter.setData(new ArrayList<>());
+            adapter.setData(filterText, new ArrayList<>());
             DBHelper.getInstance().deleteAllHttpData();
             NotificationHelper.clearBuffer();
             return true;

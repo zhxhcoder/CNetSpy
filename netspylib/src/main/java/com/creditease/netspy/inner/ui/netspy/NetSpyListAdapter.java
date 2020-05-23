@@ -35,6 +35,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
     private final int color300;
 
     private List<HttpEvent> dataList;
+    private String filterText;
 
     NetSpyListAdapter(Context context, OnListFragmentInteractionListener listener) {
         this.context = context;
@@ -64,7 +65,8 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
     public void onBindViewHolder(ViewHolder holder, int position) {
         final HttpEvent httpEvent = dataList.get(position);
 
-        holder.path.setText(MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath()));
+        String pathStr = MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath());
+        holder.path.setText(FormatHelper.findSearch(color400, pathStr, filterText));
         holder.host.setText(httpEvent.getHost());
         String strTime = FormatHelper.getHHmmSS(httpEvent.getRequestDate());
         if (strTime.length() > 5) {
@@ -127,7 +129,8 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         holder.path.setTextColor(color);
     }
 
-    void setData(List<HttpEvent> dataList) {
+    void setData(String filterText, List<HttpEvent> dataList) {
+        this.filterText = filterText;
         this.dataList = dataList;
         notifyDataSetChanged();
     }
