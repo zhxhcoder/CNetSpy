@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.creditease.netspy.BugSpyHelper;
 import com.creditease.netspy.demo.netspy.SampleNetSpyActivity;
+import com.creditease.netspy.inner.ui.netspy.HttpTabActivity;
 
 /**
  * Created by zhxh on 2019/06/20
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.reportButton).setOnClickListener(v -> {
             BugSpyHelper.debug(true);
             BugSpyHelper.launchActivity(MainActivity.this);
+        });
+        findViewById(R.id.httpButton).setOnClickListener(v -> {
+            HttpTabActivity.start(this, 1);
         });
     }
 }

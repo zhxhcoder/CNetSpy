@@ -31,4 +31,11 @@
         android:text="打开监控列表" />
 
 
+    <Button
+        android:id="@+id/httpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="打开详情页面" />
 </LinearLayout>
