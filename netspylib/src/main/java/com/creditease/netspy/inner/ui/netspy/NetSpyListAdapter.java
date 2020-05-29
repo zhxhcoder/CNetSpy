@@ -92,6 +92,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         holder.transaction = httpEvent;
         holder.view.setOnClickListener(v -> {
             if (null != NetSpyListAdapter.this.listener) {
+                Toast.makeText(context, "短按进入详情", Toast.LENGTH_LONG).show();
                 NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
         });
