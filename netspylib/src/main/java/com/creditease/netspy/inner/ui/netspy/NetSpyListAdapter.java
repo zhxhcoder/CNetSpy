@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
@@ -91,6 +92,11 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
             if (null != NetSpyListAdapter.this.listener) {
                 NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
+        });
+
+        holder.view.setOnLongClickListener(v -> {
+            Toast.makeText(context,"长按删除成功",Toast.LENGTH_LONG).show();
+            return true;
         });
     }
 
