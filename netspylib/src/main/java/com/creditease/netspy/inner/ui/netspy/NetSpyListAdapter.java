@@ -1,6 +1,7 @@
 package com.creditease.netspy.inner.ui.netspy;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -69,7 +70,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         final HttpEvent httpEvent = dataList.get(position);
 
         String pathStr = MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath());
-        holder.path.setText(FormatHelper.findSearch(color500, pathStr, filterText));
+        holder.path.setText(FormatHelper.findSearch(Color.BLUE, pathStr, filterText));
         holder.host.setText(httpEvent.getHost());
         String strTime = FormatHelper.getHHmmSS(httpEvent.getRequestDate());
         if (strTime.length() > 5) {

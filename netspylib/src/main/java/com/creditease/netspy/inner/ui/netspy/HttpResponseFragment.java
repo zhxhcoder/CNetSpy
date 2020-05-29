@@ -1,5 +1,6 @@
 package com.creditease.netspy.inner.ui.netspy;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -96,7 +97,7 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
             if (TextUtils.isEmpty(filterText) || getContext() == null) {
                 responseBody.setText(bodyString);
             } else {
-                responseBody.setText(FormatHelper.findSearch(ContextCompat.getColor(getContext(), R.color.netspy_status_500), bodyString, filterText));
+                responseBody.setText(FormatHelper.findSearch(Color.BLUE, bodyString, filterText));
             }
         }
     }
