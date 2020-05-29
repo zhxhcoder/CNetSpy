@@ -24,6 +24,7 @@ import java.util.List;
  */
 class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolder> {
 
+    NetSpyListFragment fragment;
     Context context;
 
     private final OnListFragmentInteractionListener listener;
@@ -38,7 +39,8 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
     private List<HttpEvent> dataList;
     private String filterText;
 
-    NetSpyListAdapter(Context context, OnListFragmentInteractionListener listener) {
+    NetSpyListAdapter(NetSpyListFragment fragment, Context context, OnListFragmentInteractionListener listener) {
+        this.fragment = fragment;
         this.context = context;
         this.listener = listener;
         colorDefault = ContextCompat.getColor(context, R.color.netspy_status_default);
@@ -93,9 +95,9 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
                 NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
         });
-
         holder.view.setOnLongClickListener(v -> {
-            Toast.makeText(context,"长按删除成功",Toast.LENGTH_LONG).show();
+            fragment.updateDataFromDelete(httpEvent);
+            Toast.makeText(context, "长按删除成功", Toast.LENGTH_LONG).show();
             return true;
         });
     }

@@ -30,7 +30,7 @@ import java.util.List;
  * 请求列表
  */
 public class NetSpyListFragment extends Fragment implements
-    SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener {
 
     private String filterText = "";
     private OnListFragmentInteractionListener listener;
@@ -58,8 +58,8 @@ public class NetSpyListFragment extends Fragment implements
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
-            adapter = new NetSpyListAdapter(getContext(), listener);
+                    DividerItemDecoration.VERTICAL));
+            adapter = new NetSpyListAdapter(this,getContext(), listener);
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();
@@ -79,6 +79,11 @@ public class NetSpyListFragment extends Fragment implements
         adapter.setData(filterText, dataList);
     }
 
+    public void updateDataFromDelete(HttpEvent httpEvent) {
+        DBHelper.getInstance().deleteHttpData(httpEvent);
+        updateDataFromDb();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -91,7 +96,7 @@ public class NetSpyListFragment extends Fragment implements
             listener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnListFragmentInteractionListener");
         }
     }
 

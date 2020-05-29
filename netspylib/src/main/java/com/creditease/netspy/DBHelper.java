@@ -96,6 +96,12 @@ public final class DBHelper {
         }
     }
 
+    public void deleteHttpData(HttpEvent httpEvent) {
+        if (httpEvent != null) {
+            mDaoSession.getHttpEventDao().delete(httpEvent);
+        }
+    }
+
     public void updateHttpData(HttpEvent httpEvent) {
         if (httpEvent != null) {
             mDaoSession.getHttpEventDao().update(httpEvent);
@@ -107,9 +113,9 @@ public final class DBHelper {
             @Override
             public List<HttpEvent> call() throws Exception {
                 return mDaoSession
-                    .queryBuilder(HttpEvent.class)
-                    .where(HttpEventDao.Properties.Path.like("%" + filterText + "%"))
-                    .list();
+                        .queryBuilder(HttpEvent.class)
+                        .where(HttpEventDao.Properties.Path.like("%" + filterText + "%"))
+                        .list();
             }
         });
     }
@@ -119,9 +125,9 @@ public final class DBHelper {
             @Override
             public List<HttpEvent> call() throws Exception {
                 return mDaoSession
-                    .queryBuilder(HttpEvent.class)
-                    .where(HttpEventDao.Properties.ResponseCode.eq(responseCode))
-                    .list();
+                        .queryBuilder(HttpEvent.class)
+                        .where(HttpEventDao.Properties.ResponseCode.eq(responseCode))
+                        .list();
             }
         });
     }
