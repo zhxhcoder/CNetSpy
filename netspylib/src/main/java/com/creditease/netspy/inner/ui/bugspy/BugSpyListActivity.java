@@ -22,8 +22,8 @@ public class BugSpyListActivity extends AppCompatActivity {
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, BugSpyListFragment.newInstance())
-                .commit();
+                    .add(R.id.container, BugSpyListFragment.newInstance())
+                    .commit();
         }
     }
 

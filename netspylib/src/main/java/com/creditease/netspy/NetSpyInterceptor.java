@@ -255,8 +255,8 @@ public final class NetSpyInterceptor implements Interceptor {
     private boolean bodyHasUnsupportedEncoding(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");
         return contentEncoding != null &&
-            !contentEncoding.equalsIgnoreCase("identity") &&
-            !contentEncoding.equalsIgnoreCase("gzip");
+                !contentEncoding.equalsIgnoreCase("identity") &&
+                !contentEncoding.equalsIgnoreCase("gzip");
     }
 
     private boolean bodyGzipped(Headers headers) {

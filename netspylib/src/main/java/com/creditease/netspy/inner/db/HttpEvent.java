@@ -387,30 +387,30 @@ public class HttpEvent {
     @Override
     public String toString() {
         return "HttpEvent{" +
-            "_id=" + _id +
-            ", transId=" + transId +
-            ", requestDate=" + requestDate +
-            ", responseDate=" + responseDate +
-            ", tookMs=" + tookMs +
-            ", protocol='" + protocol + '\'' +
-            ", method='" + method + '\'' +
-            ", url='" + url + '\'' +
-            ", host='" + host + '\'' +
-            ", path='" + path + '\'' +
-            ", scheme='" + scheme + '\'' +
-            ", requestContentLength=" + requestContentLength +
-            ", requestContentType='" + requestContentType + '\'' +
-            ", requestHeaders=" + requestHeaders +
-            ", requestBody='" + requestBody + '\'' +
-            ", requestBodyIsPlainText=" + requestBodyIsPlainText +
-            ", responseCode=" + responseCode +
-            ", responseMessage='" + responseMessage + '\'' +
-            ", error='" + error + '\'' +
-            ", responseContentLength=" + responseContentLength +
-            ", responseContentType='" + responseContentType + '\'' +
-            ", responseHeaders=" + responseHeaders +
-            ", responseBody='" + responseBody + '\'' +
-            ", responseBodyIsPlainText=" + responseBodyIsPlainText +
-            '}';
+                "_id=" + _id +
+                ", transId=" + transId +
+                ", requestDate=" + requestDate +
+                ", responseDate=" + responseDate +
+                ", tookMs=" + tookMs +
+                ", protocol='" + protocol + '\'' +
+                ", method='" + method + '\'' +
+                ", url='" + url + '\'' +
+                ", host='" + host + '\'' +
+                ", path='" + path + '\'' +
+                ", scheme='" + scheme + '\'' +
+                ", requestContentLength=" + requestContentLength +
+                ", requestContentType='" + requestContentType + '\'' +
+                ", requestHeaders=" + requestHeaders +
+                ", requestBody='" + requestBody + '\'' +
+                ", requestBodyIsPlainText=" + requestBodyIsPlainText +
+                ", responseCode=" + responseCode +
+                ", responseMessage='" + responseMessage + '\'' +
+                ", error='" + error + '\'' +
+                ", responseContentLength=" + responseContentLength +
+                ", responseContentType='" + responseContentType + '\'' +
+                ", responseHeaders=" + responseHeaders +
+                ", responseBody='" + responseBody + '\'' +
+                ", responseBodyIsPlainText=" + responseBodyIsPlainText +
+                '}';
     }
 }

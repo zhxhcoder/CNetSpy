@@ -22,8 +22,8 @@ public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyList
         toolbar.setSubtitle(getApplicationName());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, NetSpyListFragment.newInstance())
-                .commit();
+                    .add(R.id.container, NetSpyListFragment.newInstance())
+                    .commit();
         }
     }
 

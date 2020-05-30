@@ -30,7 +30,7 @@ public class ExpiryManager {
         period = toMillis(retentionPeriod);
         prefs = context.getSharedPreferences(PREFS_NAME, 0);
         cleanupFrequency = (retentionPeriod == NetSpyInterceptor.Period.ONE_HOUR) ?
-            TimeUnit.MINUTES.toMillis(30) : TimeUnit.HOURS.toMillis(2);
+                TimeUnit.MINUTES.toMillis(30) : TimeUnit.HOURS.toMillis(2);
     }
 
     public synchronized void doMaintenance() {

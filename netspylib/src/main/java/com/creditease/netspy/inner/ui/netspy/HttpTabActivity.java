@@ -26,7 +26,7 @@ import java.util.List;
 
 
 public class HttpTabActivity extends BaseNetSpyActivity implements
-    SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener {
 
     private String filterText = "";
 

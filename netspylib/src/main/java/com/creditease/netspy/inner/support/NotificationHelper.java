@@ -54,8 +54,8 @@ public class NotificationHelper {
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.createNotificationChannel(
-                new NotificationChannel(CHANNEL_ID,
-                    context.getString(R.string.notification_category), NotificationManager.IMPORTANCE_LOW));
+                    new NotificationChannel(CHANNEL_ID,
+                            context.getString(R.string.notification_category), NotificationManager.IMPORTANCE_LOW));
             try {
                 setChannelId = NotificationCompat.Builder.class.getMethod("setChannelId", String.class);
             } catch (Exception ignored) {
@@ -67,11 +67,11 @@ public class NotificationHelper {
         addToBuffer(httpEvent);
         if (!BaseNetSpyActivity.isInForeground()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentIntent(PendingIntent.getActivity(context, 0, NetSpyHelper.launchIntent(context), 0))
-                .setLocalOnly(true)
-                .setSmallIcon(R.drawable.netspy_ic_notification_white_24dp)
-                .setColor(ContextCompat.getColor(context, R.color.netspy_colorPrimary))
-                .setContentTitle(context.getString(R.string.netspy_notification_title));
+                    .setContentIntent(PendingIntent.getActivity(context, 0, NetSpyHelper.launchIntent(context), 0))
+                    .setLocalOnly(true)
+                    .setSmallIcon(R.drawable.netspy_ic_notification_white_24dp)
+                    .setColor(ContextCompat.getColor(context, R.color.netspy_colorPrimary))
+                    .setContentTitle(context.getString(R.string.netspy_notification_title));
             NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
             if (setChannelId != null) {
                 try {
@@ -107,7 +107,7 @@ public class NotificationHelper {
         Intent deleteIntent = new Intent(context, ClearTransService.class);
         PendingIntent intent = PendingIntent.getService(context, 11, deleteIntent, PendingIntent.FLAG_ONE_SHOT);
         return new NotificationCompat.Action(R.drawable.netspy_ic_delete_white_24dp,
-            clearTitle, intent);
+                clearTitle, intent);
     }
 
     public void dismiss() {

@@ -25,30 +25,30 @@ public class HttpHelper {
         OkHttpClient client = new OkHttpClient();
 
         FormBody paramsBody = new FormBody.Builder()
-            .add("name", "")
-            .build();
+                .add("name", "")
+                .build();
 
         MediaType type = MediaType.parse("application/octet-stream");
         RequestBody fileBody = RequestBody.create(type, file);
 
         RequestBody multipartBody = new MultipartBody.Builder()
-            .setType(MultipartBody.ALTERNATIVE)
-            //一样的效果
-            .addPart(Headers.of(
-                "Content-Disposition",
-                "form-data; name=\"params\"")
-                , paramsBody)
-            .addPart(Headers.of(
-                "Content-Disposition",
-                "form-data; name=\"file\"; filename=\"cnetspy.db\"")
-                , fileBody)
-            .build();
+                .setType(MultipartBody.ALTERNATIVE)
+                //一样的效果
+                .addPart(Headers.of(
+                        "Content-Disposition",
+                        "form-data; name=\"params\"")
+                        , paramsBody)
+                .addPart(Headers.of(
+                        "Content-Disposition",
+                        "form-data; name=\"file\"; filename=\"cnetspy.db\"")
+                        , fileBody)
+                .build();
 
         Request request = new Request.Builder().url(url)
-            .addHeader("User-Agent", "android")
-            .header("Content-Type", "text/html; charset=utf-8;")
-            .post(multipartBody)
-            .build();
+                .addHeader("User-Agent", "android")
+                .header("Content-Type", "text/html; charset=utf-8;")
+                .post(multipartBody)
+                .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override

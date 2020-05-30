@@ -74,7 +74,7 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
             requestUrl.setText(String.format("%s %s", httpEvent.getMethod(), httpEvent.getUrl()));
 
             setRequestText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
-                httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
+                    httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
 
             setResponseText(httpEvent.getFormattedResponseBody(), httpEvent.getResponseBodyIsPlainText());
         }

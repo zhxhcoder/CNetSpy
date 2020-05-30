@@ -97,13 +97,13 @@ public class BugEvent {
     @Override
     public String toString() {
         return "BugEvent{" +
-            "_id=" + _id +
-            ", timeStamp=" + timeStamp +
-            ", crashDate=" + crashDate +
-            ", bugSummary='" + bugSummary + '\'' +
-            ", bugReport='" + bugReport + '\'' +
-            ", deviceInfo='" + deviceInfo + '\'' +
-            ", userInfo='" + userInfo + '\'' +
-            '}';
+                "_id=" + _id +
+                ", timeStamp=" + timeStamp +
+                ", crashDate=" + crashDate +
+                ", bugSummary='" + bugSummary + '\'' +
+                ", bugReport='" + bugReport + '\'' +
+                ", deviceInfo='" + deviceInfo + '\'' +
+                ", userInfo='" + userInfo + '\'' +
+                '}';
     }
 }

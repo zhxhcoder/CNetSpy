@@ -26,13 +26,15 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="********************请求地址********************"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/requestUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,13 +43,15 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="********************请求参数********************"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/requestBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -56,13 +60,15 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="********************接口返回********************"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/responseBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

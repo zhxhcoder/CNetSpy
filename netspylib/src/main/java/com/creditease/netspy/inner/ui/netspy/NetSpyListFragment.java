@@ -59,7 +59,7 @@ public class NetSpyListFragment extends Fragment implements
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-            adapter = new NetSpyListAdapter(this,getContext(), listener);
+            adapter = new NetSpyListAdapter(this, getContext(), listener);
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();

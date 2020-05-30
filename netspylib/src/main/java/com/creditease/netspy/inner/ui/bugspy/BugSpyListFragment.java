@@ -53,7 +53,7 @@ public class BugSpyListFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-            adapter = new BugSpyListAdapter(this,getContext());
+            adapter = new BugSpyListAdapter(this, getContext());
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();
