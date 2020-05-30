@@ -49,6 +49,12 @@ public final class DBHelper {
         mDaoSession.deleteAll(BugEvent.class);
     }
 
+    public void deleteBugData(BugEvent bugEvent) {
+        if (bugEvent != null) {
+            mDaoSession.getBugEventDao().delete(bugEvent);
+        }
+    }
+
     public void insertBugData(BugEvent bugEvent) {
         if (bugEvent != null) {
             resetBugDataSize();

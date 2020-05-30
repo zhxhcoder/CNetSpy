@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
+import com.creditease.netspy.inner.db.HttpEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,8 +52,8 @@ public class BugSpyListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
-            adapter = new BugSpyListAdapter(getContext());
+                    DividerItemDecoration.VERTICAL));
+            adapter = new BugSpyListAdapter(this,getContext());
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();
@@ -66,6 +67,11 @@ public class BugSpyListFragment extends Fragment {
         adapter.setData(dataList);
     }
 
+    public void updateDataFromDelete(BugEvent bugEvent) {
+        DBHelper.getInstance().deleteBugData(bugEvent);
+        updateDataFromDb();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -74,6 +80,8 @@ public class BugSpyListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.netspy_main, menu);
+        MenuItem searchMenuItem = menu.findItem(R.id.search);
+        searchMenuItem.setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

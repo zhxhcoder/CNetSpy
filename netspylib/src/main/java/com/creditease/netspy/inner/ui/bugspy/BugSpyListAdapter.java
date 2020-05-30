@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
@@ -18,11 +19,13 @@ import java.util.List;
  * Created by zhxh on 2019/07/16
  */
 class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolder> {
-    Context activity;
+    Context context;
+    BugSpyListFragment fragment;
     private List<BugEvent> dataList;
 
-    BugSpyListAdapter(Context context) {
-        activity = context;
+    BugSpyListAdapter(BugSpyListFragment fragment, Context context) {
+        this.fragment = fragment;
+        this.context = context;
     }
 
     @Override
@@ -47,11 +50,19 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
 
         holder.email.setOnClickListener(v -> {
             sendEmail(item.getBugReport());
-            //TODO
         });
         holder.view.setOnClickListener(v -> {
+            Toast.makeText(context, "短按查看详情", Toast.LENGTH_LONG).show();
+            showDialog(item.getBugReport());
+        });
 
-            //TODO
+        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fragment.updateDataFromDelete(item);
+                Toast.makeText(context, "长按删除成功", Toast.LENGTH_LONG).show();
+                return true;
+            }
         });
     }
 
@@ -77,6 +88,11 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         }
     }
 
+    public void showDialog(String trace) {
+        String subject = "App异常报告";
+        String body = "异常日志记录如下: " + "\n" + trace + "\n";
+
+    }
 
     public void sendEmail(String trace) {
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -87,6 +103,6 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         sendIntent.setType("message/rfc822");
-        activity.startActivity(Intent.createChooser(sendIntent, "Title:"));
+        context.startActivity(Intent.createChooser(sendIntent, "Title:"));
     }
 }
