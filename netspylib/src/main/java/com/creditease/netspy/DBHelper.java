@@ -17,8 +17,10 @@ import java.util.concurrent.Callable;
  * 数据库操作类.
  */
 public final class DBHelper {
-    //只保留最近 50条 崩溃日志
-    private static final int bugLogCount = 20;
+    //只保留最多 500条 崩溃日志 1000条网络日志
+    private static final int bugLogCount = 200;
+    private static final int httpLogCount = 1000;
+
     private static final String DB_NAME = "app_spy41.db"; // 数据库名称
     private static volatile DBHelper sInstance = null; // 单例
     private SQLiteDatabase mDatabase;
@@ -53,7 +55,7 @@ public final class DBHelper {
 
     public void insertBugData(BugEvent bugEvent) {
         if (bugEvent != null) {
-            resetBugDataSize();
+            //resetBugDataSize();
             mDaoSession.getBugEventDao().insertOrReplace(bugEvent);
         }
     }
@@ -67,6 +69,19 @@ public final class DBHelper {
         }
         int size = list.size();
         if (size >= bugLogCount) {
+            mDaoSession.delete(list.get(size - 1));
+        }
+    }
+
+    private void resetHttpDataSize() {
+        //TODO 如果超过 httpLogCount数量 则删除最老加入的一条
+
+        List<HttpEvent> list = getAllHttpData();
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        int size = list.size();
+        if (size >= httpLogCount) {
             mDaoSession.delete(list.get(size - 1));
         }
     }
@@ -91,6 +106,7 @@ public final class DBHelper {
         }
         return null;
     }
+
     public BugEvent getBugDataByTime(long timeStamp) {
         for (BugEvent data : getAllBugData()) {
             if (timeStamp == data.getTimeStamp()) {
@@ -100,8 +116,10 @@ public final class DBHelper {
         return null;
 
     }
+
     public void insertHttpData(HttpEvent httpEvent) {
         if (httpEvent != null) {
+            //resetHttpDataSize();
             mDaoSession.getHttpEventDao().insertOrReplace(httpEvent);
         }
     }

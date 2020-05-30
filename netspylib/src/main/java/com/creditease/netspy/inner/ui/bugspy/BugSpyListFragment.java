@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.R;
@@ -63,6 +64,9 @@ public class BugSpyListFragment extends Fragment {
 
     public void updateDataFromDb() {
         List<BugEvent> dataList = DBHelper.getInstance().getAllBugData();
+        if (dataList.size() > 200) {
+            Toast.makeText(getActivity(), "异常崩溃数据已经达到" + dataList.size() + "条，请按右上角删除按钮及时清理", Toast.LENGTH_LONG).show();
+        }
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTimeStamp() - o1.getTimeStamp()));
         adapter.setData(dataList);
     }

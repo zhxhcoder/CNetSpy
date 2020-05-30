@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.DBHelper;
@@ -69,6 +70,9 @@ public class NetSpyListFragment extends Fragment implements
 
     public void updateDataFromDb() {
         List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
+        if (dataList.size() > 500) {
+            Toast.makeText(getActivity(), "请求接口数据已经达到" + dataList.size() + "条，请按右上角删除按钮及时清理", Toast.LENGTH_LONG).show();
+        }
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
         adapter.setData(filterText, dataList);
     }
