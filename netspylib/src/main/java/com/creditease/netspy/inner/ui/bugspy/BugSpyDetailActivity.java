@@ -2,15 +2,14 @@ package com.creditease.netspy.inner.ui.bugspy;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
+import com.creditease.netspy.inner.support.DeviceInfoHelper;
 import com.creditease.netspy.inner.support.FormatHelper;
 
 /**
@@ -23,9 +22,9 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     private BugEvent bugEvent;
 
     private TextView time;
-    private TextView summary;
-    private TextView content;
-
+    private TextView report;
+    private TextView device;
+    private TextView user;
 
     public static void start(Context context, long timeStamp) {
         Intent intent = new Intent(context, BugSpyDetailActivity.class);
@@ -37,13 +36,11 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bug_spy_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setSubtitle(getApplicationName());
 
         time = findViewById(R.id.time);
-        summary = findViewById(R.id.summary);
-        content = findViewById(R.id.content);
+        report = findViewById(R.id.report);
+        device = findViewById(R.id.device);
+        user = findViewById(R.id.user);
 
         timeStamp = getIntent().getLongExtra(ARG_TIME_STAMP, 0);
         bugEvent = DBHelper.getInstance().getBugDataByTime(timeStamp);
@@ -54,13 +51,8 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     private void populateUI(BugEvent bugEvent) {
         String strTime = FormatHelper.getHHmmSS(bugEvent.getCrashDate());
         time.setText(strTime);
-        summary.setText(bugEvent.getBugSummary());
-        content.setText(bugEvent.getBugReport());
-    }
-
-    private String getApplicationName() {
-        ApplicationInfo applicationInfo = getApplicationInfo();
-        int stringId = applicationInfo.labelRes;
-        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : getString(stringId);
+        device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
+        user.setText(bugEvent.getUserInfo());
+        report.setText(bugEvent.getBugReport());
     }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.DeviceInfoHelper;
 import com.creditease.netspy.inner.support.FormatHelper;
 
 /**
@@ -33,6 +34,7 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
     TextView totalSize;
 
     TextView responseHeaders;
+    TextView device;
 
 
     private HttpEvent httpEvent;
@@ -63,6 +65,7 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
         totalSize = view.findViewById(R.id.total_size);
 
         responseHeaders = view.findViewById(R.id.responseHeaders);
+        device = view.findViewById(R.id.device);
 
         return view;
     }
@@ -98,6 +101,8 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
             totalSize.setText(httpEvent.getTotalSizeString());
 
             setResponseHeader(FormatHelper.formatHeaders(httpEvent.getResponseHeaders(), true));
+
+            device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(getActivity()));
         }
     }
 

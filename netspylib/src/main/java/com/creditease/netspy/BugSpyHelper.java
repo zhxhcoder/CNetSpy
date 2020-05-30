@@ -9,15 +9,12 @@ import com.creditease.netspy.inner.ui.bugspy.BugSpyListActivity;
 
 import java.util.Date;
 
-
 /**
  * Created by zhxh on 2019/07/16
  */
 public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     static boolean isBugSpy = false;
-
-    static String deviceInfo = "";
     static String userInfo = "";
 
     private Thread.UncaughtExceptionHandler exceptionHandler;
@@ -39,8 +36,10 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
         BugSpyHelper.isBugSpy = isBugSpy;
     }
 
-    public static void initInfo(String deviceInfo, String userInfo) {
-        BugSpyHelper.deviceInfo = deviceInfo;
+    /**
+     * @param userInfo 用户信息
+     */
+    public static void initUserInfo(String userInfo) {
         BugSpyHelper.userInfo = userInfo;
     }
 
@@ -72,7 +71,6 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
                 report.append("    ").append(arr[i].toString()).append("\n");
             }
         }
-
         try {
             saveError(e.toString(), report.toString());
         } catch (Exception exec) {
@@ -83,6 +81,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     private void saveError(String reportTitle, String report) {
         BugEvent event = new BugEvent();
+        event.setUserInfo(BugSpyHelper.userInfo);
         event.setTimeStamp(System.currentTimeMillis());
         event.setCrashDate(new Date());
         event.setBugSummary(reportTitle);
