@@ -60,8 +60,8 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         holder.view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                fragment.updateDataFromDelete(item);
-                Toast.makeText(context, "长按删除成功", Toast.LENGTH_LONG).show();
+                //fragment.updateDataFromDelete(item);
+                //Toast.makeText(context, "长按删除成功", Toast.LENGTH_LONG).show();
                 return true;
             }
         });
