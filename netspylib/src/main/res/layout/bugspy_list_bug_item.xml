@@ -21,12 +21,19 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/email"
+            android:src="@drawable/netspy_ic_delete_black_24dp" />
+
+        <ImageView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/netspy_ic_email_24dp" />
-
 
     </RelativeLayout>
 
@@ -35,5 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textSize="12sp"
         tools:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" />
 </LinearLayout>

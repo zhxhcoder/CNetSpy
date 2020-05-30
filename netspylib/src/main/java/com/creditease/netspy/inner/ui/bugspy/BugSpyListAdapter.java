@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
+import com.creditease.netspy.inner.support.FormatHelper;
 
 import java.util.List;
 
@@ -46,27 +47,26 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
     public void onBindViewHolder(ViewHolder holder, int position) {
         final BugEvent item = dataList.get(position);
 
-        holder.time.setText(item.getCrashDate().toLocaleString());
-        holder.bug.setText(item.getBugReport());
+        String strTime = FormatHelper.getHHmmSS(item.getCrashDate());
+        if (strTime.length() > 5) {
+            holder.time.setText(strTime.substring(5));
+        } else {
+            holder.time.setText(strTime);
+        }
+        holder.bug.setText(item.getBugSummary());
+
+        holder.delete.setOnClickListener(v -> {
+            fragment.updateDataFromDelete(item);
+            Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
+        });
 
         holder.email.setOnClickListener(v -> {
             sendEmail(item.getBugReport());
         });
         holder.view.setOnClickListener(v -> {
-            Toast.makeText(context, "短按查看详情", Toast.LENGTH_LONG).show();
             showDialog(item.getBugReport());
         });
-
-        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                //fragment.updateDataFromDelete(item);
-                //Toast.makeText(context, "长按删除成功", Toast.LENGTH_LONG).show();
-                return true;
-            }
-        });
     }
-
 
     void setData(List<BugEvent> dataList) {
         this.dataList = dataList;
@@ -77,6 +77,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         public final View view;
         public final TextView time;
         public final ImageView email;
+        public final ImageView delete;
         public final TextView bug;
 
         ViewHolder(View view) {
@@ -84,8 +85,8 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
             this.view = view;
             time = view.findViewById(R.id.time);
             email = view.findViewById(R.id.email);
+            delete = view.findViewById(R.id.delete);
             bug = view.findViewById(R.id.bug);
-
         }
     }
 

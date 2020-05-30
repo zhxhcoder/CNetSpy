@@ -51,23 +51,18 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
         }
         StackTraceElement[] arr = e.getStackTrace();
         StringBuilder report = new StringBuilder(e.toString() + "\n\n");
-        report.append("--------- stacktrace-begin ---------\n\n");
         for (int i = 0; i < arr.length; i++) {
             report.append("    ").append(arr[i].toString()).append("\n");
         }
-        report.append("\n\n-------------- stacktrace-end -----------------\n\n");
         /*
          * 意外是子线程时,输出在这里
          */
         Throwable cause = e.getCause();
         if (cause != null) {
-            report.append("--------- thread-begin ---------\n\n");
-
             arr = cause.getStackTrace();
             for (int i = 0; i < arr.length; i++) {
                 report.append("    ").append(arr[i].toString()).append("\n");
             }
-            report.append("-------------thread-end------------------\n\n");
         }
 
         try {
