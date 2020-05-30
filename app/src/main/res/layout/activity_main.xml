@@ -15,11 +15,26 @@
         android:text="去监听测试页面" />
 
     <Button
-        android:id="@+id/errorButton"
+        android:id="@+id/errorButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="来个崩溃吧" />
+        android:text="分母不为0" />
 
+    <Button
+        android:id="@+id/errorButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="格式转换错误" />
+
+    <Button
+        android:id="@+id/errorButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="空指针异常" />
 </LinearLayout>

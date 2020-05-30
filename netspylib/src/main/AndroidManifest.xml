@@ -4,14 +4,15 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application>
         <activity
             android:name=".inner.ui.bugspy.BugSpyListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
-
         <activity
             android:name=".inner.ui.bugspy.BugSpyDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -20,12 +21,14 @@
 
         <activity
             android:name=".inner.ui.netspy.NetSpyListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />
         <activity
             android:name=".inner.ui.netspy.HttpTabActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".inner.ui.netspy.NetSpyListActivity"
             android:theme="@style/NetSpy.Theme" />
 
