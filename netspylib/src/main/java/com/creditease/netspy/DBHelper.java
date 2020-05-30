@@ -95,7 +95,15 @@ public final class DBHelper {
         }
         return null;
     }
+    public BugEvent getBugDataByTime(long timeStamp) {
+        for (BugEvent data : getAllBugData()) {
+            if (timeStamp == data.getTimeStamp()) {
+                return data;
+            }
+        }
+        return null;
 
+    }
     public void insertHttpData(HttpEvent httpEvent) {
         if (httpEvent != null) {
             mDaoSession.getHttpEventDao().insertOrReplace(httpEvent);
@@ -153,5 +161,6 @@ public final class DBHelper {
     public void setDaoSession(DaoSession daoSession) {
         mDaoSession = daoSession;
     }
+
 
 }

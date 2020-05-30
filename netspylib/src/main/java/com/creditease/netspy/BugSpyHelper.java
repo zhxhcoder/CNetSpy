@@ -17,6 +17,9 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     static boolean isBugSpy = false;
 
+    static String deviceInfo = "";
+    static String userInfo = "";
+
     private Thread.UncaughtExceptionHandler exceptionHandler;
     private Application app;
 
@@ -34,6 +37,11 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
      */
     public static void debug(boolean isBugSpy) {
         BugSpyHelper.isBugSpy = isBugSpy;
+    }
+
+    public static void initInfo(String deviceInfo, String userInfo) {
+        BugSpyHelper.deviceInfo = deviceInfo;
+        BugSpyHelper.userInfo = userInfo;
     }
 
     public static void launchActivity(Context context) {

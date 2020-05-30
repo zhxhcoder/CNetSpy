@@ -24,7 +24,6 @@ import com.creditease.netspy.inner.support.FormatHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HttpTabActivity extends BaseNetSpyActivity implements
         SearchView.OnQueryTextListener {
 
