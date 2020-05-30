@@ -2,6 +2,7 @@ package com.creditease.netspy.inner.ui.bugspy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +93,13 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         String subject = "App异常报告";
         String body = "异常日志记录如下: " + "\n" + trace + "\n";
 
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(subject)
+                .setMessage(body)
+                .setPositiveButton("确定", null)
+                .setNegativeButton("取消", null)
+                .create();
+        dialog.show();
     }
 
     public void sendEmail(String trace) {
