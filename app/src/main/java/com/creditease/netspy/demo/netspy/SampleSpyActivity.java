@@ -17,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.creditease.netspy.BugSpyHelper;
-import com.creditease.netspy.DBHelper;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
@@ -37,35 +36,30 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 /**
  * Created by zhxh on 2019/06/24
  */
-public class SampleNetSpyActivity extends AppCompatActivity {
-    private final static String TAG = "netSpyLog";
+public class SampleSpyActivity extends AppCompatActivity {
+    private final static String TAG = "sampleSpyLog";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample_netspy);
+        setContentView(R.layout.activity_sample_spy);
         findViewById(R.id.btn_http).setOnClickListener(view -> {
             for (int i = 0; i < 2; i++) {
                 forceSendRequestByMobileData(this);
             }
         });
-        findViewById(R.id.launch_netspy_directly).setOnClickListener(view -> NetSpyHelper.launchActivity(this)
-        );
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
         checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            Toast.makeText(SampleSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             NetSpyHelper.debug(isChecked);
+            NetSpyHelper.launchActivity(this);
         });
         CheckBox checkBox2 = findViewById(R.id.cb_bugspy_status);
         checkBox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Toast.makeText(SampleNetSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            Toast.makeText(SampleSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             BugSpyHelper.debug(isChecked);
             BugSpyHelper.launchActivity(this);
-        });
-
-        findViewById(R.id.btn_db).setOnClickListener(view -> {
-            Log.d(TAG, "queryHttpEventList " + DBHelper.getInstance().queryHttpEventList(200).get(0).toString());
         });
 
     }
@@ -89,10 +83,10 @@ public class SampleNetSpyActivity extends AppCompatActivity {
 
     private OkHttpClient getClient(Context context) {
         return new OkHttpClient.Builder()
-            // Add a NetSpyInterceptor instance to your OkHttp client
-            .addInterceptor(new NetSpyInterceptor())
-            .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build();
+                // Add a NetSpyInterceptor instance to your OkHttp client
+                .addInterceptor(new NetSpyInterceptor())
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build();
     }
 
     private void doHttpActivity() {
@@ -139,7 +133,7 @@ public class SampleNetSpyActivity extends AppCompatActivity {
 
     public void checkOnlineState() {
         ConnectivityManager CManager =
-            (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo NInfo = CManager.getActiveNetworkInfo();
         if (NInfo != null && NInfo.isConnectedOrConnecting()) {
 

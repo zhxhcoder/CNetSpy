@@ -17,15 +17,6 @@
         android:text="网络请求"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/launch_netspy_directly"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="启动列表页"
-        android:textAllCaps="false" />
-
     <CheckBox
         android:id="@+id/cb_netspy_status"
         android:layout_width="wrap_content"
@@ -33,15 +24,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="开启网络监听" />
-
-    <Button
-        android:id="@+id/btn_db"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="数据库操作"
-        android:textAllCaps="false" />
 
     <CheckBox
         android:id="@+id/cb_bugspy_status"

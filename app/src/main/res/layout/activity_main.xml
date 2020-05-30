@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="去网络监听页面" />
+        android:text="去监听测试页面" />
 
     <Button
         android:id="@+id/errorButton"
@@ -22,20 +22,4 @@
         android:layout_marginTop="30dp"
         android:text="来个崩溃吧" />
 
-    <Button
-        android:id="@+id/reportButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="打开监控列表" />
-
-
-    <Button
-        android:id="@+id/httpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="打开详情页面" />
 </LinearLayout>
