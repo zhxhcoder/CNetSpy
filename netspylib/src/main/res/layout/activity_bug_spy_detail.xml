@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    </android.support.v7.widget.Toolbar>
+        android:gravity="center"
+        android:text="异常崩溃信息"
+        android:textColor="@android:color/white"
+        android:textSize="17sp" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
