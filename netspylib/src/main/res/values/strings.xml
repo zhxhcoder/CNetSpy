@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="netspy_name">CAppSpy</string>
+    <string name="netspy_name">App守护</string>
     <string name="netspy_notification_title">Recording HTTP activity</string>
     <string name="netspy_clear">Clear</string>
     <string name="netspy_browse_sql_database">Browse SQLite database</string>
