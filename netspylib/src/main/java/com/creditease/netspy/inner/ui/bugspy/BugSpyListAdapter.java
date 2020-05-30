@@ -46,6 +46,8 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
     public void onBindViewHolder(ViewHolder holder, int position) {
         final BugEvent item = dataList.get(position);
 
+        holder.index.setText(String.valueOf(position + 1));
+
         String strTime = FormatHelper.getHHmmSS(item.getCrashDate());
         holder.time.setText(strTime);
 
@@ -71,6 +73,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public final View view;
+        public final TextView index;
         public final TextView time;
         public final ImageView email;
         public final ImageView delete;
@@ -79,6 +82,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         ViewHolder(View view) {
             super(view);
             this.view = view;
+            index = view.findViewById(R.id.index);
             time = view.findViewById(R.id.time);
             email = view.findViewById(R.id.email);
             delete = view.findViewById(R.id.delete);
