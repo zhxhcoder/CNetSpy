@@ -2,6 +2,7 @@ package com.creditease.netspy.demo;
 
 import android.app.Application;
 
+import com.creditease.netspy.BugSpyHelper;
 import com.creditease.netspy.NetSpyHelper;
 
 /**
@@ -13,5 +14,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         NetSpyHelper.install(this);
+        BugSpyHelper.debug(BuildConfig.DEBUG);
     }
 }

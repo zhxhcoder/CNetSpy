@@ -15,6 +15,13 @@
         android:text="去监听测试页面" />
 
     <Button
+        android:id="@+id/errorButton0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="子线程更新" />
+    <Button
         android:id="@+id/errorButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,4 +44,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="空指针异常" />
+    <Button
+        android:id="@+id/errorButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="超时" />
 </LinearLayout>
