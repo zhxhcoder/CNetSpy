@@ -57,13 +57,25 @@ public class MainActivity extends AppCompatActivity {
             str.substring(2);
         });
         findViewById(R.id.errorButton4).setOnClickListener(v -> {
-
             try {
                 Thread.sleep(32000);
-                spyButton.setText("超时");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            spyButton.setText("超时错误");
+
+        });
+        findViewById(R.id.errorButton5).setOnClickListener(v -> {//anr
+
+
+        });
+
+        findViewById(R.id.errorButton6).setOnClickListener(v -> {//OutOfMemory
+
+
+        });
+        findViewById(R.id.errorButton7).setOnClickListener(v -> {//noExists
+
 
         });
     }
