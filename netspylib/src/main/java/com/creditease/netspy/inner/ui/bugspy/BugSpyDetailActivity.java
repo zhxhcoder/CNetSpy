@@ -55,7 +55,7 @@ public class BugSpyDetailActivity extends AppCompatActivity {
         device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
         user.setText(bugEvent.getUserInfo());
         app.setText(bugEvent.getAppInfo());
-        time.setText("崩溃时间：" + strTime);
+        time.setText("崩溃发生时间：" + strTime+"\n");
         report.setText(bugEvent.getBugReport());
     }
 }
