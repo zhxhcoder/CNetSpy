@@ -21,10 +21,11 @@ public class BugEvent {
     private String bugReport;
     private String deviceInfo;
     private String userInfo;
+    private String appInfo;
 
     @Keep()
     public BugEvent(Long _id, Long timeStamp, java.util.Date crashDate,
-                    String bugSummary, String bugReport, String deviceInfo, String userInfo) {
+                    String bugSummary, String bugReport, String deviceInfo, String userInfo, String appInfo) {
         this._id = _id;
         this.timeStamp = timeStamp;
         this.crashDate = crashDate;
@@ -32,6 +33,7 @@ public class BugEvent {
         this.bugReport = bugReport;
         this.deviceInfo = deviceInfo;
         this.userInfo = userInfo;
+        this.appInfo = appInfo;
     }
 
     @Keep()
@@ -56,6 +58,14 @@ public class BugEvent {
 
     public java.util.Date getCrashDate() {
         return this.crashDate;
+    }
+
+    public String getAppInfo() {
+        return appInfo;
+    }
+
+    public void setAppInfo(String appInfo) {
+        this.appInfo = appInfo;
     }
 
     public void setCrashDate(java.util.Date crashDate) {
@@ -104,6 +114,7 @@ public class BugEvent {
                 ", bugReport='" + bugReport + '\'' +
                 ", deviceInfo='" + deviceInfo + '\'' +
                 ", userInfo='" + userInfo + '\'' +
+                ", appInfo='" + appInfo + '\'' +
                 '}';
     }
 }

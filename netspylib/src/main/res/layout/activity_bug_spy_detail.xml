@@ -28,13 +28,6 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="时间" />
-
-            <TextView
                 android:id="@+id/device"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,11 +35,26 @@
                 tools:text="设备信息" />
 
             <TextView
+                android:id="@+id/app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="App信息" />
+
+            <TextView
                 android:id="@+id/user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 tools:text="用户信息" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="时间" />
+
 
             <TextView
                 android:id="@+id/report"

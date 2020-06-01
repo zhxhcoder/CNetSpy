@@ -15,7 +15,10 @@ import java.util.Date;
 public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     static boolean isBugSpy = false;
+
+    static String appInfo = "";
     static String userInfo = "";
+
 
     private Thread.UncaughtExceptionHandler exceptionHandler;
     private Application app;
@@ -37,9 +40,11 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     }
 
     /**
-     * @param userInfo 用户信息
+     * @param appInfo  当时打包app信息 打包时间、打包版本号等信息
+     * @param userInfo 当时用户信息 用户名 用户ID等信息
      */
-    public static void initUserInfo(String userInfo) {
+    public static void initInfo(String appInfo, String userInfo) {
+        BugSpyHelper.appInfo = appInfo;
         BugSpyHelper.userInfo = userInfo;
     }
 
@@ -81,6 +86,7 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     private void saveError(String reportTitle, String report) {
         BugEvent event = new BugEvent();
+        event.setAppInfo(BugSpyHelper.appInfo);
         event.setUserInfo(BugSpyHelper.userInfo);
         event.setTimeStamp(System.currentTimeMillis());
         event.setCrashDate(new Date());

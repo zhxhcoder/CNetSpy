@@ -25,6 +25,7 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     private TextView report;
     private TextView device;
     private TextView user;
+    private TextView app;
 
     public static void start(Context context, long timeStamp) {
         Intent intent = new Intent(context, BugSpyDetailActivity.class);
@@ -41,6 +42,7 @@ public class BugSpyDetailActivity extends AppCompatActivity {
         report = findViewById(R.id.report);
         device = findViewById(R.id.device);
         user = findViewById(R.id.user);
+        app = findViewById(R.id.app);
 
         timeStamp = getIntent().getLongExtra(ARG_TIME_STAMP, 0);
         bugEvent = DBHelper.getInstance().getBugDataByTime(timeStamp);
@@ -50,9 +52,10 @@ public class BugSpyDetailActivity extends AppCompatActivity {
 
     private void populateUI(BugEvent bugEvent) {
         String strTime = FormatHelper.getHHmmSS(bugEvent.getCrashDate());
-        time.setText("崩溃时间：" + strTime);
         device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
         user.setText(bugEvent.getUserInfo());
+        app.setText(bugEvent.getAppInfo());
+        time.setText("崩溃时间：" + strTime);
         report.setText(bugEvent.getBugReport());
     }
 }
