@@ -85,7 +85,7 @@ public class NetSpyListFragment extends Fragment implements
                     .create();
             dialog.show();
         } else if (dataList.size() > 200) {
-            Toast.makeText(getActivity(), "请求接口数据已经达到" + dataList.size() + "条，请按主动屏幕右上角删除按钮及时清理（当数据超过500条会触发自动清理）", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "请求接口数据已经达到" + dataList.size() + "条，请按主动屏幕右上角删除按钮及时清理", Toast.LENGTH_LONG).show();
         }
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTransId() - o1.getTransId()));
         adapter.setData(filterText, dataList);
