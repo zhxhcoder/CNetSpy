@@ -81,10 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        final List<byte[]> container = new ArrayList<>();
         findViewById(R.id.errorButton6).setOnClickListener(v -> {//OutOfMemory
-
-            final List<byte[]> container = new ArrayList<>();
-
             Log.e("cAppSpy", "max memory = " + Runtime.getRuntime().maxMemory());
             Log.e("cAppSpy", "free memory = " + Runtime.getRuntime().freeMemory());
             Log.e("cAppSpy", "total memory = " + Runtime.getRuntime().totalMemory());

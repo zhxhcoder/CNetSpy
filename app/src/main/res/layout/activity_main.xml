@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="OutOfMemory" />
+            android:text="OOM" />
 
         <Button
             android:id="@+id/errorButton7"
