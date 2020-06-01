@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.creditease.netspy.inner.support.NotificationHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by zhxh on 2019/06/12
@@ -71,11 +73,17 @@ public class NetSpyListFragment extends Fragment implements
     public void updateDataFromDb() {
         List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
         if (dataList.size() > 500) {
-            Toast.makeText(getActivity(), "请求接口数据已经达到" + dataList.size() + "条，为防止数据过多已经自动清理", Toast.LENGTH_LONG).show();
-            adapter.setData(filterText, new ArrayList<>());
-            DBHelper.getInstance().deleteAllHttpData();
-            NotificationHelper.clearBuffer();
-            return;
+            AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
+                    .setTitle("温馨提示")
+                    .setMessage("请求接口数据已经达到" + dataList.size() + "条，为防止数据过多请自动清理")
+                    .setPositiveButton("清理", (dialog1, which) -> {
+                        adapter.setData(filterText, new ArrayList<>());
+                        DBHelper.getInstance().deleteAllHttpData();
+                        NotificationHelper.clearBuffer();
+                    })
+                    .setNegativeButton("取消", null)
+                    .create();
+            dialog.show();
         } else if (dataList.size() > 200) {
             Toast.makeText(getActivity(), "请求接口数据已经达到" + dataList.size() + "条，请按主动屏幕右上角删除按钮及时清理（当数据超过500条会触发自动清理）", Toast.LENGTH_LONG).show();
         }
