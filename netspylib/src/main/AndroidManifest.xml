@@ -6,7 +6,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application>
-        <activity android:name=".inner.ui.apimock.ApiMockDetailActivity"></activity>
+        <activity
+            android:name=".inner.ui.apimock.ApiMockDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/netspy_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.creditease.netspy.task"
+            android:theme="@style/NetSpy.Theme" />
         <activity
             android:name=".inner.ui.apimock.ApiMockListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
