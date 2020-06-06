@@ -48,6 +48,11 @@ public class SampleSpyActivity extends AppCompatActivity {
                 forceSendRequestByMobileData(this);
             }
         });
+        findViewById(R.id.btn_mock).setOnClickListener(view -> {
+            for (int i = 0; i < 2; i++) {
+                doHttpMock();
+            }
+        });
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
         checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -105,6 +110,21 @@ public class SampleSpyActivity extends AppCompatActivity {
         api.getList().enqueue(cb);
         api.postList(new SpyApiService.Data("list")).enqueue(cb);
         api.postArray(new SpyApiService.Data("array")).enqueue(cb);
+    }
+
+    private void doHttpMock() {
+        SpyApiService.HttpApi api = SpyApiService.getMock(getClient(this));
+        Callback<Void> cb = new Callback<Void>() {
+            @Override
+            public void onResponse(Call call, Response response) {
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        };
+        api.getMockData().enqueue(cb);
     }
 
 

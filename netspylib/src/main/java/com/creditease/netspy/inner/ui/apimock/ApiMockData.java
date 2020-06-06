@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by zhxh on 2020/6/6
  * 数据表
+ * url:http://10.106.156.200:5000/todos
  */
 public class ApiMockData implements Serializable {
     private long time; //最近更新时间戳
@@ -14,6 +15,7 @@ public class ApiMockData implements Serializable {
     private String method;
     private String path;
     private String host;
+    private String port;//默认5000
     private String baseUrl;
     private String url;
     private String params;

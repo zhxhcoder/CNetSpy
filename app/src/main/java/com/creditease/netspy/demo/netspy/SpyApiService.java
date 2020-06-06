@@ -22,6 +22,17 @@ class SpyApiService {
         return retrofit.create(HttpApi.class);
     }
 
+
+    static HttpApi getMock(OkHttpClient client) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.106.156.200:5000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+        return retrofit.create(HttpApi.class);
+    }
+
+
     static class Data {
         final String params;
         Data(String params) {
@@ -30,6 +41,9 @@ class SpyApiService {
     }
 
     interface HttpApi {
+        @GET("/todos")
+        Call<Void> getMockData();
+
         @GET("zhxh/list")
         Call<Void> getList();
 
