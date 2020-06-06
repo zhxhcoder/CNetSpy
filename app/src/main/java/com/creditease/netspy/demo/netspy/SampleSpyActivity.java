@@ -23,6 +23,8 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -112,7 +114,6 @@ public class SampleSpyActivity extends AppCompatActivity {
         api.getList().enqueue(cb);
         api.getList().enqueue(cb);
         api.postList(new SpyApiService.Data("list")).enqueue(cb);
-        api.postArray(new SpyApiService.Data("array")).enqueue(cb);
     }
 
     private void doHttpMock() {
@@ -127,7 +128,16 @@ public class SampleSpyActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         };
-        api.getMockData().enqueue(cb);
+
+        Map<String, String> getMap = new LinkedHashMap<>();
+        getMap.put("method", "get");
+        getMap.put("mock", "true");
+        api.getMockTodos(getMap).enqueue(cb);
+
+        Map<String, String> postMap = new LinkedHashMap<>();
+        postMap.put("method", "post");
+        postMap.put("mock", "true");
+        api.postMockTodos(postMap).enqueue(cb);
     }
 
 
