@@ -7,6 +7,13 @@
 
     <application>
         <activity
+            android:name=".inner.ui.apimock.ApiMockListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/netspy_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.creditease.netspy.task"
+            android:theme="@style/NetSpy.Theme" />
+        <activity
             android:name=".inner.ui.bugspy.BugSpyListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/netspy_name"
@@ -18,7 +25,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".inner.ui.bugspy.BugSpyListActivity"
             android:theme="@style/NetSpy.Theme" />
-
         <activity
             android:name=".inner.ui.netspy.NetSpyListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
