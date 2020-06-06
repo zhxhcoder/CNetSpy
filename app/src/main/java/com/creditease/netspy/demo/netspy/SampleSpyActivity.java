@@ -43,6 +43,9 @@ public class SampleSpyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_spy);
+
+        checkOnlineState();
+
         findViewById(R.id.btn_http).setOnClickListener(view -> {
             for (int i = 0; i < 2; i++) {
                 forceSendRequestByMobileData(this);
@@ -75,7 +78,7 @@ public class SampleSpyActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            if (msg.what == 1) {
+            if (msg.what == 1001) {
                 boolean isReachable = (boolean) msg.obj;
                 if (isReachable) {
                     Log.d(TAG, "host 可达 ");
@@ -161,8 +164,7 @@ public class SampleSpyActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-
-                        boolean isReachable = InetAddress.getByName("5g.yirendai.com").isReachable(10000);
+                        boolean isReachable = InetAddress.getByName("10.106.156.200").isReachable(10000);
 
                         Message message = handler.obtainMessage();
                         message.what = 1001;
