@@ -7,10 +7,12 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.QueryMap;
 
 /**
@@ -47,12 +49,36 @@ class SpyApiService {
     }
 
     interface HttpApi {
-        @GET("/todos")
-        Call<Void> getMockTodos(@QueryMap Map<String, String> map);
+
+        //添加或者更新
+        @FormUrlEncoded
+        @PUT("/api")
+        Call<Object> putMockApi(@FieldMap Map<String, String> map);
+
+        @FormUrlEncoded
+        @DELETE("/api")
+        Call<Object> deleteMockApi(@FieldMap Map<String, String> map);
+
+
+        @FormUrlEncoded
+        @DELETE("/api")
+        Call<Object> getMockApi(@FieldMap Map<String, String> map);
+
+
+        @FormUrlEncoded
+        @DELETE("/api")
+        Call<Object> postMockApi(@FieldMap Map<String, String> map);
+
+        /////////////////////////////////////////////////////////////////////////
 
         @FormUrlEncoded
         @POST("/todos")
         Call<Void> postMockTodos(@FieldMap Map<String, String> map);
+
+        @GET("/todos")
+        Call<Void> getMockTodos(@QueryMap Map<String, String> map);
+
+        /////////////////////////////////////////////////////////////////////////
 
         @GET("zhxh/list")
         Call<Void> getList();
