@@ -16,8 +16,10 @@ public class ApiMockData implements Serializable {
     private String path;
     private String host;
     private String port;//默认5000
-    private String baseUrl;
+    private String base_url;
     private String url;
     private String params;
-    private String resp; //gson传
+    private String resp_data; //gson传
+    private String resp_empty; //gson传
+    private String resp_failure; //gson传
 }
