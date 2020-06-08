@@ -32,7 +32,7 @@ public class OkHttpHelper {
         return instance;
     }
 
-    interface HttpCallBack {
+    public interface HttpCallBack {
         void onSuccess(String resp);
     }
 
@@ -52,8 +52,15 @@ public class OkHttpHelper {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                cb.onSuccess(response.body().string());
-                Log.d(TAG, "onResponse: " + response.body().string());
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                Log.d(TAG, "onResponse: " + resp);
+
+                if (cb != null) {
+                    cb.onSuccess(resp);
+                }
             }
         });
     }
@@ -80,12 +87,21 @@ public class OkHttpHelper {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
                 Headers headers = response.headers();
                 for (int i = 0; i < headers.size(); i++) {
                     Log.d(TAG, headers.name(i) + ":" + headers.value(i));
                 }
-                cb.onSuccess(response.body().string());
-                Log.d(TAG, "onResponse: " + response.body().string());
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                Log.d(TAG, "onResponse: " + resp);
+
+                if (cb != null) {
+                    cb.onSuccess(resp);
+                }
             }
         });
     }
