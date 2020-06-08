@@ -34,7 +34,7 @@ public class DeviceInfoHelper {
     private static final String TAG = "DeviceInfoHelper";
     private static DeviceInfoHelper instance;
 
-    public DeviceInfoHelper() {
+    private DeviceInfoHelper() {
     }
 
 

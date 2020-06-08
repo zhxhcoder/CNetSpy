@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.creditease.netspy.inner.ui.apimock.ApiMockListActivity;
-import com.creditease.netspy.inner.ui.netspy.NetSpyListActivity;
 
 /**
  * Created by zhxh on 2020/6/6

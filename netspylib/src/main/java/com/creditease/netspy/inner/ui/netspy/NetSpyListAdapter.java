@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
