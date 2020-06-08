@@ -2,6 +2,7 @@ package com.creditease.netspy.inner.db;
 
 import android.net.Uri;
 
+import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.inner.support.FormatHelper;
 
 import org.greenrobot.greendao.annotation.Convert;
@@ -161,6 +162,14 @@ public class HttpEvent {
         return this.url;
     }
 
+    public String getMockUrl() {
+        if (ApiMockHelper.host.equals(getHost())) {
+            return this.url.replace("__", "/");
+        } else {
+            return this.url;
+        }
+    }
+
 
     public void setHost(String host) {
         this.host = host;
@@ -300,6 +309,14 @@ public class HttpEvent {
 
     public String getPath() {
         return path;
+    }
+
+    public String getMockPath() {
+        if (ApiMockHelper.host.equals(getHost())) {
+            return path.replace("__", "/");
+        } else {
+            return path;
+        }
     }
 
     public String getScheme() {

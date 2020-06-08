@@ -106,7 +106,7 @@ public class FormatHelper {
             // try to keep to a single line and use a subshell to preserve any line breaks
             curlCmd += " --data $'" + requestBody.replace("\n", "\\n") + "'";
         }
-        curlCmd += ((compressed) ? " --compressed " : " ") + transaction.getUrl();
+        curlCmd += ((compressed) ? " --compressed " : " ") + transaction.getMockUrl();
         return curlCmd;
     }
 

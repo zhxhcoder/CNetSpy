@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
@@ -69,7 +70,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
     public void onBindViewHolder(ViewHolder holder, int position) {
         final HttpEvent httpEvent = dataList.get(position);
 
-        String pathStr = MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getPath());
+        String pathStr = MessageFormat.format("{0} {1}", httpEvent.getMethod(), httpEvent.getMockPath());
         holder.path.setText(FormatHelper.findSearch(Color.BLUE, pathStr, filterText));
         holder.host.setText(httpEvent.getHost());
         String strTime = FormatHelper.getHHmmSS(httpEvent.getRequestDate());

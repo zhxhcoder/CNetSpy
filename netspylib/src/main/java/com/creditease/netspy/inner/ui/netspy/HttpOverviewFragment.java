@@ -84,7 +84,7 @@ public class HttpOverviewFragment extends Fragment implements IHttpTabFragment {
 
     private void populateUI() {
         if (isAdded() && httpEvent != null) {
-            url.setText(httpEvent.getUrl());
+            url.setText(httpEvent.getMockUrl());
             method.setText(httpEvent.getMethod());
             protocol.setText(httpEvent.getProtocol());
             status.setText(httpEvent.getStatus().toString());
