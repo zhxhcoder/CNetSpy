@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".inner.ui.apimock.ApiMockListActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="哈哈哈哈" />
+
 </android.support.constraint.ConstraintLayout>

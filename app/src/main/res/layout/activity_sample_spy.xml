@@ -48,4 +48,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="开启异常监听" />
+
+    <CheckBox
+        android:id="@+id/cb_apimock_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="开启api模拟" />
 </LinearLayout>

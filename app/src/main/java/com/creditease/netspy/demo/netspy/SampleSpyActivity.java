@@ -16,6 +16,8 @@ import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.creditease.netspy.ApiMockHelper;
+import com.creditease.netspy.ApiMockInterceptor;
 import com.creditease.netspy.BugSpyHelper;
 import com.creditease.netspy.NetSpyHelper;
 import com.creditease.netspy.NetSpyInterceptor;
@@ -75,6 +77,12 @@ public class SampleSpyActivity extends AppCompatActivity {
             BugSpyHelper.debug(isChecked);
             BugSpyHelper.launchActivity(this);
         });
+        CheckBox checkBox3 = findViewById(R.id.cb_apimock_status);
+        checkBox3.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Toast.makeText(SampleSpyActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            ApiMockHelper.debug(isChecked);
+            ApiMockHelper.launchActivity(this);
+        });
 
     }
 
@@ -98,6 +106,7 @@ public class SampleSpyActivity extends AppCompatActivity {
     private OkHttpClient getClient(Context context) {
         return new OkHttpClient.Builder()
                 // Add a NetSpyInterceptor instance to your OkHttp client
+                .addInterceptor(new ApiMockInterceptor())
                 .addInterceptor(new NetSpyInterceptor())
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();

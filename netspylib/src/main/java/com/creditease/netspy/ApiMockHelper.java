@@ -1,5 +1,11 @@
 package com.creditease.netspy;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.creditease.netspy.inner.ui.apimock.ApiMockListActivity;
+import com.creditease.netspy.inner.ui.netspy.NetSpyListActivity;
+
 /**
  * Created by zhxh on 2020/6/6
  */
@@ -7,7 +13,7 @@ public final class ApiMockHelper {
     static boolean isApiMock = false;
 
     //默认baseUrl
-    private static String baseUrl = "http://localhost.com";
+    static String baseUrl = "10.106.157.94";
 
     public static void initBaseUrl(String baseUrl) {
         ApiMockHelper.baseUrl = baseUrl;
@@ -15,5 +21,13 @@ public final class ApiMockHelper {
 
     public static void debug(boolean isApiMock) {
         ApiMockHelper.isApiMock = isApiMock;
+    }
+
+    public static void launchActivity(Context context) {
+        if (ApiMockHelper.isApiMock) {
+            context.startActivity(new Intent(context, ApiMockListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        } else {
+            return;
+        }
     }
 }
