@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
+import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.ui.bugspy.BugSpyListActivity;
 

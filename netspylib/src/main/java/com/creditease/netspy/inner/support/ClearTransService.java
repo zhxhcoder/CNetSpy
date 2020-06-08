@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.creditease.netspy.DBHelper;
+import com.creditease.netspy.inner.db.DBHelper;
 
 /**
  * 清空数据库

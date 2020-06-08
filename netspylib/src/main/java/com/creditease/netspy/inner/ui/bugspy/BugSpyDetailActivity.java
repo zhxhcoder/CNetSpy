@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.creditease.netspy.DBHelper;
+import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.support.DeviceInfoHelper;

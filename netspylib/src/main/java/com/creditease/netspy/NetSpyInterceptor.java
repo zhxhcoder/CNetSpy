@@ -3,6 +3,7 @@ package com.creditease.netspy;
 import android.content.Context;
 import android.util.Log;
 
+import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.NotificationHelper;
 import com.creditease.netspy.inner.support.ExpiryManager;

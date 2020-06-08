@@ -1,12 +1,8 @@
-package com.creditease.netspy;
+package com.creditease.netspy.inner.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.creditease.netspy.inner.db.BugEvent;
-import com.creditease.netspy.inner.db.DaoMaster;
-import com.creditease.netspy.inner.db.DaoSession;
-import com.creditease.netspy.inner.db.HttpEvent;
-import com.creditease.netspy.inner.db.HttpEventDao;
+import com.creditease.netspy.NetSpyHelper;
 
 import java.util.List;
 import java.util.concurrent.Callable;

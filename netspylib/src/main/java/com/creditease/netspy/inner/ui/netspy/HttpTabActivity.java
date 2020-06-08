@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.creditease.netspy.DBHelper;
+import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
