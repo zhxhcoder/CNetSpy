@@ -98,6 +98,8 @@ public class BugSpyListFragment extends Fragment {
         inflater.inflate(R.menu.netspy_main, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.search);
         searchMenuItem.setVisible(false);
+        MenuItem uploadMenuItem = menu.findItem(R.id.upload);
+        uploadMenuItem.setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

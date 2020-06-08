@@ -22,6 +22,7 @@ import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.NotificationHelper;
+import com.creditease.netspy.inner.support.OkHttpHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,6 +103,14 @@ public class NetSpyListFragment extends Fragment implements
         updateDataFromDb();
     }
 
+    public void uploadCloudFromDb() {
+        List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
+        for (int i = 0; i < dataList.size(); i++) {
+            HttpEvent event = dataList.get(i);
+            OkHttpHelper.getInstance().postRecords(event.getPath(), event.getFormattedResponseBody());
+        }
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -137,6 +146,9 @@ public class NetSpyListFragment extends Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search) {
+            return true;
+        } else if (item.getItemId() == R.id.upload) {
+            uploadCloudFromDb();
             return true;
         } else if (item.getItemId() == R.id.clear) {
             adapter.setData(filterText, new ArrayList<>());

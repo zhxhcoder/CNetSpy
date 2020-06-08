@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.creditease.netspy.R;
+import com.creditease.netspy.inner.support.OkHttpHelper;
 
 /**
  * Created by zhxh on 2020/06/06
@@ -14,5 +15,12 @@ public class ApiMockListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_api_mock_list);
+
+        downLoadFromCloud();
+    }
+
+
+    private void downLoadFromCloud() {
+        OkHttpHelper.getInstance().getRecords();
     }
 }

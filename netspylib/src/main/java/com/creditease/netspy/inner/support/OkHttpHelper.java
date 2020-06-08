@@ -32,7 +32,11 @@ public class OkHttpHelper {
         return instance;
     }
 
-    public void getRecords(String path) {
+    interface HttpCallBack {
+        void onSuccess(String resp);
+    }
+
+    public void getRecords(HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -48,12 +52,13 @@ public class OkHttpHelper {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                cb.onSuccess(response.body().string());
                 Log.d(TAG, "onResponse: " + response.body().string());
             }
         });
     }
 
-    public void postRecords(String path, String resp) {
+    public void postRecords(String path, String resp, HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -79,6 +84,7 @@ public class OkHttpHelper {
                 for (int i = 0; i < headers.size(); i++) {
                     Log.d(TAG, headers.name(i) + ":" + headers.value(i));
                 }
+                cb.onSuccess(response.body().string());
                 Log.d(TAG, "onResponse: " + response.body().string());
             }
         });
