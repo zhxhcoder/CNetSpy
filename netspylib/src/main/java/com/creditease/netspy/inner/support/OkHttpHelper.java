@@ -65,13 +65,14 @@ public class OkHttpHelper {
         });
     }
 
-    public void postRecords(String path, String resp, HttpCallBack cb) {
+    public void postRecords(String path, String resp_data, int show_type, HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add("path", path)
-                .add("resp", resp)
+                .add("resp_data", resp_data)
+                .add("show_type", String.valueOf(show_type))
                 .build();
         Request request = new Request.Builder()
                 .url(url)
