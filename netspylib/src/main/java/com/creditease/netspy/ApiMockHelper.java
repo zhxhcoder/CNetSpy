@@ -13,10 +13,10 @@ public final class ApiMockHelper {
     static boolean isApiMock = false;
 
     //默认baseUrl
-    static String baseUrl = "10.106.157.94";
+    static String host = "10.106.157.94";
 
-    public static void initBaseUrl(String baseUrl) {
-        ApiMockHelper.baseUrl = baseUrl;
+    public static void initHost(String baseUrl) {
+        ApiMockHelper.host = baseUrl;
     }
 
     public static void debug(boolean isApiMock) {

@@ -1,7 +1,5 @@
 package com.creditease.netspy;
 
-import android.util.Log;
-
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -11,7 +9,7 @@ import okhttp3.Response;
 
 /**
  * Created by zhxh on 2020/6/8
- * 为
+ * 为了模拟采取的措施
  */
 public final class ApiMockInterceptor implements Interceptor {
     @Override
@@ -20,32 +18,17 @@ public final class ApiMockInterceptor implements Interceptor {
             Request request = chain.request();
             return chain.proceed(request);
         }
-
-        String reg = "http.+\\.com(?=/)";
-
         Request request = chain.request();
-
         //获取request的创建者builder
-        Request.Builder builder = request.newBuilder();
         HttpUrl oldHttpUrl = request.url();
-
-        Log.d("xxxxxxxxx-old", oldHttpUrl.toString());
-        Log.d("xxxxxxxxx-old", oldHttpUrl.scheme());
-        Log.d("xxxxxxxxx-old", oldHttpUrl.host());
-        Log.d("xxxxxxxxx-old", "" + oldHttpUrl.port());
-
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
-                .host(ApiMockHelper.baseUrl)
+                .host(ApiMockHelper.host)
                 .port(5000)
+                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2))
                 .build();
-
-        Log.d("xxxxxxxxx-new", newHttpUrl.toString());
-        Log.d("xxxxxxxxx-new", newHttpUrl.scheme());
-        Log.d("xxxxxxxxx-new", newHttpUrl.host());
-        Log.d("xxxxxxxxx-new", "" + newHttpUrl.port());
-
+        Request.Builder builder = request.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());
     }
 }
