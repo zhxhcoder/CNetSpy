@@ -135,8 +135,8 @@ public class SampleSpyActivity extends AppCompatActivity {
 
         if (type == 0) {
             Map<String, String> postMap = new HashMap<>();
-            postMap.put("path", "todo__no4");
-            postMap.put("resp", "44444");
+            postMap.put("path", "todo__no5.action");
+            postMap.put("resp", "55555");
             api.postMockTodos(postMap).enqueue(cb);
         } else {
             Map<String, String> getMap = new HashMap<>();

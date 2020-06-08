@@ -73,7 +73,7 @@ class SpyApiService {
         @POST("/api/list")
         Call<Void> postMockTodos(@FieldMap Map<String, String> map);
 
-        @GET("/todo__no4")
+        @GET("/todo__no5.action")
         Call<Void> getMockTodos(@QueryMap Map<String, String> map);
 
         /////////////////////////////////////////////////////////////////////////
