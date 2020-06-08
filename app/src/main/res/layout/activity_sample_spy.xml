@@ -18,11 +18,19 @@
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_mock"
+        android:id="@+id/btn_api_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="网络模拟"
+        android:text="apiList"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_todo_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="todoNumber"
         android:textAllCaps="false" />
 
     <CheckBox

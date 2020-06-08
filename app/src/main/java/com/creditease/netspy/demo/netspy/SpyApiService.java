@@ -32,7 +32,7 @@ class SpyApiService {
 
     static HttpApi getMock(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.106.156.200:5000")
+                .baseUrl("http://10.106.157.94:5000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -59,23 +59,21 @@ class SpyApiService {
         @DELETE("/api")
         Call<Object> deleteMockApi(@FieldMap Map<String, String> map);
 
-
-        @FormUrlEncoded
-        @DELETE("/api")
-        Call<Object> getMockApi(@FieldMap Map<String, String> map);
+        @GET("/api/list")
+        Call<Object> getMockApi(@QueryMap Map<String, String> map);
 
 
         @FormUrlEncoded
-        @DELETE("/api")
+        @DELETE("/api/list")
         Call<Object> postMockApi(@FieldMap Map<String, String> map);
 
         /////////////////////////////////////////////////////////////////////////
 
         @FormUrlEncoded
-        @POST("/todos")
+        @POST("/api/list")
         Call<Void> postMockTodos(@FieldMap Map<String, String> map);
 
-        @GET("/todos")
+        @GET("/todo__no4")
         Call<Void> getMockTodos(@QueryMap Map<String, String> map);
 
         /////////////////////////////////////////////////////////////////////////

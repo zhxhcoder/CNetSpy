@@ -23,6 +23,7 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -53,10 +54,13 @@ public class SampleSpyActivity extends AppCompatActivity {
                 forceSendRequestByMobileData(this);
             }
         });
-        findViewById(R.id.btn_mock).setOnClickListener(view -> {
-            for (int i = 0; i < 2; i++) {
-                doHttpMock();
-            }
+        findViewById(R.id.btn_api_list).setOnClickListener(view -> {
+            doHttpAPIList(0);
+
+        });
+        findViewById(R.id.btn_todo_number).setOnClickListener(view -> {
+            doHttpAPIList(1);
+
         });
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
@@ -116,7 +120,7 @@ public class SampleSpyActivity extends AppCompatActivity {
         api.postList(new SpyApiService.Data("list")).enqueue(cb);
     }
 
-    private void doHttpMock() {
+    private void doHttpAPIList(int type) {
         SpyApiService.HttpApi api = SpyApiService.getMock(getClient(this));
         Callback<Void> cb = new Callback<Void>() {
             @Override
@@ -129,15 +133,15 @@ public class SampleSpyActivity extends AppCompatActivity {
             }
         };
 
-        Map<String, String> getMap = new LinkedHashMap<>();
-        getMap.put("method", "get");
-        getMap.put("mock", "true");
-        api.getMockTodos(getMap).enqueue(cb);
-
-        Map<String, String> postMap = new LinkedHashMap<>();
-        postMap.put("method", "post");
-        postMap.put("mock", "true");
-        api.postMockTodos(postMap).enqueue(cb);
+        if (type == 0) {
+            Map<String, String> postMap = new HashMap<>();
+            postMap.put("path", "todo__no4");
+            postMap.put("resp", "44444");
+            api.postMockTodos(postMap).enqueue(cb);
+        } else {
+            Map<String, String> getMap = new HashMap<>();
+            api.getMockTodos(getMap).enqueue(cb);
+        }
     }
 
 
