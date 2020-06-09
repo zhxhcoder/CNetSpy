@@ -3,6 +3,7 @@ package com.creditease.netspy.demo.netspy;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
@@ -17,12 +18,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SampleMockApiActivity extends AppCompatActivity {
+    EditText et_path, et_resp, et_show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_mock_api);
 
+        et_path = findViewById(R.id.et_path);
+        et_resp = findViewById(R.id.et_resp);
+        et_show = findViewById(R.id.et_show);
 
         findViewById(R.id.btn_api_records_post).setOnClickListener(view -> {
             doHttpAPIList(0);
@@ -54,14 +59,14 @@ public class SampleMockApiActivity extends AppCompatActivity {
 
         if (type == 0) {
             Map<String, String> postMap = new HashMap<>();
-            postMap.put("path", "mock__api.action");
-            postMap.put("resp_data", "55555");
-            postMap.put("show_type", "1");
+            postMap.put("path", et_path.getText().toString());
+            postMap.put("resp_data", et_resp.getText().toString());
+            postMap.put("show_type", et_show.getText().toString());
             api.postMockRecords(postMap).enqueue(cb);
         } else if (type == 1) {
             api.getsMockRecords().enqueue(cb);
         } else {
-            api.getMockItem().enqueue(cb);
+            api.getMockItem(et_path.getText().toString()).enqueue(cb);
         }
     }
 

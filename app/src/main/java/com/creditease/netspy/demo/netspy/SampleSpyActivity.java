@@ -3,6 +3,7 @@ package com.creditease.netspy.demo.netspy;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -59,6 +60,7 @@ public class SampleSpyActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btn_mock).setOnClickListener(v -> startActivity(new Intent(SampleSpyActivity.this, SampleMockApiActivity.class)));
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
         checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -78,7 +80,6 @@ public class SampleSpyActivity extends AppCompatActivity {
             ApiMockHelper.debug(isChecked);
             ApiMockHelper.launchActivity(this);
         });
-
     }
 
     @SuppressLint("HandlerLeak")
@@ -122,37 +123,6 @@ public class SampleSpyActivity extends AppCompatActivity {
         api.getList().enqueue(cb);
         api.getList().enqueue(cb);
         api.postList(new SpyApiService.Data("list")).enqueue(cb);
-    }
-
-    private void doHttpAPIList(int type) {
-        SpyApiService.HttpApi api = SpyApiService.getMock(getClient(this));
-        Callback<Void> cb = new Callback<Void>() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.body() == null) {
-                    return;
-                }
-
-                tvHttpContent.append("\n" + response.body().toString());
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                t.printStackTrace();
-            }
-        };
-
-        if (type == 0) {
-            Map<String, String> postMap = new HashMap<>();
-            postMap.put("path", "mock__api.action");
-            postMap.put("resp_data", "55555");
-            postMap.put("show_type", "1");
-            api.postMockRecords(postMap).enqueue(cb);
-        } else if (type == 1) {
-            api.getsMockRecords().enqueue(cb);
-        } else {
-            api.getMockItem().enqueue(cb);
-        }
     }
 
 
