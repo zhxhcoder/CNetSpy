@@ -58,15 +58,7 @@ public class SampleSpyActivity extends AppCompatActivity {
                 forceSendRequestByMobileData(this);
             }
         });
-        findViewById(R.id.btn_api_records_post).setOnClickListener(view -> {
-            doHttpAPIList(0);
-        });
-        findViewById(R.id.btn_api_records_get).setOnClickListener(view -> {
-            doHttpAPIList(1);
-        });
-        findViewById(R.id.btn_api_get_item).setOnClickListener(view -> {
-            doHttpAPIList(2);
-        });
+
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
         checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {

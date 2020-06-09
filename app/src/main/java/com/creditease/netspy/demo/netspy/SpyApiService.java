@@ -50,23 +50,11 @@ class SpyApiService {
 
     interface HttpApi {
 
-        @FormUrlEncoded
-        @DELETE("/api")
-        Call<Object> deleteMockApi(@FieldMap Map<String, String> map);
-
-        @GET("/api/list")
-        Call<Object> getMockApi(@QueryMap Map<String, String> map);
-
-        @FormUrlEncoded
-        @DELETE("/api/list")
-        Call<Object> postMockApi(@FieldMap Map<String, String> map);
-
         /////////////////////////////////////////////////////////////////////////
 
         @FormUrlEncoded
         @POST("/api/records")
         Call<Void> postMockRecords(@FieldMap Map<String, String> map);
-
 
         @GET("/api/records")
         Call<Void> getsMockRecords();

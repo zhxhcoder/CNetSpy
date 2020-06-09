@@ -14,33 +14,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:text="一般网络请求"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_api_records_post"
+        android:id="@+id/btn_mock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="ApiRecordPost"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_api_records_get"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="ApiRecordGet"
-        android:textAllCaps="false" />
-
-
-    <Button
-        android:id="@+id/btn_api_get_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="ApiItem"
+        android:layout_marginBottom="20dp"
+        android:text="数据模拟开始啦"
         android:textAllCaps="false" />
 
     <CheckBox
