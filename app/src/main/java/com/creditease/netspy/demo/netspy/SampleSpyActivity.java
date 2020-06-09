@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creditease.netspy.ApiMockHelper;
@@ -26,7 +27,6 @@ import com.creditease.netspy.demo.R;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
@@ -43,26 +43,29 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
  */
 public class SampleSpyActivity extends AppCompatActivity {
     private final static String TAG = "sampleSpyLog";
+    TextView tvHttpContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_spy);
-
         checkOnlineState();
+
+        tvHttpContent = findViewById(R.id.tvHttpContent);
 
         findViewById(R.id.btn_http).setOnClickListener(view -> {
             for (int i = 0; i < 2; i++) {
                 forceSendRequestByMobileData(this);
             }
         });
-        findViewById(R.id.btn_api_list).setOnClickListener(view -> {
+        findViewById(R.id.btn_api_records_post).setOnClickListener(view -> {
             doHttpAPIList(0);
-
         });
-        findViewById(R.id.btn_todo_number).setOnClickListener(view -> {
+        findViewById(R.id.btn_api_records_get).setOnClickListener(view -> {
             doHttpAPIList(1);
-
+        });
+        findViewById(R.id.btn_api_get_item).setOnClickListener(view -> {
+            doHttpAPIList(2);
         });
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
@@ -134,6 +137,11 @@ public class SampleSpyActivity extends AppCompatActivity {
         Callback<Void> cb = new Callback<Void>() {
             @Override
             public void onResponse(Call call, Response response) {
+                if (response.body() == null) {
+                    return;
+                }
+
+                tvHttpContent.append("\n" + response.body().toString());
             }
 
             @Override
@@ -144,12 +152,14 @@ public class SampleSpyActivity extends AppCompatActivity {
 
         if (type == 0) {
             Map<String, String> postMap = new HashMap<>();
-            postMap.put("path", "todo__no5.action");
-            postMap.put("resp", "55555");
-            api.postMockTodos(postMap).enqueue(cb);
+            postMap.put("path", "mock__api.action");
+            postMap.put("resp_data", "55555");
+            postMap.put("show_type", "1");
+            api.postMockRecords(postMap).enqueue(cb);
+        } else if (type == 1) {
+            api.getsMockRecords().enqueue(cb);
         } else {
-            Map<String, String> getMap = new HashMap<>();
-            api.getMockTodos(getMap).enqueue(cb);
+            api.getMockItem().enqueue(cb);
         }
     }
 

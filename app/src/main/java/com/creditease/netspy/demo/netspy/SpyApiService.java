@@ -50,18 +50,12 @@ class SpyApiService {
 
     interface HttpApi {
 
-        //添加或者更新
-        @FormUrlEncoded
-        @PUT("/api")
-        Call<Object> putMockApi(@FieldMap Map<String, String> map);
-
         @FormUrlEncoded
         @DELETE("/api")
         Call<Object> deleteMockApi(@FieldMap Map<String, String> map);
 
         @GET("/api/list")
         Call<Object> getMockApi(@QueryMap Map<String, String> map);
-
 
         @FormUrlEncoded
         @DELETE("/api/list")
@@ -70,11 +64,15 @@ class SpyApiService {
         /////////////////////////////////////////////////////////////////////////
 
         @FormUrlEncoded
-        @POST("/api/list")
-        Call<Void> postMockTodos(@FieldMap Map<String, String> map);
+        @POST("/api/records")
+        Call<Void> postMockRecords(@FieldMap Map<String, String> map);
 
-        @GET("/todo__no5.action")
-        Call<Void> getMockTodos(@QueryMap Map<String, String> map);
+
+        @GET("/api/records")
+        Call<Void> getsMockRecords();
+
+        @GET("/mock__api.action")
+        Call<Void> getMockItem();
 
         /////////////////////////////////////////////////////////////////////////
 
