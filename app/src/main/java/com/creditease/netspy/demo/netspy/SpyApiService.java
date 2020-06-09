@@ -55,13 +55,13 @@ class SpyApiService {
 
         @FormUrlEncoded
         @POST("/api/records")
-        Call<Void> postMockRecords(@FieldMap Map<String, String> map);
+        Call<String> postMockRecords(@FieldMap Map<String, String> map);
 
         @GET("/api/records")
-        Call<Void> getsMockRecords();
+        Call<String> getsMockRecords();
 
         @GET("/{path}")
-        Call<Void> getMockItem(@Path("path") String path);
+        Call<String> getMockItem(@Path("path") String path);
 
         /////////////////////////////////////////////////////////////////////////
 

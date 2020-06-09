@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,7 @@ import retrofit2.Response;
 
 public class SampleMockApiActivity extends AppCompatActivity {
     EditText et_path, et_resp, et_show;
+    TextView tvResp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class SampleMockApiActivity extends AppCompatActivity {
         et_path = findViewById(R.id.et_path);
         et_resp = findViewById(R.id.et_resp);
         et_show = findViewById(R.id.et_show);
+
+        tvResp = findViewById(R.id.tvResp);
 
         findViewById(R.id.btn_api_records_post).setOnClickListener(view -> {
             doHttpAPIList(0);
@@ -43,12 +48,24 @@ public class SampleMockApiActivity extends AppCompatActivity {
 
     private void doHttpAPIList(int type) {
         SpyApiService.HttpApi api = SpyApiService.getMock(getClient(this));
-        Callback<Void> cb = new Callback<Void>() {
+        Callback<String> cb = new Callback<String>() {
             @Override
             public void onResponse(Call call, Response response) {
                 if (response.body() == null) {
                     return;
                 }
+
+                if (type == 2) {
+
+                    Gson gson = new Gson();
+
+                    MockData info = gson.fromJson(response.body().toString(), MockData.class);
+
+                    tvResp.setText(info.getMsg());
+
+                    tvResp.append("\n" + response.body().toString());
+                }
+
             }
 
             @Override

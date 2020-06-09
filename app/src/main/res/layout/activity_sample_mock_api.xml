@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".netspy.SampleMockApiActivity">
 
-
     <EditText
         android:id="@+id/et_path"
         android:layout_width="match_parent"
@@ -49,4 +48,11 @@
         android:layout_gravity="center_horizontal"
         android:text="ApiRecordItem"
         android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/tvResp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
