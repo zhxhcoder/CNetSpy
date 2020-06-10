@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.support.FormatHelper;
@@ -22,15 +22,14 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     private ApiMockData data;
     private String filterText = "";
 
-    TextView path;
-    TextView resp_data;
-    TextView resp_empty;
-    TextView resp_error;
+    EditText path;
+    EditText resp_data;
+    EditText resp_empty;
+    EditText resp_error;
 
     private RadioButton radio1;
     private RadioButton radio2;
     private RadioButton radio3;
-
 
     public static void start(Context context, ApiMockData data) {
         Intent intent = new Intent(context, ApiMockDetailActivity.class);
@@ -41,7 +40,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_api_mock_detail);
+        setContentView(R.layout.netspy_api_mock_detail);
 
         path = findViewById(R.id.path);
         resp_data = findViewById(R.id.resp_data);

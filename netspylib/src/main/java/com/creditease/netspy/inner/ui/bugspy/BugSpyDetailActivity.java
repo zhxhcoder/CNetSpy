@@ -36,7 +36,7 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bug_spy_detail);
+        setContentView(R.layout.netspy_bug_spy_detail);
 
         time = findViewById(R.id.time);
         report = findViewById(R.id.report);

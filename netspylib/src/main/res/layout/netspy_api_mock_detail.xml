@@ -53,7 +53,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/resp_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/resp_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/resp_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
