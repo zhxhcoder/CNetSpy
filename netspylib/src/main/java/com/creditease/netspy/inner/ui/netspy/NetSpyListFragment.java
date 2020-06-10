@@ -108,7 +108,7 @@ public class NetSpyListFragment extends Fragment implements
         for (int i = 0; i < dataList.size(); i++) {
             HttpEvent event = dataList.get(i);
             if (!TextUtils.isEmpty(event.getResponseBody())) {
-                OkHttpHelper.getInstance().postApiRecords(event.getPath(), event.getResponseBody(),1,null);
+                OkHttpHelper.getInstance().postApiRecords(event.getPath(), 1, event.getResponseBody(), "", "", null);
             }
         }
     }

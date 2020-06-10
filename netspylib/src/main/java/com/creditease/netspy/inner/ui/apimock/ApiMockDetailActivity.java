@@ -13,9 +13,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.support.FormatHelper;
+import com.creditease.netspy.inner.support.OkHttpHelper;
 
 /**
  * Created by zhxh on 2020/06/06
@@ -34,6 +36,9 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     private RadioButton radio1;
     private RadioButton radio2;
     private RadioButton radio3;
+
+
+    boolean isReadOnly = true;
 
     public static void start(Context context, ApiMockData data) {
         Intent intent = new Intent(context, ApiMockDetailActivity.class);
@@ -64,6 +69,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         populateUI();
     }
 
+
     private void populateUI() {
         path.setText(data.getMockPath());
 
@@ -76,12 +82,45 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         if (!TextUtils.isEmpty(data.resp_error)) {
             resp_error.setText(FormatHelper.findSearch(Color.BLUE, FormatHelper.formatJson(data.resp_error), filterText));
         }
+
         if ("-1".equals(data.getShowType())) {
             radio3.setChecked(true);
         } else if ("0".equals(data.getShowType())) {
             radio2.setChecked(true);
         } else {
             radio1.setChecked(true);
+        }
+
+        radio1.setOnClickListener(v -> {
+            radio1.setChecked(true);
+            radio2.setChecked(false);
+            radio3.setChecked(false);
+        });
+
+        radio2.setOnClickListener(v -> {
+            radio1.setChecked(false);
+            radio2.setChecked(true);
+            radio3.setChecked(false);
+        });
+        radio3.setOnClickListener(v -> {
+            radio1.setChecked(false);
+            radio2.setChecked(false);
+            radio3.setChecked(true);
+        });
+
+        path.setEnabled(false);
+        resp_data.setEnabled(false);
+        resp_empty.setEnabled(false);
+        resp_error.setEnabled(false);
+    }
+
+    private int getShowType() {
+        if (radio3.isChecked()) {
+            return -1;
+        } else if (radio2.isChecked()) {
+            return 0;
+        } else {
+            return 1;
         }
     }
 
@@ -105,10 +144,38 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         if (item.getItemId() == R.id.search) {
             return true;
         } else if (item.getItemId() == R.id.edit) {
+            isReadOnly = false;
+
+            path.setEnabled(true);
+            resp_data.setEnabled(true);
+            resp_empty.setEnabled(true);
+            resp_error.setEnabled(true);
+
+            path.setText(data.getMockPath());
+            resp_data.setText(data.resp_data);
+            resp_empty.setText(data.resp_empty);
+            resp_error.setText(data.resp_error);
 
             return true;
         } else if (item.getItemId() == R.id.upload) {
+            if (isReadOnly) {
+                Toast.makeText(ApiMockDetailActivity.this, "请先点击右上角编辑按钮", Toast.LENGTH_LONG).show();
+                return true;
+            }
+            if (TextUtils.isEmpty(path.getText().toString())) {
+                return true;
+            }
+            if (TextUtils.isEmpty(resp_data.getText().toString()) && TextUtils.isEmpty(resp_empty.getText().toString()) && TextUtils.isEmpty(resp_error.getText().toString())) {
+                return true;
+            }
 
+            OkHttpHelper.getInstance().postApiRecords(path.getText().toString(), getShowType(), resp_data.getText().toString(), resp_empty.getText().toString(), resp_error.getText().toString(), new OkHttpHelper.HttpCallBack() {
+                @Override
+                public void onSuccess(String resp) {
+                    isReadOnly = true;
+                    Toast.makeText(ApiMockDetailActivity.this, "提交成功了", Toast.LENGTH_LONG).show();
+                }
+            });
             return true;
         } else {
             return super.onOptionsItemSelected(item);

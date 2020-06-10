@@ -96,7 +96,7 @@ public class OkHttpHelper {
         });
     }
 
-    public void postApiRecords(String path, String resp_data, int show_type, HttpCallBack cb) {
+    public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
         String trimPath;
@@ -111,11 +111,22 @@ public class OkHttpHelper {
         }
 
         OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new FormBody.Builder()
-                .add("path", trimPath.replace("/", "__"))
-                .add("resp_data", resp_data)
-                .add("show_type", String.valueOf(show_type))
-                .build();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("path", trimPath.replace("/", "__"));
+        builder.add("show_type", String.valueOf(show_type));
+
+        if (!TextUtils.isEmpty(resp_data)) {
+            builder.add("resp_data", resp_data);
+        }
+        if (!TextUtils.isEmpty(resp_empty)) {
+            builder.add("resp_empty", resp_empty);
+        }
+        if (!TextUtils.isEmpty(resp_error)) {
+            builder.add("resp_error", resp_error);
+        }
+        RequestBody requestBody = builder.build();
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)

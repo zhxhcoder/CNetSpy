@@ -75,6 +75,7 @@
                 android:id="@+id/path"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:textIsSelectable="true"
                 android:textSize="12sp" />
 
@@ -92,6 +93,7 @@
                 android:id="@+id/resp_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:textIsSelectable="true"
                 android:textSize="12sp" />
 
@@ -110,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
+                android:textStyle="bold"
                 android:textSize="12sp" />
 
             <TextView
@@ -127,6 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
+                android:textStyle="bold"
                 android:textSize="12sp" />
 
 
