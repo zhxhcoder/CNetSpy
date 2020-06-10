@@ -26,6 +26,7 @@
     <string name="netspy_body_omitted">(encoded or binary body omitted)</string>
     <string name="netspy_search">Search</string>
     <string name="netspy_upload">Upload</string>
+    <string name="netspy_edit">Edit</string>
     <string name="netspy_body_unexpected_eof">\n\n--- Unexpected end of content ---</string>
     <string name="netspy_body_content_truncated">\n\n--- Content truncated ---</string>
     <string name="notification_category">网络异常通知</string>

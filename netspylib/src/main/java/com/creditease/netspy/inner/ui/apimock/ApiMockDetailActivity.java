@@ -6,7 +6,11 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -42,6 +46,12 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.netspy_api_mock_detail);
 
+        data = (ApiMockData) getIntent().getSerializableExtra(ARG_API_MOCK_DATA);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
         path = findViewById(R.id.path);
         resp_data = findViewById(R.id.resp_data);
         resp_empty = findViewById(R.id.resp_empty);
@@ -51,13 +61,11 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         radio2 = findViewById(R.id.radio2);
         radio3 = findViewById(R.id.radio3);
 
-        data = (ApiMockData) getIntent().getSerializableExtra(ARG_API_MOCK_DATA);
-
         populateUI();
     }
 
     private void populateUI() {
-        path.setText(data.path);
+        path.setText(data.getMockPath());
 
         if (!TextUtils.isEmpty(data.resp_data)) {
             resp_data.setText(FormatHelper.findSearch(Color.BLUE, FormatHelper.formatJson(data.resp_data), filterText));
@@ -74,6 +82,36 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
             radio2.setChecked(true);
         } else {
             radio1.setChecked(true);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.netspy_api, menu);
+        MenuItem editMenuItem = menu.findItem(R.id.edit);
+        editMenuItem.setVisible(true);
+        MenuItem uploadMenuItem = menu.findItem(R.id.upload);
+        uploadMenuItem.setVisible(true);
+        MenuItem searchMenuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setIconifiedByDefault(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            return true;
+        } else if (item.getItemId() == R.id.edit) {
+
+            return true;
+        } else if (item.getItemId() == R.id.upload) {
+
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
