@@ -107,7 +107,9 @@ public class NetSpyListFragment extends Fragment implements
         List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
         for (int i = 0; i < dataList.size(); i++) {
             HttpEvent event = dataList.get(i);
-            OkHttpHelper.getInstance().postApiRecords(event.getPath(), event.getResponseBody().trim(),1,null);
+            if (!TextUtils.isEmpty(event.getResponseBody())) {
+                OkHttpHelper.getInstance().postApiRecords(event.getPath(), event.getResponseBody(),1,null);
+            }
         }
     }
 
