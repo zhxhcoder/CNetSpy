@@ -7,8 +7,8 @@ import java.io.Serializable;
  * 数据表
  */
 public class ApiMockData implements Serializable {
-    public String show_type; // 1默认表示返回resp_data 0表示返回resp_empty -1表示返回resp_error
     public String path;
+    public String show_type; // 1默认表示返回resp_data 0表示返回resp_empty -1表示返回resp_error
     public String resp_data; //gson传
     public String resp_empty; //gson传
     public String resp_error; //gson传
@@ -21,4 +21,8 @@ public class ApiMockData implements Serializable {
         } else
             return resp_data;
     }
+    public String getMockPath() {
+        return path.replace("__", "/");
+    }
+
 }
