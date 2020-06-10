@@ -55,16 +55,6 @@ public class SampleMockApiActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (type == 2) {
-
-                    Gson gson = new Gson();
-
-                    MockData info = gson.fromJson(response.body().toString(), MockData.class);
-
-                    tvResp.setText(info.getMsg());
-
-                    tvResp.append("\n" + response.body().toString());
-                }
 
             }
 

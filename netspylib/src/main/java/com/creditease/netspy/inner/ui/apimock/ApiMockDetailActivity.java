@@ -1,8 +1,11 @@
 package com.creditease.netspy.inner.ui.apimock;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -169,17 +172,32 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
                 return true;
             }
 
-            OkHttpHelper.getInstance().postApiRecords(path.getText().toString(), getShowType(), resp_data.getText().toString(), resp_empty.getText().toString(), resp_error.getText().toString(), new OkHttpHelper.HttpCallBack() {
-                @Override
-                public void onSuccess(String resp) {
-                    isReadOnly = true;
-                    Toast.makeText(ApiMockDetailActivity.this, "提交成功了", Toast.LENGTH_LONG).show();
-                }
-            });
+            OkHttpHelper.getInstance().postApiRecords(path.getText().toString(), getShowType(), resp_data.getText().toString(), resp_empty.getText().toString(), resp_error.getText().toString(), handler);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == OkHttpHelper.SAVE_SUCCESS) {
+                Toast.makeText(ApiMockDetailActivity.this, "提交成功", Toast.LENGTH_LONG).show();
+                isReadOnly = true;
+                path.setEnabled(false);
+                resp_data.setEnabled(false);
+                resp_empty.setEnabled(false);
+                resp_error.setEnabled(false);
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(OkHttpHelper.SAVE_SUCCESS);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.creditease.netspy.inner.ui.apimock;
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -50,25 +53,42 @@ public class ApiMockListActivity extends AppCompatActivity implements
 
         adapter = new ApiMockListAdapter(this);
         recyclerView.setAdapter(adapter);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         downLoadApi();
     }
 
     private void downLoadApi() {
-        OkHttpHelper.getInstance().getApiRecords(resp -> {
-            try {
-                dataList = new Gson().fromJson(resp, new TypeToken<List<ApiMockData>>() {
-                }.getType());
+        OkHttpHelper.getInstance().getApiRecords(handler);
+    }
 
-            } catch (JsonSyntaxException e) {
-                dataList = new ArrayList<>();
-                e.printStackTrace();
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == OkHttpHelper.LIST_SUCCESS) {
+                try {
+                    dataList = new Gson().fromJson(String.valueOf(msg.obj), new TypeToken<List<ApiMockData>>() {
+                    }.getType());
+                    if (dataList == null || dataList.isEmpty()) {
+                        return;
+                    }
+                    adapter.setData(filterText, dataList);
+                } catch (JsonSyntaxException e) {
+                    dataList = new ArrayList<>();
+                    e.printStackTrace();
+                }
             }
-            if (dataList == null || dataList.isEmpty()) {
-                return;
-            }
-            adapter.setData(filterText, dataList);
-        });
+            super.handleMessage(msg);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(OkHttpHelper.LIST_SUCCESS);
     }
 
     @Override

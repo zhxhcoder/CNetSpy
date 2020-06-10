@@ -1,5 +1,7 @@
 package com.creditease.netspy.inner.support;
 
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -23,6 +25,10 @@ public class OkHttpHelper {
     private static final String TAG = "OkHttpHelper";
     private static OkHttpHelper instance;
 
+    public static final int SAVE_SUCCESS = 1001;
+    public static final int LIST_SUCCESS = 1002;
+    public static final int ITEM_SUCCESS = 1003;
+
     private OkHttpHelper() {
     }
 
@@ -33,11 +39,7 @@ public class OkHttpHelper {
         return instance;
     }
 
-    public interface HttpCallBack {
-        void onSuccess(String resp);
-    }
-
-    public void getApiItem(String pathStr, HttpCallBack cb) {
+    public void getApiItem(String pathStr, Handler handler) {
         String path = pathStr.replace("__", "/");
         String url = "http://" + ApiMockHelper.host + ":5000/" + path;
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -58,16 +60,17 @@ public class OkHttpHelper {
                     return;
                 }
                 String resp = response.body().string();
-                Log.d(TAG, "onResponse: " + resp);
-
-                if (cb != null) {
-                    cb.onSuccess(resp);
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = ITEM_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
                 }
             }
         });
     }
 
-    public void getApiRecords(HttpCallBack cb) {
+    public void getApiRecords(Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -87,16 +90,17 @@ public class OkHttpHelper {
                     return;
                 }
                 String resp = response.body().string();
-                Log.d(TAG, "onResponse: " + resp);
-
-                if (cb != null) {
-                    cb.onSuccess(resp);
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = LIST_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
                 }
             }
         });
     }
 
-    public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, HttpCallBack cb) {
+    public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
         String trimPath;
@@ -151,10 +155,12 @@ public class OkHttpHelper {
                     return;
                 }
                 String resp = response.body().string();
-                Log.d(TAG, "onResponse: " + resp);
 
-                if (cb != null) {
-                    cb.onSuccess(resp);
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = SAVE_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
                 }
             }
         });
