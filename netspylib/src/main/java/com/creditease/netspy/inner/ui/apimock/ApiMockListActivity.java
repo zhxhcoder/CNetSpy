@@ -53,10 +53,8 @@ public class ApiMockListActivity extends AppCompatActivity implements
         downLoadApi();
     }
 
-
     private void downLoadApi() {
         OkHttpHelper.getInstance().getRecords(resp -> {
-
             try {
                 dataList = new Gson().fromJson(resp, new TypeToken<List<ApiMockData>>() {
                 }.getType());
@@ -66,7 +64,6 @@ public class ApiMockListActivity extends AppCompatActivity implements
                 e.printStackTrace();
             }
             adapter.setData(filterText, dataList);
-
         });
     }
 
@@ -93,7 +90,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_http_item, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.netspy_list_api_item, parent, false);
             ViewHolder holder = new ViewHolder(itemView);
             itemView.setTag(holder);
             return holder;
@@ -104,7 +101,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
             final ApiMockData data = dataList.get(i);
             String pathStr = data.getMockPath();
             holder.path.setText(FormatHelper.findSearch(Color.BLUE, pathStr, filterText));
-            holder.show.setText(data.show_type);
+            holder.show.setText(data.getShowType());
 
             holder.view.setOnClickListener(v -> ApiMockDetailActivity.start(activity, data));
         }

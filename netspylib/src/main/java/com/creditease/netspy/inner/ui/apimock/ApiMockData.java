@@ -21,8 +21,14 @@ public class ApiMockData implements Serializable {
         } else
             return resp_data;
     }
+
     public String getMockPath() {
         return path.replace("__", "/");
     }
 
+    public String getShowType() {
+        if (show_type == null || "".equals(show_type))
+            return "1";
+        return show_type;
+    }
 }

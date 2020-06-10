@@ -2,14 +2,16 @@ package com.creditease.netspy.inner.ui.apimock;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
-import com.creditease.netspy.inner.ui.netspy.HttpTabActivity;
+import com.creditease.netspy.inner.support.FormatHelper;
 
 /**
  * Created by zhxh on 2020/06/06
@@ -31,7 +33,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
 
 
     public static void start(Context context, ApiMockData data) {
-        Intent intent = new Intent(context, HttpTabActivity.class);
+        Intent intent = new Intent(context, ApiMockDetailActivity.class);
         intent.putExtra(ARG_API_MOCK_DATA, data);
         context.startActivity(intent);
     }
@@ -50,10 +52,30 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         radio2 = findViewById(R.id.radio2);
         radio3 = findViewById(R.id.radio3);
 
-
         data = (ApiMockData) getIntent().getSerializableExtra(ARG_API_MOCK_DATA);
 
+        populateUI();
+    }
 
+    private void populateUI() {
+        path.setText(data.path);
+
+        if (!TextUtils.isEmpty(data.resp_data)) {
+            resp_data.setText(FormatHelper.findSearch(Color.BLUE, FormatHelper.formatJson(data.resp_data), filterText));
+        }
+        if (!TextUtils.isEmpty(data.resp_empty)) {
+            resp_empty.setText(FormatHelper.findSearch(Color.BLUE, FormatHelper.formatJson(data.resp_empty), filterText));
+        }
+        if (!TextUtils.isEmpty(data.resp_error)) {
+            resp_error.setText(FormatHelper.findSearch(Color.BLUE, FormatHelper.formatJson(data.resp_error), filterText));
+        }
+        if ("-1".equals(data.getShowType())) {
+            radio3.setChecked(true);
+        } else if ("0".equals(data.getShowType())) {
+            radio2.setChecked(true);
+        } else {
+            radio1.setChecked(true);
+        }
     }
 
     @Override
@@ -64,7 +86,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
-
+        populateUI();
         return true;
     }
 }
