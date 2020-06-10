@@ -1,5 +1,6 @@
 package com.creditease.netspy.inner.support;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.creditease.netspy.ApiMockHelper;
@@ -36,6 +37,36 @@ public class OkHttpHelper {
         void onSuccess(String resp);
     }
 
+    public void getApiItem(String pathStr, HttpCallBack cb) {
+        String path = pathStr.replace("__", "/");
+        String url = "http://" + ApiMockHelper.host + ":5000/" + path;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .get()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                Log.d(TAG, "onResponse: " + resp);
+
+                if (cb != null) {
+                    cb.onSuccess(resp);
+                }
+            }
+        });
+    }
+
     public void getApiRecords(HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -68,9 +99,20 @@ public class OkHttpHelper {
     public void postApiRecords(String path, String resp_data, int show_type, HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
+        String trimPath;
+        if (path.startsWith("/")) {
+            trimPath = path.substring(1);
+        } else {
+            trimPath = path;
+        }
+
+        if (TextUtils.isEmpty(trimPath)) {
+            return;
+        }
+
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("path", path)
+                .add("path", trimPath.replace("/", "__"))
                 .add("resp_data", resp_data)
                 .add("show_type", String.valueOf(show_type))
                 .build();

@@ -313,6 +313,9 @@ public class HttpEvent {
 
     public String getMockPath() {
         if (ApiMockHelper.host.equals(getHost())) {
+            if (path.startsWith("/")) {
+
+            }
             return path.replace("__", "/");
         } else {
             return path;

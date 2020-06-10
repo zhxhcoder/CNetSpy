@@ -55,6 +55,9 @@ public class ApiMockListActivity extends AppCompatActivity implements
                 dataList = new ArrayList<>();
                 e.printStackTrace();
             }
+            if (dataList == null || dataList.isEmpty()) {
+                return;
+            }
             adapter.setData(filterText, dataList);
         });
     }
