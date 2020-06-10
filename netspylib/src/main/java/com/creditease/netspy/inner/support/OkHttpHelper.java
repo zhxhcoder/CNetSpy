@@ -36,7 +36,7 @@ public class OkHttpHelper {
         void onSuccess(String resp);
     }
 
-    public void getRecords(HttpCallBack cb) {
+    public void getApiRecords(HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -65,7 +65,7 @@ public class OkHttpHelper {
         });
     }
 
-    public void postRecords(String path, String resp_data, int show_type, HttpCallBack cb) {
+    public void postApiRecords(String path, String resp_data, int show_type, HttpCallBack cb) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
         OkHttpClient okHttpClient = new OkHttpClient();

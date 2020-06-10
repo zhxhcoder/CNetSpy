@@ -54,7 +54,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
     }
 
     private void downLoadApi() {
-        OkHttpHelper.getInstance().getRecords(resp -> {
+        OkHttpHelper.getInstance().getApiRecords(resp -> {
             try {
                 dataList = new Gson().fromJson(resp, new TypeToken<List<ApiMockData>>() {
                 }.getType());
