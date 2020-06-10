@@ -27,8 +27,7 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -121,8 +120,6 @@ public class SampleSpyActivity extends AppCompatActivity {
             }
         };
         api.getList().enqueue(cb);
-        api.getList().enqueue(cb);
-        api.postList(new SpyApiService.Data("list")).enqueue(cb);
     }
 
 
