@@ -18,6 +18,7 @@ public final class ApiMockInterceptor implements Interceptor {
             Request request = chain.request();
             return chain.proceed(request);
         }
+        //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
         Request request = chain.request();
         //获取request的创建者builder
         HttpUrl oldHttpUrl = request.url();
