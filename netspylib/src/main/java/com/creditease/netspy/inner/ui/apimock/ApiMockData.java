@@ -12,6 +12,7 @@ public class ApiMockData implements Serializable {
     public String resp_data; //gson传
     public String resp_empty; //gson传
     public String resp_error; //gson传
+    public String timestamp; //时间
 
     public String getRespShow() {
         if ("-1".equals(show_type)) {
