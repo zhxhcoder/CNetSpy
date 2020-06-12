@@ -40,6 +40,10 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
         BugSpyHelper.isBugSpy = isBugSpy;
     }
 
+    public static boolean debug() {
+        return BugSpyHelper.isBugSpy;
+    }
+
     /**
      * @param appInfo  当时打包app信息 打包时间、打包版本号等信息
      * @param userInfo 当时用户信息 用户名 用户ID等信息

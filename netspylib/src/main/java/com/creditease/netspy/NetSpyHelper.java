@@ -27,6 +27,10 @@ public final class NetSpyHelper {
         NetSpyHelper.isNetSpy = isNetSpy;
     }
 
+    public static boolean debug() {
+        return NetSpyHelper.isNetSpy;
+    }
+
 
     public static Intent launchIntent(Context context) {
         return new Intent(context, NetSpyListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

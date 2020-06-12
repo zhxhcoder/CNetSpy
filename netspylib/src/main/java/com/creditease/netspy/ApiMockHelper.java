@@ -22,6 +22,10 @@ public final class ApiMockHelper {
         ApiMockHelper.isApiMock = isApiMock;
     }
 
+    public static boolean debug() {
+        return ApiMockHelper.isApiMock;
+    }
+
     public static void launchActivity(Context context) {
         if (ApiMockHelper.isApiMock) {
             context.startActivity(new Intent(context, ApiMockListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
