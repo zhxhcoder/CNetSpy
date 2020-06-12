@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,6 +8,14 @@
 
     <TextView
         android:id="@+id/path"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
+        android:textSize="13sp"
+        tools:text="coder/android" />
+
+    <TextView
+        android:id="@+id/time"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
@@ -25,4 +33,17 @@
         android:textSize="11sp"
         tools:text="3" />
 
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/netspy_status_400"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="11sp"
+        tools:text="3" />
+
+
+</LinearLayout>
