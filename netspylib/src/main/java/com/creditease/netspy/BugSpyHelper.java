@@ -32,6 +32,9 @@ public class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     public static void debug(boolean isBugSpy) {
         BugSpyHelper.isBugSpy = isBugSpy;
     }
+    public static boolean debug() {
+        return BugSpyHelper.isBugSpy;
+    }
 
     public static void launchActivity(Context context) {
         if (BugSpyHelper.isBugSpy) {

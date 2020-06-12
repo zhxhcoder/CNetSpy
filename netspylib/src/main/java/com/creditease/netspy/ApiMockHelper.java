@@ -19,6 +19,9 @@ public final class ApiMockHelper {
     public static void debug(boolean isApiMock) {
         ApiMockHelper.isApiMock = isApiMock;
     }
+    public static boolean debug() {
+        return ApiMockHelper.isApiMock;
+    }
 
     public static void launchActivity(Context context) {
         if (ApiMockHelper.isApiMock) {
