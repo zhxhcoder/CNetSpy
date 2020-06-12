@@ -32,7 +32,7 @@ public final class ApiMockInterceptor implements Interceptor {
             Set<String> paramKeys = httpUrl.queryParameterNames();
             for (String key : paramKeys) {
                 if ("path_index".equals(key)) {
-                    path_index = "___" + httpUrl.queryParameter(key);
+                    path_index = "-" + httpUrl.queryParameter(key);
                 }
             }
         } else {
@@ -40,7 +40,7 @@ public final class ApiMockInterceptor implements Interceptor {
                 FormBody formBody = (FormBody) request.body();
                 for (int i = 0; i < formBody.size(); i++) {
                     if ("path_index".equals(formBody.name(i))) {
-                        path_index = "___" + formBody.value(i);
+                        path_index = "-" + formBody.value(i);
                     }
                 }
             }

@@ -27,6 +27,8 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
 
 
 import okhttp3.OkHttpClient;
@@ -34,6 +36,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.FieldMap;
 
 import static android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET;
 import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
@@ -119,7 +122,13 @@ public class SampleSpyActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         };
+
+
+        Map<String, String> map = new HashMap<>();
+        map.put("path_index","index");
+        map.put("nice","111");
         api.getList().enqueue(cb);
+        api.postList(map).enqueue(cb);
     }
 
 

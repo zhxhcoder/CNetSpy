@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -54,6 +55,10 @@ class SpyApiService {
 
         @GET("data/sk/101010100.html")
         Call<Void> getList();
+
+        @FormUrlEncoded
+        @POST("data/sk/101010100.html")
+        Call<Void> postList(@FieldMap Map<String, String> map);
 
     }
 }
