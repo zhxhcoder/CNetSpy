@@ -19,7 +19,7 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     static String appInfo = "";
     static String userInfo = "";
-
+    static String deviceInfo = "";
 
     private Thread.UncaughtExceptionHandler exceptionHandler;
     private Application app;
@@ -51,6 +51,12 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     public static void initInfo(String appInfo, String userInfo) {
         BugSpyHelper.appInfo = appInfo;
         BugSpyHelper.userInfo = userInfo;
+    }
+
+    public static void initInfo(String appInfo, String userInfo, String deviceInfo) {
+        BugSpyHelper.appInfo = appInfo;
+        BugSpyHelper.userInfo = userInfo;
+        BugSpyHelper.deviceInfo = deviceInfo;
     }
 
     public static void launchActivity(Context context) {
@@ -92,6 +98,7 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     private void saveError(String reportTitle, String report) {
         BugEvent event = new BugEvent();
         event.setApp(BugSpyHelper.appInfo);
+        event.setDevice(BugSpyHelper.deviceInfo);
         event.setUser(BugSpyHelper.userInfo);
         event.setTimestamp(String.valueOf(System.currentTimeMillis()));
         event.setCrashDate(new Date());

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
@@ -50,8 +49,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
 
         holder.index.setText(String.valueOf(position + 1));
 
-        String strTime = FormatHelper.getHHmmSS(item.getCrashDate());
-        holder.time.setText(strTime);
+        holder.time.setText(FormatHelper.timeStamp2Str(item.getTimeStamp(),null));
 
         holder.bug.setText(item.getSummary());
 

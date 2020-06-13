@@ -41,7 +41,7 @@ public class OkHttpHelper {
 
     public void deleteApiItem(String pathStr, Handler handler) {
         String path = pathStr.replace("/", "__");
-        String url = "http://" + ApiMockHelper.host + ":5000/" + path;
+        String url = "http://" + ApiMockHelper.host + ":5000/api/item/" + path;
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -170,8 +170,8 @@ public class OkHttpHelper {
     /***************************************BUG记录*********************************************/
 
 
-    public void deleteBugItem(Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/item";
+    public void deleteBugItem(String timestamp, Handler handler) {
+        String url = "http://" + ApiMockHelper.host + ":5000/bug/item/" + timestamp;
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)

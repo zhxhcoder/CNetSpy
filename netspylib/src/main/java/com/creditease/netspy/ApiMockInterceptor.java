@@ -53,7 +53,7 @@ public final class ApiMockInterceptor implements Interceptor {
                 .scheme("http")
                 .host(ApiMockHelper.host)
                 .port(5000)
-                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + path_index)
+                .encodedPath("/api/item/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + path_index)
                 .build();
         Request.Builder builder = request.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());

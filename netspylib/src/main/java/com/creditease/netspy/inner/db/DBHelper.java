@@ -17,7 +17,7 @@ public final class DBHelper {
     private static final int bugLogCount = 200;
     private static final int httpLogCount = 1000;
 
-    private static final String DB_NAME = "app_spy43.db"; // 数据库名称
+    private static final String DB_NAME = "app_spy53.db"; // 数据库名称
     private static volatile DBHelper sInstance = null; // 单例
     private SQLiteDatabase mDatabase;
     private DaoSession mDaoSession;

@@ -65,10 +65,14 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
                     DividerItemDecoration.VERTICAL));
             adapter = new BugSpyListAdapter(true, this, getContext());
             recyclerView.setAdapter(adapter);
-
-            downLoadBugs();
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        downLoadBugs();
     }
 
     @Override

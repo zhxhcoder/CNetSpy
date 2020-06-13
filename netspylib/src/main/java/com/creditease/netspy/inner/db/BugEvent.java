@@ -63,6 +63,9 @@ public class BugEvent {
     }
 
     public String getApp() {
+        if (app == null) {
+            return "";
+        }
         return app;
     }
 
@@ -83,6 +86,9 @@ public class BugEvent {
     }
 
     public String getDevice() {
+        if (device == null) {
+            return "";
+        }
         return device;
     }
 
@@ -91,6 +97,9 @@ public class BugEvent {
     }
 
     public String getUser() {
+        if (user == null) {
+            return "";
+        }
         return user;
     }
 
