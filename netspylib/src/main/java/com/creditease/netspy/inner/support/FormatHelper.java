@@ -15,6 +15,7 @@ import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -168,5 +169,46 @@ public class FormatHelper {
             }
         }
         return s;
+    }
+
+
+    public static String timeStamp2Str(long timeStamp, String format) {
+        if (timeStamp <= 0) {
+            System.out.print("时间戳不能为空");
+            return "";
+        }
+        if (format == null || format.isEmpty()) {
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        Date date = new Date(timeStamp);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(date);
+    }
+
+    /**
+     * 时间戳转成时间字符串
+     * 例如： "2019-10-09 13:38:16" 转为 1570599496000
+     *
+     * @param dateStr "2019-10-09 13:38:16"
+     * @param format  传空默认："yyyy-MM-dd HH:mm:ss"
+     * @return
+     */
+    public static long str2TimeStamp(String dateStr, String format) {
+        if (dateStr == null || dateStr.length() == 0) {
+            System.out.print("时间字符串不能为空");
+            return 0l;
+        }
+        if (format == null || format.length() == 0) {
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        try {
+            Date parseData = dateFormat.parse(dateStr);
+            long timeStamp = parseData.getTime();
+            return timeStamp;
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+        }
+        return 0l;
     }
 }

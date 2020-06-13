@@ -14,7 +14,6 @@
         <activity
             android:name=".inner.ui.apimock.ApiMockListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/netspy_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.creditease.netspy.task"
             android:theme="@style/NetSpy.Theme" />

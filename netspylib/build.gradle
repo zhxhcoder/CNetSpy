@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 52
-        versionName "4.0.2"
+        versionCode 53
+        versionName "4.0.3"
     }
     lintOptions {
         abortOnError false
@@ -50,7 +50,7 @@ def gitUrl = 'https://github.com/zhxhcoder/CNetSpy.git'   //github仓库的地�
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-version = "4.0.2"//version
+version = "4.0.3"//version
 group = "com.creditease"//groupId
 bintray {
     user = properties.getProperty("bintray.user")
@@ -65,10 +65,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '4.0.2'//版本号
+            name = '4.0.3'//版本号
             desc = 'tools for spying okhttp network and exception'//版本描述
             released = new Date()
-            vcsTag = 'v4.0.2'
+            vcsTag = 'v4.0.3'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }

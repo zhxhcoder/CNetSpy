@@ -40,12 +40,43 @@ public class OkHttpHelper {
     }
 
     public void getApiItem(String pathStr, Handler handler) {
-        String path = pathStr.replace("__", "/");
+        String path = pathStr.replace("/", "__");
         String url = "http://" + ApiMockHelper.host + ":5000/" + path;
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
                 .get()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = ITEM_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+    public void deleteApiItem(String pathStr, Handler handler) {
+        String path = pathStr.replace("/", "__");
+        String url = "http://" + ApiMockHelper.host + ":5000/" + path;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .delete()//默认就是GET请求，可以不写
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

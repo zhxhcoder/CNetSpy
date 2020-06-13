@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.support.OkHttpHelper;
@@ -42,16 +43,15 @@ public class ApiMockListActivity extends AppCompatActivity implements
         setContentView(R.layout.netspy_api_mock_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-        toolbar.setTitle("模拟API列表");
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
 
-        adapter = new ApiMockListAdapter(this);
+        adapter = new ApiMockListAdapter(this, handler);
         recyclerView.setAdapter(adapter);
     }
 
@@ -80,6 +80,9 @@ public class ApiMockListActivity extends AppCompatActivity implements
                     dataList = new ArrayList<>();
                     e.printStackTrace();
                 }
+            } else if (msg.what == OkHttpHelper.ITEM_SUCCESS) {
+                downLoadApi();
+                Toast.makeText(ApiMockListActivity.this, "删除成功,重新请求数据", Toast.LENGTH_LONG).show();
             }
             super.handleMessage(msg);
         }
@@ -89,6 +92,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
         handler.removeMessages(OkHttpHelper.LIST_SUCCESS);
+        handler.removeMessages(OkHttpHelper.ITEM_SUCCESS);
     }
 
     @Override

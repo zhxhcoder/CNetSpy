@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingLeft="10dp">
 
-    <TextView
-        android:id="@+id/path"
-        android:layout_width="200dp"
+    <LinearLayout
+        android:id="@+id/leftLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        android:textSize="13sp"
-        tools:text="coder/android" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/show"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/netspy_status_default"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
+            android:textSize="13sp"
+            tools:text="coder/android" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/time"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        android:textSize="13sp"
-        tools:text="coder/android" />
+        android:layout_below="@+id/leftLayout"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:maxLines="1"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        tools:text="2020/06/06 12:45:60" />
 
-    <TextView
-        android:id="@+id/show"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:background="@color/netspy_status_400"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textSize="11sp"
-        tools:text="3" />
-
-
-    <TextView
+    <ImageView
         android:id="@+id/delete"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@color/netspy_status_400"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:gravity="center"
+        android:padding="5dp"
+        android:src="@drawable/netspy_ic_delete_black_24dp"
         android:textColor="@android:color/white"
         android:textSize="11sp"
         tools:text="3" />
 
-
-</LinearLayout>
+</RelativeLayout>
