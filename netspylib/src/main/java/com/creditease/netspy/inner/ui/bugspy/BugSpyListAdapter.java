@@ -21,10 +21,12 @@ import java.util.List;
  */
 class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolder> {
     Context context;
-    BugSpyListFragment fragment;
+    IBugTabFragment fragment;
     private List<BugEvent> dataList;
+    boolean isRemote;
 
-    BugSpyListAdapter(BugSpyListFragment fragment, Context context) {
+    BugSpyListAdapter(boolean isRemote, IBugTabFragment fragment, Context context) {
+        this.isRemote = isRemote;
         this.fragment = fragment;
         this.context = context;
     }
@@ -54,7 +56,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         holder.bug.setText(item.getBugSummary());
 
         holder.delete.setOnClickListener(v -> {
-            fragment.updateDataFromDelete(item);
+            fragment.updateBugData(item);
             Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
         });
 

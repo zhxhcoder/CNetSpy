@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
+import com.creditease.netspy.inner.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,15 +28,15 @@ import java.util.Objects;
 /**
  * Created by zhxh on 2019/07/16
  */
-public class BugSpyListFragment extends Fragment implements IBugTabFragment {
+public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
 
     private BugSpyListAdapter adapter;
 
-    public BugSpyListFragment() {
+    public BugSpyRecordsFragment() {
     }
 
-    public static BugSpyListFragment newInstance() {
-        return new BugSpyListFragment();
+    public static BugSpyRecordsFragment newInstance() {
+        return new BugSpyRecordsFragment();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-            adapter = new BugSpyListAdapter(false,this, getContext());
+            adapter = new BugSpyListAdapter(true, this, getContext());
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();
@@ -82,7 +82,6 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTimeStamp() - o1.getTimeStamp()));
         adapter.setData(dataList);
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

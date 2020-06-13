@@ -78,7 +78,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.netspy_network_tab_menu, menu);
+        inflater.inflate(R.menu.netspy_http_tab, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
         searchView.setOnQueryTextListener(this);
