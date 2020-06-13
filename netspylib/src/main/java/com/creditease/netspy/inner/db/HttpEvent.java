@@ -368,11 +368,11 @@ public class HttpEvent {
     public String getNotificationText() {
         switch (getStatus()) {
             case Failed:
-                return " ! ! !  " + path;
+                return " ! ! !  " + getMockPath();
             case Requested:
-                return " . . .  " + path;
+                return " . . .  " + getMockPath();
             default:
-                return String.valueOf(responseCode) + " " + path;
+                return String.valueOf(responseCode) + " " + getMockPath();
         }
     }
 
