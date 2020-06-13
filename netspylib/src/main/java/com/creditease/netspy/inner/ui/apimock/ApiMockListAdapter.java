@@ -69,7 +69,7 @@ public class ApiMockListAdapter extends RecyclerView.Adapter<ApiMockListAdapter.
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(activity))
                     .setTitle("FBI警告")
                     .setMessage("此操作将同时删除远程服务器上的数据，删除后其他人将无法请求改接口，如有不满意之处，这边建议您点击进入修改页面修改")
-                    .setPositiveButton("放弃", null)
+                    .setPositiveButton("取消", null)
                     .setNegativeButton("任性", (dialog1, which) -> OkHttpHelper.getInstance().deleteApiItem(data.path, handler))
                     .create();
             dialog.show();
