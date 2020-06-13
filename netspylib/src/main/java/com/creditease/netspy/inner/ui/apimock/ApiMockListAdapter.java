@@ -1,6 +1,7 @@
 package com.creditease.netspy.inner.ui.apimock;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -63,11 +64,9 @@ public class ApiMockListAdapter extends RecyclerView.Adapter<ApiMockListAdapter.
         holder.delete.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(activity))
                     .setTitle("FBI警告")
-                    .setMessage("这将会删除远程服务器上的接口数据，删除后其他人也将无法请求，有什么不满意建议您点击修改相关内容。")
-                    .setPositiveButton("任性", (dialog1, which) -> {
-                        OkHttpHelper.getInstance().deleteApiItem(data.path, handler);
-                    })
-                    .setNegativeButton("放弃", null)
+                    .setMessage("此操作将同时删除远程服务器上的数据，删除后其他人将无法请求改接口，如有不满意之处，这边建议您点击进入修改页面修改")
+                    .setPositiveButton("放弃", null)
+                    .setNegativeButton("任性", (dialog1, which) -> OkHttpHelper.getInstance().deleteApiItem(data.path, handler))
                     .create();
             dialog.show();
         });
