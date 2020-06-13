@@ -43,7 +43,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
         setContentView(R.layout.netspy_api_mock_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("ApiMock");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.list);
@@ -58,10 +58,10 @@ public class ApiMockListActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        downLoadApi();
+        downLoadApis();
     }
 
-    private void downLoadApi() {
+    private void downLoadApis() {
         OkHttpHelper.getInstance().getApiRecords(handler);
     }
 
@@ -81,7 +81,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
                     e.printStackTrace();
                 }
             } else if (msg.what == OkHttpHelper.DEL_SUCCESS) {
-                downLoadApi();
+                downLoadApis();
                 Toast.makeText(ApiMockListActivity.this, "删除成功,重新请求数据", Toast.LENGTH_LONG).show();
             }
             super.handleMessage(msg);

@@ -13,6 +13,7 @@ import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolder> {
     Context context;
     IBugTabFragment fragment;
-    private List<BugEvent> dataList;
+    private List<BugEvent> dataList=new ArrayList<>();
     boolean isRemote;
 
     BugSpyListAdapter(boolean isRemote, IBugTabFragment fragment, Context context) {
@@ -56,7 +57,6 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
 
         holder.delete.setOnClickListener(v -> {
             fragment.updateBugData(item);
-            Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
         });
 
         holder.view.setOnClickListener(v -> {

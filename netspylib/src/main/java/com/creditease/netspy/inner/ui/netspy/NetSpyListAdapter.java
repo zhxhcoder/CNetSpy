@@ -99,7 +99,6 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         });
         holder.delete.setOnClickListener(v -> {
             fragment.updateDataFromDelete(httpEvent);
-            Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
         });
     }
 

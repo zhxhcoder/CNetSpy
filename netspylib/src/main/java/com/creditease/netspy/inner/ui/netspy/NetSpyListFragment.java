@@ -101,6 +101,7 @@ public class NetSpyListFragment extends Fragment implements
     public void updateDataFromDelete(HttpEvent httpEvent) {
         DBHelper.getInstance().deleteHttpData(httpEvent);
         updateDataFromDb();
+        Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
     }
 
     public void uploadCloudFromDb() {

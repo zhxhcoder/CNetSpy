@@ -84,7 +84,7 @@ public class BugSpyListActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(BugSpyListFragment.newInstance(), "本地记录");
-        adapter.addFragment(BugSpyListFragment.newInstance(), "远程记录");
+        adapter.addFragment(BugSpyRecordsFragment.newInstance(), "远程记录");
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

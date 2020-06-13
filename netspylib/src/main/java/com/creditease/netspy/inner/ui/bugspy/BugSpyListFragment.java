@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
+import com.creditease.netspy.inner.support.OkHttpHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,8 +102,13 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.upload) {
-            adapter.setData(new ArrayList<>());
-            DBHelper.getInstance().deleteAllBugData();
+            List<BugEvent> dataList = DBHelper.getInstance().getAllBugData();
+            for (int i = 0; i < dataList.size(); i++) {
+                BugEvent event = dataList.get(i);
+                if (!TextUtils.isEmpty(event.getReport())) {
+                    OkHttpHelper.getInstance().postBugRecords(event.getTimestamp(), event.getSummary(), event.getReport(), event.getDevice(), event.getUser(), event.getApp(), null);
+                }
+            }
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -112,5 +119,6 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
     public void updateBugData(BugEvent bugEvent) {
         DBHelper.getInstance().deleteBugData(bugEvent);
         updateDataFromDb();
+        Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
     }
 }
