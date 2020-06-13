@@ -91,12 +91,12 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
 
     private void saveError(String reportTitle, String report) {
         BugEvent event = new BugEvent();
-        event.setAppInfo(BugSpyHelper.appInfo);
-        event.setUserInfo(BugSpyHelper.userInfo);
-        event.setTimeStamp(System.currentTimeMillis());
+        event.setApp(BugSpyHelper.appInfo);
+        event.setUser(BugSpyHelper.userInfo);
+        event.setTimestamp(String.valueOf(System.currentTimeMillis()));
         event.setCrashDate(new Date());
-        event.setBugSummary(reportTitle);
-        event.setBugReport(report);
+        event.setSummary(reportTitle);
+        event.setReport(report);
         DBHelper.getInstance().insertBugData(event);
     }
 }

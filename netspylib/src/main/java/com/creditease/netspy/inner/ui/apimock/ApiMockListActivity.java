@@ -43,7 +43,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
         setContentView(R.layout.netspy_api_mock_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("ApiMock");
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.list);

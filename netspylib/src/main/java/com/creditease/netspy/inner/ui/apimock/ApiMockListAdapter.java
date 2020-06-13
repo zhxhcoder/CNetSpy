@@ -1,7 +1,6 @@
 package com.creditease.netspy.inner.ui.apimock;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;

@@ -53,9 +53,9 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     private void populateUI(BugEvent bugEvent) {
         String strTime = FormatHelper.getHHmmSS(bugEvent.getCrashDate());
         device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
-        user.setText(bugEvent.getUserInfo());
-        app.setText(bugEvent.getAppInfo());
+        user.setText(bugEvent.getUser());
+        app.setText(bugEvent.getApp());
         time.setText("崩溃发生时间：" + strTime+"\n");
-        report.setText(bugEvent.getBugReport());
+        report.setText(bugEvent.getReport());
     }
 }

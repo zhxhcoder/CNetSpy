@@ -35,13 +35,13 @@ public class BugSpyListActivity extends AppCompatActivity {
 
     Adapter adapter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.netspy_activity_http_tab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("BugRecord");
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();

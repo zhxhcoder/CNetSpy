@@ -57,7 +57,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         data = (ApiMockData) getIntent().getSerializableExtra(ARG_API_MOCK_DATA);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("Api详情");
         setSupportActionBar(toolbar);
 
         path = findViewById(R.id.path);

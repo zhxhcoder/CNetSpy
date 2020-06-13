@@ -13,27 +13,25 @@ import org.greenrobot.greendao.annotation.Generated;
 public class BugEvent {
     @Id(autoincrement = true)
     private Long _id; // 自增id
-    private Long timeStamp; //时间戳
-
+    private String timestamp; //时间戳
     private java.util.Date crashDate;
-
-    private String bugSummary;
-    private String bugReport;
-    private String deviceInfo;
-    private String userInfo;
-    private String appInfo;
+    private String summary;
+    private String report;
+    private String device;
+    private String user;
+    private String app;
 
     @Keep()
-    public BugEvent(Long _id, Long timeStamp, java.util.Date crashDate,
-                    String bugSummary, String bugReport, String deviceInfo, String userInfo, String appInfo) {
+    public BugEvent(Long _id, String timestamp, java.util.Date crashDate,
+                    String summary, String report, String device, String user, String app) {
         this._id = _id;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
         this.crashDate = crashDate;
-        this.bugSummary = bugSummary;
-        this.bugReport = bugReport;
-        this.deviceInfo = deviceInfo;
-        this.userInfo = userInfo;
-        this.appInfo = appInfo;
+        this.summary = summary;
+        this.report = report;
+        this.device = device;
+        this.user = user;
+        this.app = app;
     }
 
     @Keep()
@@ -48,73 +46,77 @@ public class BugEvent {
         this._id = _id;
     }
 
-    public Long getTimeStamp() {
-        return this.timeStamp;
+    public String getTimestamp() {
+        return this.timestamp;
     }
 
-    public void setTimeStamp(Long timeStamp) {
-        this.timeStamp = timeStamp;
+    public Long getTimeStamp() {
+        return Long.valueOf(this.timestamp);
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public java.util.Date getCrashDate() {
         return this.crashDate;
     }
 
-    public String getAppInfo() {
-        return appInfo;
+    public String getApp() {
+        return app;
     }
 
-    public void setAppInfo(String appInfo) {
-        this.appInfo = appInfo;
+    public void setApp(String app) {
+        this.app = app;
     }
 
     public void setCrashDate(java.util.Date crashDate) {
         this.crashDate = crashDate;
     }
 
-    public String getBugReport() {
-        return this.bugReport;
+    public String getReport() {
+        return this.report;
     }
 
-    public void setBugReport(String bugReport) {
-        this.bugReport = bugReport;
+    public void setReport(String report) {
+        this.report = report;
     }
 
-    public String getDeviceInfo() {
-        return deviceInfo;
+    public String getDevice() {
+        return device;
     }
 
-    public void setDeviceInfo(String deviceInfo) {
-        this.deviceInfo = deviceInfo;
+    public void setDevice(String device) {
+        this.device = device;
     }
 
-    public String getUserInfo() {
-        return userInfo;
+    public String getUser() {
+        return user;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getBugSummary() {
-        return bugSummary;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setBugSummary(String bugSummary) {
-        this.bugSummary = bugSummary;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     @Override
     public String toString() {
         return "BugEvent{" +
                 "_id=" + _id +
-                ", timeStamp=" + timeStamp +
+                ", timeStamp=" + timestamp +
                 ", crashDate=" + crashDate +
-                ", bugSummary='" + bugSummary + '\'' +
-                ", bugReport='" + bugReport + '\'' +
-                ", deviceInfo='" + deviceInfo + '\'' +
-                ", userInfo='" + userInfo + '\'' +
-                ", appInfo='" + appInfo + '\'' +
+                ", bugSummary='" + summary + '\'' +
+                ", bugReport='" + report + '\'' +
+                ", deviceInfo='" + device + '\'' +
+                ", userInfo='" + user + '\'' +
+                ", appInfo='" + app + '\'' +
                 '}';
     }
 }

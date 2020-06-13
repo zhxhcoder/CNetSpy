@@ -52,7 +52,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         String strTime = FormatHelper.getHHmmSS(item.getCrashDate());
         holder.time.setText(strTime);
 
-        holder.bug.setText(item.getBugSummary());
+        holder.bug.setText(item.getSummary());
 
         holder.delete.setOnClickListener(v -> {
             fragment.updateBugData(item);
