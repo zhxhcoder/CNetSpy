@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,11 @@ public class ApiMockListAdapter extends RecyclerView.Adapter<ApiMockListAdapter.
         } else {
             holder.show.setBackgroundColor(ContextCompat.getColor(activity, R.color.netspy_status_default));
         }
-        holder.time.setText(FormatHelper.timeStamp2Str(Long.parseLong(data.timestamp), null));
+        if (!TextUtils.isEmpty(data.timestamp)) {
+            holder.time.setText(FormatHelper.timeStamp2Str(Long.parseLong(data.timestamp), null));
+        } else {
+            holder.time.setText("yyyy-MM-dd HH:mm:ss");
+        }
 
         holder.view.setOnClickListener(v -> ApiMockDetailActivity.start(activity, data));
         holder.delete.setOnClickListener(v -> {
