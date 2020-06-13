@@ -58,9 +58,6 @@
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:padding="5dp"
-        android:src="@drawable/netspy_ic_delete_black_24dp"
-        android:textColor="@android:color/white"
-        android:textSize="11sp"
-        tools:text="3" />
+        android:src="@drawable/netspy_ic_delete_black_24dp" />
 
 </RelativeLayout>

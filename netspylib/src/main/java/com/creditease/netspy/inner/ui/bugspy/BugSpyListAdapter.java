@@ -1,7 +1,6 @@
 package com.creditease.netspy.inner.ui.bugspy;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,9 +59,6 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
             Toast.makeText(context, "删除成功", Toast.LENGTH_LONG).show();
         });
 
-        holder.email.setOnClickListener(v -> {
-            sendEmail(item.getBugReport());
-        });
         holder.view.setOnClickListener(v -> {
             BugSpyDetailActivity.start(context, item.getTimeStamp());
         });
@@ -77,7 +73,6 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         public final View view;
         public final TextView index;
         public final TextView time;
-        public final ImageView email;
         public final ImageView delete;
         public final TextView bug;
 
@@ -86,22 +81,8 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
             this.view = view;
             index = view.findViewById(R.id.index);
             time = view.findViewById(R.id.time);
-            email = view.findViewById(R.id.email);
             delete = view.findViewById(R.id.delete);
             bug = view.findViewById(R.id.bug);
         }
-    }
-
-
-    public void sendEmail(String trace) {
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        String subject = "App异常报告";
-        String body = "异常日志记录如下: " + "\n" + trace + "\n";
-
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"zhxhcoder@gmail.com"});
-        sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        sendIntent.setType("message/rfc822");
-        context.startActivity(Intent.createChooser(sendIntent, "Title:"));
     }
 }

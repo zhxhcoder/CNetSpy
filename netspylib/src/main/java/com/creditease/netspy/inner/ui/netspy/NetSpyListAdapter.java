@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,14 +94,12 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         holder.transaction = httpEvent;
         holder.view.setOnClickListener(v -> {
             if (null != NetSpyListAdapter.this.listener) {
-                Toast.makeText(context, "长按删除", Toast.LENGTH_SHORT).show();
                 NetSpyListAdapter.this.listener.onListFragmentInteraction(holder.transaction);
             }
         });
-        holder.view.setOnLongClickListener(v -> {
+        holder.delete.setOnClickListener(v -> {
             fragment.updateDataFromDelete(httpEvent);
             Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
-            return true;
         });
     }
 
@@ -152,6 +151,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         public final TextView host;
         public final TextView start;
         public final TextView param;
+        public final ImageView delete;
         HttpEvent transaction;
 
         ViewHolder(View view) {
@@ -162,6 +162,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
             host = view.findViewById(R.id.host);
             start = view.findViewById(R.id.start);
             param = view.findViewById(R.id.param);
+            delete = view.findViewById(R.id.delete);
         }
     }
 }

@@ -41,18 +41,9 @@
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/email"
-            android:src="@drawable/netspy_ic_delete_black_24dp" />
-
-        <ImageView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/netspy_ic_email_24dp" />
+            android:src="@drawable/netspy_ic_delete_black_24dp" />
 
     </RelativeLayout>
 

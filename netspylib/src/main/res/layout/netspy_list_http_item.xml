@@ -5,69 +5,91 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="10dp">
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/code"
-        android:layout_width="28dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="@android:color/holo_orange_light"
-        android:gravity="center"
-        android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        tools:text="200" />
-
-    <TextView
-        android:id="@+id/path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-3dp"
-        android:layout_toEndOf="@id/code"
-        android:layout_toRightOf="@id/code"
-        android:padding="2dp"
-        android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
-        android:textSize="13sp"
-        tools:text="GET /github/zhxhcoder/android" />
-
-    <TextView
-        android:id="@+id/host"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/path"
-        android:padding="2dp"
-        android:textColor="@color/netspy_status_default"
-        android:textSize="12sp"
-        tools:text="zhxh.com" />
-
-    <TextView
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/path"
-        android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@id/host"
-        android:layout_toRightOf="@id/host"
-        android:padding="2dp"
-        android:text="2012年"
-        android:textColor="@color/netspy_status_default"
-        android:textSize="12sp" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/host">
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp">
 
         <TextView
-            android:id="@+id/param"
+            android:id="@+id/code"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/holo_orange_light"
+            android:gravity="center"
+            android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            tools:text="200" />
+
+        <TextView
+            android:id="@+id/path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-3dp"
+            android:layout_toEndOf="@id/code"
+            android:layout_toRightOf="@id/code"
             android:padding="2dp"
-            android:textSize="11sp"
-            tools:text="参数" />
+            android:textAppearance="@style/NetSpy.TextAppearance.ListItem"
+            android:textSize="13sp"
+            tools:text="GET /github/zhxhcoder/android" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/path"
+            android:padding="2dp"
+            android:textColor="@color/netspy_status_default"
+            android:textSize="12sp"
+            tools:text="zhxh.com" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/path"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@id/host"
+            android:layout_toRightOf="@id/host"
+            android:padding="2dp"
+            android:text="2012年"
+            android:textColor="@color/netspy_status_default"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/host">
+
+            <TextView
+                android:id="@+id/param"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:textSize="11sp"
+                tools:text="参数" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:src="@drawable/netspy_ic_delete_black_24dp" />
 
 </RelativeLayout>
