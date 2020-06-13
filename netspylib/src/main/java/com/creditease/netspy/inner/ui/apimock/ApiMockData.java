@@ -24,7 +24,7 @@ public class ApiMockData implements Serializable {
     }
 
     public String getMockPath() {
-        return path.replace("__", "/").replace("/api/item/","/");
+        return path.replace("__", "/");
     }
 
     public String getShowType() {
