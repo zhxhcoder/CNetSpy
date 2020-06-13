@@ -27,7 +27,7 @@ public class OkHttpHelper {
 
     public static final int SAVE_SUCCESS = 1001;
     public static final int LIST_SUCCESS = 1002;
-    public static final int ITEM_SUCCESS = 1003;
+    public static final int DEL_SUCCESS = 1003;
 
     private OkHttpHelper() {
     }
@@ -37,37 +37,6 @@ public class OkHttpHelper {
             instance = new OkHttpHelper();
         }
         return instance;
-    }
-
-    public void getApiItem(String pathStr, Handler handler) {
-        String path = pathStr.replace("/", "__");
-        String url = "http://" + ApiMockHelper.host + ":5000/" + path;
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .url(url)
-                .get()//默认就是GET请求，可以不写
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d(TAG, "onFailure: ");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.body() == null) {
-                    return;
-                }
-                String resp = response.body().string();
-                if (handler != null) {
-                    Message msg = handler.obtainMessage();
-                    msg.what = ITEM_SUCCESS;
-                    msg.obj = resp;
-                    handler.sendMessage(msg);
-                }
-            }
-        });
     }
 
     public void deleteApiItem(String pathStr, Handler handler) {
@@ -93,7 +62,7 @@ public class OkHttpHelper {
                 String resp = response.body().string();
                 if (handler != null) {
                     Message msg = handler.obtainMessage();
-                    msg.what = ITEM_SUCCESS;
+                    msg.what = DEL_SUCCESS;
                     msg.obj = resp;
                     handler.sendMessage(msg);
                 }
@@ -160,6 +129,120 @@ public class OkHttpHelper {
         if (!TextUtils.isEmpty(resp_error)) {
             builder.add("resp_error", resp_error);
         }
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
+                Headers headers = response.headers();
+                for (int i = 0; i < headers.size(); i++) {
+                    Log.d(TAG, headers.name(i) + ":" + headers.value(i));
+                }
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = SAVE_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+
+    /***************************************BUG记录*********************************************/
+
+
+    public void deleteBugItem(Handler handler) {
+        String url = "http://" + ApiMockHelper.host + ":5000/bug/item";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .delete()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = DEL_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+    public void getBugRecords(Handler handler) {
+        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .get()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = LIST_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+    public void postBugRecords(String timestamp, String summary, String report, String device, String user, String app, Handler handler) {
+        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("timestamp", timestamp);
+        builder.add("summary", summary);
+        builder.add("report", report);
+        builder.add("device", device);
+        builder.add("user", user);
+        builder.add("app", app);
+
         RequestBody requestBody = builder.build();
 
         Request request = new Request.Builder()

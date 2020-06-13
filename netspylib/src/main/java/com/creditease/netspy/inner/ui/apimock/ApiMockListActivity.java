@@ -80,7 +80,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
                     dataList = new ArrayList<>();
                     e.printStackTrace();
                 }
-            } else if (msg.what == OkHttpHelper.ITEM_SUCCESS) {
+            } else if (msg.what == OkHttpHelper.DEL_SUCCESS) {
                 downLoadApi();
                 Toast.makeText(ApiMockListActivity.this, "删除成功,重新请求数据", Toast.LENGTH_LONG).show();
             }
@@ -92,7 +92,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
         handler.removeMessages(OkHttpHelper.LIST_SUCCESS);
-        handler.removeMessages(OkHttpHelper.ITEM_SUCCESS);
+        handler.removeMessages(OkHttpHelper.DEL_SUCCESS);
     }
 
     @Override
