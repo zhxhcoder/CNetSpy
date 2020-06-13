@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,16 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.db.DBHelper;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by zhxh on 2019/07/16
@@ -58,27 +54,13 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
             adapter = new BugSpyListAdapter(true, this, getContext());
             recyclerView.setAdapter(adapter);
 
-            updateDataFromDb();
+            updateDataFromCloud();
         }
         return view;
     }
 
-    public void updateDataFromDb() {
+    public void updateDataFromCloud() {
         List<BugEvent> dataList = DBHelper.getInstance().getAllBugData();
-        if (dataList.size() > 200) {
-            AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
-                    .setTitle("温馨提示")
-                    .setMessage("异常崩溃数据已经达到" + dataList.size() + "条，为防止数据过多请自动清理")
-                    .setPositiveButton("清理", (dialog1, which) -> {
-                        adapter.setData(new ArrayList<>());
-                        DBHelper.getInstance().deleteAllBugData();
-                    })
-                    .setNegativeButton("取消", null)
-                    .create();
-            dialog.show();
-        } else if (dataList.size() > 100) {
-            Toast.makeText(getActivity(), "异常崩溃数据已经达到" + dataList.size() + "条，请按主动屏幕右上角删除按钮及时清理", Toast.LENGTH_LONG).show();
-        }
         Collections.sort(dataList, (o1, o2) -> (int) (o2.getTimeStamp() - o1.getTimeStamp()));
         adapter.setData(dataList);
     }
@@ -91,8 +73,6 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.netspy_main, menu);
-        MenuItem searchMenuItem = menu.findItem(R.id.search);
-        searchMenuItem.setVisible(false);
         MenuItem uploadMenuItem = menu.findItem(R.id.upload);
         uploadMenuItem.setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
@@ -100,9 +80,7 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.clear) {
-            adapter.setData(new ArrayList<>());
-            DBHelper.getInstance().deleteAllBugData();
+        if (item.getItemId() == R.id.upload) {
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -112,6 +90,6 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
     @Override
     public void updateBugData(BugEvent bugEvent) {
         DBHelper.getInstance().deleteBugData(bugEvent);
-        updateDataFromDb();
+        updateDataFromCloud();
     }
 }

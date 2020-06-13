@@ -55,7 +55,7 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-            adapter = new BugSpyListAdapter(false,this, getContext());
+            adapter = new BugSpyListAdapter(false, this, getContext());
             recyclerView.setAdapter(adapter);
 
             updateDataFromDb();
@@ -91,17 +91,15 @@ public class BugSpyListFragment extends Fragment implements IBugTabFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.netspy_main, menu);
-        MenuItem searchMenuItem = menu.findItem(R.id.search);
-        searchMenuItem.setVisible(false);
+        inflater.inflate(R.menu.netspy_bug, menu);
         MenuItem uploadMenuItem = menu.findItem(R.id.upload);
-        uploadMenuItem.setVisible(false);
+        uploadMenuItem.setVisible(true);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.clear) {
+        if (item.getItemId() == R.id.upload) {
             adapter.setData(new ArrayList<>());
             DBHelper.getInstance().deleteAllBugData();
             return true;
