@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
@@ -105,13 +106,21 @@ public class NetSpyListFragment extends Fragment implements
     }
 
     public void uploadCloudFromDb() {
-        List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
-        for (int i = 0; i < dataList.size(); i++) {
-            HttpEvent event = dataList.get(i);
-            if (!TextUtils.isEmpty(event.getResponseBody())) {
-                OkHttpHelper.getInstance().postApiRecords(event.getPath(), 1, event.getResponseBody(), "", "", null);
-            }
-        }
+        AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
+                .setTitle("温馨提示")
+                .setMessage("将上传接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
+                .setPositiveButton("上传", (dialog1, which) -> {
+                    List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
+                    for (int i = 0; i < dataList.size(); i++) {
+                        HttpEvent event = dataList.get(i);
+                        if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
+                            OkHttpHelper.getInstance().postApiRecords(event.getPath(), 1, event.getResponseBody(), "", "", null);
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .create();
+        dialog.show();
     }
 
     @Override

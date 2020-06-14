@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.creditease.netspy.NetSpyInterceptor;
 import com.creditease.netspy.demo.R;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
