@@ -114,7 +114,8 @@ public class NetSpyListFragment extends Fragment implements
                     for (int i = 0; i < dataList.size(); i++) {
                         HttpEvent event = dataList.get(i);
                         if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
-                            OkHttpHelper.getInstance().postApiRecords(event.getPath(), 1, event.getResponseBody(), "", "", null);
+                            //TODO
+                            OkHttpHelper.getInstance().postApiRecords(event.getPathWithParam(), 1, event.getResponseBody(), "", "", null);
                         }
                     }
                 })

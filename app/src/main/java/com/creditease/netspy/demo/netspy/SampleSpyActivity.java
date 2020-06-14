@@ -57,7 +57,7 @@ public class SampleSpyActivity extends AppCompatActivity {
         tvHttpContent = findViewById(R.id.tvHttpContent);
 
         findViewById(R.id.btn_http).setOnClickListener(view -> {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 1; i++) {
                 forceSendRequestByMobileData(this);
             }
         });
@@ -125,9 +125,10 @@ public class SampleSpyActivity extends AppCompatActivity {
 
 
         Map<String, String> map = new HashMap<>();
-        map.put("path_index","index");
+        map.put("method","mm");
         map.put("nice","111");
-        api.getList().enqueue(cb);
+        map.put("cardids","cc");
+        //api.getList().enqueue(cb);
         api.postList(map).enqueue(cb);
     }
 

@@ -17,11 +17,12 @@ public final class ApiMockHelper {
     //默认baseUrl
     public static String host = "10.106.157.94";
 
-    public static Set<String> paramSet = new HashSet<>();
+    public static Set<String> paramSet = new HashSet<String>() {{
+        add("method");
+        add("cardids");
+    }};
 
     public static void initHost(String baseUrl) {
-        paramSet.add("method");
-        paramSet.add("cardids");
         ApiMockHelper.host = baseUrl;
     }
 

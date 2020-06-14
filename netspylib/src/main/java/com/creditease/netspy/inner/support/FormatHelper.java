@@ -17,7 +17,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -219,5 +221,25 @@ public class FormatHelper {
             e1.printStackTrace();
         }
         return 0l;
+    }
+
+
+    //获得某个key的value值string类型
+    public static String getParamValue(String key, CharSequence input) {
+        if (TextUtils.isEmpty(input)) return "";
+        if (TextUtils.isEmpty(key)) return "";
+        List<String> matches = new ArrayList<>();
+
+        String regex = key + "=" + "[^&]*";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        while (matcher.find()) {
+            matches.add(matcher.group());
+        }
+        if (matches.size() > 0) {
+            return matches.get(0);
+        }
+        return "";
     }
 }

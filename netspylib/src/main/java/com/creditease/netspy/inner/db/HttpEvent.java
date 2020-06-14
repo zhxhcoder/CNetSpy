@@ -311,9 +311,29 @@ public class HttpEvent {
         return path;
     }
 
+    //TODO 获取带有特殊参数
+    public String getPathWithParam() {
+        StringBuilder pathParams = new StringBuilder();
+        for (String param : ApiMockHelper.paramSet) {
+            if (requestBody.contains(param)) {
+                pathParams.append("--")
+                        .append(param)
+                        .append("--")
+                        .append(getParamValue(param));
+            }
+        }
+
+        return path + pathParams;
+    }
+
+    private String getParamValue(String param) {
+        return FormatHelper.getParamValue(param, requestBody).replace(param + "=", "");
+    }
+
     public String getMockPath() {
         if (ApiMockHelper.host.equals(getHost())) {
             if (path.startsWith("/")) {
+            } else {
             }
             return path.replace("__", "/");
         } else {

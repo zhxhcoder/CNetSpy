@@ -68,7 +68,8 @@ public class SampleMockApiActivity extends AppCompatActivity {
             postMap.put("path", et_path.getText().toString());
             postMap.put("resp_data", et_resp.getText().toString());
             postMap.put("show_type", et_show.getText().toString());
-            postMap.put("path_index", "555");
+            postMap.put("method", "mmmmm");
+            postMap.put("cardids", "ccccc");
             api.postMockRecords(postMap).enqueue(cb);
         } else if (type == 1) {
             api.getsMockRecords().enqueue(cb);

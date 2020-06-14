@@ -30,27 +30,26 @@ public final class ApiMockInterceptor implements Interceptor {
         if ("GET".equals(request.method())) { // GET方法
             HttpUrl httpUrl = urlBuilder.build();
             Set<String> paramKeys = httpUrl.queryParameterNames();
-            for (String key : paramKeys) {
-                for (String param : ApiMockHelper.paramSet) {
-                    if (param.equals(key)) {
-                        pathParams.append("--")
-                                .append(param)
-                                .append("--")
-                                .append(httpUrl.queryParameter(key));
-                    }
+
+            for (String param : ApiMockHelper.paramSet) {
+                if (paramKeys.contains(param)) {
+                    pathParams.append("--")
+                            .append(param)
+                            .append("--")
+                            .append(httpUrl.queryParameter(param));
                 }
             }
+
         } else {
             if (request.body() instanceof FormBody) {
                 FormBody formBody = (FormBody) request.body();
+
                 for (int i = 0; i < formBody.size(); i++) {
-                    for (String param : ApiMockHelper.paramSet) {
-                        if (param.equals(formBody.name(i))) {
-                            pathParams.append("--")
-                                    .append(param)
-                                    .append("--")
-                                    .append(formBody.value(i));
-                        }
+                    if (ApiMockHelper.paramSet.contains(formBody.name(i))) {
+                        pathParams.append("--")
+                                .append(formBody.name(i))
+                                .append("--")
+                                .append(formBody.value(i));
                     }
                 }
             }
