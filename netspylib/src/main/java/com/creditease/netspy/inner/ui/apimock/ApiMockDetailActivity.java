@@ -40,7 +40,6 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     private RadioButton radio2;
     private RadioButton radio3;
 
-
     boolean isReadOnly = true;
 
     public static void start(Context context, ApiMockData data) {
@@ -57,7 +56,7 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         data = (ApiMockData) getIntent().getSerializableExtra(ARG_API_MOCK_DATA);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("API详情");
         setSupportActionBar(toolbar);
 
         path = findViewById(R.id.path);

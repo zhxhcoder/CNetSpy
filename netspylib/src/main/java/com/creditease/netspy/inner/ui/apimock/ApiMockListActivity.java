@@ -1,6 +1,7 @@
 package com.creditease.netspy.inner.ui.apimock;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.creditease.netspy.R;
+import com.creditease.netspy.inner.support.FormatHelper;
 import com.creditease.netspy.inner.support.OkHttpHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -31,6 +34,8 @@ public class ApiMockListActivity extends AppCompatActivity implements
         SearchView.OnQueryTextListener {
 
     List<ApiMockData> dataList = new ArrayList<>();
+    List<ApiMockData> searchList = new ArrayList<>();
+
     private String filterText = "";
 
     RecyclerView recyclerView;
@@ -43,7 +48,8 @@ public class ApiMockListActivity extends AppCompatActivity implements
         setContentView(R.layout.netspy_api_mock_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("API记录");
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.list);
@@ -123,8 +129,17 @@ public class ApiMockListActivity extends AppCompatActivity implements
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
-        adapter.setData(filterText, dataList);
+
+        if (TextUtils.isEmpty(filterText)) {
+            adapter.setData(filterText, dataList);
+        } else {
+            searchList.clear();
+            for (ApiMockData data : dataList) {
+                if (FormatHelper.isFindMatch(data.getMockPath(), filterText))
+                    searchList.add(data);
+            }
+            adapter.setData(filterText, searchList);
+        }
         return true;
     }
-
 }

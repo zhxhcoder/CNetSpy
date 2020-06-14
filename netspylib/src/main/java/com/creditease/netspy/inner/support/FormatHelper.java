@@ -146,6 +146,15 @@ public class FormatHelper {
         return s;
     }
 
+    public static boolean isFindMatch(String text, String keyword) {
+        if (TextUtils.isEmpty(keyword) || TextUtils.isEmpty(text)) {
+            return false;
+        }
+        Pattern p = Pattern.compile(keyword);
+        Matcher m = p.matcher(text);
+        return m.find();
+    }
+
     /**
      * 多个关键字高亮变色
      *

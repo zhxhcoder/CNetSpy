@@ -50,7 +50,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
         setContentView(R.layout.netspy_activity_http_tab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("接口返回");
+        toolbar.setTitle("Request结果");
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();

@@ -53,10 +53,13 @@ public class ApiMockListAdapter extends RecyclerView.Adapter<ApiMockListAdapter.
 
         if ("-1".equals(data.getShowType())) {
             holder.show.setBackgroundColor(ContextCompat.getColor(activity, R.color.netspy_status_500));
+            holder.path.setTextColor(ContextCompat.getColor(activity, R.color.netspy_status_500));
         } else if ("0".equals(data.getShowType())) {
             holder.show.setBackgroundColor(ContextCompat.getColor(activity, R.color.netspy_status_400));
+            holder.path.setTextColor(ContextCompat.getColor(activity, R.color.netspy_status_400));
         } else {
             holder.show.setBackgroundColor(ContextCompat.getColor(activity, R.color.netspy_status_default));
+            holder.path.setTextColor(ContextCompat.getColor(activity, R.color.netspy_status_default));
         }
         if (!TextUtils.isEmpty(data.timestamp)) {
             holder.time.setText(FormatHelper.timeStamp2Str(Long.parseLong(data.timestamp), null));

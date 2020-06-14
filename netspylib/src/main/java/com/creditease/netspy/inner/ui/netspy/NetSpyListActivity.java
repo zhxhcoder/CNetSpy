@@ -1,6 +1,5 @@
 package com.creditease.netspy.inner.ui.netspy;
 
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,7 +18,7 @@ public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("NetSpy");
+        toolbar.setTitle("Request记录");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {

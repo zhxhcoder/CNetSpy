@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -40,7 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="正确返回:1" />
+                    android:text="正确返回:1"
+                    android:textColor="@android:color/black" />
 
                 <RadioButton
                     android:id="@+id/radio2"
@@ -48,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="空返回:0" />
+                    android:text="空返回:0"
+                    android:textColor="@android:color/black" />
 
                 <RadioButton
                     android:id="@+id/radio3"
@@ -56,7 +59,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="错误返回:-1" />
+                    android:text="错误返回:-1"
+                    android:textColor="@android:color/black" />
 
             </LinearLayout>
 
@@ -75,9 +79,10 @@
                 android:id="@+id/path"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:textColor="#666666"
                 android:textIsSelectable="true"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,9 +98,10 @@
                 android:id="@+id/resp_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:textColor="#666666"
                 android:textIsSelectable="true"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -111,9 +117,10 @@
                 android:id="@+id/resp_empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#666666"
                 android:textIsSelectable="true"
-                android:textStyle="bold"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -129,9 +136,10 @@
                 android:id="@+id/resp_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#666666"
                 android:textIsSelectable="true"
-                android:textStyle="bold"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>

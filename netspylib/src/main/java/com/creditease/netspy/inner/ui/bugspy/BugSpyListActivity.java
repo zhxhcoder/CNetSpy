@@ -41,7 +41,7 @@ public class BugSpyListActivity extends AppCompatActivity {
         setContentView(R.layout.netspy_activity_http_tab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("BugRecord");
+        toolbar.setTitle("Bug记录");
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
