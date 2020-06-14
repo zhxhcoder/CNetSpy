@@ -105,9 +105,9 @@ public class OkHttpHelper {
 
         String trimPath;
         if (path.startsWith("/")) {
-            trimPath = path.substring(1);
+            trimPath = path.substring(1).trim();
         } else {
-            trimPath = path;
+            trimPath = path.trim();
         }
 
         if (TextUtils.isEmpty(trimPath)) {
@@ -121,13 +121,13 @@ public class OkHttpHelper {
         builder.add("show_type", String.valueOf(show_type));
 
         if (!TextUtils.isEmpty(resp_data)) {
-            builder.add("resp_data", resp_data);
+            builder.add("resp_data", resp_data.trim());
         }
         if (!TextUtils.isEmpty(resp_empty)) {
-            builder.add("resp_empty", resp_empty);
+            builder.add("resp_empty", resp_empty.trim());
         }
         if (!TextUtils.isEmpty(resp_error)) {
-            builder.add("resp_error", resp_error);
+            builder.add("resp_error", resp_error.trim());
         }
         RequestBody requestBody = builder.build();
 
