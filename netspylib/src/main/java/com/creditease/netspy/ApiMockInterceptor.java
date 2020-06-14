@@ -24,29 +24,33 @@ public final class ApiMockInterceptor implements Interceptor {
         //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
         Request request = chain.request();
 
-        String path_params = "";
+        StringBuilder pathParams = new StringBuilder();
         HttpUrl.Builder urlBuilder = request.url().newBuilder();
 
         if ("GET".equals(request.method())) { // GET方法
             HttpUrl httpUrl = urlBuilder.build();
             Set<String> paramKeys = httpUrl.queryParameterNames();
             for (String key : paramKeys) {
-                if ("method".equals(key)) {
-                    path_params = "--method--" + httpUrl.queryParameter(key);
-                }
-                if ("cardids".equals(key)) {
-                    path_params = "--cardids--" + httpUrl.queryParameter(key);
+                for (String param : ApiMockHelper.paramSet) {
+                    if (param.equals(key)) {
+                        pathParams.append("--")
+                                .append(param)
+                                .append("--")
+                                .append(httpUrl.queryParameter(key));
+                    }
                 }
             }
         } else {
             if (request.body() instanceof FormBody) {
                 FormBody formBody = (FormBody) request.body();
                 for (int i = 0; i < formBody.size(); i++) {
-                    if ("method".equals(formBody.name(i))) {
-                        path_params = "--method--" + formBody.value(i);
-                    }
-                    if ("cardids".equals(formBody.name(i))) {
-                        path_params = "--cardids--" + formBody.value(i);
+                    for (String param : ApiMockHelper.paramSet) {
+                        if (param.equals(formBody.name(i))) {
+                            pathParams.append("--")
+                                    .append(param)
+                                    .append("--")
+                                    .append(formBody.value(i));
+                        }
                     }
                 }
             }
@@ -59,7 +63,7 @@ public final class ApiMockInterceptor implements Interceptor {
                 .scheme("http")
                 .host(ApiMockHelper.host)
                 .port(5000)
-                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + path_params)
+                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();
         Request.Builder builder = request.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());
