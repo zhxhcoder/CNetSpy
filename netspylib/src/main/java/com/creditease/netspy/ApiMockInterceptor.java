@@ -24,23 +24,29 @@ public final class ApiMockInterceptor implements Interceptor {
         //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
         Request request = chain.request();
 
-        String path_index = "";
+        String path_params = "";
         HttpUrl.Builder urlBuilder = request.url().newBuilder();
 
         if ("GET".equals(request.method())) { // GET方法
             HttpUrl httpUrl = urlBuilder.build();
             Set<String> paramKeys = httpUrl.queryParameterNames();
             for (String key : paramKeys) {
-                if ("path_index".equals(key)) {
-                    path_index = "--" + httpUrl.queryParameter(key);
+                if ("method".equals(key)) {
+                    path_params = "--method--" + httpUrl.queryParameter(key);
+                }
+                if ("cardids".equals(key)) {
+                    path_params = "--cardids--" + httpUrl.queryParameter(key);
                 }
             }
         } else {
             if (request.body() instanceof FormBody) {
                 FormBody formBody = (FormBody) request.body();
                 for (int i = 0; i < formBody.size(); i++) {
-                    if ("path_index".equals(formBody.name(i))) {
-                        path_index = "--" + formBody.value(i);
+                    if ("method".equals(formBody.name(i))) {
+                        path_params = "--method--" + formBody.value(i);
+                    }
+                    if ("cardids".equals(formBody.name(i))) {
+                        path_params = "--cardids--" + formBody.value(i);
                     }
                 }
             }
@@ -53,7 +59,7 @@ public final class ApiMockInterceptor implements Interceptor {
                 .scheme("http")
                 .host(ApiMockHelper.host)
                 .port(5000)
-                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + path_index)
+                .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + path_params)
                 .build();
         Request.Builder builder = request.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());
