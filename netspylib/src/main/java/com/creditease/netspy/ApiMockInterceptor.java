@@ -157,8 +157,10 @@ public final class ApiMockInterceptor implements Interceptor {
             }
         }
 
+        //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
+        Request requestApi = chain.request();
         //获取request的创建者builder
-        HttpUrl oldHttpUrl = request.url();
+        HttpUrl oldHttpUrl = requestApi.url();
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
@@ -166,7 +168,7 @@ public final class ApiMockInterceptor implements Interceptor {
                 .port(5000)
                 .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();
-        Request.Builder builder = request.newBuilder();
+        Request.Builder builder = requestApi.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());
 
     }
