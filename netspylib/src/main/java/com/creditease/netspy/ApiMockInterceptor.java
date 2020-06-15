@@ -1,6 +1,7 @@
 package com.creditease.netspy;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.creditease.netspy.inner.support.FormatHelper;
 
@@ -18,6 +19,8 @@ import okhttp3.Response;
  * 为了模拟采取的措施
  */
 public final class ApiMockInterceptor implements Interceptor {
+    public static final String TAG = "ApiMock";
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         if (!ApiMockHelper.isApiMock) {//默认false 不拦截
@@ -49,6 +52,8 @@ public final class ApiMockInterceptor implements Interceptor {
             }
 
             for (String param : ApiMockHelper.paramSet) {
+                Log.d(TAG, param + ":" + httpUrl.queryParameter(param));
+
                 if (paramKeys.contains(param)) {
                     pathParams.append("--")
                             .append(param)
@@ -82,6 +87,7 @@ public final class ApiMockInterceptor implements Interceptor {
 
                 for (int i = 0; i < formBody.size(); i++) {
                     if (ApiMockHelper.paramSet.contains(formBody.name(i))) {
+                        Log.d(TAG, formBody.name(i) + ":" + formBody.value(i));
                         pathParams.append("--")
                                 .append(formBody.name(i))
                                 .append("--")
