@@ -57,7 +57,7 @@ public class SampleActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_http).setOnClickListener(view -> {
             for (int i = 0; i < 1; i++) {
-                forceSendRequestByMobileData(this);
+                doHttpActivity();
             }
         });
 
@@ -144,7 +144,6 @@ public class SampleActivity extends AppCompatActivity {
             public void onAvailable(Network network) {
                 super.onAvailable(network);
                 try {
-                    doHttpActivity();
 
                 } catch (Exception e) {
 
