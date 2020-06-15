@@ -147,7 +147,7 @@ public final class NetSpyInterceptor implements Interceptor {
             if (isPlaintext(buffer)) {
                 transaction.setRequestBody(readFromBuffer(buffer, charset));
             } else {
-                transaction.setResponseBodyIsPlainText(false);
+                transaction.setRequestBodyIsPlainText(false);
             }
         }
 
