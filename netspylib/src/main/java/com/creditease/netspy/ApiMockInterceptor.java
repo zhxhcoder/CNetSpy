@@ -1,8 +1,6 @@
 package com.creditease.netspy;
 
 import android.text.TextUtils;
-
-import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.FormatHelper;
 
 import java.io.EOFException;
@@ -10,12 +8,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -23,8 +15,6 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okhttp3.internal.http.HttpHeaders;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.GzipSource;
@@ -46,30 +36,13 @@ public final class ApiMockInterceptor implements Interceptor {
             Request request = chain.request();
             return chain.proceed(request);
         }
-
         String strRequest = "";
 
         Request request = chain.request();
         RequestBody requestBody = request.body();
         boolean hasRequestBody = requestBody != null;
 
-        HttpEvent transaction = new HttpEvent();
-        transaction.setRequestDate(new Date());
-
-        transaction.setMethod(request.method());
-        transaction.setUrl(request.url().toString());
-
-        transaction.setRequestHeaders(toHttpHeaderMap(request.headers()));
-        if (hasRequestBody) {
-            if (requestBody.contentType() != null) {
-                transaction.setRequestContentType(requestBody.contentType().toString());
-            }
-            if (requestBody.contentLength() != -1) {
-                transaction.setRequestContentLength(requestBody.contentLength());
-            }
-        }
-        transaction.setRequestBodyIsPlainText(!bodyHasUnsupportedEncoding(request.headers()));
-        if (hasRequestBody && transaction.getRequestBodyIsPlainText()) {
+        if (hasRequestBody && !bodyHasUnsupportedEncoding(request.headers())) {
             BufferedSource source = getNativeSource(new Buffer(), bodyGzipped(request.headers()));
             Buffer buffer = source.buffer();
             requestBody.writeTo(buffer);
@@ -79,57 +52,8 @@ public final class ApiMockInterceptor implements Interceptor {
                 charset = contentType.charset(UTF8);
             }
             if (isPlaintext(buffer)) {
-                transaction.setRequestBody(readFromBuffer(buffer, charset));
-            } else {
-                transaction.setResponseBodyIsPlainText(false);
+                strRequest = readFromBuffer(buffer, charset);
             }
-        }
-        long startNs = System.nanoTime();
-        Response response;
-        try {
-            response = chain.proceed(request);
-        } catch (Exception e) {
-            transaction.setError(e.toString());
-            throw e;
-        }
-        long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
-
-        ResponseBody responseBody = response.body();
-
-        transaction.setRequestHeaders(toHttpHeaderMap(response.request().headers())); // includes headers added later in the chain
-        transaction.setResponseDate(new Date());
-        transaction.setTookMs(tookMs);
-        transaction.setProtocol(response.protocol().toString());
-        transaction.setResponseCode(response.code());
-        transaction.setResponseMessage(response.message());
-
-        transaction.setResponseContentLength(responseBody.contentLength());
-        if (responseBody.contentType() != null) {
-            transaction.setResponseContentType(responseBody.contentType().toString());
-        }
-        transaction.setResponseHeaders(toHttpHeaderMap(response.headers()));
-
-        transaction.setResponseBodyIsPlainText(!bodyHasUnsupportedEncoding(response.headers()));
-        if (HttpHeaders.hasBody(response) && transaction.getResponseBodyIsPlainText()) {
-            BufferedSource source = getNativeSource(response);
-            source.request(Long.MAX_VALUE);
-            Buffer buffer = source.buffer();
-            Charset charset = UTF8;
-            MediaType contentType = responseBody.contentType();
-            if (contentType != null) {
-                try {
-                    charset = contentType.charset(UTF8);
-                } catch (UnsupportedCharsetException e) {
-                    return response;
-                }
-            }
-            if (isPlaintext(buffer)) {
-                strRequest = readFromBuffer(buffer.clone(), charset);
-                transaction.setResponseBody(strRequest);
-            } else {
-                transaction.setResponseBodyIsPlainText(false);
-            }
-            transaction.setResponseContentLength(buffer.size());
         }
 
         //TODO 利用NetSpyInterceptor原来的数据
@@ -158,9 +82,8 @@ public final class ApiMockInterceptor implements Interceptor {
         }
 
         //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
-        Request requestApi = chain.request();
         //获取request的创建者builder
-        HttpUrl oldHttpUrl = requestApi.url();
+        HttpUrl oldHttpUrl = request.url();
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
@@ -168,20 +91,9 @@ public final class ApiMockInterceptor implements Interceptor {
                 .port(5000)
                 .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();
-        Request.Builder builder = requestApi.newBuilder();
+        Request.Builder builder = request.newBuilder();
         return chain.proceed(builder.url(newHttpUrl).build());
 
-    }
-
-    private BufferedSource getNativeSource(Response response) throws IOException {
-        if (bodyGzipped(response.headers())) {
-            BufferedSource source = response.peekBody(maxContentLength).source();
-            if (source.buffer().size() < maxContentLength) {
-                return getNativeSource(source, true);
-            } else {
-            }
-        }
-        return response.body().source();
     }
 
     private BufferedSource getNativeSource(BufferedSource input, boolean isGzipped) {
@@ -245,14 +157,5 @@ public final class ApiMockInterceptor implements Interceptor {
         } catch (UnsupportedEncodingException e) {
             return requestBody;
         }
-    }
-
-
-    private Map<String, String> toHttpHeaderMap(Headers headers) {
-        Map<String, String> headerMap = new HashMap<>();
-        for (int i = 0, count = headers.size(); i < count; i++) {
-            headerMap.put(headers.name(i), headers.value(i));
-        }
-        return headerMap;
     }
 }
