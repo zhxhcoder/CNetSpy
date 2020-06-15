@@ -85,8 +85,8 @@ public final class ApiMockInterceptor implements Interceptor {
                 }
 
                 for (int i = 0; i < formBody.size(); i++) {
+                    Log.d(TAG, formBody.name(i) + ":" + formBody.value(i));
                     if (ApiMockHelper.paramSet.contains(formBody.name(i))) {
-                        Log.d(TAG, formBody.name(i) + ":" + formBody.value(i));
                         pathParams.append("--")
                                 .append(formBody.name(i))
                                 .append("--")
