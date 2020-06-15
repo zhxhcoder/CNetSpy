@@ -327,7 +327,7 @@ public class HttpEvent {
     }
 
     private String getParamValue(String param) {
-        return FormatHelper.getParamValue(param, requestBody).replace(param + "=", "");
+        return FormatHelper.getParamValue(param, requestBody);
     }
 
     public String getMockPath() {

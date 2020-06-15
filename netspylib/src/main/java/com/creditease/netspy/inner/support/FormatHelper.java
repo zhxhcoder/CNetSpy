@@ -238,7 +238,7 @@ public class FormatHelper {
             matches.add(matcher.group());
         }
         if (matches.size() > 0) {
-            return matches.get(0);
+            return matches.get(0).replace(key + "=", "");
         }
         return "";
     }
