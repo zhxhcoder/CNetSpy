@@ -1,6 +1,7 @@
 package com.creditease.netspy.inner.db;
 
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.inner.support.FormatHelper;
@@ -319,8 +320,22 @@ public class HttpEvent {
     //TODO 获取带有特殊参数
     public String getPathWithParam() {
         StringBuilder pathParams = new StringBuilder();
+        //针对的是data参数我gson传
+        if (getRequestBody().contains("data=")) {
+            for (String param : ApiMockHelper.paramSet) {
+                String value = FormatHelper.parseGsonValue(param, getRequestBody());
+                if (!TextUtils.isEmpty(value)) {
+                    pathParams.append("--")
+                            .append(param)
+                            .append("--")
+                            .append(value);
+                }
+            }
+        }
+
+        //针对是method等参数直接传值
         for (String param : ApiMockHelper.paramSet) {
-            if (getRequestBody().contains(param)) {
+            if (getRequestBody().contains(param + "=")) {
                 pathParams.append("--")
                         .append(param)
                         .append("--")

@@ -1,5 +1,9 @@
 package com.creditease.netspy;
 
+import android.text.TextUtils;
+
+import com.creditease.netspy.inner.support.FormatHelper;
+
 import java.io.IOException;
 import java.util.Set;
 
@@ -24,12 +28,25 @@ public final class ApiMockInterceptor implements Interceptor {
         //还要处理同一个接口 删除不相干参数 或者 统一加上一个特殊的参数
         Request request = chain.request();
 
-        StringBuilder pathParams = new StringBuilder();
         HttpUrl.Builder urlBuilder = request.url().newBuilder();
+
+        StringBuilder pathParams = new StringBuilder();
 
         if ("GET".equals(request.method())) { // GET方法
             HttpUrl httpUrl = urlBuilder.build();
             Set<String> paramKeys = httpUrl.queryParameterNames();
+
+            if (paramKeys.contains("data")) {
+                for (String param : ApiMockHelper.paramSet) {
+                    String value = FormatHelper.parseGsonValue(param, httpUrl.queryParameter(param));
+                    if (!TextUtils.isEmpty(value)) {
+                        pathParams.append("--")
+                                .append(param)
+                                .append("--")
+                                .append(value);
+                    }
+                }
+            }
 
             for (String param : ApiMockHelper.paramSet) {
                 if (paramKeys.contains(param)) {
@@ -43,6 +60,25 @@ public final class ApiMockInterceptor implements Interceptor {
         } else {
             if (request.body() instanceof FormBody) {
                 FormBody formBody = (FormBody) request.body();
+
+                String dataGson = "";
+                for (int i = 0; i < formBody.size(); i++) {
+                    if ("data".equals(formBody.name(i))) {
+                        dataGson = formBody.value(i);
+                        break;
+                    }
+                }
+                if (!TextUtils.isEmpty(dataGson)) {
+                    for (String param : ApiMockHelper.paramSet) {
+                        String value = FormatHelper.parseGsonValue(param, dataGson);
+                        if (!TextUtils.isEmpty(value)) {
+                            pathParams.append("--")
+                                    .append(param)
+                                    .append("--")
+                                    .append(value);
+                        }
+                    }
+                }
 
                 for (int i = 0; i < formBody.size(); i++) {
                     if (ApiMockHelper.paramSet.contains(formBody.name(i))) {
