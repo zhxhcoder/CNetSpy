@@ -25,7 +25,6 @@ import okio.Okio;
  * 为了模拟采取的措施
  */
 public final class ApiMockInterceptor implements Interceptor {
-    public static final String TAG = "ApiMock";
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private long maxContentLength = 250000L;
