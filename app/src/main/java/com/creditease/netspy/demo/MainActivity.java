@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
-import com.creditease.netspy.demo.netspy.SampleSpyActivity;
+import com.creditease.netspy.demo.netspy.SampleActivity;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         spyButton = findViewById(R.id.spyButton);
 
-        findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleSpyActivity.class)));
+        findViewById(R.id.spyButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SampleActivity.class)));
 
         findViewById(R.id.errorButton0).setOnClickListener(v -> {
             new Thread(() -> {

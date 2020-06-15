@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".netspy.SampleSpyActivity" />
+        <activity android:name=".netspy.SampleActivity" />
         <activity android:name=".netspy.SampleMockApiActivity" />
 
     </application>
