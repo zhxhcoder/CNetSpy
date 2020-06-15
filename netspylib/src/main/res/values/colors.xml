@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="netspy_colorPrimary">#f05032</color>
-    <color name="netspy_colorPrimaryDark">#d63629</color>
-    <color name="netspy_colorAccent">#D81B60</color>
-    <color name="netspy_colorWhite">#ffffff</color>
+    <color name="netspy_colorPrimary">#008577</color>
+    <color name="netspy_colorPrimaryDark">#00574B</color>
+    <color name="netspy_colorAccent">#03A89E</color>
 
     <color name="netspy_status_default">#212121</color>
     <color name="netspy_status_requested">#9E9E9E</color>
