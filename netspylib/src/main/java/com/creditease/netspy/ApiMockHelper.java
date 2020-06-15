@@ -22,6 +22,7 @@ public final class ApiMockHelper {
         add("cardids");
         add("status");
         add("fundType");
+        add("showPosition");
     }};
 
     public static Set<String> excludeParamSet = new HashSet<String>() {{
