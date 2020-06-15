@@ -122,12 +122,11 @@ public class SampleActivity extends AppCompatActivity {
             }
         };
 
-
         Map<String, String> map = new HashMap<>();
-        map.put("method","mm");
-        map.put("nice","111");
-        map.put("cardids","cc");
-        //api.getList().enqueue(cb);
+        map.put("method","m");
+        map.put("nice","n");
+        map.put("fundType","1");
+        map.put("cardids","c");
         api.postList(map).enqueue(cb);
     }
 
