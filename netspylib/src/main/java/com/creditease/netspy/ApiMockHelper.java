@@ -40,6 +40,10 @@ public final class ApiMockHelper {
         paramSet.add(param);
     }
 
+    public static void addExcludeParams(String param) {
+        excludeParamSet.add(param);
+    }
+
     public static void debug(boolean isApiMock) {
         ApiMockHelper.isApiMock = isApiMock;
     }
