@@ -53,7 +53,6 @@ public final class ApiMockInterceptor implements Interceptor {
 
             for (String param : ApiMockHelper.paramSet) {
                 Log.d(TAG, param + ":" + httpUrl.queryParameter(param));
-
                 if (paramKeys.contains(param)) {
                     pathParams.append("--")
                             .append(param)
