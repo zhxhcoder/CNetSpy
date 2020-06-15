@@ -10,6 +10,8 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Map;
 
 import org.greenrobot.greendao.annotation.Generated;
@@ -327,7 +329,11 @@ public class HttpEvent {
     }
 
     private String getParamValue(String param) {
-        return FormatHelper.getParamValue(param, requestBody);
+        try {
+            return FormatHelper.getParamValue(param, URLDecoder.decode(requestBody, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
     }
 
     public String getMockPath() {
