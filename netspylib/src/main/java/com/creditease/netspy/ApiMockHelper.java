@@ -20,6 +20,16 @@ public final class ApiMockHelper {
     public static Set<String> paramSet = new HashSet<String>() {{
         add("method");
         add("cardids");
+        add("status");
+        add("fundType");
+    }};
+
+    public static Set<String> excludeParamSet = new HashSet<String>() {{
+        add("clientType");
+        add("channelId");
+        add("timestamp");
+        add("token");
+        add("sign");
     }};
 
     public static void initHost(String baseUrl) {
