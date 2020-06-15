@@ -203,9 +203,12 @@ public class HttpEvent {
         this.requestContentType = requestContentType;
     }
 
-
     public String getRequestBody() {
-        return this.requestBody;
+        try {
+            return URLDecoder.decode(requestBody, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return this.requestBody;
+        }
     }
 
     public void setRequestBody(String requestBody) {
@@ -317,23 +320,18 @@ public class HttpEvent {
     public String getPathWithParam() {
         StringBuilder pathParams = new StringBuilder();
         for (String param : ApiMockHelper.paramSet) {
-            if (requestBody.contains(param)) {
+            if (getRequestBody().contains(param)) {
                 pathParams.append("--")
                         .append(param)
                         .append("--")
                         .append(getParamValue(param));
             }
         }
-
         return path + pathParams;
     }
 
     private String getParamValue(String param) {
-        try {
-            return FormatHelper.getParamValue(param, URLDecoder.decode(requestBody, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            return "";
-        }
+        return FormatHelper.getParamValue(param, getRequestBody());
     }
 
     public String getMockPath() {
@@ -422,7 +420,7 @@ public class HttpEvent {
     }
 
     public String getFormattedRequestBody() {
-        return formatBody(requestBody, requestContentType);
+        return formatBody(getRequestBody(), requestContentType);
     }
 
     public String getFormattedResponseBody() {
@@ -446,7 +444,7 @@ public class HttpEvent {
                 ", requestContentLength=" + requestContentLength +
                 ", requestContentType='" + requestContentType + '\'' +
                 ", requestHeaders=" + requestHeaders +
-                ", requestBody='" + requestBody + '\'' +
+                ", requestBody='" + getRequestBody() + '\'' +
                 ", requestBodyIsPlainText=" + requestBodyIsPlainText +
                 ", responseCode=" + responseCode +
                 ", responseMessage='" + responseMessage + '\'' +
