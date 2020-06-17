@@ -128,7 +128,6 @@ public class BugSpyRecordsFragment extends Fragment implements IBugTabFragment {
     @Override
     public void updateBugData(BugEvent bugEvent) {
         AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
-                .setTitle("FBI警告")
                 .setMessage("此操作将同时删除远程服务器上的Bug记录，删除后其他人将无法查阅，请慎重")
                 .setPositiveButton("取消", null)
                 .setNegativeButton("任性", (dialog1, which) -> OkHttpHelper.getInstance().deleteBugItem(bugEvent.getTimestamp(),handler))

@@ -68,7 +68,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
 
         httpEvent = DBHelper.getInstance().getHttpDataByTransId(transactionId);
 
-        populateUI(httpEvent);
+        applyUI(httpEvent);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
     }
 
 
-    private void populateUI(HttpEvent event) {
+    private void applyUI(HttpEvent event) {
         if (event != null) {
             for (IHttpTabFragment fragment : adapter.fragments) {
                 fragment.httpTransUpdate(filterText, event);
@@ -152,7 +152,7 @@ public class HttpTabActivity extends BaseNetSpyActivity implements
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
-        populateUI(httpEvent);
+        applyUI(httpEvent);
         return true;
     }
 

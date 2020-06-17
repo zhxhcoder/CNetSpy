@@ -54,6 +54,9 @@ public class FormatHelper {
     }
 
     public static String formatJson(String json) {
+        if (json==null) {
+            return "";
+        }
         try {
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(json);
@@ -134,6 +137,9 @@ public class FormatHelper {
      * @return
      */
     public static SpannableString findSearch(int color, String text, String keyword) {
+        if (TextUtils.isEmpty(text)) {
+            return new SpannableString("");
+        }
         SpannableString s = new SpannableString(text);
         if (TextUtils.isEmpty(keyword)) {
             return s;

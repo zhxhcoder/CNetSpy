@@ -47,10 +47,10 @@ public class BugSpyDetailActivity extends AppCompatActivity {
         timeStamp = getIntent().getLongExtra(ARG_TIME_STAMP, 0);
         bugEvent = DBHelper.getInstance().getBugDataByTime(timeStamp);
 
-        populateUI(bugEvent);
+        applyUI(bugEvent);
     }
 
-    private void populateUI(BugEvent bugEvent) {
+    private void applyUI(BugEvent bugEvent) {
         String strTime = FormatHelper.getHHmmSS(bugEvent.getCrashDate());
         device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
         user.setText(bugEvent.getUser());

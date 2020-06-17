@@ -59,17 +59,17 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        populateUI();
+        applyUI();
     }
 
     @Override
     public void httpTransUpdate(String filterText, HttpEvent httpEvent) {
         this.filterText = filterText;
         this.httpEvent = httpEvent;
-        populateUI();
+        applyUI();
     }
 
-    private void populateUI() {
+    private void applyUI() {
         if (isAdded() && httpEvent != null) {
             requestUrl.setText(String.format("%s %s", httpEvent.getMethod(), httpEvent.getMockUrl()));
 
