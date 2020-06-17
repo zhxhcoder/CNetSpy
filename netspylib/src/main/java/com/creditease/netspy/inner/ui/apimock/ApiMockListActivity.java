@@ -42,12 +42,14 @@ public class ApiMockListActivity extends AppCompatActivity implements
 
     ApiMockListAdapter adapter;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.netspy_api_mock_list);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("API记录");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -81,6 +83,7 @@ public class ApiMockListActivity extends AppCompatActivity implements
                     if (dataList == null || dataList.isEmpty()) {
                         return;
                     }
+                    toolbar.setTitle("API-" + dataList.size() + "条");
                     adapter.setData(filterText, dataList);
                 } catch (JsonSyntaxException e) {
                     dataList = new ArrayList<>();
