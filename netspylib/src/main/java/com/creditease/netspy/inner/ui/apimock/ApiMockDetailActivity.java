@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -153,6 +154,8 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
             resp_error.setEnabled(true);
 
             path.setText(data.getMockPath());
+
+            showSoftInputFromWindow(path);
             return true;
         } else if (item.getItemId() == R.id.upload) {
             if (isReadOnly) {
@@ -237,4 +240,15 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
             return super.onKeyDown(keyCode, event);
         }
     }
+
+    public void showSoftInputFromWindow(EditText editText) {
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        InputMethodManager inputManager =
+                (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(editText, 0);
+    }
+
+
 }
