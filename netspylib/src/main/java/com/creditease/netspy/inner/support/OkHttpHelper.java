@@ -115,7 +115,7 @@ public class OkHttpHelper {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("path", trimPath.replace("/", "__"));
+        builder.add("path", trimPath);
         builder.add("show_type", String.valueOf(show_type));
 
         if (!TextUtils.isEmpty(resp_data)) {
