@@ -1,5 +1,7 @@
 package com.creditease.netspy.inner.ui.apimock;
 
+import com.creditease.netspy.ApiMockHelper;
+
 import java.io.Serializable;
 
 /**
@@ -25,6 +27,11 @@ public class ApiMockData implements Serializable {
 
     public String getMockPath() {
         return path.replace("__", "/");
+    }
+
+
+    public String getFullPath() {
+        return "http://" + ApiMockHelper.host + ":5000/" + path;
     }
 
     public String getShowType() {

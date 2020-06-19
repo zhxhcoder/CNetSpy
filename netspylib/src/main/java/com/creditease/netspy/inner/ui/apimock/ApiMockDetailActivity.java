@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.support.FormatHelper;
 import com.creditease.netspy.inner.support.OkHttpHelper;
@@ -133,6 +134,8 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         editMenuItem.setVisible(true);
         MenuItem uploadMenuItem = menu.findItem(R.id.upload);
         uploadMenuItem.setVisible(true);
+        MenuItem shareMenuItem = menu.findItem(R.id.share);
+        shareMenuItem.setVisible(true);
         MenuItem searchMenuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
         searchView.setOnQueryTextListener(this);
@@ -143,6 +146,9 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search) {
+            return true;
+        } else if (item.getItemId() == R.id.share) {
+            share(data.getFullPath());
             return true;
         } else if (item.getItemId() == R.id.edit) {
             toolbar.setTitle("API正在编辑中......");
@@ -250,5 +256,11 @@ public class ApiMockDetailActivity extends AppCompatActivity implements SearchVi
         inputManager.showSoftInput(editText, 0);
     }
 
-
+    private void share(String content) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, content);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, null));
+    }
 }
