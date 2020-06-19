@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.support.FormatHelper;
 import com.creditease.netspy.inner.support.OkHttpHelper;
