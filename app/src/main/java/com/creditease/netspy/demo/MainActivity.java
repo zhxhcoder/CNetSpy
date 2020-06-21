@@ -1,11 +1,14 @@
 package com.creditease.netspy.demo;
 
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
+import com.creditease.netspy.ApiMockHelper;
 import com.creditease.netspy.demo.netspy.SampleActivity;
 
 import java.io.BufferedInputStream;
@@ -21,9 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
     Button spyButton;
 
+    private ShakeDetector shakeDetector = null;
+    private SensorManager sensorManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sensorManager = ContextCompat.getSystemService(this, SensorManager.class);
+
         setContentView(R.layout.activity_main);
 
         spyButton = findViewById(R.id.spyButton);
@@ -99,5 +109,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void stopSensShake() {
+        if (shakeDetector != null) {
+            shakeDetector.stop();
+        }
+    }
+
+    private void setSensShake() {
+        shakeDetector = new ShakeDetector(() -> {
+            ApiMockHelper.launchActivity(this);
+        });
+        shakeDetector.start(sensorManager);
     }
 }
