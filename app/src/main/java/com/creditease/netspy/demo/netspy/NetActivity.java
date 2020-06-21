@@ -43,14 +43,14 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 /**
  * Created by zhxh on 2019/06/24
  */
-public class SampleActivity extends AppCompatActivity {
+public class NetActivity extends AppCompatActivity {
     private final static String TAG = "sampleSpyLog";
     TextView tvHttpContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample_spy);
+        setContentView(R.layout.activity_net_spy);
         checkOnlineState();
 
         tvHttpContent = findViewById(R.id.tvHttpContent);
@@ -61,23 +61,23 @@ public class SampleActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_mock).setOnClickListener(v -> startActivity(new Intent(SampleActivity.this, SampleMockApiActivity.class)));
+        findViewById(R.id.btn_mock).setOnClickListener(v -> startActivity(new Intent(NetActivity.this, SampleMockApiActivity.class)));
 
         CheckBox checkBox1 = findViewById(R.id.cb_netspy_status);
         checkBox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Toast.makeText(SampleActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            Toast.makeText(NetActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             NetSpyHelper.debug(isChecked);
             NetSpyHelper.launchActivity(this);
         });
         CheckBox checkBox2 = findViewById(R.id.cb_bugspy_status);
         checkBox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Toast.makeText(SampleActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            Toast.makeText(NetActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             BugSpyHelper.debug(isChecked);
             BugSpyHelper.launchActivity(this);
         });
         CheckBox checkBox3 = findViewById(R.id.cb_apimock_status);
         checkBox3.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Toast.makeText(SampleActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
+            Toast.makeText(NetActivity.this, "是否开启 " + isChecked, Toast.LENGTH_LONG).show();
             ApiMockHelper.debug(isChecked);
             ApiMockHelper.launchActivity(this);
         });
