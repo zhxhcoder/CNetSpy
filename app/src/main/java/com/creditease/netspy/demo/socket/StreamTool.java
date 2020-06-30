@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 
-/**
- * Created by HackerLee on 2019/1/11.
- */
 
 public class StreamTool {
 

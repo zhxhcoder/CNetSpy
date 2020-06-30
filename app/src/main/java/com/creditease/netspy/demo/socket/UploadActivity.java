@@ -8,22 +8,15 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.LocalSocketAddress;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -59,6 +52,7 @@ public class UploadActivity extends AppCompatActivity {
     private Socket socket;
     private Socket newSocket;
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -76,8 +70,8 @@ public class UploadActivity extends AppCompatActivity {
                     break;
                 case 1:
                     // 更新用户名
-                    uploadHost.setText(((SocketApplication)getApplication()).getLocalHost());
-                    downloadHost.setText(((SocketApplication)getApplication()).getRemoteHost());
+                    uploadHost.setText(((SocketApplication) getApplication()).getLocalHost());
+                    downloadHost.setText(((SocketApplication) getApplication()).getRemoteHost());
                     break;
                 case 2:
                     // 上次已上传成功
@@ -131,11 +125,11 @@ public class UploadActivity extends AppCompatActivity {
         title.setText(getBaseContext().getResources().getText(R.string.upload_title));
 
 
-        socket = ((SocketApplication)getApplication()).getSocket();
-        if(socket == null || !sendHeartBeat(socket)){
+        socket = ((SocketApplication) getApplication()).getSocket();
+        if (socket == null || !sendHeartBeat(socket)) {
             sendHandle(3);  // 警告
             sendHandle(5);  // 更新标题栏图标 未连接
-        }else {
+        } else {
             sendHandle(1);  // 更新用户名
             sendHandle(4);  // 更新标题栏图标 已连接
         }
@@ -154,45 +148,29 @@ public class UploadActivity extends AppCompatActivity {
         uploadHost = (TextView) findViewById(R.id.upload_host);
         downloadHost = (TextView) findViewById(R.id.download_host);
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String filename = editFname.getText().toString();
-                File file = new File(filename);
-                if(file.exists()){
-                    pgbar.setMax((int) file.length());
-                    uploadFile(file);
-                }else {
-                    String temp = (String) getBaseContext().getResources().getText(R.string.file_no_texsit);
-                    Toast.makeText(UploadActivity.this, temp, Toast.LENGTH_SHORT).show();
-                }
-                flag = true;
+        btnUpload.setOnClickListener(view -> {
+            String filename = editFname.getText().toString();
+            File file = new File(filename);
+            if (file.exists()) {
+                pgbar.setMax((int) file.length());
+                uploadFile(file);
+            } else {
+                String temp = (String) getBaseContext().getResources().getText(R.string.file_no_texsit);
+                Toast.makeText(UploadActivity.this, temp, Toast.LENGTH_SHORT).show();
             }
+            flag = true;
         });
 
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flag = false;
-            }
+        btnStop.setOnClickListener(view -> flag = false);
+
+        btnSelect.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(intent, 1);
         });
 
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(intent,1);
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
+        back.setOnClickListener(v -> finish());
     }
 
 
@@ -239,7 +217,7 @@ public class UploadActivity extends AppCompatActivity {
 
                     while (flag && (len = fileOutStream.read(buffer)) != -1) {
                         outStream.write(buffer, 0, len);
-                        length += len;                      //  累加已经上传的数据长度
+                        length += len;    //  累加已经上传的数据长度
                         sendHandle(0);
 //                        Message msg = new Message();
 //                        msg.getData().putInt("length", length);
@@ -261,7 +239,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     // 给主线程发送消息，更新UI
-    private void sendHandle(int what){
+    private void sendHandle(int what) {
         Message msg = Message.obtain();
         msg.what = what;
         handler.sendMessage(msg);

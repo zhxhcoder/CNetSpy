@@ -1,5 +1,6 @@
 package com.creditease.netspy.demo.socket;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,19 +48,39 @@ public class ChatActivity extends AppCompatActivity {
 
     private Socket socket;
     OutputStream outputStream;
-    private Handler mMainHandler;// 线程池
-    private ExecutorService mThreadPool;
+    private ExecutorService mThreadPool;//线程池
+    // 实例化主线程，用于更新子线程传递的消息
+    @SuppressLint("HandlerLeak")
+    private Handler mMainHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            String tmp;
+            switch (msg.what) {
+                case 0:
+                    // 已连接
+                    InetAddress serverIp = socket.getInetAddress();
+                    tmp = (String) getBaseContext().getResources().getText(R.string.state);
+                    title.setText(serverIp.getHostAddress() + tmp);
+                    connectState.setImageResource(R.drawable.connected);
+                    break;
+                case 1:
+                    // 未连接
+                    tmp = (String) getBaseContext().getResources().getText(R.string.unconnected);
+                    title.setText(tmp);
+                    connectState.setImageResource(R.drawable.unconnected);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
-//        ActionBar actionBar = getSupportActionBar();
-//        if(actionBar != null){
-//            actionBar.hide();
-//        }
-
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         mThreadPool = Executors.newCachedThreadPool();
         inputText = (EditText) findViewById(R.id.input_text);
         send = (Button) findViewById(R.id.send);
@@ -84,85 +106,53 @@ public class ChatActivity extends AppCompatActivity {
         String tmp = (String) getBaseContext().getResources().getText(R.string.unconnected);
         title.setText(tmp);
 
-        // 实例化主线程，用于更新子线程传递的消息
-        mMainHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                String tmp;
-                switch (msg.what){
-                    case 0:
-                        // 已连接
-                        InetAddress serverIp = socket.getInetAddress();
-                        tmp = (String) getBaseContext().getResources().getText(R.string.state);
-                        title.setText(serverIp.getHostAddress() + tmp);
-                        connectState.setImageResource(R.drawable.connected);
-                        break;
-                    case 1:
-                        // 未连接
-                        tmp = (String) getBaseContext().getResources().getText(R.string.unconnected);
-                        title.setText(tmp);
-                        connectState.setImageResource(R.drawable.unconnected);
-                        break;
-                }
-            }
-        };
+        socket = ((SocketApplication) getApplication()).getSocket();
 
-        socket = ((SocketApplication)getApplication()).getSocket();
-
-        if(sendHeartBeat(socket)){
+        if (sendHeartBeat(socket)) {
             initMsgs();     // 初始化消息数据
             sendHandle(0);
         }
 
-        send.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String content = inputText.getText().toString();
-                if(!"".equals(content)){
-                    Msg msg = new Msg(content, Msg.TYPE_SENT);
-                    msgList.add(msg);
-                    adapter.notifyItemInserted(msgList.size() - 1);     // 有消息时 刷新ListView
-                    msgRecyclerView.scrollToPosition(msgList.size() - 1);          // 将ListView定位到最后一行
-                    inputText.setText("");      // 清空输入框的内容
+        send.setOnClickListener(v -> {
+            String content = inputText.getText().toString();
+            if (!"".equals(content)) {
+                Msg msg = new Msg(content, Msg.TYPE_SENT);
+                msgList.add(msg);
+                adapter.notifyItemInserted(msgList.size() - 1);     // 有消息时 刷新ListView
+                msgRecyclerView.scrollToPosition(msgList.size() - 1);          // 将ListView定位到最后一行
+                inputText.setText("");      // 清空输入框的内容
 
-                    try{
-                        if(socket != null && socket.isConnected()){
-                            outputStream = socket.getOutputStream();
-                            outputStream.write((content.toString()+"\n").getBytes("utf-8"));
-                            outputStream.flush();
-                        }
-                    }catch (IOException ex) {
-                        ex.printStackTrace();
+                try {
+                    if (socket != null && socket.isConnected()) {
+                        outputStream = socket.getOutputStream();
+                        outputStream.write((content.toString() + "\n").getBytes("utf-8"));
+                        outputStream.flush();
                     }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
+        back.setOnClickListener(v -> finish());
     }
 
-    private void initMsgs(){
-
-        Msg msg1 = new Msg("This is " + ((SocketApplication)getApplication()).getRemoteHost(), Msg.TYPE_RECEIVED);
+    private void initMsgs() {
+        Msg msg1 = new Msg("This is " + ((SocketApplication) getApplication()).getRemoteHost(), Msg.TYPE_RECEIVED);
         msgList.add(msg1);
 
-        Msg msg2 = new Msg("This is " + ((SocketApplication)getApplication()).getLocalHost(), Msg.TYPE_SENT);
+        Msg msg2 = new Msg("This is " + ((SocketApplication) getApplication()).getLocalHost(), Msg.TYPE_SENT);
         msgList.add(msg2);
     }
 
-    class LocalReceiver extends BroadcastReceiver{
+    class LocalReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent){
+        public void onReceive(Context context, Intent intent) {
             String content = intent.getStringExtra(Intent.EXTRA_TEXT);
-            if(content.equals("9875a1b2957c223f33e67d6f9940c4d6")){
+            if (content.equals("9875a1b2957c223f33e67d6f9940c4d6")) {
                 sendHandle(1);
-            }else {
+            } else {
                 Msg msg = new Msg(content, Msg.TYPE_RECEIVED);
                 msgList.add(msg);
                 adapter.notifyItemInserted(msgList.size() - 1);     // 有消息时 刷新ListView
@@ -172,7 +162,8 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    protected void onDestory(){
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
         localBroadcastManager.unregisterReceiver(localReceiver);
     }
@@ -189,7 +180,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     // 给主线程发送消息，更新UI
-    private void sendHandle(int what){
+    private void sendHandle(int what) {
         Message msg = Message.obtain();
         msg.what = what;
         mMainHandler.sendMessage(msg);
