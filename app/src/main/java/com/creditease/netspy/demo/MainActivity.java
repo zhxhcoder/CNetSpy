@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         bugButton = findViewById(R.id.bugButton);
         findViewById(R.id.netButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NetActivity.class)));
         findViewById(R.id.bugButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BugActivity.class)));
+        findViewById(R.id.tcpButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TcpMainActivity.class)));
     }
 
     @Override
