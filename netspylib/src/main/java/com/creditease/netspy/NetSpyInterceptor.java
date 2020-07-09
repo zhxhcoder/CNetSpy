@@ -6,7 +6,6 @@ import android.util.Log;
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.support.NotificationHelper;
-import com.creditease.netspy.inner.support.ExpiryManager;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -35,33 +34,11 @@ import okio.Okio;
  * okhttp拦截器
  */
 public final class NetSpyInterceptor implements Interceptor {
-
-    public enum Period {
-        /**
-         * 保留最近一小时数据.
-         */
-        ONE_HOUR,
-        /**
-         * 保留最近一天数据
-         */
-        ONE_DAY,
-        /**
-         * 保留最近一周数据
-         */
-        ONE_WEEK,
-        /**
-         * 保留数据
-         */
-        FOREVER
-    }
-
     private static final String LOG_TAG = "NetSpyInterceptor";
-    private static final Period DEFAULT_RETENTION = Period.ONE_DAY;
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private final Context context;
     private final NotificationHelper notificationHelper;
-    private ExpiryManager expiryManager;
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
@@ -73,7 +50,6 @@ public final class NetSpyInterceptor implements Interceptor {
         this.context = NetSpyHelper.netSpyApp;
         notificationHelper = new NotificationHelper(this.context);
         showNotification = NetSpyHelper.isNetSpy;
-        expiryManager = new ExpiryManager(this.context, DEFAULT_RETENTION);
     }
 
     /**
@@ -92,16 +68,6 @@ public final class NetSpyInterceptor implements Interceptor {
      */
     public NetSpyInterceptor maxContentLength(long max) {
         this.maxContentLength = max;
-        return this;
-    }
-
-    /**
-     * 默认保留一天数据
-     *
-     * @return The {@link NetSpyInterceptor} instance.
-     */
-    public NetSpyInterceptor retainDataFor(Period period) {
-        expiryManager = new ExpiryManager(context, period);
         return this;
     }
 
@@ -215,7 +181,6 @@ public final class NetSpyInterceptor implements Interceptor {
         if (showNotification) {
             notificationHelper.show(transaction);
         }
-        expiryManager.doMaintenance();
         return transaction.getTransId();
     }
 
