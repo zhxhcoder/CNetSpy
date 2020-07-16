@@ -51,7 +51,11 @@ public class BugEvent {
     }
 
     public Long getTimeStamp() {
-        return Long.valueOf(this.timestamp);
+        try {
+            return Long.valueOf(this.timestamp);
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
     }
 
     public void setTimestamp(String timestamp) {
