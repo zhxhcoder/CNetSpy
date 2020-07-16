@@ -1,4 +1,4 @@
-package com.creditease.netspy.inner.ui.apimock;
+package com.creditease.netspy.inner.db;
 
 import com.creditease.netspy.ApiMockHelper;
 

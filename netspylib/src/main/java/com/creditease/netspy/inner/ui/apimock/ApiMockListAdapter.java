@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
+import com.creditease.netspy.inner.db.ApiMockData;
 import com.creditease.netspy.inner.support.FormatHelper;
 import com.creditease.netspy.inner.support.OkHttpHelper;
 
