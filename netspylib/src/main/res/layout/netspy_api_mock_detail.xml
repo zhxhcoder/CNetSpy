@@ -1,150 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-
-        </android.support.v7.widget.Toolbar>
-
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="#40c0c0c0">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <RadioButton
-                    android:id="@+id/radio1"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="正确返回:1"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginBottom="16dp"
+                    android:background="#40c0c0c0">
 
-                <RadioButton
-                    android:id="@+id/radio2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="空返回:0"
-                    android:textColor="@android:color/black" />
+                    <RadioButton
+                        android:id="@+id/radio1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="正确返回:1"
+                        android:textColor="@android:color/black" />
 
-                <RadioButton
-                    android:id="@+id/radio3"
-                    android:layout_width="0dp"
+                    <RadioButton
+                        android:id="@+id/radio2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="空返回:0"
+                        android:textColor="@android:color/black" />
+
+                    <RadioButton
+                        android:id="@+id/radio3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="错误返回:-1"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="错误返回:-1"
-                    android:textColor="@android:color/black" />
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="********************请求路径********************"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/path"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColor="#666666"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="********************正确Gson串********************"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/resp_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#666666"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="********************空Gson串********************"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/resp_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#666666"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="********************错误Gson串********************"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/resp_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#666666"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="********************请求路径********************"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/path"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColor="#666666"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="********************正确Gson串********************"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/resp_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#666666"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="********************空Gson串********************"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/resp_empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#666666"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="********************错误Gson串********************"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/resp_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#666666"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-
         </LinearLayout>
-    </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
