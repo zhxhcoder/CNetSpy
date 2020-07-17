@@ -72,13 +72,12 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
     }
 
     private void applyUI() {
-        responseRaw.setOnClickListener(v -> {
-            if (isAdded() && httpEvent != null) {
-                setResponseText(httpEvent.getResponseBody(), true);
-            }
-        });
-
         if (isAdded() && httpEvent != null) {
+            responseRaw.setOnClickListener(v -> {
+                responseRaw.setTextColor(Color.BLUE);
+                setResponseText(httpEvent.getResponseBody(), true);
+            });
+
             requestUrl.setText(String.format("%s %s", httpEvent.getMethod(), httpEvent.getMockUrl()));
 
             setRequestText(FormatHelper.formatHeaders(httpEvent.getRequestHeaders(), true),
