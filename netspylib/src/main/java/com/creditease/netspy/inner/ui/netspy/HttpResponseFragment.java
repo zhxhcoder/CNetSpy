@@ -26,6 +26,7 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
     TextView requestUrl;
     TextView requestBody;
     TextView responseBody;
+    TextView responseRaw;
 
     private HttpEvent httpEvent;
 
@@ -53,6 +54,7 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
         requestUrl = view.findViewById(R.id.requestUrl);
         requestBody = view.findViewById(R.id.requestBody);
         responseBody = view.findViewById(R.id.responseBody);
+        responseRaw = view.findViewById(R.id.responseRaw);
         return view;
     }
 
@@ -70,6 +72,12 @@ public class HttpResponseFragment extends Fragment implements IHttpTabFragment {
     }
 
     private void applyUI() {
+        responseRaw.setOnClickListener(v -> {
+            if (isAdded() && httpEvent != null) {
+                setResponseText(httpEvent.getResponseBody(), true);
+            }
+        });
+
         if (isAdded() && httpEvent != null) {
             requestUrl.setText(String.format("%s %s", httpEvent.getMethod(), httpEvent.getMockUrl()));
 
