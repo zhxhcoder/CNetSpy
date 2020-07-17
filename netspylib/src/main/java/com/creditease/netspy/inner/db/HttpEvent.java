@@ -23,7 +23,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * HttpEvent 实体类.
  */
 @Entity
-public class HttpEvent implements Serializable {
+public class HttpEvent {
 
     public enum Status {
         Requested,
