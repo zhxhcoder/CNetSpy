@@ -54,7 +54,7 @@ public class FormatHelper {
     }
 
     public static String formatJson(String json) {
-        if (json==null) {
+        if (json == null) {
             return "";
         }
         try {
@@ -122,6 +122,9 @@ public class FormatHelper {
 
 
     public static String getHHmmSS(Date date) {
+        if (date == null) {
+            return "YYYY/MM/dd HH:mm:ss.SSS";
+        }
         String msg = "";
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss.SSS");
         msg += sdf.format(date);
