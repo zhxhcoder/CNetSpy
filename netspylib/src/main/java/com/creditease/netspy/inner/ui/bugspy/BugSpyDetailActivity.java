@@ -51,11 +51,14 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     }
 
     private void applyUI(BugEvent bugEvent) {
+        if (bugEvent == null) {
+            return;
+        }
         String strTime = FormatHelper.getHHmmSS(bugEvent.getCrashDate());
         device.setText(DeviceInfoHelper.getInstance().getAllDeviceInfo(this));
         user.setText(bugEvent.getUser());
         app.setText(bugEvent.getApp());
-        time.setText("崩溃发生时间：" + strTime+"\n");
+        time.setText("崩溃发生时间：" + strTime + "\n");
         report.setText(bugEvent.getReport());
     }
 }
