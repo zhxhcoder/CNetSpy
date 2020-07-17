@@ -13,6 +13,8 @@ import java.io.Serializable;
 
 @Entity
 public class BugEvent implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id(autoincrement = true)
     private Long _id; // 自增id
     private String timestamp; //时间戳
