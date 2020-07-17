@@ -11,6 +11,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Map;
@@ -22,7 +23,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * HttpEvent 实体类.
  */
 @Entity
-public class HttpEvent {
+public class HttpEvent implements Serializable {
 
     public enum Status {
         Requested,

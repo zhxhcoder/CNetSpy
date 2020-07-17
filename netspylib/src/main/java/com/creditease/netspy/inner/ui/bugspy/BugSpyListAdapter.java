@@ -58,7 +58,7 @@ class BugSpyListAdapter extends RecyclerView.Adapter<BugSpyListAdapter.ViewHolde
         });
 
         holder.view.setOnClickListener(v -> {
-            BugSpyDetailActivity.start(context, item.getTimeStamp());
+            BugSpyDetailActivity.start(context, item);
         });
     }
 

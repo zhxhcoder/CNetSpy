@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.BugEvent;
 import com.creditease.netspy.inner.support.DeviceInfoHelper;
@@ -16,10 +15,7 @@ import com.creditease.netspy.inner.support.FormatHelper;
  * Created by zhxh on 2020/05/30
  */
 public class BugSpyDetailActivity extends AppCompatActivity {
-    private static final String ARG_TIME_STAMP = "time_stamp";
-
-    private long timeStamp;
-    private BugEvent bugEvent;
+    private static final String ARG_BUG_EVENT = "arg_bug_event";
 
     private TextView time;
     private TextView report;
@@ -27,9 +23,9 @@ public class BugSpyDetailActivity extends AppCompatActivity {
     private TextView user;
     private TextView app;
 
-    public static void start(Context context, long timeStamp) {
+    public static void start(Context context, BugEvent bugEvent) {
         Intent intent = new Intent(context, BugSpyDetailActivity.class);
-        intent.putExtra(ARG_TIME_STAMP, timeStamp);
+        intent.putExtra(ARG_BUG_EVENT, bugEvent);
         context.startActivity(intent);
     }
 
@@ -44,8 +40,7 @@ public class BugSpyDetailActivity extends AppCompatActivity {
         user = findViewById(R.id.user);
         app = findViewById(R.id.app);
 
-        timeStamp = getIntent().getLongExtra(ARG_TIME_STAMP, 0);
-        bugEvent = DBHelper.getInstance().getBugDataByTime(timeStamp);
+        BugEvent bugEvent = (BugEvent) getIntent().getSerializableExtra(ARG_BUG_EVENT);
 
         applyUI(bugEvent);
     }

@@ -5,12 +5,14 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 /**
  * Created by zhxh on 2019/07/16
  */
 
 @Entity
-public class BugEvent {
+public class BugEvent implements Serializable {
     @Id(autoincrement = true)
     private Long _id; // 自增id
     private String timestamp; //时间戳
