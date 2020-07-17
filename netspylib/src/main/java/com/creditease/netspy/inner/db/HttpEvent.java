@@ -122,6 +122,9 @@ public class HttpEvent {
     }
 
     public java.util.Date getRequestDate() {
+        if (this.requestDate == null) {
+            return new java.util.Date();
+        }
         return this.requestDate;
     }
 
@@ -130,6 +133,9 @@ public class HttpEvent {
     }
 
     public java.util.Date getResponseDate() {
+        if (this.responseDate == null) {
+            return new java.util.Date();
+        }
         return this.responseDate;
     }
 
