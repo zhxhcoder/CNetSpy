@@ -63,6 +63,9 @@ public class BugEvent {
     }
 
     public java.util.Date getCrashDate() {
+        if (this.crashDate == null) {
+            return new java.util.Date();
+        }
         return this.crashDate;
     }
 
