@@ -115,4 +115,9 @@ public class BugSpyListActivity extends AppCompatActivity {
             return fragmentTitles.get(position);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

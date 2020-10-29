@@ -32,4 +32,9 @@ public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyList
     public void onListFragmentInteraction(HttpEvent transaction) {
         HttpTabActivity.start(this, transaction.getTransId());
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

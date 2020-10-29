@@ -146,4 +146,9 @@ public class ApiMockListActivity extends AppCompatActivity implements
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
