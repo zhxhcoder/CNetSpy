@@ -2,7 +2,8 @@ package com.creditease.netspy.inner.support;
 
 import android.app.IntentService;
 import android.content.Intent;
-import androidx.annotation.NonNull;
+
+import androidx.annotation.Nullable;
 
 import com.creditease.netspy.inner.db.DBHelper;
 

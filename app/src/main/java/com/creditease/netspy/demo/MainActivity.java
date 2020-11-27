@@ -3,8 +3,9 @@ package com.creditease.netspy.demo;
 import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.widget.Button;
 import android.widget.Toast;
 
