@@ -1,8 +1,8 @@
 package com.creditease.netspy.inner.ui.netspy;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.creditease.netspy.inner.support.NotificationHelper;
 

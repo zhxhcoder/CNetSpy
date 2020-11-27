@@ -2,8 +2,8 @@ package com.creditease.netspy.inner.ui.netspy;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
 import com.creditease.netspy.R;
 import com.creditease.netspy.inner.db.HttpEvent;
