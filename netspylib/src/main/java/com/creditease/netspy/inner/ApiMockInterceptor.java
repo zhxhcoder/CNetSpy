@@ -45,7 +45,7 @@ public final class ApiMockInterceptor implements Interceptor {
     }};
 
     public static void debug(boolean isApiMock) {
-        isApiMock = isApiMock;
+        ApiMockInterceptor.isApiMock = isApiMock;
     }
 
     public static boolean debug() {
