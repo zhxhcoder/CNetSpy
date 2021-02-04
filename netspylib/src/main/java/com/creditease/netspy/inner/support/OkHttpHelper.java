@@ -165,6 +165,74 @@ public class OkHttpHelper {
     }
 
 
+    /***************************************Track记录*********************************************/
+
+    public void postTrackRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
+        String url = "http://" + ApiMockHelper.host + ":5000/track/records";
+
+        String trimPath;
+        if (path.startsWith("/")) {
+            trimPath = path.substring(1).trim();
+        } else {
+            trimPath = path.trim();
+        }
+
+        if (TextUtils.isEmpty(trimPath)) {
+            return;
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("path", trimPath);
+        builder.add("show_type", String.valueOf(show_type));
+
+        if (!TextUtils.isEmpty(resp_data)) {
+            builder.add("resp_data", resp_data.trim());
+        }
+        if (!TextUtils.isEmpty(resp_empty)) {
+            builder.add("resp_empty", resp_empty.trim());
+        }
+        if (!TextUtils.isEmpty(resp_error)) {
+            builder.add("resp_error", resp_error.trim());
+        }
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
+                Headers headers = response.headers();
+                for (int i = 0; i < headers.size(); i++) {
+                    Log.d(TAG, headers.name(i) + ":" + headers.value(i));
+                }
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = SAVE_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
     /***************************************BUG记录*********************************************/
 
 
