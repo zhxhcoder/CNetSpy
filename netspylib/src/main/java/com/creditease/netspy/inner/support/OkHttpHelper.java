@@ -167,10 +167,10 @@ public class OkHttpHelper {
 
     /***************************************Track记录*********************************************/
 
-    public void postTrackRecords(String app, String user, String action, String report, Handler handler) {
+    public void postTrackRecords(String app, String user, String event, String report, Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/track/records";
 
-        if (TextUtils.isEmpty(action)) {
+        if (TextUtils.isEmpty(event)) {
             return;
         }
         if (TextUtils.isEmpty(report)) {
@@ -180,7 +180,7 @@ public class OkHttpHelper {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("action", action.trim());
+        builder.add("event", event.trim());
         builder.add("report", report.trim());
 
         if (!TextUtils.isEmpty(app)) {
