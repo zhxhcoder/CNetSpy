@@ -165,7 +165,7 @@ public class OkHttpHelper {
     }
 
 
-    /***************************************Track记录*********************************************/
+    /***************************************Track记录-神策埋点数据 和 log日志都可以发过来*********************************************/
 
     public void postTrackRecords(String app, String user, String event, String report, Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/track/records";
