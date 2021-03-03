@@ -4,7 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
+import com.creditease.netspy.inner.db.DBHelper;
+import com.creditease.netspy.inner.db.HttpEvent;
 import com.creditease.netspy.inner.ui.netspy.NetSpyListActivity;
+
+import java.util.Date;
 
 /**
  * Created by zhxh on 2018/11/12
@@ -42,5 +46,15 @@ public final class NetSpyHelper {
         } else {
             return;
         }
+    }
+
+    //加入event
+    public static void insertHttpEvent(String url, String response) {
+        HttpEvent transaction = new HttpEvent();
+        transaction.setRequestDate(new Date());
+        transaction.setUrl(url);
+        transaction.setTransId(System.currentTimeMillis());
+        transaction.setRequestBody(response);
+        DBHelper.getInstance().insertHttpData(transaction);
     }
 }
