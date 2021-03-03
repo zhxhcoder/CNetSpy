@@ -172,7 +172,7 @@ public class OkHttpHelper {
 
     /***************************************Track记录*********************************************/
 
-    public void postTrackRecords(String app, String user, String event, String report, Handler handler) {
+    public void postTrackRecords(String source, String user, String event, String report, Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/track/records";
 
         if (TextUtils.isEmpty(event)) {
@@ -188,8 +188,8 @@ public class OkHttpHelper {
         builder.add("event", event.trim());
         builder.add("report", report.trim());
 
-        if (!TextUtils.isEmpty(app)) {
-            builder.add("app", app.trim());
+        if (!TextUtils.isEmpty(source)) {
+            builder.add("app", source.trim());
         }
         if (!TextUtils.isEmpty(user)) {
             builder.add("user", user.trim());
