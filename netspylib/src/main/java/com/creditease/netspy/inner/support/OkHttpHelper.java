@@ -69,7 +69,7 @@ public class OkHttpHelper {
     }
 
     public void getApiRecords(Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/api/records";
+        String url = ApiMockHelper.getBaseURL() + "api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -104,7 +104,7 @@ public class OkHttpHelper {
 
 
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/api/records";
+        String url = ApiMockHelper.getBaseURL() + "api/records";
 
         String trimPath;
         if (path.startsWith("/")) {
@@ -173,7 +173,7 @@ public class OkHttpHelper {
     /***************************************Track记录*********************************************/
 
     public void postTrackRecords(String source, String user, String event, String report, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/track/records";
+        String url = ApiMockHelper.getBaseURL() + "track/records";
 
         if (TextUtils.isEmpty(event)) {
             return;
@@ -236,7 +236,7 @@ public class OkHttpHelper {
 
 
     public void deleteBugItem(String timestamp, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/item/" + timestamp;
+        String url = ApiMockHelper.getBaseURL() + "bug/item/" + timestamp;
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -266,7 +266,7 @@ public class OkHttpHelper {
     }
 
     public void getBugRecords(Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+        String url = ApiMockHelper.getBaseURL() + "bug/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -296,7 +296,7 @@ public class OkHttpHelper {
     }
 
     public void postBugRecords(String timestamp, String summary, String report, String device, String user, String app, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+        String url = ApiMockHelper.getBaseURL() + "bug/records";
 
         OkHttpClient okHttpClient = new OkHttpClient();
 

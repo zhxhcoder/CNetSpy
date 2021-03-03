@@ -31,7 +31,7 @@ public class ApiMockData implements Serializable {
 
 
     public String getFullPath() {
-        return "http://" + ApiMockHelper.host + ":5000/" + path;
+        return ApiMockHelper.getBaseURL() + path;
     }
 
     public String getShowType() {
