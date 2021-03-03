@@ -98,6 +98,11 @@ public class OkHttpHelper {
         });
     }
 
+    public void postApiRecords(String path, String resp_data) {
+        postApiRecords(path, 1, resp_data, "", "", null);
+    }
+
+
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
         String url = "http://" + ApiMockHelper.host + ":5000/api/records";
 
