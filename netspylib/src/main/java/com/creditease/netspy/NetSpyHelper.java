@@ -3,6 +3,7 @@ package com.creditease.netspy;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
@@ -48,14 +49,17 @@ public final class NetSpyHelper {
         }
     }
 
-    //加入event
+    //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
+        Uri uri = Uri.parse(url);
         HttpEvent transaction = new HttpEvent();
         transaction.setRequestDate(new Date());
         transaction.setMethod(method);
-        transaction.setUrl(url);
+        transaction.setUrl(url.replaceFirst("\\?.+$", ""));
+        transaction.setPath(uri.getPath());
         transaction.setTransId(System.currentTimeMillis());
-        transaction.setRequestBody(response);
+        transaction.setRequestBody(uri.getQuery());
+        transaction.setResponseBody(response);
         DBHelper.getInstance().insertHttpData(transaction);
     }
 }
