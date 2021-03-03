@@ -39,8 +39,8 @@ public final class ApiMockHelper {
     }
 
 
-    public static void initHost(String baseUrl) {
-        ApiMockHelper.host = baseUrl;
+    public static void initHost(String host) {
+        ApiMockHelper.host = host;
     }
 
     public static void addParams(String param) {
