@@ -49,9 +49,10 @@ public final class NetSpyHelper {
     }
 
     //加入event
-    public static void insertHttpEvent(String url, String response) {
+    public static void insertHttpEvent(String method, String url, String response) {
         HttpEvent transaction = new HttpEvent();
         transaction.setRequestDate(new Date());
+        transaction.setMethod(method);
         transaction.setUrl(url);
         transaction.setTransId(System.currentTimeMillis());
         transaction.setRequestBody(response);
