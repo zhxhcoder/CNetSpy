@@ -107,7 +107,29 @@ public class NetSpyListFragment extends Fragment implements
         Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
     }
 
-    public void uploadCloudFromDb() {
+    public void uploadAllCloudFromDb() {
+        AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
+                .setTitle("温馨提示")
+                .setMessage("将上传接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
+                .setPositiveButton("上传", (dialog1, which) -> {
+                    //Todo pathSet去重
+                    List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
+                    Set<String> pathSet = new HashSet<>();
+                    for (int i = 0; i < dataList.size(); i++) {
+                        HttpEvent event = dataList.get(i);
+                        String pathStr = event.getPathWithParam();
+                        if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
+                            pathSet.add(pathStr);
+                            OkHttpHelper.getInstance().postApiRecords(pathStr, 1, event.getResponseBody(), "", "", null);
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .create();
+        dialog.show();
+    }
+
+    public void uploadPathCloudFromDb() {
         AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                 .setTitle("温馨提示")
                 .setMessage("将上传接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
@@ -166,7 +188,7 @@ public class NetSpyListFragment extends Fragment implements
         if (item.getItemId() == R.id.search) {
             return true;
         } else if (item.getItemId() == R.id.upload) {
-            uploadCloudFromDb();
+            uploadAllCloudFromDb();
             return true;
         } else if (item.getItemId() == R.id.clear) {
             adapter.setData(filterText, new ArrayList<>());
