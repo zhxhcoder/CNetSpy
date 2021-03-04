@@ -33,8 +33,14 @@ public final class ApiMockHelper {
         add("sign");
     }};
 
-    public static void initHost(String baseUrl) {
-        ApiMockHelper.host = baseUrl;
+
+    public static String getBaseURL() {
+        return "http://" + ApiMockHelper.host + ":5000/";
+    }
+
+
+    public static void initHost(String host) {
+        ApiMockHelper.host = host;
     }
 
     public static void addParams(String param) {

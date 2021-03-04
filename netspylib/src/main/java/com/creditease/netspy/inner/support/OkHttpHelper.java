@@ -69,7 +69,7 @@ public class OkHttpHelper {
     }
 
     public void getApiRecords(Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/api/records";
+        String url = ApiMockHelper.getBaseURL() + "api/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -98,8 +98,13 @@ public class OkHttpHelper {
         });
     }
 
+    public void postApiRecords(String path, String resp_data) {
+        postApiRecords(path, 1, resp_data, "", "", null);
+    }
+
+
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/api/records";
+        String url = ApiMockHelper.getBaseURL() + "api/records";
 
         String trimPath;
         if (path.startsWith("/")) {
@@ -165,11 +170,73 @@ public class OkHttpHelper {
     }
 
 
+    /***************************************Track记录*********************************************/
+
+    public void postTrackRecords(String source, String user, String event, String report, Handler handler) {
+        String url = ApiMockHelper.getBaseURL() + "track/records";
+
+        if (TextUtils.isEmpty(event)) {
+            return;
+        }
+        if (TextUtils.isEmpty(report)) {
+            return;
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("event", event.trim());
+        builder.add("report", report.trim());
+
+        if (!TextUtils.isEmpty(source)) {
+            builder.add("app", source.trim());
+        }
+        if (!TextUtils.isEmpty(user)) {
+            builder.add("user", user.trim());
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
+                Headers headers = response.headers();
+                for (int i = 0; i < headers.size(); i++) {
+                    Log.d(TAG, headers.name(i) + ":" + headers.value(i));
+                }
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = SAVE_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
     /***************************************BUG记录*********************************************/
 
 
     public void deleteBugItem(String timestamp, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/item/" + timestamp;
+        String url = ApiMockHelper.getBaseURL() + "bug/item/" + timestamp;
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -199,7 +266,7 @@ public class OkHttpHelper {
     }
 
     public void getBugRecords(Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+        String url = ApiMockHelper.getBaseURL() + "bug/records";
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -229,7 +296,7 @@ public class OkHttpHelper {
     }
 
     public void postBugRecords(String timestamp, String summary, String report, String device, String user, String app, Handler handler) {
-        String url = "http://" + ApiMockHelper.host + ":5000/bug/records";
+        String url = ApiMockHelper.getBaseURL() + "bug/records";
 
         OkHttpClient okHttpClient = new OkHttpClient();
 

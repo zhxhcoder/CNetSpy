@@ -91,6 +91,8 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         setRequestText(holder.param, httpEvent.getFormattedRequestBody(), httpEvent.getRequestBodyIsPlainText());
 
         setStatusColor(holder, httpEvent);
+
+        holder.upload.setVisibility(View.VISIBLE);
         holder.transaction = httpEvent;
         holder.view.setOnClickListener(v -> {
             if (null != NetSpyListAdapter.this.listener) {
@@ -99,6 +101,9 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         });
         holder.delete.setOnClickListener(v -> {
             fragment.updateDataFromDelete(httpEvent);
+        });
+        holder.upload.setOnClickListener(v -> {
+            fragment.uploadCloudFromDb(httpEvent);
         });
     }
 
@@ -151,6 +156,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         public final TextView start;
         public final TextView param;
         public final ImageView delete;
+        public final ImageView upload;
         HttpEvent transaction;
 
         ViewHolder(View view) {
@@ -162,6 +168,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
             start = view.findViewById(R.id.start);
             param = view.findViewById(R.id.param);
             delete = view.findViewById(R.id.delete);
+            upload = view.findViewById(R.id.upload);
         }
     }
 }
