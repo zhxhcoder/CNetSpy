@@ -27,6 +27,7 @@ public class HttpEvent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public enum Status {
+        Uploaded,
         Requested,
         Complete,
         Failed
