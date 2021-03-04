@@ -92,7 +92,13 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
 
         setStatusColor(holder, httpEvent);
 
+        if (httpEvent.isUploaded()) {
+            holder.upload.setImageResource(R.drawable.netspy_ic_cloud_upload_yellow_24);
+        } else {
+            holder.upload.setImageResource(R.drawable.netspy_ic_cloud_upload_black_24);
+        }
         holder.upload.setVisibility(View.VISIBLE);
+
         holder.transaction = httpEvent;
         holder.view.setOnClickListener(v -> {
             if (null != NetSpyListAdapter.this.listener) {
