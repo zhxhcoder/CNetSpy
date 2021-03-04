@@ -110,7 +110,7 @@ public class NetSpyListFragment extends Fragment implements
     public void uploadAllCloudFromDb() {
         AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                 .setTitle("温馨提示")
-                .setMessage("将上传接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
+                .setMessage("将上传所有接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
                 .setPositiveButton("上传", (dialog1, which) -> {
                     //Todo pathSet去重
                     List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
@@ -129,12 +129,11 @@ public class NetSpyListFragment extends Fragment implements
         dialog.show();
     }
 
-    public void uploadCloudFromDb(long transId) {
+    public void uploadCloudFromDb(HttpEvent event) {
         AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                 .setTitle("温馨提示")
-                .setMessage("将上传接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
+                .setMessage("将上传该接口相关数据到服务器，并可能覆盖服务器上相同接口的相关数据")
                 .setPositiveButton("上传", (dialog1, which) -> {
-                    HttpEvent event = DBHelper.getInstance().getHttpDataByTransId(transId);
                     String pathStr = event.getPathWithParam();
                     if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
                         OkHttpHelper.getInstance().postApiRecords(pathStr, 1, event.getResponseBody(), "", "", null);

@@ -80,16 +80,33 @@
 
     </RelativeLayout>
 
-
-    <ImageView
-        android:id="@+id/delete"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:padding="5dp"
-        android:src="@drawable/netspy_ic_delete_black_24dp" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:padding="5dp"
+            android:src="@drawable/netspy_ic_delete_black_24dp" />
+
+        <ImageView
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:padding="5dp"
+            android:src="@drawable/netspy_ic_cloud_upload_black_24" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>
