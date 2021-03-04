@@ -66,6 +66,7 @@ public class HttpEvent implements Serializable {
     private Map<String, String> responseHeaders;
     private String responseBody;
     private boolean responseBodyIsPlainText = true;
+    private boolean isUploaded = false;
 
     @Keep()
     public HttpEvent(Long _id, Long transId, java.util.Date requestDate,
@@ -76,7 +77,7 @@ public class HttpEvent implements Serializable {
                      boolean requestBodyIsPlainText, Integer responseCode,
                      String responseMessage, String error, Long responseContentLength,
                      String responseContentType, Map<String, String> responseHeaders, String responseBody,
-                     boolean responseBodyIsPlainText) {
+                     boolean responseBodyIsPlainText, boolean isUploaded) {
         this._id = _id;
         this.transId = transId;
         this.requestDate = requestDate;
@@ -101,6 +102,7 @@ public class HttpEvent implements Serializable {
         this.responseHeaders = responseHeaders;
         this.responseBody = responseBody;
         this.responseBodyIsPlainText = responseBodyIsPlainText;
+        this.isUploaded = isUploaded;
     }
 
     @Keep()
@@ -306,6 +308,14 @@ public class HttpEvent implements Serializable {
         this.responseBodyIsPlainText = responseBodyIsPlainText;
     }
 
+    public boolean isUploaded() {
+        return isUploaded;
+    }
+
+    public void setUploaded(boolean uploaded) {
+        isUploaded = uploaded;
+    }
+
     /********************************************************/
 
 
@@ -478,5 +488,13 @@ public class HttpEvent implements Serializable {
                 ", responseBody='" + responseBody + '\'' +
                 ", responseBodyIsPlainText=" + responseBodyIsPlainText +
                 '}';
+    }
+
+    public boolean getIsUploaded() {
+        return this.isUploaded;
+    }
+
+    public void setIsUploaded(boolean isUploaded) {
+        this.isUploaded = isUploaded;
     }
 }

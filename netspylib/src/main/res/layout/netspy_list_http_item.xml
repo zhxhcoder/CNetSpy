@@ -100,11 +100,13 @@
             android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
             android:gravity="bottom"
             android:padding="5dp"
-            android:src="@drawable/netspy_ic_cloud_upload_black_24" />
+            android:src="@drawable/netspy_ic_cloud_upload_black_24"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

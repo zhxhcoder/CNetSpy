@@ -139,6 +139,10 @@ public class NetSpyListFragment extends Fragment implements
                     if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
                         OkHttpHelper.getInstance().postApiRecords(pathStr, 1, event.getResponseBody(), "", "", null);
                     }
+
+                    event.setUploaded(true);
+                    DBHelper.getInstance().updateHttpData(event);
+                    updateDataFromDb();
                 })
                 .setNegativeButton("取消", null)
                 .create();
