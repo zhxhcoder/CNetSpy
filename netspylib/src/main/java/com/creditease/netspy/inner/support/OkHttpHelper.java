@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.creditease.netspy.ApiMockHelper;
+import com.creditease.netspy.NetSpyHelper;
 
 import java.io.IOException;
 
@@ -98,14 +99,17 @@ public class OkHttpHelper {
         });
     }
 
+    //提供给外部非okHttp时
     public void postApiRecords(String path, String resp_data) {
-        postApiRecords("", path, 1, resp_data, "", "", null);
+        postApiRecords(NetSpyHelper.source, path, 1, resp_data, "", "", null);
     }
 
+    //提供给外部非okHttp时
     public void postApiRecords(String source, String path, String resp_data) {
         postApiRecords(source, path, 1, resp_data, "", "", null);
     }
 
+    //仅修改不改变之前的source
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
         postApiRecords("", path, show_type, resp_data, resp_empty, resp_error, handler);
     }

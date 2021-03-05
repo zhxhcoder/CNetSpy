@@ -120,7 +120,7 @@ public class NetSpyListFragment extends Fragment implements
                         String pathStr = event.getPathWithParam();
                         if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
                             pathSet.add(pathStr);
-                            OkHttpHelper.getInstance().postApiRecords(pathStr, 1, event.getResponseBody(), "", "", null);
+                            OkHttpHelper.getInstance().postApiRecords(event.getSource(),pathStr, 1, event.getResponseBody(), "", "", null);
                         }
                     }
                 })
@@ -136,7 +136,7 @@ public class NetSpyListFragment extends Fragment implements
                 .setPositiveButton("上传", (dialog1, which) -> {
                     String pathStr = event.getPathWithParam();
                     if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
-                        OkHttpHelper.getInstance().postApiRecords(pathStr, 1, event.getResponseBody(), "", "", null);
+                        OkHttpHelper.getInstance().postApiRecords(event.getSource(), pathStr, 1, event.getResponseBody(), "", "", null);
                     }
 
                     event.setUploaded(true);
