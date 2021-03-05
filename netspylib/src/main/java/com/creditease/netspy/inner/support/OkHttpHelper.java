@@ -99,11 +99,19 @@ public class OkHttpHelper {
     }
 
     public void postApiRecords(String path, String resp_data) {
-        postApiRecords(path, 1, resp_data, "", "", null);
+        postApiRecords("", path, 1, resp_data, "", "", null);
     }
 
+    public void postApiRecords(String source, String path, String resp_data) {
+        postApiRecords(source, path, 1, resp_data, "", "", null);
+    }
 
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
+        postApiRecords("", path, show_type, resp_data, resp_empty, resp_error, handler);
+    }
+
+    //最终方法
+    public void postApiRecords(String source, String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
         String url = ApiMockHelper.getBaseURL() + "api/records";
 
         String trimPath;
@@ -131,6 +139,10 @@ public class OkHttpHelper {
         }
         if (!TextUtils.isEmpty(resp_error)) {
             builder.add("resp_error", resp_error.trim());
+        }
+
+        if (!TextUtils.isEmpty(source)) {
+            builder.add("source", source.trim());
         }
         RequestBody requestBody = builder.build();
 
