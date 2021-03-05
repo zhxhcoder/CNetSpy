@@ -85,6 +85,7 @@ public final class NetSpyInterceptor implements Interceptor {
         boolean hasRequestBody = requestBody != null;
 
         HttpEvent transaction = new HttpEvent();
+        transaction.setSource(NetSpyHelper.source);
         transaction.setRequestDate(new Date());
 
         transaction.setMethod(request.method());

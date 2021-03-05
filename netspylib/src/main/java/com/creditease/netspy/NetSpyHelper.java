@@ -16,10 +16,16 @@ import java.util.Date;
  * NetSpyHelper 工具类.
  */
 public final class NetSpyHelper {
+    static String source = "";
     static boolean isNetSpy = false;
     public static Application netSpyApp;
 
     public static void install(Application netSpyApp) {
+        NetSpyHelper.install(netSpyApp, "");
+    }
+
+    public static void install(Application netSpyApp, String source) {
+        NetSpyHelper.source = source;
         NetSpyHelper.netSpyApp = netSpyApp;
         //注册异常监控
         BugSpyHelper.install(netSpyApp);
@@ -51,7 +57,7 @@ public final class NetSpyHelper {
 
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
-        insertHttpEvent("",method,url,response);
+        insertHttpEvent(NetSpyHelper.source, method, url, response);
     }
 
     public static void insertHttpEvent(String source, String method, String url, String response) {
