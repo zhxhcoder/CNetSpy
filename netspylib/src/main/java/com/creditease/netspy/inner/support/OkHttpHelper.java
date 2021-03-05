@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.creditease.netspy.ApiMockHelper;
+import com.creditease.netspy.NetSpyHelper;
 
 import java.io.IOException;
 
@@ -99,7 +100,7 @@ public class OkHttpHelper {
     }
 
     public void postApiRecords(String path, String resp_data) {
-        postApiRecords("", path, 1, resp_data, "", "", null);
+        postApiRecords(NetSpyHelper.source, path, 1, resp_data, "", "", null);
     }
 
     public void postApiRecords(String source, String path, String resp_data) {
@@ -107,7 +108,7 @@ public class OkHttpHelper {
     }
 
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
-        postApiRecords("", path, show_type, resp_data, resp_empty, resp_error, handler);
+        postApiRecords(NetSpyHelper.source, path, show_type, resp_data, resp_empty, resp_error, handler);
     }
 
     //最终方法

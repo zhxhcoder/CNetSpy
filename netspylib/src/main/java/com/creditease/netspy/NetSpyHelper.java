@@ -16,7 +16,7 @@ import java.util.Date;
  * NetSpyHelper 工具类.
  */
 public final class NetSpyHelper {
-    static String source = "";
+    public static String source = "";
     static boolean isNetSpy = false;
     public static Application netSpyApp;
 
