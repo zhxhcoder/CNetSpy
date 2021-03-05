@@ -67,6 +67,7 @@ public class HttpEvent implements Serializable {
     private String responseBody;
     private boolean responseBodyIsPlainText = true;
     private boolean isUploaded = false;
+    private String source;
 
     @Keep()
     public HttpEvent(Long _id, Long transId, java.util.Date requestDate,
@@ -77,7 +78,7 @@ public class HttpEvent implements Serializable {
                      boolean requestBodyIsPlainText, Integer responseCode,
                      String responseMessage, String error, Long responseContentLength,
                      String responseContentType, Map<String, String> responseHeaders, String responseBody,
-                     boolean responseBodyIsPlainText, boolean isUploaded) {
+                     boolean responseBodyIsPlainText, boolean isUploaded, String source) {
         this._id = _id;
         this.transId = transId;
         this.requestDate = requestDate;
@@ -103,6 +104,7 @@ public class HttpEvent implements Serializable {
         this.responseBody = responseBody;
         this.responseBodyIsPlainText = responseBodyIsPlainText;
         this.isUploaded = isUploaded;
+        this.source = source;
     }
 
     @Keep()
@@ -487,6 +489,8 @@ public class HttpEvent implements Serializable {
                 ", responseHeaders=" + responseHeaders +
                 ", responseBody='" + responseBody + '\'' +
                 ", responseBodyIsPlainText=" + responseBodyIsPlainText +
+                ", isUploaded=" + isUploaded +
+                ", source=" + source +
                 '}';
     }
 
@@ -496,5 +500,13 @@ public class HttpEvent implements Serializable {
 
     public void setIsUploaded(boolean isUploaded) {
         this.isUploaded = isUploaded;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

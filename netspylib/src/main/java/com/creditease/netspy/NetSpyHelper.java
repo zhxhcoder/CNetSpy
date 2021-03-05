@@ -51,9 +51,14 @@ public final class NetSpyHelper {
 
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
+        insertHttpEvent("",method,url,response);
+    }
+
+    public static void insertHttpEvent(String source, String method, String url, String response) {
         Uri uri = Uri.parse(url);
         HttpEvent transaction = new HttpEvent();
         transaction.setRequestDate(new Date());
+        transaction.setSource(source);
         transaction.setMethod(method);
         transaction.setUrl(url.replaceFirst("\\?.+$", ""));
         transaction.setPath(uri.getPath());
