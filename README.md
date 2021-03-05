@@ -7,7 +7,7 @@ https://www.jianshu.com/p/12995ed85a38
 
 ####项目引用：
 ```
-implementation 'com.creditease:netspylib:4.6.3'
+implementation 'com.creditease:netspylib:4.6.5'
 ```
 ####项目介绍：
 项目历经十几个版本，从只是记录接口返回，到现在已经逐步扩展到，接口数据镜像，异常记录与上传等实用功能。
