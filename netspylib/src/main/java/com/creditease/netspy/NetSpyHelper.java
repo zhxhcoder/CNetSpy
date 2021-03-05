@@ -21,7 +21,7 @@ public final class NetSpyHelper {
     public static Application netSpyApp;
 
     public static void install(Application netSpyApp) {
-        NetSpyHelper.install(netSpyApp, "");
+        NetSpyHelper.install(netSpyApp, NetSpyHelper.source);
     }
 
     public static void install(Application netSpyApp, String source) {

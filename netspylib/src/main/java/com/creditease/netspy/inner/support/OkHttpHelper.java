@@ -99,6 +99,7 @@ public class OkHttpHelper {
         });
     }
 
+    //提供给外部
     public void postApiRecords(String path, String resp_data) {
         postApiRecords(NetSpyHelper.source, path, 1, resp_data, "", "", null);
     }
@@ -107,8 +108,9 @@ public class OkHttpHelper {
         postApiRecords(source, path, 1, resp_data, "", "", null);
     }
 
+    //不改变之前的source
     public void postApiRecords(String path, int show_type, String resp_data, String resp_empty, String resp_error, Handler handler) {
-        postApiRecords(NetSpyHelper.source, path, show_type, resp_data, resp_empty, resp_error, handler);
+        postApiRecords("", path, show_type, resp_data, resp_empty, resp_error, handler);
     }
 
     //最终方法
