@@ -217,6 +217,9 @@ public class HttpEvent implements Serializable {
     }
 
     public String getRequestBody() {
+        if (requestBody == null) {
+            return "";
+        }
         try {
             return URLDecoder.decode(requestBody, "UTF-8");
         } catch (UnsupportedEncodingException e) {
