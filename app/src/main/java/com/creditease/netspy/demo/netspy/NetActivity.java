@@ -55,9 +55,14 @@ public class NetActivity extends AppCompatActivity {
 
         tvHttpContent = findViewById(R.id.tvHttpContent);
 
-        findViewById(R.id.btn_http).setOnClickListener(view -> {
+        findViewById(R.id.btn_http_post).setOnClickListener(view -> {
             for (int i = 0; i < 1; i++) {
-                doHttpActivity();
+                doHttpPost();
+            }
+        });
+        findViewById(R.id.btn_http_get).setOnClickListener(view -> {
+            for (int i = 0; i < 1; i++) {
+                doHttpGet();
             }
         });
 
@@ -109,7 +114,7 @@ public class NetActivity extends AppCompatActivity {
                 .build();
     }
 
-    private void doHttpActivity() {
+    private void doHttpPost() {
         SpyApiService.HttpApi api = SpyApiService.getInstance(getClient(this));
         Callback<Void> cb = new Callback<Void>() {
             @Override
@@ -123,11 +128,32 @@ public class NetActivity extends AppCompatActivity {
         };
 
         Map<String, String> map = new HashMap<>();
-        map.put("method","m");
-        map.put("nice","n");
-        map.put("fundType","1");
-        map.put("cardids","c");
+        map.put("method", "m");
+        map.put("nice", "n");
+        map.put("fundType", "1");
+        map.put("cardids", "c");
         api.postList(map).enqueue(cb);
+    }
+
+    private void doHttpGet() {
+        SpyApiService.HttpApi api = SpyApiService.getInstance(getClient(this));
+        Callback<Void> cb = new Callback<Void>() {
+            @Override
+            public void onResponse(Call call, Response response) {
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        };
+
+        Map<String, String> map = new HashMap<>();
+        map.put("method", "m");
+        map.put("nice", "n");
+        map.put("fundType", "1");
+        map.put("cardids", "c");
+        api.getList(map).enqueue(cb);
     }
 
 

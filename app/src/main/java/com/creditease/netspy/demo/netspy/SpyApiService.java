@@ -12,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by zhxh on 2019/06/24
@@ -53,11 +54,11 @@ class SpyApiService {
 
         /////////////////////////////////////////////////////////////////////////
 
-        @GET("data/sk/101010100.html")
-        Call<Void> getList();
+        @GET("/data/sk/101010100.html")
+        Call<Void> getList(@QueryMap Map<String, String> map);
 
         @FormUrlEncoded
-        @POST("data/sk/101010100.html")
+        @POST("/data/sk/101010100.html")
         Call<Void> postList(@FieldMap Map<String, String> map);
 
     }
