@@ -89,7 +89,14 @@ public final class NetSpyInterceptor implements Interceptor {
         transaction.setRequestDate(new Date());
 
         transaction.setMethod(request.method());
-        transaction.setUrl(request.url().toString());
+
+
+        if (request.method().equals("GET")) {
+            transaction.setUrl(request.url().toString().replaceFirst("\\?.*$", ""));
+            transaction.setRequestBody(request.url().toString().replaceFirst("^.+\\?", ""));
+        } else {//POST
+            transaction.setUrl(request.url().toString());
+        }
 
         transaction.setRequestHeaders(toHttpHeaderMap(request.headers()));
         if (hasRequestBody) {
