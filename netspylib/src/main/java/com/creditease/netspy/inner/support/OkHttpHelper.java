@@ -254,7 +254,7 @@ public class OkHttpHelper {
         postUsersRecords(name, pwd, "", "");
     }
 
-    public void postUsersRecords(String name, String pwd, String source, String variant) {
+    public void postUsersRecords(String name, String pwd, String source, String flavor) {
         String url = ApiMockHelper.getBaseURL() + "users/records";
 
         if (TextUtils.isEmpty(name)) {
@@ -275,8 +275,8 @@ public class OkHttpHelper {
         } else {
             builder.add("source", NetSpyHelper.source);
         }
-        if (!TextUtils.isEmpty(variant)) {
-            builder.add("variant", variant.trim());
+        if (!TextUtils.isEmpty(flavor)) {
+            builder.add("flavor", flavor.trim());
         }
 
         RequestBody requestBody = builder.build();
