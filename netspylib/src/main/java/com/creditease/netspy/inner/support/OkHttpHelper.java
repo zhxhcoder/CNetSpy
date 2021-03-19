@@ -248,6 +248,68 @@ public class OkHttpHelper {
         });
     }
 
+    /***************************************测试用户记录*********************************************/
+
+    public void postUsersRecords(String name, String pwd) {
+        postUsersRecords(name, pwd, "", "");
+    }
+
+    public void postUsersRecords(String name, String pwd, String source, String variant) {
+        String url = ApiMockHelper.getBaseURL() + "users/records";
+
+        if (TextUtils.isEmpty(name)) {
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            return;
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("name", name.trim());
+        builder.add("pwd", pwd.trim());
+
+        if (!TextUtils.isEmpty(source)) {
+            builder.add("source", source.trim());
+        } else {
+            builder.add("source", NetSpyHelper.source);
+        }
+        if (!TextUtils.isEmpty(variant)) {
+            builder.add("variant", variant.trim());
+        }
+
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
+                Headers headers = response.headers();
+                for (int i = 0; i < headers.size(); i++) {
+                    Log.d(TAG, headers.name(i) + ":" + headers.value(i));
+                }
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+
+            }
+        });
+    }
+
     /***************************************BUG记录*********************************************/
 
 
