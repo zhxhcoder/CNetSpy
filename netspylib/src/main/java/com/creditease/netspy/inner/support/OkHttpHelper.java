@@ -250,6 +250,10 @@ public class OkHttpHelper {
 
     /***************************************测试用户记录*********************************************/
 
+    public void postUsersRecords(String name, String pwd) {
+        postUsersRecords(name, pwd, "", "");
+    }
+
     public void postUsersRecords(String name, String pwd, String source, String variant) {
         String url = ApiMockHelper.getBaseURL() + "users/records";
 
@@ -268,6 +272,8 @@ public class OkHttpHelper {
 
         if (!TextUtils.isEmpty(source)) {
             builder.add("source", source.trim());
+        } else {
+            builder.add("source", NetSpyHelper.source);
         }
         if (!TextUtils.isEmpty(variant)) {
             builder.add("variant", variant.trim());
