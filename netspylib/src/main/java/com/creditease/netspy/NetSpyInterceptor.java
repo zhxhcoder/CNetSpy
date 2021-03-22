@@ -37,8 +37,8 @@ public final class NetSpyInterceptor implements Interceptor {
     private static final String LOG_TAG = "NetSpyInterceptor";
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
-    private final Context context;
-    private final NotificationHelper notificationHelper;
+    private Context context;
+    private NotificationHelper notificationHelper;
     private boolean showNotification;
     private long maxContentLength = 250000L;
 
@@ -47,6 +47,9 @@ public final class NetSpyInterceptor implements Interceptor {
      * NetSpyInterceptor
      */
     public NetSpyInterceptor() {
+        if (NetSpyHelper.netSpyApp == null) {
+            return;
+        }
         this.context = NetSpyHelper.netSpyApp;
         notificationHelper = new NotificationHelper(this.context);
         showNotification = NetSpyHelper.isNetSpy;
