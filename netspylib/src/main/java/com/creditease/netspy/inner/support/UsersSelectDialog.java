@@ -105,7 +105,7 @@ public class UsersSelectDialog extends FrameLayout {
             TextView title = itemView.findViewById(R.id.title);
             TextView time = itemView.findViewById(R.id.time);
 
-            title.setText("应用 " + data.getSource() + " 环境 " + data.getFlavor() + " 用户名 " + data.getName());
+            title.setText("应用：" + data.getSource() + " 环境：" + data.getFlavor() + " 用户名：" + data.getName());
             time.setText(data.update_time_show);
 
             itemView.setOnClickListener(new OnClickListener() {
