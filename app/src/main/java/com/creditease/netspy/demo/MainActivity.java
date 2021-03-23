@@ -19,6 +19,7 @@ import com.creditease.netspy.inner.support.OkHttpHelper;
  */
 public class MainActivity extends AppCompatActivity {
 
+    Button userButton;
     Button netButton;
     Button bugButton;
     Button trackButton;
@@ -32,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
         sensorManager = ContextCompat.getSystemService(this, SensorManager.class);
         setContentView(R.layout.activity_main);
 
+        userButton = findViewById(R.id.userButton);
         netButton = findViewById(R.id.netButton);
         bugButton = findViewById(R.id.bugButton);
         trackButton = findViewById(R.id.trackButton);
+        findViewById(R.id.userButton).setOnClickListener(v -> OkHttpHelper.getInstance().getUsersRecords("",null));
         findViewById(R.id.netButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NetActivity.class)));
         findViewById(R.id.bugButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BugActivity.class)));
         findViewById(R.id.socketButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SocketMainActivity.class)));
