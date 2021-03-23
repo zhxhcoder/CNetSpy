@@ -101,7 +101,7 @@ public class UsersSelectDialog extends FrameLayout {
 
         for (int i = 0; i < dataList.size(); i++) {
             UsersItemData data = dataList.get(i);
-            View itemView = LayoutInflater.from(activity).inflate(R.layout.users_records_item, null);
+            View itemView = LayoutInflater.from(activity).inflate(R.layout.users_select_item, null);
             TextView title = itemView.findViewById(R.id.title);
             TextView time = itemView.findViewById(R.id.time);
 
