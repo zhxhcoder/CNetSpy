@@ -33,7 +33,7 @@ public class UsersRecordsActivity extends AppCompatActivity {
         setContentView(R.layout.users_records_layout);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("用户记录");
+        toolbar.setTitle("账号记录");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
@@ -46,6 +46,15 @@ public class UsersRecordsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        downLoadUsers();
+    }
+
+    private void downLoadUsers() {
+        OkHttpHelper.getInstance().getUsersRecords("",handler);
+    }
 
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
@@ -57,7 +66,7 @@ public class UsersRecordsActivity extends AppCompatActivity {
                     if (dataList == null || dataList.isEmpty()) {
                         return;
                     }
-                    toolbar.setTitle("用户-" + dataList.size() + "条");
+                    toolbar.setTitle("账号-" + dataList.size() + "个");
                     adapter.setData(dataList);
                 } catch (JsonSyntaxException e) {
                     dataList = new ArrayList<>();

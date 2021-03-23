@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.creditease.netspy.ApiMockHelper;
+import com.creditease.netspy.UsersHelper;
 import com.creditease.netspy.demo.netspy.BugActivity;
 import com.creditease.netspy.demo.netspy.NetActivity;
 import com.creditease.netspy.demo.socket.SocketMainActivity;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         netButton = findViewById(R.id.netButton);
         bugButton = findViewById(R.id.bugButton);
         trackButton = findViewById(R.id.trackButton);
-        findViewById(R.id.userButton).setOnClickListener(v -> OkHttpHelper.getInstance().getUsersRecords("",null));
+        findViewById(R.id.userButton).setOnClickListener(v -> UsersHelper.launchActivity(this));
         findViewById(R.id.netButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NetActivity.class)));
         findViewById(R.id.bugButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BugActivity.class)));
         findViewById(R.id.socketButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SocketMainActivity.class)));
