@@ -36,7 +36,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
                 android:scaleType="centerInside"
-                android:src="@drawable/netspy_ic_cloud_upload_black_24" />
+                android:src="@drawable/ic_baseline_close_24" />
 
         </RelativeLayout>
 
