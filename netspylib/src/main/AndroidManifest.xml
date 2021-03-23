@@ -7,6 +7,11 @@
 
     <application>
         <activity
+            android:name=".inner.ui.users.UsersRecordsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".inner.ui.apimock.ApiMockListActivity"
+            android:theme="@style/NetSpy.Theme" />
+        <activity
             android:name=".inner.ui.apimock.ApiMockDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".inner.ui.apimock.ApiMockListActivity"
