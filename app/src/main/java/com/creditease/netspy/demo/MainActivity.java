@@ -14,6 +14,7 @@ import com.creditease.netspy.demo.netspy.BugActivity;
 import com.creditease.netspy.demo.netspy.NetActivity;
 import com.creditease.netspy.demo.socket.SocketMainActivity;
 import com.creditease.netspy.inner.support.OkHttpHelper;
+import com.creditease.netspy.inner.support.UsersSelectDialog;
 
 /**
  * Created by zhxh on 2019/06/20
@@ -38,7 +39,12 @@ public class MainActivity extends AppCompatActivity {
         netButton = findViewById(R.id.netButton);
         bugButton = findViewById(R.id.bugButton);
         trackButton = findViewById(R.id.trackButton);
-        findViewById(R.id.userButton).setOnClickListener(v -> UsersHelper.launchActivity(this));
+        findViewById(R.id.userButton).setOnClickListener(v -> UsersHelper.launchDialog(this, "", new UsersSelectDialog.OnSelectListener() {
+            @Override
+            public void onUser(String name, String pwd) {
+                Toast.makeText(MainActivity.this, "" + name + "  " + pwd, Toast.LENGTH_SHORT).show();
+            }
+        }));
         findViewById(R.id.netButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NetActivity.class)));
         findViewById(R.id.bugButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BugActivity.class)));
         findViewById(R.id.socketButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SocketMainActivity.class)));

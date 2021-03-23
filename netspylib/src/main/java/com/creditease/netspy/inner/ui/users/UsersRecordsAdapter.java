@@ -42,19 +42,12 @@ public class UsersRecordsAdapter extends RecyclerView.Adapter<UsersRecordsAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         final UsersItemData data = dataList.get(i);
-        holder.name.setText(data.getName());
-
-        if (!TextUtils.isEmpty(data.timestamp)) {
-            holder.time.setText(FormatHelper.timeStamp2Str(Long.parseLong(data.timestamp), null));
-        } else {
-            holder.time.setText("yyyy-MM-dd HH:mm:ss");
-        }
-
+        holder.title.setText("应用 " + data.getSource() + " 环境 " + data.getFlavor() + " 用户名 " + data.getName());
+        holder.time.setText(data.update_time_show);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 activity.finish();
             }
         });
@@ -73,14 +66,14 @@ public class UsersRecordsAdapter extends RecyclerView.Adapter<UsersRecordsAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public final View view;
-        public final TextView name;
+        public final TextView title;
         public final TextView show;
         public final TextView time;
 
         ViewHolder(View view) {
             super(view);
             this.view = view;
-            name = view.findViewById(R.id.name);
+            title = view.findViewById(R.id.title);
             show = view.findViewById(R.id.show);
             time = view.findViewById(R.id.time);
         }
