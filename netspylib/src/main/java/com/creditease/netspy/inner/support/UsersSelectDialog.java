@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.creditease.netspy.R;
@@ -33,6 +34,7 @@ public class UsersSelectDialog extends FrameLayout {
     View rootView;
     View contentLayout;
     View ivDialogClose;
+    LinearLayout llContainer;
 
     OnSelectListener selectListener;
 
@@ -57,8 +59,8 @@ public class UsersSelectDialog extends FrameLayout {
         }
         rootView = LayoutInflater.from(context).inflate(R.layout.users_select_layout, this);
         contentLayout = rootView.findViewById(R.id.contentLayout);
-
         ivDialogClose = rootView.findViewById(R.id.ivDialogClose);
+        llContainer = rootView.findViewById(R.id.llContainer);
     }
 
     public void requestUsers(String source, OnSelectListener selectListener) {
@@ -94,6 +96,9 @@ public class UsersSelectDialog extends FrameLayout {
             return;
         }
 
+        llContainer.setVisibility(VISIBLE);
+        llContainer.removeAllViews();
+
         for (int i = 0; i < dataList.size(); i++) {
             UsersItemData data = dataList.get(i);
             View itemView = LayoutInflater.from(activity).inflate(R.layout.users_records_item, null);
@@ -107,8 +112,11 @@ public class UsersSelectDialog extends FrameLayout {
                 @Override
                 public void onClick(View v) {
                     submitListener.onUser(data.getName(), data.getPwd());
+                    close();
                 }
             });
+
+            llContainer.addView(itemView);
         }
 
         contentLayout.setOnClickListener(view -> {

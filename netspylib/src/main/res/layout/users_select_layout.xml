@@ -26,7 +26,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="17dp"
                 android:text="请点击选择"
-                android:textStyle="normal" />
+                android:textColor="#000"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ivDialogClose"

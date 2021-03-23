@@ -39,12 +39,6 @@ public class MainActivity extends AppCompatActivity {
         netButton = findViewById(R.id.netButton);
         bugButton = findViewById(R.id.bugButton);
         trackButton = findViewById(R.id.trackButton);
-        findViewById(R.id.userButton).setOnClickListener(v -> UsersHelper.launchDialog(this, "", new UsersSelectDialog.OnSelectListener() {
-            @Override
-            public void onUser(String name, String pwd) {
-                Toast.makeText(MainActivity.this, "" + name + "  " + pwd, Toast.LENGTH_SHORT).show();
-            }
-        }));
         findViewById(R.id.netButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NetActivity.class)));
         findViewById(R.id.bugButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BugActivity.class)));
         findViewById(R.id.socketButton).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SocketMainActivity.class)));
