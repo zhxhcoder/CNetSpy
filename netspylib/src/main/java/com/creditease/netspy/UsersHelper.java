@@ -19,5 +19,4 @@ public final class UsersHelper {
     public static void launchDialog(Activity context, String source, UsersSelectDialog.OnSelectListener selectListener) {
         new UsersSelectDialog(context).requestUsers(source, selectListener);
     }
-
 }
