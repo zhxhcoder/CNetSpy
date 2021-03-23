@@ -310,6 +310,45 @@ public class OkHttpHelper {
         });
     }
 
+    public void getUsersRecords(String source, Handler handler) {
+        String url;
+        if (source == null || "".equals(source)) {
+            url = ApiMockHelper.getBaseURL() + "users/records";
+        } else {
+            url = ApiMockHelper.getBaseURL() + "users/records" + "?source=" + source;
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.protocol() + " " + response.code() + " " + response.message());
+
+                if (response.body() == null) {
+                    return;
+                }
+                String resp = response.body().string();
+                if (handler != null) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = LIST_SUCCESS;
+                    msg.obj = resp;
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
     /***************************************BUG记录*********************************************/
 
 

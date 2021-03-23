@@ -10,16 +10,19 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.creditease.netspy.ApiMockHelper;
+import com.creditease.netspy.UsersHelper;
 import com.creditease.netspy.demo.netspy.BugActivity;
 import com.creditease.netspy.demo.netspy.NetActivity;
 import com.creditease.netspy.demo.socket.SocketMainActivity;
 import com.creditease.netspy.inner.support.OkHttpHelper;
+import com.creditease.netspy.inner.support.UsersSelectDialog;
 
 /**
  * Created by zhxh on 2019/06/20
  */
 public class MainActivity extends AppCompatActivity {
 
+    Button userButton;
     Button netButton;
     Button bugButton;
     Button trackButton;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         sensorManager = ContextCompat.getSystemService(this, SensorManager.class);
         setContentView(R.layout.activity_main);
 
+        userButton = findViewById(R.id.userButton);
         netButton = findViewById(R.id.netButton);
         bugButton = findViewById(R.id.bugButton);
         trackButton = findViewById(R.id.trackButton);

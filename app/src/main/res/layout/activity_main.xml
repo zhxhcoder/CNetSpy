@@ -7,6 +7,15 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/userButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="去Users测试页面" />
+
+    <Button
         android:id="@+id/netButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
