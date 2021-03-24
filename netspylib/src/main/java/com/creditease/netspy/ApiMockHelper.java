@@ -16,6 +16,7 @@ public final class ApiMockHelper {
 
     //默认baseUrl
     public static String host = "10.106.157.94";
+    public static String baseURL = "";
 
     public static Set<String> paramSet = new HashSet<String>() {{
         add("method");
@@ -35,7 +36,14 @@ public final class ApiMockHelper {
 
 
     public static String getBaseURL() {
-        return "http://" + ApiMockHelper.host + ":5000/";
+        if (baseURL == null || baseURL.isEmpty()) {
+            baseURL = "http://" + ApiMockHelper.host + ":5000/";
+        }
+        return baseURL;
+    }
+
+    public static void setBaseURL(String baseURL) {
+        ApiMockHelper.baseURL = baseURL;
     }
 
 
