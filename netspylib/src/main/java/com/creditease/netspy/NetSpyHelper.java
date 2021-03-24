@@ -1,5 +1,6 @@
 package com.creditease.netspy;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.net.Uri;
 
 import com.creditease.netspy.inner.db.DBHelper;
 import com.creditease.netspy.inner.db.HttpEvent;
+import com.creditease.netspy.inner.support.UsersSelectDialog;
 import com.creditease.netspy.inner.ui.netspy.NetSpyListActivity;
 
 import java.util.Date;
@@ -72,5 +74,15 @@ public final class NetSpyHelper {
         transaction.setRequestBody(uri.getQuery());
         transaction.setResponseBody(response);
         DBHelper.getInstance().insertHttpData(transaction);
+    }
+
+    /*********************************************users相关***************************************/
+
+    public static void launchUsersDialog(Activity context, String source, UsersSelectDialog.OnSelectListener selectListener) {
+        new UsersSelectDialog(context).requestUsers(source, selectListener);
+    }
+
+    public static void launchUsersDialog(Activity context, UsersSelectDialog.OnSelectListener selectListener) {
+        new UsersSelectDialog(context).requestUsers(NetSpyHelper.source, selectListener);
     }
 }
