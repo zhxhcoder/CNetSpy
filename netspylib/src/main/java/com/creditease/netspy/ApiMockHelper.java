@@ -42,7 +42,7 @@ public final class ApiMockHelper {
         return baseURL;
     }
 
-    public static void setBaseURL(String baseURL) {
+    public static void initBaseURL(String baseURL) {
         ApiMockHelper.baseURL = baseURL;
     }
 
