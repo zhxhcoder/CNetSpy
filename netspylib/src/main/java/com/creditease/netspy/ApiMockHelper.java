@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.creditease.netspy.inner.ui.apimock.ApiMockListActivity;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -74,4 +75,31 @@ public final class ApiMockHelper {
             return;
         }
     }
+
+
+    public static String getMockUrl(String reBaseUrl, String url, Map<String, String> params) {
+        StringBuilder pathParams = new StringBuilder();
+        //针对是method等参数直接传值
+        for (String param : ApiMockHelper.paramSet) {
+            for (String key : params.keySet()) {
+                if (param.equals(key)) {
+                    pathParams.append("--")
+                            .append(param)
+                            .append("--")
+                            .append(params.get(key));
+                }
+            }
+        }
+        String urlPost = url.replace(reBaseUrl + "/", "");
+        urlPost = urlPost.replace("/", "__");
+        return ApiMockHelper.getBaseURL() + urlPost + pathParams.toString();
+    }
+
+    public static String getMockPath(String reBaseUrl, String url) {
+        String urlPost = url.replace(reBaseUrl + "/", "");
+        urlPost = urlPost.replaceFirst("\\?.+$", "");
+        urlPost = urlPost.replace("/", "__");
+        return urlPost;
+    }
+
 }
