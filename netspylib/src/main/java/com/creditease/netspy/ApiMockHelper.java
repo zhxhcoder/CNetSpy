@@ -76,7 +76,8 @@ public final class ApiMockHelper {
         }
     }
 
-    public static String getMockUrl(String url, Map<String, String> params) {
+
+    public static String getMockUrl(String reBaseUrl, String url, Map<String, String> params) {
         StringBuilder pathParams = new StringBuilder();
         //针对是method等参数直接传值
         for (String param : ApiMockHelper.paramSet) {
@@ -89,9 +90,16 @@ public final class ApiMockHelper {
                 }
             }
         }
-        String urlPost = url.replace(getBaseURL() + "/", "");
+        String urlPost = url.replace(reBaseUrl + "/", "");
         urlPost = urlPost.replace("/", "__");
         return ApiMockHelper.getBaseURL() + urlPost + pathParams.toString();
+    }
+
+    public static String getMockPath(String reBaseUrl, String url) {
+        String urlPost = url.replace(reBaseUrl + "/", "");
+        urlPost = urlPost.replaceFirst("\\?.+$", "");
+        urlPost = urlPost.replace("/", "__");
+        return urlPost;
     }
 
 }
