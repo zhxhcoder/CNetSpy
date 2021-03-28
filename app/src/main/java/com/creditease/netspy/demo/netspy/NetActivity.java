@@ -29,6 +29,8 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +65,13 @@ public class NetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //todo 测试
+
+                try {
+                    URI uri = new URI("http://10.106.157.94:5000/mock/records.html?source=%E6%8C%87%E6%97%BA");
+                    btn_test.setText(uri.getHost());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
 
             }
         });

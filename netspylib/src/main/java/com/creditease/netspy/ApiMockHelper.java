@@ -16,10 +16,8 @@ import java.util.Set;
  */
 public final class ApiMockHelper {
     static boolean isApiMock = false;
-
     //默认baseUrl
-    private static String host = "10.106.157.94";
-    private static String baseURL = "";
+    private static String baseURL = "http://10.106.157.94:5000/";
 
     public static Set<String> paramSet = new HashSet<String>() {{
         add("method");
@@ -29,34 +27,26 @@ public final class ApiMockHelper {
         add("showPosition");
     }};
 
-    public static void initHost(String host) {
-        ApiMockHelper.host = host;
-    }
-
     public static void initBaseURL(String baseURL) {
         ApiMockHelper.baseURL = baseURL;
     }
 
     public static String getHost() {
-        if (host == null || host.isEmpty()) {
-            try {
-                URI uri = new URI(baseURL);
-                return uri.getHost();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            return "";
+        try {
+            URI uri = new URI(baseURL);
+            return uri.getHost();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
-        return host;
+        return "";
     }
 
     public static String getBaseURL() {
         if (baseURL == null || baseURL.isEmpty()) {
-            baseURL = "http://" + ApiMockHelper.host + ":5000/";
+            return "";
         }
         return baseURL;
     }
-
 
     public static void addParams(String param) {
         paramSet.add(param);
