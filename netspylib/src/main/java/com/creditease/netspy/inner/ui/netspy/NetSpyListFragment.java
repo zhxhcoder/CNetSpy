@@ -109,18 +109,19 @@ public class NetSpyListFragment extends Fragment implements
 
     private void removeDuplicateFromDb() {
         List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
-        Set<String> pathSet = new HashSet<>();
+        Set<String> pathMethodSet = new HashSet<>();
         for (int i = 0; i < dataList.size(); i++) {
             HttpEvent event = dataList.get(i);
-            String pathStr = event.getPathWithParam();
-            if (!ApiMockHelper.host.equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
-                pathSet.add(pathStr);
+            String pathMethodStr = event.getPathWithParam() + event.getMethod();
+            if (!ApiMockHelper.host.equals(event.getHost()) && !pathMethodSet.contains(pathMethodStr)) {//本来就是服务器上的数据不再上传
+                pathMethodSet.add(pathMethodStr);
             } else {
                 DBHelper.getInstance().deleteHttpData(event);
             }
         }
 
         updateDataFromDb();
+        Toast.makeText(getActivity(), "去重成功", Toast.LENGTH_SHORT).show();
     }
 
     public void uploadAllCloudFromDb() {
