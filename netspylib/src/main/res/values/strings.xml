@@ -3,8 +3,6 @@
 <resources>
     <string name="netspy_name">Watchmen</string>
     <string name="netspy_notification_title">Recording HTTP activity</string>
-    <string name="netspy_remove">去重</string>
-    <string name="netspy_clear">删除</string>
     <string name="netspy_browse_sql_database">Browse SQLite database</string>
     <string name="netspy_overview">请求头</string>
     <string name="netspy_response">返回值</string>
@@ -28,6 +26,8 @@
     <string name="netspy_search">搜索</string>
     <string name="netspy_upload">上传</string>
     <string name="netspy_edit">编辑</string>
+    <string name="netspy_remove">去重</string>
+    <string name="netspy_clear">清空</string>
     <string name="netspy_body_unexpected_eof">\n\n--- Unexpected end of content ---</string>
     <string name="netspy_body_content_truncated">\n\n--- Content truncated ---</string>
     <string name="notification_category">网络异常通知</string>
