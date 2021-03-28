@@ -14,6 +14,8 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 public class NetActivity extends AppCompatActivity {
     private final static String TAG = "sampleSpyLog";
     TextView tvHttpContent;
+    Button btn_test;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +57,15 @@ public class NetActivity extends AppCompatActivity {
         checkOnlineState();
 
         tvHttpContent = findViewById(R.id.tvHttpContent);
+        btn_test = findViewById(R.id.btn_test);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo 测试
+
+            }
+        });
 
         findViewById(R.id.btn_http_post).setOnClickListener(view -> {
             for (int i = 0; i < 1; i++) {
