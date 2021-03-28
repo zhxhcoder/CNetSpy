@@ -38,9 +38,4 @@ public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyList
     public void onRefreshTitle(String leftTitle) {
         toolbar.setTitle(leftTitle);
     }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
 }
