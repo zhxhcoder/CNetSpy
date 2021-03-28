@@ -27,14 +27,6 @@ public final class ApiMockHelper {
         add("showPosition");
     }};
 
-    public static Set<String> excludeParamSet = new HashSet<String>() {{
-        add("clientType");
-        add("channelId");
-        add("timestamp");
-        add("token");
-        add("sign");
-    }};
-
 
     public static String getBaseURL() {
         if (baseURL == null || baseURL.isEmpty()) {
@@ -43,21 +35,18 @@ public final class ApiMockHelper {
         return baseURL;
     }
 
-    public static void initBaseURL(String baseURL) {
-        ApiMockHelper.baseURL = baseURL;
-    }
-
-
     public static void initHost(String host) {
         ApiMockHelper.host = host;
     }
 
-    public static void addParams(String param) {
-        paramSet.add(param);
+    public static void initBaseURL(String baseURL) {
+        ApiMockHelper.baseURL = baseURL;
+
     }
 
-    public static void addExcludeParams(String param) {
-        excludeParamSet.add(param);
+
+    public static void addParams(String param) {
+        paramSet.add(param);
     }
 
     public static void debug(boolean isApiMock) {
