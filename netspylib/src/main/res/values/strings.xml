@@ -3,7 +3,8 @@
 <resources>
     <string name="netspy_name">Watchmen</string>
     <string name="netspy_notification_title">Recording HTTP activity</string>
-    <string name="netspy_clear">Clear</string>
+    <string name="netspy_remove">去重</string>
+    <string name="netspy_clear">删除</string>
     <string name="netspy_browse_sql_database">Browse SQLite database</string>
     <string name="netspy_overview">请求头</string>
     <string name="netspy_response">返回值</string>
