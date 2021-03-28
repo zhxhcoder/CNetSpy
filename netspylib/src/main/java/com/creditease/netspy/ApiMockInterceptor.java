@@ -86,7 +86,7 @@ public final class ApiMockInterceptor implements Interceptor {
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
-                .host(ApiMockHelper.host)
+                .host(ApiMockHelper.getHost())
                 .port(5000)
                 .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();

@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.creditease.netspy.inner.ui.apimock.ApiMockListActivity;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -16,8 +18,8 @@ public final class ApiMockHelper {
     static boolean isApiMock = false;
 
     //默认baseUrl
-    public static String host = "10.106.157.94";
-    public static String baseURL = "";
+    private static String host = "10.106.157.94";
+    private static String baseURL = "";
 
     public static Set<String> paramSet = new HashSet<String>() {{
         add("method");
@@ -27,21 +29,32 @@ public final class ApiMockHelper {
         add("showPosition");
     }};
 
-
-    public static String getBaseURL() {
-        if (baseURL == null || baseURL.isEmpty()) {
-            baseURL = "http://" + ApiMockHelper.host + ":5000/";
-        }
-        return baseURL;
-    }
-
     public static void initHost(String host) {
         ApiMockHelper.host = host;
     }
 
     public static void initBaseURL(String baseURL) {
         ApiMockHelper.baseURL = baseURL;
+    }
 
+    public static String getHost() {
+        if (host == null || host.isEmpty()) {
+            try {
+                URI uri = new URI(baseURL);
+                return uri.getHost();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+        return host;
+    }
+
+    public static String getBaseURL() {
+        if (baseURL == null || baseURL.isEmpty()) {
+            baseURL = "http://" + ApiMockHelper.host + ":5000/";
+        }
+        return baseURL;
     }
 
 

@@ -178,7 +178,7 @@ public class HttpEvent implements Serializable {
     }
 
     public String getMockUrl() {
-        if (ApiMockHelper.host.equals(getHost())) {
+        if (ApiMockHelper.getHost().equals(getHost())) {
             return this.url.replace("__", "/");
         } else {
             return this.url;
@@ -376,7 +376,7 @@ public class HttpEvent implements Serializable {
     }
 
     public String getMockPath() {
-        if (ApiMockHelper.host.equals(getHost())) {
+        if (ApiMockHelper.getHost().equals(getHost())) {
             if (path.startsWith("/")) {
             } else {
             }
