@@ -108,6 +108,23 @@ public class NetSpyListFragment extends Fragment implements
         Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
     }
 
+    private void removeDuplicateFromDb() {
+        List<HttpEvent> dataList = DBHelper.getInstance().getAllHttpData();
+        Set<String> pathMethodCodeSet = new HashSet<>();
+        for (int i = 0; i < dataList.size(); i++) {
+            HttpEvent event = dataList.get(i);
+            String pathMethodCodeStr = event.getPathWithParam() + event.getMethod() + event.getResponseCode();
+            if (!pathMethodCodeSet.contains(pathMethodCodeStr)) {//去重
+                pathMethodCodeSet.add(pathMethodCodeStr);
+            } else {
+                DBHelper.getInstance().deleteHttpData(event);
+            }
+        }
+
+        updateDataFromDb();
+        Toast.makeText(getActivity(), "去重成功", Toast.LENGTH_SHORT).show();
+    }
+
     public void uploadAllCloudFromDb() {
         AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                 .setTitle("温馨提示")
@@ -121,7 +138,7 @@ public class NetSpyListFragment extends Fragment implements
                         String pathStr = event.getPathWithParam();
                         if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
                             pathSet.add(pathStr);
-                            OkHttpHelper.getInstance().postApiRecords(event.getSource(),pathStr, 1, event.getResponseBody(), "", "", null);
+                            OkHttpHelper.getInstance().postApiRecords(event.getSource(), pathStr, 1, event.getResponseBody(), "", "", null);
                         }
                     }
                 })
@@ -185,6 +202,9 @@ public class NetSpyListFragment extends Fragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search) {
             return true;
+        } else if (item.getItemId() == R.id.remove) {
+            removeDuplicateFromDb();
+            return true;
         } else if (item.getItemId() == R.id.upload) {
             uploadAllCloudFromDb();
             return true;
@@ -197,6 +217,7 @@ public class NetSpyListFragment extends Fragment implements
             return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public boolean onQueryTextSubmit(String query) {

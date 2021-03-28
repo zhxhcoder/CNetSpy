@@ -240,6 +240,9 @@ public class HttpEvent implements Serializable {
     }
 
     public Integer getResponseCode() {
+        if (responseCode == null) {
+            return 0;
+        }
         return this.responseCode;
     }
 
