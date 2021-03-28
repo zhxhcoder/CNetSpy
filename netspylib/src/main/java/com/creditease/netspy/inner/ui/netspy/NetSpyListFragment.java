@@ -237,5 +237,7 @@ public class NetSpyListFragment extends Fragment implements
 
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(HttpEvent item);
+
+        void onRefreshTitle(String leftTitle);
     }
 }

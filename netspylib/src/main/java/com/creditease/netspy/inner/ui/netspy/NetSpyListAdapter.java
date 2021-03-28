@@ -152,6 +152,7 @@ class NetSpyListAdapter extends RecyclerView.Adapter<NetSpyListAdapter.ViewHolde
         this.filterText = filterText;
         this.dataList = dataList;
         notifyDataSetChanged();
+        listener.onRefreshTitle(dataList.size() + "条记录");
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -12,12 +12,13 @@ import com.creditease.netspy.inner.db.HttpEvent;
  * Created by zhxh on 2019/06/12
  */
 public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyListFragment.OnListFragmentInteractionListener {
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_activity_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Request记录");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -31,6 +32,11 @@ public class NetSpyListActivity extends BaseNetSpyActivity implements NetSpyList
     @Override
     public void onListFragmentInteraction(HttpEvent transaction) {
         HttpTabActivity.start(this, transaction.getTransId());
+    }
+
+    @Override
+    public void onRefreshTitle(String leftTitle) {
+        toolbar.setTitle(leftTitle);
     }
 
     @Override
