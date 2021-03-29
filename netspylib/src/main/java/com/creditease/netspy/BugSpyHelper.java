@@ -1,6 +1,5 @@
 package com.creditease.netspy;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
@@ -22,15 +21,13 @@ public final class BugSpyHelper implements Thread.UncaughtExceptionHandler {
     static String deviceInfo = "";
 
     private Thread.UncaughtExceptionHandler exceptionHandler;
-    private Application app;
 
-    private BugSpyHelper(Application app) {
+    private BugSpyHelper() {
         this.exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        this.app = app;
     }
 
-    static void install(Application app) {
-        Thread.setDefaultUncaughtExceptionHandler(new BugSpyHelper(app));
+    static void install() {
+        Thread.setDefaultUncaughtExceptionHandler(new BugSpyHelper());
     }
 
     /**

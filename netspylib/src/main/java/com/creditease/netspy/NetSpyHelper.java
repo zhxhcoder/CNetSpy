@@ -37,7 +37,7 @@ public final class NetSpyHelper {
         NetSpyHelper.setSpyApp(netSpyApp);
 
         //BugSpyHelper注册异常监控的初始化
-        BugSpyHelper.install(netSpyApp);
+        BugSpyHelper.install();
 
         //ApiMockHelper相关参数的初始化
         ApiMockHelper.initBaseURL(baseURL);
