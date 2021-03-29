@@ -33,11 +33,12 @@ public final class NetSpyHelper {
 
     //总初始化
     public static void install(Application netSpyApp, String source, String baseURL, String strParamSet) {
-        NetSpyHelper.setSource(source);
+        //NetSpyHelper相关参数的初始化
         NetSpyHelper.setSpyApp(netSpyApp);
+        NetSpyHelper.setSource(source);
 
         //BugSpyHelper注册异常监控的初始化
-        BugSpyHelper.install(netSpyApp);
+        BugSpyHelper.install();
 
         //ApiMockHelper相关参数的初始化
         ApiMockHelper.initBaseURL(baseURL);
@@ -83,6 +84,8 @@ public final class NetSpyHelper {
             return;
         }
     }
+
+    /*********************************************http相关***************************************/
 
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
