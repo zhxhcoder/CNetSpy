@@ -15,6 +15,8 @@ import android.os.Message;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,8 @@ import com.creditease.netspy.demo.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +51,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 public class NetActivity extends AppCompatActivity {
     private final static String TAG = "sampleSpyLog";
     TextView tvHttpContent;
+    Button btn_test;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +60,22 @@ public class NetActivity extends AppCompatActivity {
         checkOnlineState();
 
         tvHttpContent = findViewById(R.id.tvHttpContent);
+        btn_test = findViewById(R.id.btn_test);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo 测试
+
+                try {
+                    URI uri = new URI("http://10.106.157.94:5000/mock/records.html?source=%E6%8C%87%E6%97%BA");
+                    btn_test.setText(uri.getHost());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
         findViewById(R.id.btn_http_post).setOnClickListener(view -> {
             for (int i = 0; i < 1; i++) {

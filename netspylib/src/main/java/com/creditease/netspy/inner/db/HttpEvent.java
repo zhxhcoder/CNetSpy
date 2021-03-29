@@ -178,7 +178,7 @@ public class HttpEvent implements Serializable {
     }
 
     public String getMockUrl() {
-        if (ApiMockHelper.host.equals(getHost())) {
+        if (ApiMockHelper.getHost().equals(getHost())) {
             return this.url.replace("__", "/");
         } else {
             return this.url;
@@ -348,7 +348,7 @@ public class HttpEvent implements Serializable {
         StringBuilder pathParams = new StringBuilder();
         //针对的是data参数我gson传
         if (getRequestBody().contains("data=")) {
-            for (String param : ApiMockHelper.paramSet) {
+            for (String param : ApiMockHelper.getParamSet()) {
                 String value = FormatHelper.parseGsonValue(param, getRequestBody());
                 if (!TextUtils.isEmpty(value)) {
                     pathParams.append("--")
@@ -360,7 +360,7 @@ public class HttpEvent implements Serializable {
         }
 
         //针对是method等参数直接传值
-        for (String param : ApiMockHelper.paramSet) {
+        for (String param : ApiMockHelper.getParamSet()) {
             if (getRequestBody().contains(param + "=")) {
                 pathParams.append("--")
                         .append(param)
@@ -376,7 +376,7 @@ public class HttpEvent implements Serializable {
     }
 
     public String getMockPath() {
-        if (ApiMockHelper.host.equals(getHost())) {
+        if (ApiMockHelper.getHost().equals(getHost())) {
             if (path.startsWith("/")) {
             } else {
             }

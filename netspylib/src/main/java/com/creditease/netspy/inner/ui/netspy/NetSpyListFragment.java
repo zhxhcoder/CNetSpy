@@ -136,7 +136,7 @@ public class NetSpyListFragment extends Fragment implements
                     for (int i = 0; i < dataList.size(); i++) {
                         HttpEvent event = dataList.get(i);
                         String pathStr = event.getPathWithParam();
-                        if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
+                        if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.getHost().equals(event.getHost()) && !pathSet.contains(pathStr)) {//本来就是服务器上的数据不再上传
                             pathSet.add(pathStr);
                             OkHttpHelper.getInstance().postApiRecords(event.getSource(), pathStr, 1, event.getResponseBody(), "", "", null);
                         }
@@ -153,7 +153,7 @@ public class NetSpyListFragment extends Fragment implements
                 .setMessage("将上传接口：" + event.getMockPath() + "\n到服务器，并可能覆盖服务器上该接口的相关数据")
                 .setPositiveButton("上传", (dialog1, which) -> {
                     String pathStr = event.getPathWithParam();
-                    if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.host.equals(event.getHost())) {//本来就是服务器上的数据不再上传
+                    if (!TextUtils.isEmpty(event.getResponseBody()) && !ApiMockHelper.getHost().equals(event.getHost())) {//本来就是服务器上的数据不再上传
                         OkHttpHelper.getInstance().postApiRecords(event.getSource(), pathStr, 1, event.getResponseBody(), "", "", null);
                     }
 

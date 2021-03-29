@@ -59,7 +59,7 @@ public final class ApiMockInterceptor implements Interceptor {
         StringBuilder pathParams = new StringBuilder();
         //针对的是data参数我gson传
         if (getDecodeRequest(strRequest).contains("data=")) {
-            for (String param : ApiMockHelper.paramSet) {
+            for (String param : ApiMockHelper.getParamSet()) {
                 String value = FormatHelper.parseGsonValue(param, getDecodeRequest(strRequest));
                 if (!TextUtils.isEmpty(value)) {
                     pathParams.append("--")
@@ -71,7 +71,7 @@ public final class ApiMockInterceptor implements Interceptor {
         }
 
         //针对是method等参数直接传值
-        for (String param : ApiMockHelper.paramSet) {
+        for (String param : ApiMockHelper.getParamSet()) {
             if (getDecodeRequest(strRequest).contains(param + "=")) {
                 pathParams.append("--")
                         .append(param)
@@ -86,7 +86,7 @@ public final class ApiMockInterceptor implements Interceptor {
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
-                .host(ApiMockHelper.host)
+                .host(ApiMockHelper.getHost())
                 .port(5000)
                 .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();
