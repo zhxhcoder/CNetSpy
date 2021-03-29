@@ -84,6 +84,8 @@ public final class NetSpyHelper {
         }
     }
 
+    /*********************************************http相关***************************************/
+
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
         insertHttpEvent(NetSpyHelper.getSource(), method, url, response);
