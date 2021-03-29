@@ -34,8 +34,8 @@ public final class NetSpyHelper {
     //总初始化
     public static void install(Application netSpyApp, String source, String baseURL, String strParamSet) {
         //NetSpyHelper相关参数的初始化
-        NetSpyHelper.setSource(source);
         NetSpyHelper.setSpyApp(netSpyApp);
+        NetSpyHelper.setSource(source);
 
         //BugSpyHelper注册异常监控的初始化
         BugSpyHelper.install();
