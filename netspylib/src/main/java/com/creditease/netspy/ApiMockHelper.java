@@ -43,7 +43,7 @@ public final class ApiMockHelper {
             return;
         }
         paramSet = new HashSet<String>();
-        for (String s : strParamSet.split(",")) {
+        for (String s : strParamSet.split("\\s*,\\s*")) {
             addParams(s);
         }
     }
