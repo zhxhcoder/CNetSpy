@@ -33,6 +33,7 @@ public final class NetSpyHelper {
 
     //总初始化
     public static void install(Application netSpyApp, String source, String baseURL, String strParamSet) {
+        //NetSpyHelper相关参数的初始化
         NetSpyHelper.setSource(source);
         NetSpyHelper.setSpyApp(netSpyApp);
 
