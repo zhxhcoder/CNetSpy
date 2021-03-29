@@ -18,8 +18,8 @@ import java.util.Date;
  * NetSpyHelper 工具类.
  */
 public final class NetSpyHelper {
-    public static String source = "";
     static boolean isNetSpy = false;
+    public static String source = "";
     public static Application netSpyApp;
 
     public static void install(Application netSpyApp) {
@@ -31,6 +31,19 @@ public final class NetSpyHelper {
         NetSpyHelper.netSpyApp = netSpyApp;
         //注册异常监控
         BugSpyHelper.install(netSpyApp);
+    }
+
+    //总初始化
+    public static void install(Application netSpyApp, String source, String baseURL, String strParamSet) {
+        NetSpyHelper.source = source;
+        NetSpyHelper.netSpyApp = netSpyApp;
+
+        //BugSpyHelper注册异常监控的初始化
+        BugSpyHelper.install(netSpyApp);
+
+        //ApiMockHelper相关参数的初始化
+        ApiMockHelper.initBaseURL(baseURL);
+        ApiMockHelper.initParamSet(strParamSet);
     }
 
     /**

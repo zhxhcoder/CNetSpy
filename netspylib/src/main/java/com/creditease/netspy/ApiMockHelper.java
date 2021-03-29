@@ -28,6 +28,9 @@ public final class ApiMockHelper {
     }};
 
     public static void initBaseURL(String baseURL) {
+        if (baseURL == null || baseURL.isEmpty()) {
+            return;
+        }
         ApiMockHelper.baseURL = baseURL;
     }
 
