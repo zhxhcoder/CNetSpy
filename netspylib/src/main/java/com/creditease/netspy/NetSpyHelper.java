@@ -19,11 +19,12 @@ import java.util.Date;
  */
 public final class NetSpyHelper {
     static boolean isNetSpy = false;
-    public static String source = "";
-    public static Application netSpyApp;
+
+    private static Application netSpyApp;
+    private static String source = "";
 
     public static void install(Application netSpyApp) {
-        NetSpyHelper.install(netSpyApp, NetSpyHelper.source, "", "");
+        NetSpyHelper.install(netSpyApp, NetSpyHelper.getSource(), "", "");
     }
 
     public static void install(Application netSpyApp, String source) {
@@ -32,8 +33,8 @@ public final class NetSpyHelper {
 
     //总初始化
     public static void install(Application netSpyApp, String source, String baseURL, String strParamSet) {
-        NetSpyHelper.source = source;
-        NetSpyHelper.netSpyApp = netSpyApp;
+        NetSpyHelper.setSource(source);
+        NetSpyHelper.setSpyApp(netSpyApp);
 
         //BugSpyHelper注册异常监控的初始化
         BugSpyHelper.install(netSpyApp);
@@ -41,6 +42,22 @@ public final class NetSpyHelper {
         //ApiMockHelper相关参数的初始化
         ApiMockHelper.initBaseURL(baseURL);
         ApiMockHelper.initParamSet(strParamSet);
+    }
+
+    public static Application getSpyApp() {
+        return netSpyApp;
+    }
+
+    public static void setSpyApp(Application netSpyApp) {
+        NetSpyHelper.netSpyApp = netSpyApp;
+    }
+
+    public static String getSource() {
+        return source;
+    }
+
+    public static void setSource(String source) {
+        NetSpyHelper.source = source;
     }
 
     /**
@@ -69,7 +86,7 @@ public final class NetSpyHelper {
 
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String response) {
-        insertHttpEvent(NetSpyHelper.source, method, url, response);
+        insertHttpEvent(NetSpyHelper.getSource(), method, url, response);
     }
 
     public static void insertHttpEvent(String source, String method, String url, String response) {
@@ -93,6 +110,6 @@ public final class NetSpyHelper {
     }
 
     public static void launchUsersDialog(Activity context, UsersSelectDialog.OnSelectListener selectListener) {
-        new UsersSelectDialog(context).requestUsers(NetSpyHelper.source, selectListener);
+        new UsersSelectDialog(context).requestUsers(NetSpyHelper.getSource(), selectListener);
     }
 }

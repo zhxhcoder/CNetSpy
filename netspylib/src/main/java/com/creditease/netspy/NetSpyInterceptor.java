@@ -47,10 +47,10 @@ public final class NetSpyInterceptor implements Interceptor {
      * NetSpyInterceptor
      */
     public NetSpyInterceptor() {
-        if (NetSpyHelper.netSpyApp == null) {
+        if (NetSpyHelper.getSpyApp() == null) {
             return;
         }
-        this.context = NetSpyHelper.netSpyApp;
+        this.context = NetSpyHelper.getSpyApp();
         notificationHelper = new NotificationHelper(this.context);
         showNotification = NetSpyHelper.isNetSpy;
     }
@@ -88,7 +88,7 @@ public final class NetSpyInterceptor implements Interceptor {
         boolean hasRequestBody = requestBody != null;
 
         HttpEvent transaction = new HttpEvent();
-        transaction.setSource(NetSpyHelper.source);
+        transaction.setSource(NetSpyHelper.getSource());
         transaction.setRequestDate(new Date());
 
         transaction.setMethod(request.method());

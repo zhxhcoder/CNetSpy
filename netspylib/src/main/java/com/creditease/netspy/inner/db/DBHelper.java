@@ -23,7 +23,7 @@ public final class DBHelper {
     private DaoSession mDaoSession;
 
     public DBHelper() {
-        mDatabase = new DaoMaster.DevOpenHelper(NetSpyHelper.netSpyApp, DB_NAME).getWritableDatabase();
+        mDatabase = new DaoMaster.DevOpenHelper(NetSpyHelper.getSpyApp(), DB_NAME).getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(mDatabase);//用于创建数据库以及获取DaoSession
         mDaoSession = daoMaster.newSession();//用于获取各个表对应的Dao类
     }

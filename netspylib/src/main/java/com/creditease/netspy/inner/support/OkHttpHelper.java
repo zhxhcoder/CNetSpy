@@ -101,7 +101,7 @@ public class OkHttpHelper {
 
     //提供给外部非okHttp时
     public void postApiRecords(String path, String resp_data) {
-        postApiRecords(NetSpyHelper.source, path, 1, resp_data, "", "", null);
+        postApiRecords(NetSpyHelper.getSource(), path, 1, resp_data, "", "", null);
     }
 
     //提供给外部非okHttp时
@@ -273,7 +273,7 @@ public class OkHttpHelper {
         if (!TextUtils.isEmpty(source)) {
             builder.add("source", source.trim());
         } else {
-            builder.add("source", NetSpyHelper.source);
+            builder.add("source", NetSpyHelper.getSource());
         }
         if (!TextUtils.isEmpty(flavor)) {
             builder.add("flavor", flavor.trim());
