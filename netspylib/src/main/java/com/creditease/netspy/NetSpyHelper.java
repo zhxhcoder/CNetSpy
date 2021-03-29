@@ -23,14 +23,11 @@ public final class NetSpyHelper {
     public static Application netSpyApp;
 
     public static void install(Application netSpyApp) {
-        NetSpyHelper.install(netSpyApp, NetSpyHelper.source);
+        NetSpyHelper.install(netSpyApp, NetSpyHelper.source, "", "");
     }
 
     public static void install(Application netSpyApp, String source) {
-        NetSpyHelper.source = source;
-        NetSpyHelper.netSpyApp = netSpyApp;
-        //注册异常监控
-        BugSpyHelper.install(netSpyApp);
+        NetSpyHelper.install(netSpyApp, source, "", "");
     }
 
     //总初始化
