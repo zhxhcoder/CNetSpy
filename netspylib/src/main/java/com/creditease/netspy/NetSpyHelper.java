@@ -89,11 +89,11 @@ public final class NetSpyHelper {
 
     //加入event 例如api/reward/fee
     public static void insertHttpEvent(String method, String url, String responseBody) {
-        insertHttpEvent(NetSpyHelper.getSource(), method, url, responseBody);
+        insertHttpEvent(NetSpyHelper.getSource(), method, url, 0, responseBody);
     }
 
-    public static void insertHttpEvent(String source, String method, String url, String responseBody) {
-        insertHttpEvent(source, method, url, 0, responseBody);
+    public static void insertHttpEvent(String method, String url, int responseCode, String responseBody) {
+        insertHttpEvent(NetSpyHelper.getSource(), method, url, responseCode, responseBody);
     }
 
     public static void insertHttpEvent(String source, String method, String url, int responseCode, String responseBody) {
