@@ -88,11 +88,15 @@ public final class NetSpyHelper {
     /*********************************************http相关***************************************/
 
     //加入event 例如api/reward/fee
-    public static void insertHttpEvent(String method, String url, String response) {
-        insertHttpEvent(NetSpyHelper.getSource(), method, url, response);
+    public static void insertHttpEvent(String method, String url, String responseBody) {
+        insertHttpEvent(NetSpyHelper.getSource(), method, url, responseBody);
     }
 
-    public static void insertHttpEvent(String source, String method, String url, String response) {
+    public static void insertHttpEvent(String source, String method, String url, String responseBody) {
+        insertHttpEvent(source, method, url, 0, responseBody);
+    }
+
+    public static void insertHttpEvent(String source, String method, String url, int responseCode, String responseBody) {
         Uri uri = Uri.parse(url);
         HttpEvent transaction = new HttpEvent();
         transaction.setRequestDate(new Date());
@@ -102,7 +106,11 @@ public final class NetSpyHelper {
         transaction.setPath(uri.getPath());
         transaction.setTransId(System.currentTimeMillis());
         transaction.setRequestBody(uri.getQuery());
-        transaction.setResponseBody(response);
+
+        if (responseCode != 0) {
+            transaction.setResponseCode(responseCode);
+        }
+        transaction.setResponseBody(responseBody);
         DBHelper.getInstance().insertHttpData(transaction);
     }
 
