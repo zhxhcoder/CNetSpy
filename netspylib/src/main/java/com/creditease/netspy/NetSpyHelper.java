@@ -106,10 +106,7 @@ public final class NetSpyHelper {
         transaction.setPath(uri.getPath());
         transaction.setTransId(System.currentTimeMillis());
         transaction.setRequestBody(uri.getQuery());
-
-        if (responseCode != 0) {
-            transaction.setResponseCode(responseCode);
-        }
+        transaction.setResponseCode(responseCode);
         transaction.setResponseBody(responseBody);
         DBHelper.getInstance().insertHttpData(transaction);
     }
