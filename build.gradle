@@ -2,24 +2,26 @@
 
 buildscript {
     repositories {
-        google()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add greenDao plugin
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0' // add greenDao plugin
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        //Gradle Bintray Plugin
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 allprojects {
     repositories {
-        google()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
+        google()
     }
 }
 
