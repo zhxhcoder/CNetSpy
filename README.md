@@ -1,15 +1,20 @@
-项目介绍见简书链接：
+客户端项目介绍见简书链接：
+CNetSpy-HTTP网络监听与记录，API模拟（客户端）
 https://www.jianshu.com/p/12995ed85a38
 
+服务端项目介绍见简书链接：
+CFlaskProj-CNetSpy的API模拟（服务端）
+https://www.jianshu.com/p/ff96b3612516
 
-####项目初衷：
+
+#### 项目初衷：
 因产品频繁来问某个页面调用的哪个接口，虽然项目中已经集成了stetho可以方便我们在浏览器查看接口返回情况，但也需要把手机连上电脑，常常电脑还识别不了产品拿来的各种各样的手机，用自己的手机再重新打个同样的包，又得等个将近十分钟，干脆就自己开发一套项目一劳永逸地解决这个问题。
 
-####项目引用：
+#### 项目引用：
 ```
 implementation 'com.creditease:netspylib:4.8.5'
 ```
-####项目介绍：
+#### 项目介绍：
 项目历经十几个版本，从只是记录接口返回，到现在已经逐步扩展到，接口数据镜像，异常记录与上传等实用功能。
 
 ![项目结构](https://upload-images.jianshu.io/upload_images/4334234-cb1e20d72c35179d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -19,7 +24,7 @@ NetSpyHelper和NetSpyInterceptor分别负责http监听记录及上传功能，
 BugSpyHelper负责异常bug监听记录及上传，
 ApiMockHelper和ApiMockInterceptor分别负责api镜像及展示功能。
 
-#####1，网络监听
+##### 1，网络监听
 
 ![网络监听配置](https://upload-images.jianshu.io/upload_images/4334234-dd3015e2743ba291.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -126,13 +131,13 @@ NetSpyInterceptor这个类大致作用：
 
 同样具有搜索功能，会高亮显示返回值的匹配的关键字，同时网络返回也是以json的格式展示，方便查看数据结构
 
-#####2，异常监听
+##### 2，异常监听
 
 ![异常监听主页](https://upload-images.jianshu.io/upload_images/4334234-fa29de19e12a9ed8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![远程记录](https://upload-images.jianshu.io/upload_images/4334234-7f1768a24c3a8b73.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####3，API模拟
+##### 3，API模拟
 
 ![API模拟主页](https://upload-images.jianshu.io/upload_images/4334234-069ee5bb3f68480b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
