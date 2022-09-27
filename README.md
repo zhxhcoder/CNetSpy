@@ -8,6 +8,14 @@ CFlaskProj-CNetSpy的API模拟（服务端）
 
 https://www.jianshu.com/p/ff96b3612516
 
+产品地址（自己临时买的腾讯云服务）：
+
+http://81.70.39.185:5000/home.html
+![img_home.png](img_home.png)
+
+
+http://81.70.39.185:5000/mock/records.html
+![img_mock.png](img_mock.png)
 
 #### 项目初衷：
 因产品频繁来问某个页面调用的哪个接口，虽然项目中已经集成了stetho可以方便我们在浏览器查看接口返回情况，但也需要把手机连上电脑，常常电脑还识别不了产品拿来的各种各样的手机，用自己的手机再重新打个同样的包，又得等个将近十分钟，干脆就自己开发一套项目一劳永逸地解决这个问题。
