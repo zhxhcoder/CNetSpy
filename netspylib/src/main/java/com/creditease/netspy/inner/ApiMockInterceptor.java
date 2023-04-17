@@ -109,7 +109,7 @@ public final class ApiMockInterceptor implements Interceptor {
         HttpUrl newHttpUrl = oldHttpUrl
                 .newBuilder()
                 .scheme("http")
-                .host("10.106.157.94")
+                .host("10.24.119.254")
                 .port(5000)
                 .encodedPath("/" + oldHttpUrl.encodedPath().replace("/", "__").substring(2) + pathParams.toString())
                 .build();

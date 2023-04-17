@@ -17,7 +17,7 @@ import java.util.Set;
 public final class ApiMockHelper {
     static boolean isApiMock = false;
     //默认baseUrl
-    private static String baseURL = "http://10.106.157.94:5000/";
+    private static String baseURL = "http://10.24.119.254:5000/";
 
     private static Set<String> paramSet = new HashSet<String>() {{
         add("method");

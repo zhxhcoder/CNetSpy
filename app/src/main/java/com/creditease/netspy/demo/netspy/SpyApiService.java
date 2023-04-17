@@ -31,7 +31,7 @@ class SpyApiService {
 
     static HttpApi getMock(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.106.157.94:5000")
+                .baseUrl("http://10.24.119.254:5000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

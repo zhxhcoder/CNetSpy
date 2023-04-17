@@ -68,7 +68,7 @@ public class NetActivity extends AppCompatActivity {
                 //todo 测试
 
                 try {
-                    URI uri = new URI("http://10.106.157.94:5000/mock/records.html?source=%E6%8C%87%E6%97%BA");
+                    URI uri = new URI("http://10.24.119.254:5000/mock/records.html?source=%E6%8C%87%E6%97%BA");
                     btn_test.setText(uri.getHost());
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
