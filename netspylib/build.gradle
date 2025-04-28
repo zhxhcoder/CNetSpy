@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.github.dcendents.android-maven'
 android {
-    compileSdk 31
+    compileSdk 30
     buildToolsVersion  "30.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 30
         versionCode 121
         versionName "5.2.1"
     }

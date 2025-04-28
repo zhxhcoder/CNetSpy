@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 31
+    compileSdk 30
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.creditease.netspy.demo"
         minSdkVersion 18
-        targetSdkVersion 31
+        targetSdkVersion 30
         versionCode 2
         versionName "1.0.1"
     }
